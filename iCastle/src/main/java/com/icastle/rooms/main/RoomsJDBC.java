@@ -1,0 +1,234 @@
+package com.icastle.rooms.main;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import com.icastle.rooms.model.RoomsJDBCDAO;
+import com.icastle.rooms.model.RoomsVO;
+
+public class RoomsJDBC {
+	
+	static RoomsJDBCDAO dao = new RoomsJDBCDAO();
+	
+	public static void insert(){
+		RoomsVO vo = new RoomsVO();
+		RoomsVO vo2 = new RoomsVO();
+		RoomsVO vo3 = new RoomsVO();
+		RoomsVO vo4 = new RoomsVO();
+		List<RoomsVO> lis = new ArrayList<RoomsVO>();
+
+		Calendar cal = Calendar.getInstance();
+		cal.set(2017, 0, 1);
+		long first = cal.getTimeInMillis();
+		cal.set(2017, 0, 2);
+		long second = cal.getTimeInMillis();
+		cal.set(2017, 0, 3);
+		long thrid = cal.getTimeInMillis();
+		cal.set(2017, 0, 4);
+		long fourth = cal.getTimeInMillis();
+		
+		
+		vo.setRoomTypeId(10);
+		vo.setHotelId(5);
+		vo.setRoomDate(new Date(first));
+		vo.setRoomTypeName("雅緻雙人房（無窗）");
+		vo.setPeopleNum(2);
+		vo.setRemaining(12);
+		vo.setRoomNumber(15);
+		vo.setPrice(2875);
+		vo.setDiscount(0.9);
+		vo.setOfferName("春季優惠");
+		vo.setBreakfast(true);
+		vo.setLunch(false);
+		vo.setAfternoonTea(false);;
+		vo.setBedAddable(true);;
+		vo.setPricePerPerson(600);
+		vo.setRemark("若單筆預訂超過5間客房，可能會需要遵守其他相關規定以及符合額外的要求。");
+		
+		lis.add(vo);
+		
+		vo2.setRoomTypeId(10);
+		vo2.setHotelId(5);
+		vo2.setRoomDate(new Date(second));
+		vo2.setRoomTypeName("雅緻雙人房（無窗）");
+		vo2.setPeopleNum(2);
+		vo2.setRemaining(8);
+		vo2.setRoomNumber(15);
+		vo2.setPrice(3120);
+		vo2.setDiscount(0.9);
+		vo2.setOfferName("春季優惠");
+		vo2.setBreakfast(true);
+		vo2.setLunch(false);
+		vo2.setAfternoonTea(false);;
+		vo2.setBedAddable(true);;
+		vo2.setPricePerPerson(600);
+		vo2.setRemark("若單筆預訂超過5間客房，可能會需要遵守其他相關規定以及符合額外的要求。");
+		
+		lis.add(vo2);
+		
+		vo3.setRoomTypeId(10);
+		vo3.setHotelId(5);
+		vo3.setRoomDate(new Date(thrid));
+		vo3.setRoomTypeName("雅緻雙人房（無窗）");
+		vo3.setPeopleNum(2);
+		vo3.setRemaining(11);
+		vo3.setRoomNumber(15);
+		vo3.setPrice(2771);
+		vo3.setDiscount(0.9);
+		vo3.setOfferName("春季優惠");
+		vo3.setBreakfast(true);
+		vo3.setLunch(false);
+		vo3.setAfternoonTea(false);;
+		vo3.setBedAddable(true);;
+		vo3.setPricePerPerson(600);
+		vo3.setRemark("若單筆預訂超過5間客房，可能會需要遵守其他相關規定以及符合額外的要求。");
+		
+		lis.add(vo3);
+		
+		vo4.setRoomTypeId(10);
+		vo4.setHotelId(5);
+		vo4.setRoomDate(new Date(fourth));
+		vo4.setRoomTypeName("雅緻雙人房（無窗）");
+		vo4.setPeopleNum(2);
+		vo4.setRemaining(6);
+		vo4.setRoomNumber(15);
+		vo4.setPrice(2875);
+		vo4.setDiscount(0.9);
+		vo4.setOfferName("春季優惠");
+		vo4.setBreakfast(true);
+		vo4.setLunch(false);
+		vo4.setAfternoonTea(false);;
+		vo4.setBedAddable(true);;
+		vo4.setPricePerPerson(600);
+		vo4.setRemark("若單筆預訂超過5間客房，可能會需要遵守其他相關規定以及符合額外的要求。");
+		
+		lis.add(vo4);
+		
+		int count = dao.insert(lis);
+		System.out.println(count);
+	}
+
+	public static void getRoomsByMonth(){
+		
+		
+		List<RoomsVO> lis = dao.getRoomsByMonth(5, 10, 1);
+		
+		for(RoomsVO vo : lis){
+			System.out.println("RoomId = " +vo.getRoomId());
+			System.out.println("RoomTypeId = " +vo.getRoomTypeId());
+			System.out.println("HotelId = " + vo.getHotelId());
+			System.out.println("RoomDate = " + vo.getRoomDate());
+			System.out.println("RoomTypeName = " + vo.getRoomTypeName());
+			System.out.println("PeopleNum = " + vo.getPeopleNum());
+			System.out.println("Remaining = " + vo.getRemaining());
+			System.out.println("RoomNumber = " + vo.getRoomNumber());
+			System.out.println("Price = " + vo.getPrice());
+			System.out.println("Discount = " + vo.getDiscount());
+			System.out.println("OfferName = " + vo.getOfferName());
+			System.out.println("Breakfast = " + vo.isBreakfast());
+			System.out.println("Lunch = " + vo.isLunch());
+			System.out.println("AfternoonTea = " + vo.isAfternoonTea());
+			System.out.println("BedAddable = " + vo.isBedAddable());
+			System.out.println("PricePerPerson = " + vo.getPricePerPerson());
+			System.out.println("Remark = " + vo.getRemark());
+			System.out.println("------------------------------------------------------------------------------------------");
+		}
+	}
+	
+	public static void update(){
+		RoomsVO vo = new RoomsVO();
+		RoomsVO vo2 = new RoomsVO();
+		
+		List<RoomsVO> lis = new ArrayList<RoomsVO>();
+		
+		vo.setRoomId(29);
+		vo.setRoomTypeName("雅緻雙人房（無窗）");
+		vo.setRoomNumber(15);
+		vo.setDiscount(0.7);
+		vo.setOfferName("閃光彈專案");
+		vo.setBreakfast(true);
+		vo.setLunch(false);
+		vo.setAfternoonTea(false);;
+		vo.setBedAddable(true);;
+		vo.setPricePerPerson(400);
+		vo.setRemark("");
+		
+		vo2.setRoomId(30);
+		vo2.setRoomTypeName("雙人房");
+		vo2.setRoomNumber(1000);
+		vo2.setDiscount(0.4);
+		vo2.setOfferName("閃光彈專案");
+		vo2.setBreakfast(true);
+		vo2.setLunch(true);
+		vo2.setAfternoonTea(true);;
+		vo2.setBedAddable(true);;
+		vo2.setPricePerPerson(40000);
+		vo2.setRemark(null);
+		
+		lis.add(vo);
+		lis.add(vo2);
+		
+		int count = dao.update(lis);
+		System.out.println(count);
+	}
+	
+	public static void getOrder(){
+		RoomsVO vo = new RoomsVO();
+		RoomsVO vo2 = new RoomsVO();
+		
+		List<RoomsVO> lis = new ArrayList<RoomsVO>();
+		
+		vo.setRoomId(29);
+		
+		vo2.setRoomId(30);
+		
+		lis.add(vo);
+		lis.add(vo2);
+		
+		int count = dao.getOrder(lis);
+		System.out.println(count);
+	}
+	
+	public static void findRooms(){
+		Calendar cal = Calendar.getInstance();
+		cal.set(2017, 0, 2);
+		long star = cal.getTimeInMillis();
+		
+		cal.set(2017, 0, 4);
+		long end = cal.getTimeInMillis();
+		
+		List<RoomsVO> list = dao.findRooms(5, 4, new Date(star), new Date(end));
+		
+		for(RoomsVO vo : list){
+			System.out.println("RoomId = " +vo.getRoomId());
+			System.out.println("RoomTypeId = " +vo.getRoomTypeId());
+			System.out.println("HotelId = " + vo.getHotelId());
+			System.out.println("RoomDate = " + vo.getRoomDate());
+			System.out.println("RoomTypeName = " + vo.getRoomTypeName());
+			System.out.println("PeopleNum = " + vo.getPeopleNum());
+			System.out.println("Remaining = " + vo.getRemaining());
+			System.out.println("RoomNumber = " + vo.getRoomNumber());
+			System.out.println("Price = " + vo.getPrice());
+			System.out.println("Discount = " + vo.getDiscount());
+			System.out.println("OfferName = " + vo.getOfferName());
+			System.out.println("Breakfast = " + vo.isBreakfast());
+			System.out.println("Lunch = " + vo.isLunch());
+			System.out.println("AfternoonTea = " + vo.isAfternoonTea());
+			System.out.println("BedAddable = " + vo.isBedAddable());
+			System.out.println("PricePerPerson = " + vo.getPricePerPerson());
+			System.out.println("Remark = " + vo.getRemark());
+			System.out.println("------------------------------------------------------------------------------------------");
+		}
+	}
+	
+	public static void main(String[] args) {
+//		insert();
+//		getRoomsByMonth();
+//		update();
+//		getOrder();
+//		findRooms();
+	}
+
+}
