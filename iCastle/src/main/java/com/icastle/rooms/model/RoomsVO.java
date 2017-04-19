@@ -10,18 +10,15 @@ public class RoomsVO implements java.io.Serializable{
 	private Date roomDate;
 	private String roomTypeName;
 	private Integer peopleNum;
-	private Integer remaining;
+	private Integer bookedNum;
 	private Integer roomNumber;
 	private Integer price;
-	private Double discount;
-	private String offerName;
 	private boolean breakfast;
-	private boolean lunch;
+	private boolean dinner;
 	private boolean afternoonTea;
 	private boolean bedAddable;
 	private Integer pricePerPerson;
 	private String remark;
-	
 	public Integer getRoomId() {
 		return roomId;
 	}
@@ -58,11 +55,11 @@ public class RoomsVO implements java.io.Serializable{
 	public void setPeopleNum(Integer peopleNum) {
 		this.peopleNum = peopleNum;
 	}
-	public Integer getRemaining() {
-		return remaining;
+	public Integer getBookedNum() {
+		return bookedNum;
 	}
-	public void setRemaining(Integer remaining) {
-		this.remaining = remaining;
+	public void setBookedNum(Integer bookedNum) {
+		this.bookedNum = bookedNum;
 	}
 	public Integer getRoomNumber() {
 		return roomNumber;
@@ -76,29 +73,17 @@ public class RoomsVO implements java.io.Serializable{
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	public Double getDiscount() {
-		return discount;
-	}
-	public void setDiscount(Double discount) {
-		this.discount = discount;
-	}
-	public String getOfferName() {
-		return offerName;
-	}
-	public void setOfferName(String offerName) {
-		this.offerName = offerName;
-	}
 	public boolean isBreakfast() {
 		return breakfast;
 	}
 	public void setBreakfast(boolean breakfast) {
 		this.breakfast = breakfast;
 	}
-	public boolean isLunch() {
-		return lunch;
+	public boolean isDinner() {
+		return dinner;
 	}
-	public void setLunch(boolean lunch) {
-		this.lunch = lunch;
+	public void setDinner(boolean dinner) {
+		this.dinner = dinner;
 	}
 	public boolean isAfternoonTea() {
 		return afternoonTea;

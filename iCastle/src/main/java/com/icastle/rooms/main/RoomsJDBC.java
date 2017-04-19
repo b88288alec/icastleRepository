@@ -35,13 +35,11 @@ public class RoomsJDBC {
 		vo.setRoomDate(new Date(first));
 		vo.setRoomTypeName("雅緻雙人房（無窗）");
 		vo.setPeopleNum(2);
-		vo.setRemaining(12);
+		vo.setBookedNum(12);
 		vo.setRoomNumber(15);
 		vo.setPrice(2875);
-		vo.setDiscount(0.9);
-		vo.setOfferName("春季優惠");
 		vo.setBreakfast(true);
-		vo.setLunch(false);
+		vo.setDinner(false);
 		vo.setAfternoonTea(false);;
 		vo.setBedAddable(true);;
 		vo.setPricePerPerson(600);
@@ -54,13 +52,11 @@ public class RoomsJDBC {
 		vo2.setRoomDate(new Date(second));
 		vo2.setRoomTypeName("雅緻雙人房（無窗）");
 		vo2.setPeopleNum(2);
-		vo2.setRemaining(8);
+		vo2.setBookedNum(8);
 		vo2.setRoomNumber(15);
 		vo2.setPrice(3120);
-		vo2.setDiscount(0.9);
-		vo2.setOfferName("春季優惠");
 		vo2.setBreakfast(true);
-		vo2.setLunch(false);
+		vo2.setDinner(false);
 		vo2.setAfternoonTea(false);;
 		vo2.setBedAddable(true);;
 		vo2.setPricePerPerson(600);
@@ -73,13 +69,11 @@ public class RoomsJDBC {
 		vo3.setRoomDate(new Date(thrid));
 		vo3.setRoomTypeName("雅緻雙人房（無窗）");
 		vo3.setPeopleNum(2);
-		vo3.setRemaining(11);
+		vo3.setBookedNum(11);
 		vo3.setRoomNumber(15);
 		vo3.setPrice(2771);
-		vo3.setDiscount(0.9);
-		vo3.setOfferName("春季優惠");
 		vo3.setBreakfast(true);
-		vo3.setLunch(false);
+		vo3.setDinner(false);
 		vo3.setAfternoonTea(false);;
 		vo3.setBedAddable(true);;
 		vo3.setPricePerPerson(600);
@@ -92,13 +86,11 @@ public class RoomsJDBC {
 		vo4.setRoomDate(new Date(fourth));
 		vo4.setRoomTypeName("雅緻雙人房（無窗）");
 		vo4.setPeopleNum(2);
-		vo4.setRemaining(6);
+		vo4.setBookedNum(6);
 		vo4.setRoomNumber(15);
 		vo4.setPrice(2875);
-		vo4.setDiscount(0.9);
-		vo4.setOfferName("春季優惠");
 		vo4.setBreakfast(true);
-		vo4.setLunch(false);
+		vo4.setDinner(false);
 		vo4.setAfternoonTea(false);;
 		vo4.setBedAddable(true);;
 		vo4.setPricePerPerson(600);
@@ -122,13 +114,11 @@ public class RoomsJDBC {
 			System.out.println("RoomDate = " + vo.getRoomDate());
 			System.out.println("RoomTypeName = " + vo.getRoomTypeName());
 			System.out.println("PeopleNum = " + vo.getPeopleNum());
-			System.out.println("Remaining = " + vo.getRemaining());
+			System.out.println("BookedNum = " + vo.getBookedNum());
 			System.out.println("RoomNumber = " + vo.getRoomNumber());
 			System.out.println("Price = " + vo.getPrice());
-			System.out.println("Discount = " + vo.getDiscount());
-			System.out.println("OfferName = " + vo.getOfferName());
 			System.out.println("Breakfast = " + vo.isBreakfast());
-			System.out.println("Lunch = " + vo.isLunch());
+			System.out.println("Dinner = " + vo.isDinner());
 			System.out.println("AfternoonTea = " + vo.isAfternoonTea());
 			System.out.println("BedAddable = " + vo.isBedAddable());
 			System.out.println("PricePerPerson = " + vo.getPricePerPerson());
@@ -146,10 +136,8 @@ public class RoomsJDBC {
 		vo.setRoomId(29);
 		vo.setRoomTypeName("雅緻雙人房（無窗）");
 		vo.setRoomNumber(15);
-		vo.setDiscount(0.7);
-		vo.setOfferName("閃光彈專案");
 		vo.setBreakfast(true);
-		vo.setLunch(false);
+		vo.setDinner(false);
 		vo.setAfternoonTea(false);;
 		vo.setBedAddable(true);;
 		vo.setPricePerPerson(400);
@@ -158,10 +146,8 @@ public class RoomsJDBC {
 		vo2.setRoomId(30);
 		vo2.setRoomTypeName("雙人房");
 		vo2.setRoomNumber(1000);
-		vo2.setDiscount(0.4);
-		vo2.setOfferName("閃光彈專案");
 		vo2.setBreakfast(true);
-		vo2.setLunch(true);
+		vo2.setDinner(true);
 		vo2.setAfternoonTea(true);;
 		vo2.setBedAddable(true);;
 		vo2.setPricePerPerson(40000);
@@ -208,13 +194,11 @@ public class RoomsJDBC {
 			System.out.println("RoomDate = " + vo.getRoomDate());
 			System.out.println("RoomTypeName = " + vo.getRoomTypeName());
 			System.out.println("PeopleNum = " + vo.getPeopleNum());
-			System.out.println("Remaining = " + vo.getRemaining());
+			System.out.println("BookedNum = " + vo.getBookedNum());
 			System.out.println("RoomNumber = " + vo.getRoomNumber());
 			System.out.println("Price = " + vo.getPrice());
-			System.out.println("Discount = " + vo.getDiscount());
-			System.out.println("OfferName = " + vo.getOfferName());
 			System.out.println("Breakfast = " + vo.isBreakfast());
-			System.out.println("Lunch = " + vo.isLunch());
+			System.out.println("Dinner = " + vo.isDinner());
 			System.out.println("AfternoonTea = " + vo.isAfternoonTea());
 			System.out.println("BedAddable = " + vo.isBedAddable());
 			System.out.println("PricePerPerson = " + vo.getPricePerPerson());
@@ -228,7 +212,7 @@ public class RoomsJDBC {
 //		getRoomsByMonth();
 //		update();
 //		getOrder();
-//		findRooms();
+		findRooms();
 	}
 
 }
