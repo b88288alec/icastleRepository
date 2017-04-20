@@ -348,6 +348,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 				updateCount += count;
 			}
 			conn.commit();
+			conn.setAutoCommit(true);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
