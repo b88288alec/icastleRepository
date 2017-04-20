@@ -24,6 +24,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	private final String UPDATE_CMD = "update Rooms set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?";
 	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+1 where roomId = ?";
 	private final String indexQueryGetRoom = "{call indexQueryGetRoom(?,?,?,?)}";
+	private final String UPDATE_PRICE = "UPDATE Rooms SET price = ? WHERE roomId = ?";
 	
 	Connection conn = null;
 	PreparedStatement pstmt = null;
@@ -94,7 +95,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public int update(List<RoomsVO> roomList) {
+	public int updateDetail(List<RoomsVO> roomList) {
 		int updateCount = 0;
 		try {
 			Class.forName(driver);
@@ -298,6 +299,55 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 			}
 			conn.commit();
 			conn.setAutoCommit(true);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}finally {
+			if (!(pstmt == null)) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (!(conn == null)) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return updateCount;
+	}
+	
+
+	@Override
+	public int updatePrice(List<RoomsVO> roomsList) {
+		int updateCount = 0;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(UPDATE_PRICE);
+			
+			for(RoomsVO vo : roomsList){
+				pstmt.setInt(1, vo.getPrice());
+				pstmt.setInt(2, vo.getRoomId());
+				int count = pstmt.executeUpdate();
+				updateCount += count;
+			}
+			conn.commit();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

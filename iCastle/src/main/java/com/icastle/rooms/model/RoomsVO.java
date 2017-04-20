@@ -109,6 +109,7 @@ public class RoomsVO implements java.io.Serializable{
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
 	
 	
 }

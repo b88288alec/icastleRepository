@@ -156,7 +156,7 @@ public class RoomsJDBC {
 		lis.add(vo);
 		lis.add(vo2);
 		
-		int count = dao.update(lis);
+		int count = dao.updateDetail(lis);
 		System.out.println(count);
 	}
 	
@@ -207,12 +207,30 @@ public class RoomsJDBC {
 		}
 	}
 	
+	public static void updatePrice(){
+		RoomsVO vo = new RoomsVO();
+		RoomsVO vo2 = new RoomsVO();
+		List<RoomsVO> lis = new ArrayList<RoomsVO>();
+		
+		vo.setRoomId(42);
+		vo.setPrice(6000);
+		vo2.setRoomId(43);
+		vo2.setPrice(6000);
+		
+		lis.add(vo);
+		lis.add(vo2);
+		
+		int count = dao.updatePrice(lis);
+		System.out.println(count);
+	}
+	
 	public static void main(String[] args) {
 //		insert();
 //		getRoomsByMonth();
 //		update();
 //		getOrder();
-		findRooms();
+//		findRooms();
+		updatePrice();
 	}
 
 }
