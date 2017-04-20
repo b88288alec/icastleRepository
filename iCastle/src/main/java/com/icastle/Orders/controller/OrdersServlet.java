@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.icastle.Orders.model.OrdersServise;
+import com.icastle.Orders.model.OrdersService;
 
 @WebServlet("/orders/OrdersServlet")
 public class OrdersServlet extends HttpServlet {
@@ -93,7 +93,7 @@ public class OrdersServlet extends HttpServlet {
 		String hotelRemark = req.getParameter("hotelRemark");
 		Boolean orderState = true;
 		
-		OrdersServise os = new OrdersServise();
+		OrdersService os = new OrdersService();
 		os.newOrder(memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,orderState);
 		
 		res.sendRedirect("success.jsp");
