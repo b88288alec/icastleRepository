@@ -16,6 +16,9 @@
     <link href="../css/template.css" rel="stylesheet" />
     <link href="../css/index.css" rel="stylesheet" />
     
+    <script src="../js/index.js"></script>
+    
+    
     <title>愛客宿-iCastle</title>
 </head>
 <body>
@@ -30,14 +33,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="HtmlPage.html">
+                <a class="navbar-brand" href="/iCastle/view/index.jsp">
                     <img alt="Brand" height="30" src="../img/logo.png" />
                 </a>
             </div>
             <!--結束logo-->
             <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="HtmlPage.html">首頁</a></li>
+                <li class="active"><a href="/iCastle/view/index.jsp">首頁</a></li>
                 <li><a href="#">活動</a></li>
                 <li><a href="#">討論區</a></li>
             </ul>
@@ -60,7 +63,7 @@
 
      <!--搜尋列表-->
         <div class="row query-overlay">
-            <form action="#" method="get">
+            <form action="Query.do" method="get">
                 <div class="col-md-2 col-xs-12 col-sm-4" style="margin:15px;">
                     <div class="input-group input-group-sm">
                         <p>查詢型態</p>
@@ -71,14 +74,14 @@
                 <div class="col-md-2 col-xs-12 col-sm-4" style="margin:15px;">
                     <div class="input-group input-group-sm">
                         <p>入住日期</p>
-                        <input type="text" class="form-control datepicker" placeholder="輸入入住日期" name="start"/>
+                        <input type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" data-date-start-date="+0d" placeholder="輸入入住日期" name="start"/>
                     </div>
                 </div>
                 <div class="clearfix visible-xs-block"></div>
                 <div class="col-md-2 col-xs-12 col-sm-4" style="margin:15px;">
                     <div class="input-group input-group-sm">
                         <p>退房日期</p>
-                        <input type="text" class="form-control datepicker" placeholder="輸入退房日期" name="end"/>
+                        <input type="text" class="form-control datepicker" data-date-format="yyyy/mm/dd" data-date-end-date="0d" placeholder="輸入退房日期" name="end"/>
                     </div>
                 </div>
                 <div class="clearfix visible-xs-block"></div>
@@ -95,6 +98,7 @@
                         <input type="submit" class="btn btn-success" value="搜尋" />
                     </div>
                 </div>
+                <input type="button" id="onekey" value="一鍵輸入"/>
             </form>
         </div>
    </div>
@@ -163,4 +167,23 @@
 <script src="../js/bootstrap-datepicker.js"></script>
 
 <script src="../js/material-kit.js"></script>
+<script>
+$(function(){
+	$('#onekey').click(function(){
+		event.preventDefault();
+		$('input[name = "type"]').val('高雄');
+		$('input[name = "start"]').val('2017/01/02');
+		$('input[name = "end"]').val('2017/01/04');
+		$('input[name = "peopleNum"]').val(4);
+	});
+	
+	
+	$('input[name = "end"]').focus(function(){
+		$('input[name = "start"]').datepicker('hide');
+	})
+	$('input[name = "start"]').focus(function(){
+		$('input[name = "end"]').datepicker('hide');
+	})
+});
+</script>
 </html>
