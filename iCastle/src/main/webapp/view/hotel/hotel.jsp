@@ -24,7 +24,7 @@
 
 
 <!--以下請加入各自頁面的css-->
-<link href="hotel/css/hotelList.css" rel="stylesheet" />
+<link href="css/hotel.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -36,7 +36,7 @@
 <style>
 #container {
 	margin-top: 100px;
-	color: blue;
+	color: skyblue;
 }
 
 .ahotel {
@@ -82,9 +82,14 @@
 	<!--結束導覽列-->
 	<!--content here!!!!!!!!!!!!~~~~~~~~~~-->
 	
-			<!-- 飯店列表 -->
-			<div class="row" id="content">
-				
+			<!-- 飯店 -->
+			<div class="row" id="container">
+				<div class="col-md-2 col-md-offset-1"> 
+					${param.hotelId}<br>
+					${param.start}<br>
+					${param.end}<br>
+					${param.peopleNum}<br>		
+				</div>
 			</div>
 
 	<!--footer-->
