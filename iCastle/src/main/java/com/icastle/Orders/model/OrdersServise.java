@@ -44,9 +44,10 @@ public class OrdersServise {
 	}
 	
 //	修改訂單狀態
-	public void cancel(Integer orderId, Boolean orderState){
+	public void update(Integer orderId, Boolean orderState, String memo){
 		OrdersVO order = dao.select_by_orderId(orderId);
 		order.setOrderState(orderState);
+		order.setMemo(memo);
 		
 		dao.update(order);
 	}
@@ -65,4 +66,47 @@ public class OrdersServise {
 		return result;
 	}
 
+//	業者搜尋訂單
+	public List<OrdersVO> search_By_HotelId(Integer hotelId, Integer roomTypeId, Integer year, Integer month, Integer day, Boolean state){
+		
+		if(month == null && day == null && roomTypeId == null && state == null){
+			return dao.select_by_hotelId_year(hotelId, year);
+		}
+		if(day == null && roomTypeId == null && state == null){
+			return dao.select_by_hotelId_month(hotelId, year, month);
+		}
+		if(roomTypeId == null && state == null){
+			return dao.select_by_hotelId_day(hotelId, year, month, day);
+		}
+		if(month == null && day == null && roomTypeId == null){
+			return dao.select_by_hotelId_year_orderstate(hotelId, year, state);
+		}
+		if(day == null && roomTypeId == null){
+			return dao.select_by_hotelId_month_orderstate(hotelId, year, month, state);
+		}
+		if(roomTypeId == null){
+			return dao.select_by_hotelId_day_orderstate(hotelId, year, month, day, state);
+		}
+		if(month == null && day == null && state == null){
+			return dao.select_by_hotelId_year_roomTypeId(hotelId, roomTypeId, year);
+		}
+		if(day == null && state == null){
+			return dao.select_by_hotelId_month_roomTypeId(hotelId, roomTypeId, year, month);
+		}
+		if(state == null){
+			return dao.select_by_hotelId_day_roomTypeId(hotelId, roomTypeId, year, month, day);
+		}
+		if(month == null && day == null){
+			return dao.select_by_hotelId_year_roomTypeId_orderstate(hotelId, roomTypeId, year, state);
+		}
+		if(day == null){
+			return dao.select_by_hotelId_month_roomTypeId_orderstate(hotelId, roomTypeId, year, month, state);
+		}
+		if(month != null && day != null && roomTypeId != null && state != null){
+			return dao.select_by_hotelId_day_roomTypeId_orderstate(hotelId, roomTypeId, year, month, day, state);
+		}else{
+			return null;
+		}
+	}
+	
 }

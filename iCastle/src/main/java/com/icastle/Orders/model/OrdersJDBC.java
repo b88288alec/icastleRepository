@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class OrdersJDBC implements OrdersDAO_interface{
@@ -571,69 +572,901 @@ public class OrdersJDBC implements OrdersDAO_interface{
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_day(Integer hotelId, Integer year, Integer month, Integer day) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_DAY);
+			java.sql.Date checkDay = new java.sql.Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+			pstat.setInt(1, hotelId);
+			pstat.setDate(2, checkDay);
+			pstat.setDate(3, checkDay);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_year_roomTypeId(Integer hotelId, Integer roomTypeId, Integer year) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_YEAR_ROOMTYPEID);
+			pstat.setInt(1, hotelId);
+			pstat.setInt(2, year);
+			pstat.setInt(3, year);
+			pstat.setInt(4, roomTypeId);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_month_roomTypeId(Integer hotelId, Integer roomTypeId, Integer year,
 			Integer month) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_MONTH_ROOMTYPEID);
+			pstat.setInt(1, hotelId);
+			pstat.setInt(2, year);
+			pstat.setInt(3, year);
+			pstat.setInt(4, month);
+			pstat.setInt(5, month);
+			pstat.setInt(6, roomTypeId);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_day_roomTypeId(Integer hotelId, Integer roomTypeId, Integer year,
 			Integer month, Integer day) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_DAY_ROOMTYPEID);
+			java.sql.Date checkDay = new java.sql.Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+			pstat.setInt(1, hotelId);
+			pstat.setDate(2, checkDay);
+			pstat.setDate(3, checkDay);
+			pstat.setInt(4, roomTypeId);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_year_orderstate(Integer hotelId, Integer year, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_YEAR_ORDERSTATE);
+			pstat.setInt(1, hotelId);
+			pstat.setInt(2, year);
+			pstat.setInt(3, year);
+			pstat.setBoolean(4, state);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_month_orderstate(Integer hotelId, Integer year, Integer month,
 			Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_MONTH_ORDERSTATE);
+			pstat.setInt(1, hotelId);
+			pstat.setInt(2, year);
+			pstat.setInt(3, year);
+			pstat.setInt(4, month);
+			pstat.setInt(5, month);
+			pstat.setBoolean(6, state);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_day_orderstate(Integer hotelId, Integer year, Integer month, Integer day,
 			Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_DAY_ORDERSTATE);
+			java.sql.Date checkDay = new java.sql.Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+			pstat.setInt(1, hotelId);
+			pstat.setDate(2, checkDay);
+			pstat.setDate(3, checkDay);
+			pstat.setBoolean(4, state);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_year_roomTypeId_orderstate(Integer hotelId, Integer roomTypeId,
 			Integer year, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE);
+			pstat.setInt(1, hotelId);
+			pstat.setInt(2, year);
+			pstat.setInt(3, year);
+			pstat.setBoolean(4, state);
+			pstat.setInt(5, roomTypeId);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_month_roomTypeId_orderstate(Integer hotelId, Integer roomTypeId,
 			Integer year, Integer month, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE);
+			pstat.setInt(1, hotelId);
+			pstat.setInt(2, year);
+			pstat.setInt(3, year);
+			pstat.setInt(4, month);
+			pstat.setInt(5, month);
+			pstat.setBoolean(6, state);
+			pstat.setInt(7, roomTypeId);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_day_roomTypeId_orderstate(Integer hotelId, Integer roomTypeId, Integer year,
 			Integer month, Integer day, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement pstat = null;
+		ResultSet rs = null;
+		OrdersVO order = null;
+		List<OrdersVO> result = null;
+		
+		try{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, userid, passwd);
+			pstat = conn.prepareStatement(SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE);
+			java.sql.Date checkDay = new java.sql.Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+			pstat.setInt(1, hotelId);
+			pstat.setDate(2, checkDay);
+			pstat.setDate(3, checkDay);
+			pstat.setBoolean(4, state);
+			pstat.setInt(5, roomTypeId);
+			
+			rs = pstat.executeQuery();
+			result = new ArrayList<OrdersVO>();
+			
+			while(rs.next()){
+				order = new OrdersVO();
+				order.setOrderId(rs.getInt("orderId"));
+				order.setMemberId(rs.getInt("memberId"));
+				order.setRoomId(rs.getInt("roomId"));
+				order.setHotelId(rs.getInt("hotelId"));
+				order.setRoomTypeId(rs.getInt("roomTypeId"));
+				order.setRoomTypeName(rs.getString("roomTypeName"));
+				order.setCheckinDay(rs.getDate("checkinDay"));
+				order.setCheckoutDay(rs.getDate("checkoutDay"));
+				order.setRoomCount(rs.getInt("roomCount"));
+				order.setPeopleNum(rs.getInt("peopleNum"));
+				order.setBreakfast(rs.getBoolean("breakfast"));
+				order.setDinner(rs.getBoolean("dinner"));
+				order.setAfternoonTea(rs.getBoolean("afternoonTea"));
+				order.setPrice(rs.getInt("price"));
+				order.setReservationer(rs.getString("reservationer"));
+				order.setBdate(rs.getDate("bdate"));
+				order.setTel(rs.getString("tel"));
+				order.setEmail(rs.getString("email"));
+				order.setAddr(rs.getString("addr"));
+				order.setPersonId(rs.getString("personId"));
+				order.setCountry(rs.getString("country"));
+				order.setPassport(rs.getString("passport"));
+				order.setBedAdding(rs.getBoolean("bedAdding"));
+				order.setPricePerPerson(rs.getInt("pricePerPerson"));
+				order.setCustomerRemark(rs.getString("customerRemark"));
+				order.setHotelRemark(rs.getString("hotelRemark"));
+				order.setMemo(rs.getString("memo"));
+				order.setOrderState(rs.getBoolean("orderState"));
+				result.add(order);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstat != null) {
+				try {
+					pstat.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}		
+		return result;
 	}
 	
 }
