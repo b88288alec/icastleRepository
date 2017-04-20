@@ -56,19 +56,29 @@
 		<table>
 			<tr><td><span>客戶編號:</span></td><td><input type="text" name="memberId"><br></td></tr>
 			<tr><td><span>房間編號:</span></td><td><input type="text" name="roomId"><br></td></tr>
-			<tr><td><span>價格:</span></td><td><input type="text" name="price"><br></td></tr>
-			<tr><td><span>入住天數:</span></td><td><input type="text" name="dates"><br></td></tr>
-			<tr><td><span>房間號碼:</span></td><td><input type="text" name="roomNum"><br></td></tr>
+			<tr><td><span>飯店編號:</span></td><td><input type="text" name="hotelId"><br></td></tr>
+			<tr><td><span>房型編號:</span></td><td><input type="text" name="roomTypeId"><br></td></tr>
+			<tr><td><span>房型名稱:</span></td><td><input type="text" name="roomTypeName"><br></td></tr>
+			<tr><td><span>入住日:</span></td><td><input type="text" name="checkinDay"><br></td></tr>
+			<tr><td><span>退房日:</span></td><td><input type="text" name="checkoutDay"><br></td></tr>
+			<tr><td><span>預定間數:</span></td><td><input type="text" name="roomCount"><br></td></tr>
+			<tr><td><span>入住人數:</span></td><td><input type="text" name="peopleNum"><br></td></tr>
+			<tr><td><span>早餐:</span></td><td><input type="radio" name="breakfast" value="true"><span>含早</span><input type="radio" name="breakfast" value="false" checked="checked"><span>不含早</span><br></td></tr>
+			<tr><td><span>晚餐:</span></td><td><input type="radio" name="dinner" value="true"><span>含晚</span><input type="radio" name="dinner" value="false" checked="checked"><span>不含晚</span><br></td></tr>
+			<tr><td><span>下午茶:</span></td><td><input type="radio" name="afternoonTea" value="true"><span>含下午茶</span><input type="radio" name="afternoonTea" value="false" checked="checked"><span>不含下午茶</span><br></td></tr>
+			<tr><td><span>房價:</span></td><td><input type="text" name="price"><br></td></tr>
 			<tr><td><span>入住人姓名:</span></td><td><input type="text" name="reservationer"><br></td></tr>
 			<tr><td><span>生日:</span></td><td><input type="text" name="bdate"><br></td></tr>
 			<tr><td><span>電話:</span></td><td><input type="text" name="tel"><br></td></tr>
-			<tr><td><span>E-mail:</span></td><td><input type="text" name="email"><br></td></tr>
+			<tr><td><span>信箱:</span></td><td><input type="text" name="email"><br></td></tr>
 			<tr><td><span>地址:</span></td><td><input type="text" name="addr"><br></td></tr>
 			<tr><td><span>身分證字號:</span></td><td><input type="text" name="personId"><br></td></tr>
 			<tr><td><span>國籍:</span></td><td><input type="text" name="country"><br></td></tr>
 			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport"><br></td></tr>
 			<tr><td><span>是否加床:</span></td><td><input type="radio" name="bedAdding" value="true"><span>加床</span><input type="radio" name="bedAdding" value="false" checked="checked"><span>不加床</span><br></td></tr>
-			<tr><td><span>備註:</span></td><td><textarea rows="4" cols="50" name="remark"></textarea><br></td></tr>
+			<tr><td><span>加床價格:</span></td><td><input type="text" name="pricePerPerson"><br></td></tr>
+			<tr><td><span>顧客備註:</span></td><td><textarea rows="4" cols="50" name="customerRemark"></textarea><br></td></tr>
+			<tr><td><span>飯店備註:</span></td><td><textarea rows="4" cols="50" name="hotelRemark"></textarea><br></td></tr>
 			<tr><td></td><td><input type="submit"></td></tr>
 		</table>
 	</form>

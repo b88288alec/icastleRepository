@@ -32,14 +32,44 @@ public class OrdersServlet extends HttpServlet {
 		
 		Integer memberId = new Integer(req.getParameter("memberId"));
 		Integer roomId = new Integer(req.getParameter("roomId"));
+		Integer hotelId = new Integer(req.getParameter("hotelId"));
+		Integer roomTypeId = new Integer(req.getParameter("roomTypeId"));
+		String roomTypeName = req.getParameter("roomTypeName");
+		
+		String[] checkin = req.getParameter("checkinDay").trim().split("/");
+		int year = 0, month = 0, date = 0;
+		for(int i = 0; i < 3; i++){
+			if(i == 0){
+				year =  Integer.parseInt(checkin[i]);
+			}if(i == 1){
+				month = Integer.parseInt(checkin[i]) - 1;
+			}else{
+				date = Integer.parseInt(checkin[i]);
+			}
+		}
+		java.sql.Date checkinDay = new java.sql.Date(new GregorianCalendar(year, month, date).getTimeInMillis());
+		
+		String[] checkout = req.getParameter("checkoutDay").trim().split("/");
+		for(int i = 0; i < 3; i++){
+			if(i == 0){
+				year =  Integer.parseInt(checkout[i]);
+			}if(i == 1){
+				month = Integer.parseInt(checkout[i]) - 1;
+			}else{
+				date = Integer.parseInt(checkout[i]);
+			}
+		}
+		java.sql.Date checkoutDay = new java.sql.Date(new GregorianCalendar(year, month, date).getTimeInMillis());
+		
+		Integer roomCount = new Integer(req.getParameter("roomCount"));
+		Integer peopleNum = new Integer(req.getParameter("peopleNum"));
+		Boolean breakfast = Boolean.valueOf(req.getParameter("breakfast"));
+		Boolean dinner = Boolean.valueOf(req.getParameter("dinner"));
+		Boolean afternoonTea = Boolean.valueOf(req.getParameter("afternoonTea"));
 		Integer price = new Integer(req.getParameter("price"));
-		Integer dates = new Integer(req.getParameter("dates"));
-		Integer roomNum = new Integer(req.getParameter("roomNum"));
-		Boolean orderState = true;
 		String reservationer = req.getParameter("reservationer");
 		
 		String[] birthday = req.getParameter("bdate").trim().split("/");
-		int year = 0, month = 0, date = 0;
 		for(int i = 0; i < 3; i++){
 			if(i == 0){
 				year =  Integer.parseInt(birthday[i]);
@@ -54,14 +84,17 @@ public class OrdersServlet extends HttpServlet {
 		String tel = req.getParameter("tel");
 		String personId = req.getParameter("personId");
 		String email = req.getParameter("email");
-		String country = req.getParameter("country");
 		String addr = req.getParameter("addr");
+		String country = req.getParameter("country");
 		String passport = req.getParameter("passport");
 		Boolean bedAdding = Boolean.valueOf(req.getParameter("bedAdding"));
-		String remark = req.getParameter("remark");
+		Integer pricePerPerson = new Integer(req.getParameter("pricePerPerson"));
+		String customerRemark = req.getParameter("customerRemark");
+		String hotelRemark = req.getParameter("hotelRemark");
+		Boolean orderState = true;
 		
 		OrdersServise os = new OrdersServise();
-		os.newOrder(memberId, roomId, price, dates, roomNum, orderState, reservationer, bdate, tel, personId, email, country, addr, passport, bedAdding, remark);
+		os.newOrder(memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,orderState);
 		
 		res.sendRedirect("success.jsp");
 	}

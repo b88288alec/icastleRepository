@@ -1,5 +1,6 @@
 package com.icastle.Orders.main;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.icastle.Orders.model.OrdersDAO_interface;
@@ -14,46 +15,73 @@ public class OrdersTest {
 //		OrdersDAO_interface dao = new OrdersJDBC();
 //		OrdersVO result = dao.select_by_orderId(2);
 //		
-//		System.out.println("orderId: " + result.getOrderId());
-//		System.out.println("memberId: " + result.getMemberId());
-//		System.out.println("roomId: " + result.getRoomId());
-//		System.out.println("price: " + result.getPrice());
-//		System.out.println("dates: " + result.getDates());
-//		System.out.println("roomNum: " + result.getRoomNum());
-//		System.out.println("orderState: " + result.getOrderState());
-//		System.out.println("reservationer: " + result.getReservationer());
-//		System.out.println("bdate: " + result.getBdate());
-//		System.out.println("tel: " + result.getTel());
-//		System.out.println("personId: " + result.getPersonId());
-//		System.out.println("email: " + result.getEmail());
-//		System.out.println("country: " + result.getCountry());
-//		System.out.println("addr: " + result.getAddr());
-//		System.out.println("passport: " + result.getPassport());
-//		System.out.println("bedAdding: " + result.getBedAdding());
-//		System.out.println("remark: " + result.getRemark());
+//		System.out.println(
+//		+result.getHotelId() + "   "
+//		+result.getMemberId() + "   "
+//		+result.getRoomId() + "   "
+//		+result.getHotelId() + "   "
+//		+result.getRoomTypeId() + "   "
+//		+result.getRoomTypeName() + "   "
+//		+result.getCheckinDay() + "   "
+//		+result.getCheckoutDay() + "   "
+//		+result.getRoomCount() + "   "
+//		+result.getPeopleNum() + "   "
+//		+result.getBreakfast() + "   "
+//		+result.getDinner() + "   "
+//		+result.getAfternoonTea() + "   "
+//		+result.getPrice() + "   "
+//		+result.getReservationer() + "   "
+//		+result.getBdate() + "   "
+//		+result.getTel() + "   "
+//		+result.getEmail() + "   "
+//		+result.getAddr() + "   "
+//		+result.getPersonId() + "   "
+//		+result.getCountry() + "   "
+//		+result.getPassport() + "   "
+//		+result.getBedAdding() + "   "
+//		+result.getPricePerPerson() + "   "
+//		+result.getCustomerRemark() + "   "
+//		+result.getHotelRemark() + "   "
+//		+result.getMemo() + "   "
+//		+result.getOrderState()
+//		);
+//		System.out.println("---------------------------------------------");
 		
 //		查詢-memberId
 //		OrdersDAO_interface dao = new OrdersJDBC();
 //		List<OrdersVO> orders = dao.select_by_memberId(1);
 //		
 //		for(OrdersVO result:orders){
-//			System.out.println("orderId: " + result.getOrderId());
-//			System.out.println("memberId: " + result.getMemberId());
-//			System.out.println("roomId: " + result.getRoomId());
-//			System.out.println("price: " + result.getPrice());
-//			System.out.println("dates: " + result.getDates());
-//			System.out.println("roomNum: " + result.getRoomNum());
-//			System.out.println("orderState: " + result.getOrderState());
-//			System.out.println("reservationer: " + result.getReservationer());
-//			System.out.println("bdate: " + result.getBdate());
-//			System.out.println("tel: " + result.getTel());
-//			System.out.println("personId: " + result.getPersonId());
-//			System.out.println("email: " + result.getEmail());
-//			System.out.println("country: " + result.getCountry());
-//			System.out.println("addr: " + result.getAddr());
-//			System.out.println("passport: " + result.getPassport());
-//			System.out.println("bedAdding: " + result.getBedAdding());
-//			System.out.println("remark: " + result.getRemark());
+//			System.out.println(
+//			+result.getHotelId() + "   "
+//			+result.getMemberId() + "   "
+//			+result.getRoomId() + "   "
+//			+result.getHotelId() + "   "
+//			+result.getRoomTypeId() + "   "
+//			+result.getRoomTypeName() + "   "
+//			+result.getCheckinDay() + "   "
+//			+result.getCheckoutDay() + "   "
+//			+result.getRoomCount() + "   "
+//			+result.getPeopleNum() + "   "
+//			+result.getBreakfast() + "   "
+//			+result.getDinner() + "   "
+//			+result.getAfternoonTea() + "   "
+//			+result.getPrice() + "   "
+//			+result.getReservationer() + "   "
+//			+result.getBdate() + "   "
+//			+result.getTel() + "   "
+//			+result.getEmail() + "   "
+//			+result.getAddr() + "   "
+//			+result.getPersonId() + "   "
+//			+result.getCountry() + "   "
+//			+result.getPassport() + "   "
+//			+result.getBedAdding() + "   "
+//			+result.getPricePerPerson() + "   "
+//			+result.getCustomerRemark() + "   "
+//			+result.getHotelRemark() + "   "
+//			+result.getMemo() + "   "
+//			+result.getOrderState()
+//			);
 //			System.out.println("---------------------------------------------");
 //		}
 		
@@ -62,53 +90,75 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_all();
 //		
 //		for(OrdersVO result:orders){
-//			System.out.println("orderId: " + result.getOrderId());
-//			System.out.println("memberId: " + result.getMemberId());
-//			System.out.println("roomId: " + result.getRoomId());
-//			System.out.println("price: " + result.getPrice());
-//			System.out.println("dates: " + result.getDates());
-//			System.out.println("roomNum: " + result.getRoomNum());
-//			System.out.println("orderState: " + result.getOrderState());
-//			System.out.println("reservationer: " + result.getReservationer());
-//			System.out.println("bdate: " + result.getBdate());
-//			System.out.println("tel: " + result.getTel());
-//			System.out.println("personId: " + result.getPersonId());
-//			System.out.println("email: " + result.getEmail());
-//			System.out.println("country: " + result.getCountry());
-//			System.out.println("addr: " + result.getAddr());
-//			System.out.println("passport: " + result.getPassport());
-//			System.out.println("bedAdding: " + result.getBedAdding());
-//			System.out.println("remark: " + result.getRemark());
-//			System.out.println("---------------------------------------------");
+//		System.out.println(
+//		+result.getHotelId() + "   "
+//		+result.getMemberId() + "   "
+//		+result.getRoomId() + "   "
+//		+result.getHotelId() + "   "
+//		+result.getRoomTypeId() + "   "
+//		+result.getRoomTypeName() + "   "
+//		+result.getCheckinDay() + "   "
+//		+result.getCheckoutDay() + "   "
+//		+result.getRoomCount() + "   "
+//		+result.getPeopleNum() + "   "
+//		+result.getBreakfast() + "   "
+//		+result.getDinner() + "   "
+//		+result.getAfternoonTea() + "   "
+//		+result.getPrice() + "   "
+//		+result.getReservationer() + "   "
+//		+result.getBdate() + "   "
+//		+result.getTel() + "   "
+//		+result.getEmail() + "   "
+//		+result.getAddr() + "   "
+//		+result.getPersonId() + "   "
+//		+result.getCountry() + "   "
+//		+result.getPassport() + "   "
+//		+result.getBedAdding() + "   "
+//		+result.getPricePerPerson() + "   "
+//		+result.getCustomerRemark() + "   "
+//		+result.getHotelRemark() + "   "
+//		+result.getMemo() + "   "
+//		+result.getOrderState()
+//		);
+//		System.out.println("---------------------------------------------");
 //		}
 		
 //		新增
 //		OrdersDAO_interface dao = new OrdersJDBC();
-//		OrdersVO order = new OrdersVO();
-//		order.setMemberId(1);
-//		order.setRoomId(2);
-//		order.setPrice(6000);
-//		order.setDates(2);
-//		order.setRoomNum(301);
-//		order.setOrderState(true);
-//		order.setReservationer("王曉明");
-//		order.setBdate(new java.sql.Date(new java.util.GregorianCalendar(1987, 10, 6).getTime().getTime()));
-//		order.setTel("0987087087");
-//		order.setPersonId("Z555555555");
-//		order.setEmail("fdas@gmail.com");
-//		order.setCountry(null);
-//		order.setAddr("台北市大忠路一段");
-//		order.setPassport(null);
-//		order.setBedAdding(false);
-//		order.setRemark("我想放假!!!");
-//		dao.insert(order);
+//		OrdersVO ordersVO = new OrdersVO();
+//		ordersVO.setMemberId(1);
+//		ordersVO.setRoomId(1);
+//		ordersVO.setHotelId(1);
+//		ordersVO.setRoomTypeId(1);
+//		ordersVO.setRoomTypeName("好帥");
+//		ordersVO.setCheckinDay(new java.sql.Date(new GregorianCalendar(2017, 9, 10).getTimeInMillis()));
+//		ordersVO.setCheckoutDay(new java.sql.Date(new GregorianCalendar(2017, 9, 13).getTimeInMillis()));
+//		ordersVO.setRoomCount(1);
+//		ordersVO.setPeopleNum(2);
+//		ordersVO.setBreakfast(true);
+//		ordersVO.setDinner(false);
+//		ordersVO.setAfternoonTea(false);
+//		ordersVO.setPrice(9000);
+//		ordersVO.setReservationer("王美美");
+//		ordersVO.setBdate(new java.sql.Date(new GregorianCalendar(1922, 10, 10).getTimeInMillis()));
+//		ordersVO.setTel("0999555555");
+//		ordersVO.setEmail("dfas@");
+//		ordersVO.setAddr("fdsajkdasflewe");
+//		ordersVO.setPersonId("G111111111");
+//		ordersVO.setCountry("taiwan");
+//		ordersVO.setPassport("1561561343412");
+//		ordersVO.setBedAdding(false);
+//		ordersVO.setPricePerPerson(1000);
+//		ordersVO.setCustomerRemark("我朋友需要大張一點的床");
+//		ordersVO.setHotelRemark("哈哈");
+//		dao.insert(ordersVO);
 		
 		//修改訂單狀態
-		OrdersDAO_interface dao = new OrdersJDBC();
-		OrdersVO order = new OrdersVO();
-		order.setOrderId(3);
-		order.setOrderState(false);
-		dao.update(order);
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		OrdersVO order = new OrdersVO();
+//		order.setOrderId(3);
+//		order.setOrderState(false);
+//		dao.update(order);
 		
 	}
 

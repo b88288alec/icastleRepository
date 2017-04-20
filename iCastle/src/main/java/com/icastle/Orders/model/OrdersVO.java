@@ -5,20 +5,32 @@ public class OrdersVO {
 	private Integer orderId;
 	private Integer memberId;
 	private Integer roomId;
+	private Integer hotelId;
+	private Integer roomTypeId;
+	private String roomTypeName;
+	private java.sql.Date checkinDay;
+	private java.sql.Date checkoutDay;
+	private Integer roomCount;
+	private Integer peopleNum;
+	private Boolean breakfast;
+	private Boolean dinner;
+	private Boolean afternoonTea;
 	private Integer price;
-	private Integer dates;	//入住天數
-	private Integer roomNum;
-	private Boolean orderState;
+	private String roomNo;
 	private String reservationer;
 	private java.sql.Date bdate;
 	private String tel;
-	private String personId;
 	private String email;
-	private String country;
 	private String addr;
+	private String personId;
+	private String country;
 	private String passport;
 	private Boolean bedAdding;
-	private String remark;
+	private Integer pricePerPerson;
+	private String customerRemark;
+	private String hotelRemark;
+	private String memo;
+	private Boolean orderState;
 	
 	public Integer getOrderId() {
 		return orderId;
@@ -43,18 +55,6 @@ public class OrdersVO {
 	}
 	public void setPrice(Integer price) {
 		this.price = price;
-	}
-	public Integer getDates() {
-		return dates;
-	}
-	public void setDates(Integer dates) {
-		this.dates = dates;
-	}
-	public Integer getRoomNum() {
-		return roomNum;
-	}
-	public void setRoomNum(Integer roomNum) {
-		this.roomNum = roomNum;
 	}
 	public Boolean getOrderState() {
 		return orderState;
@@ -116,11 +116,95 @@ public class OrdersVO {
 	public void setBedAdding(Boolean bedAdding) {
 		this.bedAdding = bedAdding;
 	}
-	public String getRemark() {
-		return remark;
+	public Integer getHotelId() {
+		return hotelId;
 	}
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setHotelId(Integer hotelId) {
+		this.hotelId = hotelId;
+	}
+	public Integer getRoomTypeId() {
+		return roomTypeId;
+	}
+	public void setRoomTypeId(Integer roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+	public String getRoomTypeName() {
+		return roomTypeName;
+	}
+	public void setRoomTypeName(String roomTypeName) {
+		this.roomTypeName = roomTypeName;
+	}
+	public java.sql.Date getCheckinDay() {
+		return checkinDay;
+	}
+	public void setCheckinDay(java.sql.Date checkinDay) {
+		this.checkinDay = checkinDay;
+	}
+	public java.sql.Date getCheckoutDay() {
+		return checkoutDay;
+	}
+	public void setCheckoutDay(java.sql.Date checkoutDay) {
+		this.checkoutDay = checkoutDay;
+	}
+	public Integer getRoomCount() {
+		return roomCount;
+	}
+	public void setRoomCount(Integer roomCount) {
+		this.roomCount = roomCount;
+	}
+	public Integer getPeopleNum() {
+		return peopleNum;
+	}
+	public void setPeopleNum(Integer peopleNum) {
+		this.peopleNum = peopleNum;
+	}
+	public Boolean getBreakfast() {
+		return breakfast;
+	}
+	public void setBreakfast(Boolean breakfast) {
+		this.breakfast = breakfast;
+	}
+	public Boolean getDinner() {
+		return dinner;
+	}
+	public void setDinner(Boolean dinner) {
+		this.dinner = dinner;
+	}
+	public Boolean getAfternoonTea() {
+		return afternoonTea;
+	}
+	public void setAfternoonTea(Boolean afternoonTea) {
+		this.afternoonTea = afternoonTea;
+	}
+	public String getRoomNo() {
+		return roomNo;
+	}
+	public void setRoomNo(String roomNo) {
+		this.roomNo = roomNo;
+	}
+	public Integer getPricePerPerson() {
+		return pricePerPerson;
+	}
+	public void setPricePerPerson(Integer pricePerPerson) {
+		this.pricePerPerson = pricePerPerson;
+	}
+	public String getCustomerRemark() {
+		return customerRemark;
+	}
+	public void setCustomerRemark(String customerRemark) {
+		this.customerRemark = customerRemark;
+	}
+	public String getHotelRemark() {
+		return hotelRemark;
+	}
+	public void setHotelRemark(String hotelRemark) {
+		this.hotelRemark = hotelRemark;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 	
 }
