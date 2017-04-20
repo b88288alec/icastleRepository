@@ -142,16 +142,17 @@
 
 			<!-- 飯店列表 -->
 			<div class="row" id="content">
-				<c:forEach var="hotel" items="${hotels}">
+				<c:forEach var="hotel" items="${hotels}"> 
 					<div class="row ahotel">
 						<div class="col-md-2">飯店圖片</div>
 						<div class="col-md-5">
-							<a href="hotel.jsp">${hotel.hotelName}</a><br>
+							<a href="hotel/hotel.jsp?hotelId=${hotel.hotelId}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">${hotel.hotelName}</a><br>
+							
 							${hotel.star}星級<br>
 							<c:if test="${hotel.roomWifi == true}">
 					    		室內wifi
 					    	</c:if>
-							<c:if test="${hotel.breakfast == true}">
+							<c:if test="${hotel.breakfast == true}"> 
 					    		附早餐
 					    	</c:if>
 							<c:if test="${hotel.dinner == true}">
