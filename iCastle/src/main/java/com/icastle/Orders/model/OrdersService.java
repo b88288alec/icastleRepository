@@ -1,5 +1,6 @@
 package com.icastle.Orders.model;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class OrdersService {
@@ -46,8 +47,12 @@ public class OrdersService {
 //	修改訂單狀態
 	public void update(Integer orderId, Boolean orderState, String memo){
 		OrdersVO order = dao.select_by_orderId(orderId);
+		
+		java.sql.Date day = new java.sql.Date(new GregorianCalendar().getInstance().getTimeInMillis());
+		
 		order.setOrderState(orderState);
 		order.setMemo(memo);
+		order.setCancelDate(day);
 		
 		dao.update(order);
 	}

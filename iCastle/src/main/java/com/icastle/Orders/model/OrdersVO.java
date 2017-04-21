@@ -31,6 +31,7 @@ public class OrdersVO {
 	private String hotelRemark;
 	private String memo;
 	private Boolean orderState;
+	private java.sql.Date cancelDate;
 	
 	public Integer getOrderId() {
 		return orderId;
@@ -205,6 +206,12 @@ public class OrdersVO {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+	public java.sql.Date getCancelDate() {
+		return cancelDate;
+	}
+	public void setCancelDate(java.sql.Date cancelDate) {
+		this.cancelDate = cancelDate;
 	}
 	
 }

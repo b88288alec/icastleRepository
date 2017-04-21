@@ -17,23 +17,23 @@ public class OrdersJDBC implements OrdersDAO_interface{
 	String passwd = "sa123456";
 	
 	private static final String INSERT_STMT = "insert into orders(memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,orderState) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_STMT = "update orders set orderState=? , memo=? where orderid=?";
-	private static final String SELECT_BY_MEMBERID_STMT = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where memberId=?";
-	private static final String SELECT_BY_ORDERID_STMT = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where orderId=?";
-	private static final String SELECT_BY_HOTELID_YEAR = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?)";
-	private static final String SELECT_BY_HOTELID_MONTH = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and (month(checkinDay)<=? and month(checkoutDay)>=?)";
-	private static final String SELECT_BY_HOTELID_DAY = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and checkinDay<=? and checkoutDay>=?";
-	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and roomtypeid=?";
-	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and (month(checkinDay)<=? and month(checkoutDay)>=?) and roomtypeid=?";
-	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and checkinDay<=? and checkoutDay>=? and roomtypeid=?";
-	private static final String SELECT_BY_HOTELID_YEAR_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and orderstate=?";
-	private static final String SELECT_BY_HOTELID_MONTH_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and (month(checkinDay)<=? and month(checkoutDay)>=?) and orderstate=?";
-	private static final String SELECT_BY_HOTELID_DAY_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and checkinDay<=? and checkoutDay>=? and orderstate=?";
-	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and orderstate=? and roomtypeid=?";
-	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE = "orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and (month(checkinDay)<=? and month(checkoutDay)>=?) and orderstate=? and roomtypeid=?";
-	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders where hotelId=? and checkinDay<=? and checkoutDay>=? and orderstate=? and roomtypeid=?";
+	private static final String UPDATE_STMT = "update orders set orderState=? , memo=? , cancelDate=? where orderid=?";
+	private static final String SELECT_BY_MEMBERID_STMT = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where memberId=?";
+	private static final String SELECT_BY_ORDERID_STMT = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where orderId=?";
+	private static final String SELECT_BY_HOTELID_YEAR = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?)";
+	private static final String SELECT_BY_HOTELID_MONTH = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and (month(checkinDay)<=? and month(checkoutDay)>=?)";
+	private static final String SELECT_BY_HOTELID_DAY = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and checkinDay<=? and checkoutDay>=?";
+	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and roomtypeid=?";
+	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and (month(checkinDay)<=? and month(checkoutDay)>=?) and roomtypeid=?";
+	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and checkinDay<=? and checkoutDay>=? and roomtypeid=?";
+	private static final String SELECT_BY_HOTELID_YEAR_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and orderstate=?";
+	private static final String SELECT_BY_HOTELID_MONTH_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and (month(checkinDay)<=? and month(checkoutDay)>=?) and orderstate=?";
+	private static final String SELECT_BY_HOTELID_DAY_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and checkinDay<=? and checkoutDay>=? and orderstate=?";
+	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and orderstate=? and roomtypeid=?";
+	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and (year(checkinDay)=? or year(checkoutDay)=?) and (month(checkinDay)<=? and month(checkoutDay)>=?) and orderstate=? and roomtypeid=?";
+	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders where hotelId=? and checkinDay<=? and checkoutDay>=? and orderstate=? and roomtypeid=?";
 
-	private static final String SELECT_ALL_STMT = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState from orders";
+	private static final String SELECT_ALL_STMT = "select orderId,memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,memo,orderState,cancelDate from orders";
 	
 	public void insert(OrdersVO ordersVO){
 		
@@ -113,7 +113,8 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			
 			pstat.setBoolean(1, ordersVO.getOrderState());
 			pstat.setString(2, ordersVO.getMemo());
-			pstat.setInt(3, ordersVO.getOrderId());
+			pstat.setDate(3, ordersVO.getCancelDate());
+			pstat.setInt(4, ordersVO.getOrderId());
 			
 			pstat.executeUpdate();
 			
@@ -191,6 +192,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -274,6 +276,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				result.setHotelRemark(rs.getString("hotelRemark"));
 				result.setMemo(rs.getString("memo"));
 				result.setOrderState(rs.getBoolean("orderState"));
+				result.setCancelDate(rs.getDate("cancelDate"));
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -357,6 +360,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -444,6 +448,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -533,6 +538,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -621,6 +627,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -709,6 +716,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -800,6 +808,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -890,6 +899,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -978,6 +988,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1069,6 +1080,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1159,6 +1171,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1249,6 +1262,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1341,6 +1355,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1432,6 +1447,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
+				order.setCancelDate(rs.getDate("cancelDate"));
 				result.add(order);
 			}
 			

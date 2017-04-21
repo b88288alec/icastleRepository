@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.icastle.Orders.model.OrdersDAO_interface;
 import com.icastle.Orders.model.OrdersJDBC;
+import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
 
 public class OrdersTest {
@@ -100,7 +101,7 @@ public class OrdersTest {
 
 		// //業者查詢-年
 //		OrdersDAO_interface dao = new OrdersJDBC();
-//		List<OrdersVO> orders = dao.select_by_hotelId_year(2, 2017);
+//		List<OrdersVO> orders = dao.select_by_hotelId_year(3, 2017);
 //
 //		for (OrdersVO result : orders) {
 //			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
@@ -116,22 +117,192 @@ public class OrdersTest {
 //		}
 
 		// 業者查詢-年-月
-		OrdersDAO_interface dao = new OrdersJDBC();
-		List<OrdersVO> orders = dao.select_by_hotelId_month(2, 2017, 9);
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_month(3, 2017, 9);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
+//					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
+//					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
+//					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
+//					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
+//					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
+//					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
+//					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
 
-		for (OrdersVO result : orders) {
-			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
-					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
-					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
-					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
-					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
-					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
-					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
-					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
-					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
-			System.out.println("---------------------------------------------");
-		}
+//		// 業者查詢-年-月-日
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_day(3, 2017, 9, 1);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
+//					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
+//					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
+//					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
+//					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
+//					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
+//					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
+//					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+		
+		// //業者查詢-年-房型
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_year_roomTypeId(3, 2, 2017);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
+//					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
+//					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
+//					+ result.getAfternoonTea() + " " + result.getPrice() + " " + result.getReservationer() + " "
+//					+ result.getBdate() + " " + result.getTel() + " " + result.getEmail() + " " + result.getAddr() + " "
+//					+ result.getPersonId() + " " + result.getCountry() + " " + result.getPassport() + " "
+//					+ result.getBedAdding() + " " + result.getPricePerPerson() + " " + result.getCustomerRemark() + " "
+//					+ result.getHotelRemark() + " " + result.getMemo() + " " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
 
+		// 業者查詢-年-月-房型
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_month_roomTypeId(3, 2, 2017, 9);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
+//					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
+//					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
+//					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
+//					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
+//					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
+//					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
+//					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+
+//		// 業者查詢-年-月-日-房型
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_day_roomTypeId(3, 2, 2017, 9, 1);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
+//					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
+//					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
+//					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
+//					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
+//					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
+//					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
+//					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+
+		// //業者查詢-年-訂單狀態
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_year_orderstate(3, 2017, true);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
+//					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
+//					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
+//					+ result.getAfternoonTea() + " " + result.getPrice() + " " + result.getReservationer() + " "
+//					+ result.getBdate() + " " + result.getTel() + " " + result.getEmail() + " " + result.getAddr() + " "
+//					+ result.getPersonId() + " " + result.getCountry() + " " + result.getPassport() + " "
+//					+ result.getBedAdding() + " " + result.getPricePerPerson() + " " + result.getCustomerRemark() + " "
+//					+ result.getHotelRemark() + " " + result.getMemo() + " " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+
+		// 業者查詢-年-月-訂單狀態
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_month_orderstate(3, 2017, 9, true);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
+//					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
+//					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
+//					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
+//					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
+//					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
+//					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
+//					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+
+//		// 業者查詢-年-月-日-訂單狀態
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_day_orderstate(3, 2017, 9, 1, true);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
+//					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
+//					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
+//					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
+//					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
+//					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
+//					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
+//					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}		
+		
+		// //業者查詢-年-房型-訂單狀態
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_year_roomTypeId_orderstate(3, 2, 2017, true);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
+//					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
+//					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
+//					+ result.getAfternoonTea() + " " + result.getPrice() + " " + result.getReservationer() + " "
+//					+ result.getBdate() + " " + result.getTel() + " " + result.getEmail() + " " + result.getAddr() + " "
+//					+ result.getPersonId() + " " + result.getCountry() + " " + result.getPassport() + " "
+//					+ result.getBedAdding() + " " + result.getPricePerPerson() + " " + result.getCustomerRemark() + " "
+//					+ result.getHotelRemark() + " " + result.getMemo() + " " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+
+		// 業者查詢-年-月-房型-訂單狀態
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_month_roomTypeId_orderstate(3, 2, 2017, 9, true);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
+//					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
+//					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
+//					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
+//					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
+//					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
+//					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
+//					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+
+//		// 業者查詢-年-月-日-房型-訂單狀態
+//		OrdersDAO_interface dao = new OrdersJDBC();
+//		List<OrdersVO> orders = dao.select_by_hotelId_day_roomTypeId_orderstate(3, 2, 2017, 9, 1, true);
+//
+//		for (OrdersVO result : orders) {
+//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
+//					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
+//					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
+//					+ result.getAfternoonTea() + "   " + result.getPrice() + "   " + result.getReservationer() + "   "
+//					+ result.getBdate() + "   " + result.getTel() + "   " + result.getEmail() + "   " + result.getAddr()
+//					+ "   " + result.getPersonId() + "   " + result.getCountry() + "   " + result.getPassport() + "   "
+//					+ result.getBedAdding() + "   " + result.getPricePerPerson() + "   " + result.getCustomerRemark()
+//					+ "   " + result.getHotelRemark() + "   " + result.getMemo() + "   " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+		
 	}
 
 }
