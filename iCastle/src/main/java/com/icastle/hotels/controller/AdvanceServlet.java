@@ -1,4 +1,4 @@
-package hotels.controller;
+package com.icastle.hotels.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import hotels.model.ListVO;
+import com.icastle.hotels.model.ListVO;
 
 @WebServlet("/view/hotel/Advance.do")
 public class AdvanceServlet extends HttpServlet {

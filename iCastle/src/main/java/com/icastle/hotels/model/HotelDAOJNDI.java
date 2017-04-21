@@ -1,25 +1,32 @@
-package hotels.model;
+package com.icastle.hotels.model;
 
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-public class HotelDAOJDBC implements HotelDAO_Interface {
+import javax.naming.*;
+import javax.sql.*;
 
-	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private String url = "jdbc:sqlserver://localhost:1433;DatabaseName=i-Castle";
-	private String sa = "sa";
-	private String password = "sa123456";
+public class HotelDAOJNDI implements HotelDAO_Interface {
+	
+	private static DataSource ds = null;
+	static {
+	     try {
+	          Context context = new InitialContext();
+	                 // "java:comp/env/" + 連線池名稱 (在context.xml)
+	          ds = (DataSource) context.lookup("java:comp/env/jdbc/iCastleDB");
+	     } catch (NamingException e) {
+	          e.printStackTrace();
+	     }
+	}
 	
 	@Override
 	public HotelVO addHotel(HotelVO hotelVO) {
 		Connection conn = null;
 		PreparedStatement pStmt = null;
-		HotelVO hotel = null;
 		
 		try{
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, sa, password);
+			conn = ds.getConnection();
 			String SQL_STMT = "insert into Hotels values(?,?,?,?,?,?,?,?,?,?)";
 			pStmt = conn.prepareStatement(SQL_STMT);
 			pStmt.setString(1, hotelVO.getHotelName());
@@ -35,9 +42,7 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 			
 			pStmt.executeUpdate();
 			
-			hotel = findByPrimaryKey(hotelVO.getHotelId());
-		} catch (ClassNotFoundException e){
-			e.printStackTrace();
+			
 		} catch (SQLException e){
 			e.printStackTrace();			
 		} finally {
@@ -46,7 +51,7 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 			try { conn.close();
 			} catch (SQLException e) {e.printStackTrace();}
 		}
-		return hotel;
+		return hotelVO;
 	}
 
 	@Override
@@ -56,8 +61,7 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 		HotelVO hotel = null;
 		
 		try{
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, sa, password);
+			conn = ds.getConnection();
 			String SQL_STMT = "update Hotels set hotelName = ?, pw = ?  where hotelId=?";
 			pStmt = conn.prepareStatement(SQL_STMT);
 			pStmt.setString(1, hotelVO.getHotelName());
@@ -67,8 +71,6 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 			pStmt.executeUpdate();
 			
 			hotel = findByPrimaryKey(hotelVO.getHotelId());
-		} catch (ClassNotFoundException e){
-			e.printStackTrace();
 		} catch (SQLException e){
 			e.printStackTrace();			
 		} finally {
@@ -87,18 +89,15 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 		HotelVO hotel = null;
 		
 		try{
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, sa, password);
+			conn = ds.getConnection();
 			String SQL_STMT = "update Hotels set hotelState=? where hotelId=?";
 			pStmt = conn.prepareStatement(SQL_STMT);
-			pStmt.setInt(1, hotelId);
-			pStmt.setInt(2, state);
+			pStmt.setInt(1, state);
+			pStmt.setInt(2, hotelId);
 
 			pStmt.executeUpdate();
 			
 			hotel = findByPrimaryKey(hotelId);
-		} catch (ClassNotFoundException e){
-			e.printStackTrace();
 		} catch (SQLException e){
 			e.printStackTrace();			
 		} finally {
@@ -118,8 +117,7 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 		HotelVO hotel = new HotelVO();
 		
 		try{
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, sa, password);
+			conn = ds.getConnection();
 			String SQL_STMT = "select * from Hotels where hotelId = ?";
 			pStmt = conn.prepareStatement(SQL_STMT);
 			pStmt.setInt(1, hotelId);
@@ -139,9 +137,6 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 				hotel.setHotelState(rs.getInt(10));
 				hotel.setRegisterId(rs.getString(11));
 			}
-			
-		} catch (ClassNotFoundException e){
-			e.printStackTrace();
 		} catch (SQLException e){
 			e.printStackTrace();			
 		} finally {
@@ -160,10 +155,9 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 		Connection conn = null;
 		CallableStatement cStmt = null;
 		ResultSet rs = null;
-		List<List> hotels = new ArrayList();
+		List<ListVO> hotels = new ArrayList<ListVO>();
 		try{
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, sa, password);
+			conn = ds.getConnection();
 			cStmt = conn.prepareCall("{call indexQuery(?,?,?,?)}");
 			cStmt.setEscapeProcessing(true);
 			cStmt.setQueryTimeout(90);
@@ -176,20 +170,18 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 			rs = cStmt.executeQuery();
 
 			while (rs.next()){
-				List hotel = new ArrayList();
-				hotel.add(rs.getInt(1));
-				hotel.add(rs.getString(2));
-				hotel.add(rs.getInt(3));
-				hotel.add(rs.getInt(4));
-				hotel.add(rs.getInt(5));
-				hotel.add(rs.getInt(6));
-				hotel.add(rs.getBoolean(7));
-				hotel.add(rs.getBoolean(8));
-				hotel.add(rs.getBoolean(9));
+				ListVO hotel = new ListVO();
+				hotel.setHotelId(rs.getInt(1));
+				hotel.setHotelName(rs.getString(2));
+				hotel.setPrice(rs.getInt(3));
+				hotel.setStar(rs.getInt(4));
+				hotel.setPoint(rs.getDouble(5));
+				hotel.setHot(rs.getInt(6));
+				hotel.setBreakfast(rs.getBoolean(7));
+				hotel.setDinner(rs.getBoolean(8));
+				hotel.setRoomWifi(rs.getBoolean(9));
 				hotels.add(hotel);
 			}
-		} catch (ClassNotFoundException e){
-			e.printStackTrace();
 		} catch (SQLException e){
 			e.printStackTrace();			
 		} finally {
@@ -200,8 +192,9 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 			try { conn.close();
 			} catch (SQLException e) {e.printStackTrace();}
 		}
-		return null;
+		return hotels;
 	}
+
 
 	@Override
 	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate, int peopleNum, String order,

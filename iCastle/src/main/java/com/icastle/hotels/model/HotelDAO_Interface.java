@@ -1,4 +1,4 @@
-package hotels.model;
+package com.icastle.hotels.model;
 
 import java.sql.Date;
 import java.util.List;

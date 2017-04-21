@@ -1,4 +1,4 @@
-package hotels.model;
+package com.icastle.hotels.model;
 
 public class HotelVO {
 

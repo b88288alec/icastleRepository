@@ -1,4 +1,4 @@
-package hotels.controller;
+package com.icastle.hotels.controller;
 
 import java.io.IOException;
 import java.util.*;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import hotels.model.*;
+import com.icastle.hotels.model.*;
 
 @WebServlet("/view/Test.do")
 public class TestServlet extends HttpServlet {

@@ -1,4 +1,4 @@
-package hotels.model;
+package com.icastle.hotels.model;
 
 import java.sql.*;
 import java.sql.Date;
@@ -14,7 +14,7 @@ public class HotelDAO implements HotelDAO_Interface {
 	     try {
 	          Context context = new InitialContext();
 	                 // "java:comp/env/" + 連線池名稱 (在context.xml)
-	          ds = (DataSource) context.lookup("java:comp/env/jdbc/TestDB");
+	          ds = (DataSource) context.lookup("java:comp/env/jdbc/iCastleDB");
 	     } catch (NamingException e) {
 	          e.printStackTrace();
 	     }

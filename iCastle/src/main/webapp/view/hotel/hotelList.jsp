@@ -36,7 +36,6 @@
 <style>
 #container {
 	margin-top: 100px;
-	color: blue;
 }
 
 .ahotel {
@@ -123,11 +122,11 @@
 				</form>
 			</div>
 			<!-- 篩選 -->
-			價錢
-			<div id="slider-range"></div>
-			<div id="price"></div>
-			評分
-			<div id="rateYo"></div>
+<!-- 			價錢 -->
+<!-- 			<div id="slider-range"></div> -->
+<!-- 			<div id="price"></div> -->
+<!-- 			評分 -->
+<!-- 			<div id="rateYo"></div> -->
 		</div>
 
 		<!-- 排序+飯店列表 -->
@@ -135,7 +134,7 @@
 
 			<!-- 排序 -->
 			<div class="row">排序方式: 熱門度 最低價格 星級排行
-				<input type="text" name="order" value="熱門度">
+<!-- 				<input type="text" name="order" value="熱門度"> -->
 			</div>
 			<br>
 
@@ -146,7 +145,7 @@
 					<div class="row ahotel">
 						<div class="col-md-2">飯店圖片</div>
 						<div class="col-md-5">
-							<a href="hotel/hotel.jsp?hotelId=${hotel.hotelId}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">${hotel.hotelName}</a><br>
+							<a href="ShowHotel.do?hotelId=${hotel.hotelId}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">${hotel.hotelName}</a><br>
 							
 							${hotel.star}星級<br>
 							<c:if test="${hotel.roomWifi == true}">
@@ -163,8 +162,6 @@
 							評分 ${hotel.point}<br> 熱門度 ${hotel.hot}<br> 最低價格
 							${hotel.price}<br>
 						</div>
-						<input type="text"display="hidden"/>
-						<div></div>
 					</div>
 				</c:forEach>
 			</div>
