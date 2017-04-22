@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RoomsJDBCDAO implements RoomsDAO_interface {
@@ -15,14 +16,15 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	private final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private final String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
 	private final String user = "sa";
-	private final String password = "sa123456";
-//	private final String password = "Alec88288";
+//	private final String password = "sa123456";
+	private final String password = "Alec88288";
 
 	private final String INSERT_CMD = "insert into Rooms(roomTypeId, hotelId, roomDate, RoomTypeName, peopleNum, bookedNum, roomNumber, price,  breakfast, dinner, afternoonTea, bedAddable, pricePerPerson, remark) "
 			+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String GET_ROOMS_BY_MONTH = "select * from Rooms where hotelId = ? and roomTypeId = ? and MONTH(roomDate) = ?";
 	private final String UPDATE_CMD = "update Rooms set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?";
-	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+1 where roomId = ?";
+	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+1 where roomId between ? and ?";
+	private final String GET_PER_PRICE = "select price from Rooms where roomId between ? and ? order by roomDate";
 	private final String indexQueryGetRoom = "{call indexQueryGetRoom(?,?,?,?)}";
 	private final String UPDATE_PRICE = "UPDATE Rooms SET price = ? WHERE roomId = ?";
 	
@@ -284,19 +286,20 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public int getOrder(List<RoomsVO> roomsList) {
+	public int getOrder(int roomId, int dayNum) {
 		int updateCount = 0;
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, user, password);
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(GET_ORDER);
+			int roomIdEnd = roomId + (dayNum - 1);
+
+			pstmt.setInt(1,roomId);
+			pstmt.setInt(2,roomIdEnd);
+			int count = pstmt.executeUpdate();
+			updateCount += count;
 			
-			for (RoomsVO vo : roomsList){
-				pstmt.setInt(1, vo.getRoomId());
-				int count = pstmt.executeUpdate();
-				updateCount += count;
-			}
 			conn.commit();
 			conn.setAutoCommit(true);
 		} catch (ClassNotFoundException e) {
@@ -379,6 +382,54 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 			}
 		}
 		return updateCount;
+	}
+
+	@Override
+	public List<Integer> getPerPrice(int roomId, int stayDayNum) {
+		List<Integer> perPrice = new LinkedList<Integer>();
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			pstmt = conn.prepareStatement(GET_PER_PRICE);
+			int roomIdEnd = roomId + (stayDayNum - 1);
+			
+			pstmt.setInt(1, roomId);
+			pstmt.setInt(2, roomIdEnd);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Integer price = new Integer(rs.getInt(1));
+				perPrice.add(price);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (!(rs == null)) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (!(pstmt == null)) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (!(conn == null)) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return perPrice;
 	}
 
 }
