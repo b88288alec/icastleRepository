@@ -130,7 +130,7 @@
 				<div class="row">
 					這邊是飯店介紹資訊<br><br>
 				</div>
-				<!-- 飯店介紹資訊結束 -->
+				<!-- 飯店介紹資訊結束 --> 
 				
 				<!-- 房型 -->
 				<div class="row">
@@ -141,10 +141,10 @@
 					<!-- 一筆又一筆的房間 -->
 					<c:forEach var="room" items="${rooms}">
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-2">
 								${room.roomTypeName}
 							</div>
-							<div class="col-md-8">
+							<div class="col-md-10">
 								<form action="#" name="form">
 									
 									<!-- 測試能否抓到資訊 -->
@@ -167,19 +167,18 @@
 									<!-- 測試能否抓到資訊 -->
 
 									<c:if test="${room.breakfast}">
-										含早餐
+										含早餐 
 									</c:if>
 									<c:if test="${room.dinner}">
 										含晚餐 
 									</c:if>
 									<c:if test="${room.afternoonTea}">
-										含下午茶
+										含下午茶 
 									</c:if>
-									$${room.price}
-									<!-- 可加床則顯示可以加床的checkbox -->
 									<c:if test="${room.bedAddable}">
-										<input type="checkbox" value="加床"/>加床 
+										可加床 
 									</c:if>
+									$${room.price} 
 									
 									<!-- 下訂按鈕與傳送資訊 -->
 									<input type="button" value="下訂"/><br>
