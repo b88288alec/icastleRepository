@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,21 +53,55 @@
     <!--結束導覽列-->
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container" style="margin-top:56px">
-    <form action="OrdersServlet" method="post">
+    <form action="OrdersServlet.do" method="post">
 		<table>
-			<tr><td><span>客戶編號:</span></td><td><input type="text" name="memberId"><br></td></tr>
-			<tr><td><span>房間編號:</span></td><td><input type="text" name="roomId"><br></td></tr>
-			<tr><td><span>飯店編號:</span></td><td><input type="text" name="hotelId"><br></td></tr>
-			<tr><td><span>房型編號:</span></td><td><input type="text" name="roomTypeId"><br></td></tr>
-			<tr><td><span>房型名稱:</span></td><td><input type="text" name="roomTypeName"><br></td></tr>
-			<tr><td><span>入住日:</span></td><td><input type="text" name="checkinDay"><br></td></tr>
-			<tr><td><span>退房日:</span></td><td><input type="text" name="checkoutDay"><br></td></tr>
-			<tr><td><span>預定間數:</span></td><td><input type="text" name="roomCount"><br></td></tr>
-			<tr><td><span>入住人數:</span></td><td><input type="text" name="peopleNum"><br></td></tr>
-			<tr><td><span>早餐:</span></td><td><input type="radio" name="breakfast" value="true"><span>含早</span><input type="radio" name="breakfast" value="false" checked="checked"><span>不含早</span><br></td></tr>
-			<tr><td><span>晚餐:</span></td><td><input type="radio" name="dinner" value="true"><span>含晚</span><input type="radio" name="dinner" value="false" checked="checked"><span>不含晚</span><br></td></tr>
-			<tr><td><span>下午茶:</span></td><td><input type="radio" name="afternoonTea" value="true"><span>含下午茶</span><input type="radio" name="afternoonTea" value="false" checked="checked"><span>不含下午茶</span><br></td></tr>
-			<tr><td><span>房價:</span></td><td><input type="text" name="price"><br></td></tr>
+			<tr><td><span>客戶編號:</span></td><td><span name="memberId">${ordersVO.memberId }</span><br></td></tr>
+			<tr><td><span>房間編號:</span></td><td><span name="roomId">${ordersVO.roomId }</span><br></td></tr>
+			<tr><td><span>飯店編號:</span></td><td><span name="hotelId">${ordersVO.hotelId }</span><br></td></tr>
+			<tr><td><span>房型編號:</span></td><td><span name="roomTypeId">${ordersVO.roomTypeId }</span><br></td></tr>
+			<tr><td><span>房型名稱:</span></td><td><span name="roomTypeName">${ordersVO.roomTypeName }</span><br></td></tr>
+			<tr><td><span>入住日:</span></td><td><span name="checkinDay">${ordersVO.checkinDay }</span><br></td></tr>
+			<tr><td><span>退房日:</span></td><td><span name="checkoutDay">${ordersVO.checkoutDay }</span><br></td></tr>
+<!-- 			<tr><td><span>預定間數:</span></td><td><input type="text" name="roomCount"><br></td></tr> -->
+			<tr><td><span>入住人數:</span></td><td><span name="peopleNum">${ordersVO.peopleNum }</span><br></td></tr>
+			
+			<tr><td><span>早餐:</span></td>
+			<td>
+				<c:choose>
+					<c:when test="${ordersVO.breakfast}">
+						<span name="breakfast" value="true">含早餐</span><br>
+					</c:when>
+					<c:otherwise>
+						<span name="breakfast" value="false">不含早餐</span><br>
+					</c:otherwise>
+				</c:choose>
+			</td></tr>
+			
+			<tr><td><span>晚餐:</span></td>
+			<td>
+				<c:choose>
+					<c:when test="${ordersVO.dinner}">
+						<span name="dinner" value="true">含晚餐</span><br>
+					</c:when>
+					<c:otherwise>
+						<span name="dinner" value="false">不含晚餐</span><br>
+					</c:otherwise>
+				</c:choose>
+			</td></tr>
+			
+			<tr><td><span>下午茶:</span></td>
+			<td>
+				<c:choose>
+					<c:when test="${ordersVO.afternoonTea}">
+						<span name="afternoonTea" value="true">含下午茶</span><br>
+					</c:when>
+					<c:otherwise>
+						<span name="afternoonTea" value="false">不含下午茶</span><br>
+					</c:otherwise>
+				</c:choose>
+			</td></tr>
+			
+			<tr><td><span>房價:</span></td><td><span name="price">${ordersVO.price } /間/晚</span><br></td></tr>
 			<tr><td><span>入住人姓名:</span></td><td><input type="text" name="reservationer"><br></td></tr>
 			<tr><td><span>生日:</span></td><td><input type="text" name="bdate"><br></td></tr>
 			<tr><td><span>電話:</span></td><td><input type="text" name="tel"><br></td></tr>
@@ -75,12 +110,27 @@
 			<tr><td><span>身分證字號:</span></td><td><input type="text" name="personId"><br></td></tr>
 			<tr><td><span>國籍:</span></td><td><input type="text" name="country"><br></td></tr>
 			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport"><br></td></tr>
-			<tr><td><span>是否加床:</span></td><td><input type="radio" name="bedAdding" value="true"><span>加床</span><input type="radio" name="bedAdding" value="false" checked="checked"><span>不加床</span><br></td></tr>
-			<tr><td><span>加床價格:</span></td><td><input type="text" name="pricePerPerson"><br></td></tr>
+			<c:if test="${ordersVO.bedAdding}">
+				<tr><td><span>是否加床:</span></td><td><input type="radio" name="bedAdding" value="true"><span>加床</span><input type="radio" name="bedAdding" value="false" checked><span>不加床</span><br></td></tr>
+				<tr><td><span>加床價格:</span></td><td><span name="pricePerPerson">${ordersVO.pricePerPerson } /位</span><br></td></tr>
+			</c:if>
 			<tr><td><span>顧客備註:</span></td><td><textarea rows="4" cols="50" name="customerRemark"></textarea><br></td></tr>
-			<tr><td><span>飯店備註:</span></td><td><textarea rows="4" cols="50" name="hotelRemark"></textarea><br></td></tr>
+			<tr><td><span>飯店備註:</span></td><td><span name="hotelRemark">${ordersVO.hotelRemark }</span><br></td></tr>
 			<tr><td></td><td><input type="submit"></td></tr>
 		</table>
+		<input type="hidden" name="memberId" value="${ordersVO.memberId}"/>
+		<input type="hidden" name="roomId" value="${ordersVO.roomId}"/>
+		<input type="hidden" name="hotelId" value="${ordersVO.hotelId}"/>
+		<input type="hidden" name="roomTypeId" value="${ordersVO.roomTypeId}"/>
+		<input type="hidden" name="roomTypeName" value="${ordersVO.roomTypeName}"/>
+		<input type="hidden" name="checkinDay" value="${ordersVO.checkinDay}"/>
+		<input type="hidden" name="checkoutDay" value="${ordersVO.checkoutDay}"/>
+		<input type="hidden" name="peopleNum" value="${ordersVO.peopleNum}"/>
+		<input type="hidden" name="breakfast" value="${ordersVO.breakfast}"/>
+		<input type="hidden" name="dinner" value="${ordersVO.dinner}"/>
+		<input type="hidden" name="afternoonTea" value="${ordersVO.afternoonTea}"/>
+		<input type="hidden" name="price" value="${ordersVO.price}"/>
+		<input type="hidden" name="hotelRemark" value="${ordersVO.hotelRemark}"/>
 	</form>
 	</div>
     <!--footer-->

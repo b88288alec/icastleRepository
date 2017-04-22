@@ -145,7 +145,7 @@
 								${room.roomTypeName}
 							</div>
 							<div class="col-md-10">
-								<form action="#" name="form">
+								<form action="../orders/OrdersServlet.do" name="form">
 									
 									<!-- 測試能否抓到資訊 -->
 									<!--
@@ -181,13 +181,13 @@
 									$${room.price} 
 									
 									<!-- 下訂按鈕與傳送資訊 -->
-									<input type="button" value="下訂"/><br>
+									<input type="submit" value="下訂"/><br>
 									<input type="hidden" name="roomId" value="${room.roomId}"/>
 									<input type="hidden" name="hotelId" value="${room.hotelId}"/>
 									<input type="hidden" name="roomTypeId" value="${room.roomTypeId}"/>
 									<input type="hidden" name="roomTypeName" value="${room.roomTypeName}"/>
-									<input type="hidden" name="start" value="${param.start}"/>
-									<input type="hidden" name="end" value="${param.end}"/>
+									<input type="hidden" name="checkinDay" value="${param.start}"/>
+									<input type="hidden" name="checkoutDay" value="${param.end}"/>
 									<input type="hidden" name="peopleNum" value="${param.peopleNum}"/>
 									<input type="hidden" name="breakfast" value="${room.breakfast}"/>
 									<input type="hidden" name="dinner" value="${room.dinner}"/>
@@ -195,7 +195,7 @@
 									<input type="hidden" name="price" value="${room.price}"/>
 									<input type="hidden" name="bedAddable" value="${room.bedAddable}"/>
 									<input type="hidden" name="pricePerPerson" value="${room.pricePerPerson}"/>
-									<input type="hidden" name="remark" value="${room.remark}"/>
+									<input type="hidden" name="hotelRemark" value="${room.remark}"/>
  									${room.remark}<br><br>
 								</form>
 							</div>

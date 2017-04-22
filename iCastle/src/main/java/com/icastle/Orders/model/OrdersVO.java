@@ -1,6 +1,6 @@
 package com.icastle.Orders.model;
 
-public class OrdersVO {
+public class OrdersVO implements java.io.Serializable{
 
 	private Integer orderId;
 	private Integer memberId;
