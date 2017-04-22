@@ -35,7 +35,7 @@ public class OrdersServlet extends HttpServlet {
 		ordersVO.setRoomTypeId(new Integer(req.getParameter("roomTypeId")));
 		ordersVO.setRoomTypeName(req.getParameter("roomTypeName"));
 		
-		String[] checkin = req.getParameter("checkinDay").trim().split("/");
+		String[] checkin = req.getParameter("start").trim().split("/");
 		int year = 0, month = 0, date = 0;
 		for(int i = 0; i < 3; i++){
 			if(i == 0){
@@ -48,7 +48,7 @@ public class OrdersServlet extends HttpServlet {
 		}
 		java.sql.Date checkinDay = new java.sql.Date(new GregorianCalendar(year, month, date).getTimeInMillis());
 		
-		String[] checkout = req.getParameter("checkoutDay").trim().split("/");
+		String[] checkout = req.getParameter("end").trim().split("/");
 		for(int i = 0; i < 3; i++){
 			if(i == 0){
 				year =  Integer.parseInt(checkout[i]);
@@ -68,9 +68,9 @@ public class OrdersServlet extends HttpServlet {
 		ordersVO.setDinner(Boolean.valueOf(req.getParameter("dinner")));
 		ordersVO.setAfternoonTea(Boolean.valueOf(req.getParameter("afternoonTea")));
 		ordersVO.setPrice(new Integer(req.getParameter("price")));
-		ordersVO.setBedAdding(Boolean.valueOf(req.getParameter("bedAdding")));
+		ordersVO.setBedAdding(Boolean.valueOf(req.getParameter("bedAddable")));
 		ordersVO.setPricePerPerson(new Integer(req.getParameter("pricePerPerson")));
-		ordersVO.setHotelRemark(req.getParameter("hotelRemark"));
+		ordersVO.setHotelRemark(req.getParameter("remark"));
 		
 		req.setAttribute("ordersVO", ordersVO);
 		
@@ -120,9 +120,24 @@ public class OrdersServlet extends HttpServlet {
 		//房間數量先寫死，之後再改成動態的
 		Integer roomCount = 1;
 		Integer peopleNum = new Integer(req.getParameter("peopleNum"));
-		Boolean breakfast = Boolean.valueOf(req.getParameter("breakfast"));
-		Boolean dinner = Boolean.valueOf(req.getParameter("dinner"));
-		Boolean afternoonTea = Boolean.valueOf(req.getParameter("afternoonTea"));
+		
+		String bf = req.getParameter("breakfast");
+		Boolean breakfast = false;
+		if(bf != null){
+			breakfast = Boolean.valueOf(bf);
+		}
+		
+		String dr = req.getParameter("dinner");
+		Boolean dinner = false;
+		if(dr != null){
+			dinner = Boolean.valueOf(dr);
+		}
+		
+		String tea = req.getParameter("afternoonTea");
+		Boolean afternoonTea = false;
+		if(tea != null){
+			afternoonTea = Boolean.valueOf(tea);
+		}
 		Integer price = new Integer(req.getParameter("price"));
 		String reservationer = req.getParameter("reservationer");
 		

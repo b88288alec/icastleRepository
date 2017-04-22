@@ -65,51 +65,27 @@
 <!-- 			<tr><td><span>預定間數:</span></td><td><input type="text" name="roomCount"><br></td></tr> -->
 			<tr><td><span>入住人數:</span></td><td><span name="peopleNum">${ordersVO.peopleNum }</span><br></td></tr>
 			
-			<tr><td><span>早餐:</span></td>
+			<tr><td><span>含餐:</span></td>
 			<td>
-				<c:choose>
-					<c:when test="${ordersVO.breakfast}">
-						<span name="breakfast" value="true">含早餐</span><br>
-					</c:when>
-					<c:otherwise>
-						<span name="breakfast" value="false">不含早餐</span><br>
-					</c:otherwise>
-				</c:choose>
+				<c:if test="${ordersVO.breakfast}">
+					<span name="breakfast" value="true">含早餐   </span>
+				</c:if>
+				<c:if test="${ordersVO.dinner}">
+					<span name="dinner" value="true">含晚餐   </span><br>
+				</c:if>
+				<c:if test="${ordersVO.afternoonTea}">
+					<span name="afternoonTea" value="true">含下午茶</span>
+				</c:if>
 			</td></tr>
-			
-			<tr><td><span>晚餐:</span></td>
-			<td>
-				<c:choose>
-					<c:when test="${ordersVO.dinner}">
-						<span name="dinner" value="true">含晚餐</span><br>
-					</c:when>
-					<c:otherwise>
-						<span name="dinner" value="false">不含晚餐</span><br>
-					</c:otherwise>
-				</c:choose>
-			</td></tr>
-			
-			<tr><td><span>下午茶:</span></td>
-			<td>
-				<c:choose>
-					<c:when test="${ordersVO.afternoonTea}">
-						<span name="afternoonTea" value="true">含下午茶</span><br>
-					</c:when>
-					<c:otherwise>
-						<span name="afternoonTea" value="false">不含下午茶</span><br>
-					</c:otherwise>
-				</c:choose>
-			</td></tr>
-			
 			<tr><td><span>房價:</span></td><td><span name="price">${ordersVO.price } /間/晚</span><br></td></tr>
-			<tr><td><span>入住人姓名:</span></td><td><input type="text" name="reservationer"><br></td></tr>
-			<tr><td><span>生日:</span></td><td><input type="text" name="bdate"><br></td></tr>
-			<tr><td><span>電話:</span></td><td><input type="text" name="tel"><br></td></tr>
-			<tr><td><span>信箱:</span></td><td><input type="text" name="email"><br></td></tr>
-			<tr><td><span>地址:</span></td><td><input type="text" name="addr"><br></td></tr>
-			<tr><td><span>身分證字號:</span></td><td><input type="text" name="personId"><br></td></tr>
-			<tr><td><span>國籍:</span></td><td><input type="text" name="country"><br></td></tr>
-			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport"><br></td></tr>
+			<tr><td><span>入住人姓名:</span></td><td><input type="text" name="reservationer">${errorMsgs.name}<br></td></tr>
+			<tr><td><span>生日:</span></td><td><input type="text" name="bdate">${errorMsgs.bdate}<br></td></tr>
+			<tr><td><span>電話:</span></td><td><input type="text" name="tel">${errorMsgs.tel}<br></td></tr>
+			<tr><td><span>信箱:</span></td><td><input type="text" name="email">${errorMsgs.email}<br></td></tr>
+			<tr><td><span>地址:</span></td><td><input type="text" name="addr">${errorMsgs.addr}<br></td></tr>
+			<tr><td><span>身分證字號:</span></td><td><input type="text" name="personId">${errorMsgs.personId}<br></td></tr>
+			<tr><td><span>國籍:</span></td><td><input type="text" name="country">${errorMsgs.country}<br></td></tr>
+			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport">${errorMsgs.passport}<br></td></tr>
 			<c:if test="${ordersVO.bedAdding}">
 				<tr><td><span>是否加床:</span></td><td><input type="radio" name="bedAdding" value="true"><span>加床</span><input type="radio" name="bedAdding" value="false" checked><span>不加床</span><br></td></tr>
 				<tr><td><span>加床價格:</span></td><td><span name="pricePerPerson">${ordersVO.pricePerPerson } /位</span><br></td></tr>
@@ -130,6 +106,7 @@
 		<input type="hidden" name="dinner" value="${ordersVO.dinner}"/>
 		<input type="hidden" name="afternoonTea" value="${ordersVO.afternoonTea}"/>
 		<input type="hidden" name="price" value="${ordersVO.price}"/>
+		<input type="hidden" name="pricePerPerson" value="${ordersVO.pricePerPerson}"/>
 		<input type="hidden" name="hotelRemark" value="${ordersVO.hotelRemark}"/>
 	</form>
 	</div>
