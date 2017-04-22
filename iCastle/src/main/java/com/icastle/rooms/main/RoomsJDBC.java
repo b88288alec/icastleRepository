@@ -1,11 +1,14 @@
 package com.icastle.rooms.main;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import com.icastle.rooms.model.RoomsJDBCDAO;
+import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
 
 public class RoomsJDBC {
@@ -161,19 +164,8 @@ public class RoomsJDBC {
 	}
 	
 	public static void getOrder(){
-		RoomsVO vo = new RoomsVO();
-		RoomsVO vo2 = new RoomsVO();
 		
-		List<RoomsVO> lis = new ArrayList<RoomsVO>();
-		
-		vo.setRoomId(29);
-		
-		vo2.setRoomId(30);
-		
-		lis.add(vo);
-		lis.add(vo2);
-		
-		int count = dao.getOrder(lis);
+		int count = dao.getOrder(29, 2);
 		System.out.println(count);
 	}
 	
@@ -224,13 +216,44 @@ public class RoomsJDBC {
 		System.out.println(count);
 	}
 	
+	public static void getstayDayNum(){
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		int stayDayNum = 0;
+		Date d = null;
+		try {
+			String s1 = "2017/01/02";
+			String s2 = "2017/01/04";
+			long start = sdf.parse(s1).getTime();
+			long end = sdf.parse(s2).getTime();
+			stayDayNum = (int)((end - start) / (1000*60*60*24));
+			d = new Date((end - start / (24*60*60*1000)));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(stayDayNum);
+		System.out.println(d);
+		
+	}
+	
+	public static void getPerPrice(){
+		List<Integer> perPrice = dao.getPerPrice(41, 3);
+		
+		for(Integer price : perPrice){
+			System.out.println(price);
+		}
+	}
+	
 	public static void main(String[] args) {
 //		insert();
 //		getRoomsByMonth();
 //		update();
 //		getOrder();
 //		findRooms();
-		updatePrice();
+//		updatePrice();
+//		getstayDayNum();
+		getPerPrice();
 	}
 
 }

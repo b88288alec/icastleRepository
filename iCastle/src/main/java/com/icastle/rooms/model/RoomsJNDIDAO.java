@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -32,7 +33,8 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 			+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String GET_ROOMS_BY_MONTH = "select * from Rooms where hotelId = ? and roomTypeId = ? and MONTH(roomDate) = ?";
 	private final String UPDATE_CMD = "update Rooms set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?";
-	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+1 where roomId = ?";
+	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+1 where roomId between ? and ?";
+	private final String GET_PER_PRICE = "select price from Rooms where roomId between ? and ? order by roomDate";
 	private final String indexQueryGetRoom = "{call indexQueryGetRoom(?,?,?,?)}";
 	private final String UPDATE_PRICE = "UPDATE Rooms SET price = ? WHERE roomId = ?";
 	
@@ -278,18 +280,18 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public int getOrder(List<RoomsVO> roomsList) {
+	public int getOrder(int roomId, int dayNum) {
 		int updateCount = 0;
 		try {
 			conn = ds.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(GET_ORDER);
+			int roomIdEnd = roomId + (dayNum - 1);
 			
-			for (RoomsVO vo : roomsList){
-				pstmt.setInt(1, vo.getRoomId());
-				int count = pstmt.executeUpdate();
-				updateCount += count;
-			}
+			pstmt.setInt(1,roomId);
+			pstmt.setInt(2,roomIdEnd);
+			int count = pstmt.executeUpdate();
+			updateCount += count;
 			conn.commit();
 			conn.setAutoCommit(true);
 		} catch (SQLException e) {
@@ -367,4 +369,47 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 		return updateCount;
 	}
 
+	public List<Integer> getPerPrice(int roomId, int stayDayNum) {
+		List<Integer> perPrice = new LinkedList<Integer>();
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(GET_PER_PRICE);
+			int roomIdEnd = roomId + (stayDayNum - 1);
+			
+			pstmt.setInt(1, roomId);
+			pstmt.setInt(2, roomIdEnd);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				Integer price = new Integer(rs.getInt(1));
+				perPrice.add(price);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (!(rs == null)) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (!(pstmt == null)) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (!(conn == null)) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return perPrice;
+	}
 }
