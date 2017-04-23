@@ -1,0 +1,59 @@
+﻿/*bootstarp navbar導覽列複寫*/
+.navbar, .navbar.navbar-default {
+    background-color: #f5e345;
+    border-color: #f5e345;
+    border-radius: 0;
+    width: 100%;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    z-index: 3;
+    padding:0px;
+    color:gray;
+}
+
+    .navbar-default .navbar-nav > li > a {
+        font-family: 'Microsoft JhengHei';
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+        .navbar-default .navbar-nav > li > a:hover {
+            background-color: white;
+            border-bottom: 4px solid #00BCD4;
+            color: black;
+        }
+
+        .navbar-default .navbar-nav > li > a:focus {
+        }
+
+    .navbar-default .navbar-nav > .active > a,
+    .navbar-default .navbar-nav > .active > a:hover,
+    .navbar-default .navbar-nav > .active > a:focus {
+        background-color: white;
+        border-bottom: 4px solid #00BCD4;
+    }
+
+.navbar-brand {
+    margin: 0px;
+    padding: 12px 12px;
+}
+/*bootstarp navbar導覽列複寫結束*/
+
+/*網頁字體及底色*/
+body {
+    background-color: #FAFAFA;
+    font-family: 'Microsoft JhengHei';
+}
+/*網頁字體及底色結束*/
+
+/*網頁footer*/
+.footer {
+    height: 100px;
+    background-color: #f5e345;
+    margin-top: 100px;
+    text-align: center;
+}
+
+    .footer img {
+        margin-top: 20px;
+    }
+/*網頁footer結束*/
