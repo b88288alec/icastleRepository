@@ -1,9 +1,12 @@
 package com.icastle.Orders.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,9 +14,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
+import com.icastle.rooms.model.RoomsService;
 
 @WebServlet("/orders/OrdersServlet.do")
 public class OrdersServlet extends HttpServlet {
@@ -85,74 +90,53 @@ public class OrdersServlet extends HttpServlet {
 		
 		List<String> errorMsgs = new LinkedList<String>();
 		req.setAttribute("errorMsgs", errorMsgs);
+		HttpSession session = req.getSession();
+		Map<String,String> orderMap = (Map)session.getAttribute("orderMap");
+		
+		RoomsService rs = new RoomsService();
+		rs.getOrder(Integer.parseInt(orderMap.get("roomId")), (int)session.getAttribute("stayDayNum"));
 		
 		Integer memberId = new Integer(req.getParameter("memberId"));
-		Integer roomId = new Integer(req.getParameter("roomId"));
-		Integer hotelId = new Integer(req.getParameter("hotelId"));
-		Integer roomTypeId = new Integer(req.getParameter("roomTypeId"));
-		String roomTypeName = req.getParameter("roomTypeName");
+		Integer roomId = new Integer(orderMap.get("roomId"));
+		Integer hotelId = new Integer(orderMap.get("hotelId"));
+		Integer roomTypeId = new Integer(orderMap.get("roomTypeId"));
+		String roomTypeName = orderMap.get("roomTypeName");
 		
-		String[] checkin = req.getParameter("checkinDay").trim().split("-");
-		int year = 0, month = 0, date = 0;
-		for(int i = 0; i < 3; i++){
-			if(i == 0){
-				year =  Integer.parseInt(checkin[i]);
-			}if(i == 1){
-				month = Integer.parseInt(checkin[i]) - 1;
-			}else{
-				date = Integer.parseInt(checkin[i]);
-			}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+		java.sql.Date checkinDay = null;
+		java.sql.Date checkoutDay = null;
+		java.sql.Date bdate = null;
+		try {
+			checkinDay = new java.sql.Date(sdf.parse(orderMap.get("checkinDay")).getTime());
+			checkoutDay = new java.sql.Date(sdf.parse(orderMap.get("checkoutDay")).getTime());
+			bdate = new java.sql.Date(sdf.parse(req.getParameter("bdate")).getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		java.sql.Date checkinDay = new java.sql.Date(new GregorianCalendar(year, month, date).getTimeInMillis());
-		
-		String[] checkout = req.getParameter("checkoutDay").trim().split("-");
-		for(int i = 0; i < 3; i++){
-			if(i == 0){
-				year =  Integer.parseInt(checkout[i]);
-			}if(i == 1){
-				month = Integer.parseInt(checkout[i]) - 1;
-			}else{
-				date = Integer.parseInt(checkout[i]);
-			}
-		}
-		java.sql.Date checkoutDay = new java.sql.Date(new GregorianCalendar(year, month, date).getTimeInMillis());
 		
 		//房間數量先寫死，之後再改成動態的
 		Integer roomCount = 1;
-		Integer peopleNum = new Integer(req.getParameter("peopleNum"));
+		Integer peopleNum = new Integer(orderMap.get("peopleNum"));
 		
-		String bf = req.getParameter("breakfast");
+		String bf = orderMap.get("breakfast");
 		Boolean breakfast = false;
 		if(bf != null){
 			breakfast = Boolean.valueOf(bf);
 		}
 		
-		String dr = req.getParameter("dinner");
+		String dr = orderMap.get("dinner");
 		Boolean dinner = false;
 		if(dr != null){
 			dinner = Boolean.valueOf(dr);
 		}
 		
-		String tea = req.getParameter("afternoonTea");
+		String tea = orderMap.get("afternoonTea");
 		Boolean afternoonTea = false;
 		if(tea != null){
 			afternoonTea = Boolean.valueOf(tea);
 		}
 		Integer price = new Integer(req.getParameter("price"));
 		String reservationer = req.getParameter("reservationer");
-		
-		String[] birthday = req.getParameter("bdate").trim().split("/");
-		for(int i = 0; i < 3; i++){
-			if(i == 0){
-				year =  Integer.parseInt(birthday[i]);
-			}if(i == 1){
-				month = Integer.parseInt(birthday[i]) - 1;
-			}else{
-				date = Integer.parseInt(birthday[i]);
-			}
-		}
-		java.sql.Date bdate = new java.sql.Date(new GregorianCalendar(year, month, date).getTimeInMillis());
-		
 		String tel = req.getParameter("tel");
 		String personId = req.getParameter("personId");
 		String email = req.getParameter("email");
@@ -163,11 +147,11 @@ public class OrdersServlet extends HttpServlet {
 		
 		Integer pricePerPerson = 0;
 		if(bedAdding){
-			pricePerPerson = new Integer(req.getParameter("pricePerPerson"));
+			pricePerPerson = new Integer(orderMap.get("pricePerPerson"));
 		}
 		
 		String customerRemark = req.getParameter("customerRemark");
-		String hotelRemark = req.getParameter("hotelRemark");
+		String hotelRemark = orderMap.get("remark");
 		Boolean orderState = true;
 		
 		OrdersService os = new OrdersService();

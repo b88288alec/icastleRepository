@@ -145,7 +145,7 @@
 								${room.roomTypeName}
 							</div>
 							<div class="col-md-10">
-								<form action="../orders/OrdersServlet.do" name="form">
+								<form action="../rooms/Rooms.do" name="form">
 									
 									<!-- 測試能否抓到資訊 -->
 									<!--
@@ -196,6 +196,7 @@
 									<input type="hidden" name="bedAddable" value="${room.bedAddable}"/>
 									<input type="hidden" name="pricePerPerson" value="${room.pricePerPerson}"/>
 									<input type="hidden" name="remark" value="${room.remark}"/>
+									<input type="hidden" name="action" value="getOrder"/>
  									${room.remark}<br><br>
 								</form>
 							</div>
