@@ -3,7 +3,9 @@ package com.icastle.rooms.model;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class RoomsService {
 	RoomsDAO_interface dao = new RoomsJNDIDAO();
@@ -45,7 +47,7 @@ public class RoomsService {
 		return stayDayNum;
 	}
 	
-	public List<Integer> getPerPrice(int roomId, int stayDayNum){
+	public Map<String,Integer> getPerPrice(int roomId, int stayDayNum){
 		return dao.getPerPrice(roomId, stayDayNum);
 	}
 }

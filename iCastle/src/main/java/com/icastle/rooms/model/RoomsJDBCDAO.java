@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class RoomsJDBCDAO implements RoomsDAO_interface {
 
@@ -24,7 +26,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	private final String GET_ROOMS_BY_MONTH = "select * from Rooms where hotelId = ? and roomTypeId = ? and MONTH(roomDate) = ?";
 	private final String UPDATE_CMD = "update Rooms set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?";
 	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+1 where roomId between ? and ?";
-	private final String GET_PER_PRICE = "select price from Rooms where roomId between ? and ? order by roomDate";
+	private final String GET_PER_PRICE = "select roomDate,price from Rooms where roomId between ? and ? order by roomDate";
 	private final String indexQueryGetRoom = "{call indexQueryGetRoom(?,?,?,?)}";
 	private final String UPDATE_PRICE = "UPDATE Rooms SET price = ? WHERE roomId = ?";
 	
@@ -385,8 +387,8 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public List<Integer> getPerPrice(int roomId, int stayDayNum) {
-		List<Integer> perPrice = new LinkedList<Integer>();
+	public Map<String,Integer> getPerPrice(int roomId, int stayDayNum) {
+		Map<String,Integer> perPrice = new TreeMap<String,Integer>();
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, user, password);
@@ -398,8 +400,9 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				Integer price = new Integer(rs.getInt(1));
-				perPrice.add(price);
+				String date = rs.getString(1);
+				Integer price = new Integer(rs.getInt(2));
+				perPrice.put(date,price);
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

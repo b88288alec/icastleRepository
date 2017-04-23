@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.icastle.rooms.model.RoomsService;
 
@@ -27,6 +28,7 @@ public class RoomsServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
+		HttpSession session = request.getSession(); 
 		
 		RequestDispatcher rd = null;
 		
@@ -37,20 +39,20 @@ public class RoomsServlet extends HttpServlet {
 			String hotelId = request.getParameter("hotelId");
 			String roomTypeId = request.getParameter("roomTypeId");
 			String roomTypeName = request.getParameter("roomTypeName");
-			String checkinDay = request.getParameter("checkinDay");
-			String checkoutDay = request.getParameter("checkoutDay");
+			String checkinDay = request.getParameter("start");
+			String checkoutDay = request.getParameter("end");
 			String peopleNum = request.getParameter("peopleNum");
 			String breakfast = request.getParameter("breakfast");
 			String dinner = request.getParameter("dinner");
 			String afternoonTea = request.getParameter("afternoonTea");
-			String badAddable = request.getParameter("badAddable");
-			String pricePerPrice = request.getParameter("pricePerPrice");
+			String bedAddable = request.getParameter("bedAddable");
+			String pricePerPerson = request.getParameter("pricePerPerson");
 			String remark = request.getParameter("remark");
 			String avgPrice = request.getParameter("price");
 			
 			RoomsService roomS = new RoomsService();
 			int stayDayNum = roomS.getstayDayNum(checkinDay, checkoutDay);
-			List<Integer> PerPrice = roomS.getPerPrice(Integer.parseInt(roomId), stayDayNum);
+			Map<String,Integer> PerPrice = roomS.getPerPrice(Integer.parseInt(roomId), stayDayNum);
 			
 			//包裝資料
 			Map<String,String> orderMap = new HashMap<String,String>();
@@ -64,18 +66,18 @@ public class RoomsServlet extends HttpServlet {
 			orderMap.put("breakfast", breakfast);
 			orderMap.put("dinner", dinner);
 			orderMap.put("afternoonTea", afternoonTea);
-			orderMap.put("badAddable", badAddable);
-			orderMap.put("pricePerPrice", pricePerPrice);
+			orderMap.put("bedAddable", bedAddable);
+			orderMap.put("pricePerPerson", pricePerPerson);
 			orderMap.put("remark", remark);
 			orderMap.put("avgPrice", avgPrice);
 			
 			//放入request
-			request.setAttribute("orderMap", orderMap);
-			request.setAttribute("stayDayNum", stayDayNum);
-			request.setAttribute("PerPrice", PerPrice);
+			session.setAttribute("orderMap", orderMap);
+			session.setAttribute("stayDayNum", stayDayNum);
+			session.setAttribute("PerPrice", PerPrice);
 			
 			//forward
-			rd = request.getRequestDispatcher("../orders/OrdersServlet.do");
+			rd = request.getRequestDispatcher("../orders/insert.jsp");
 			rd.forward(request, response);
 		}
 		

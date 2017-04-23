@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import com.icastle.rooms.model.RoomsJDBCDAO;
 import com.icastle.rooms.model.RoomsService;
@@ -238,11 +239,11 @@ public class RoomsJDBC {
 	}
 	
 	public static void getPerPrice(){
-		List<Integer> perPrice = dao.getPerPrice(41, 3);
+		Map<String,Integer> perPrice = dao.getPerPrice(41, 3);
 		
-		for(Integer price : perPrice){
-			System.out.println(price);
-		}
+//		for(Integer price : perPrice){
+//			System.out.println(price);
+//		}
 	}
 	
 	public static void main(String[] args) {
