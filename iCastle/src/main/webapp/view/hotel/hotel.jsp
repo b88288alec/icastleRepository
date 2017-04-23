@@ -24,10 +24,9 @@
 
 
 <!--以下請加入各自頁面的css-->
-<link href="css/hotel.css" rel="stylesheet" />
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link href="hotel/css/hotel.css" rel="stylesheet" />
+<link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+	rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css">
@@ -83,70 +82,126 @@
 	<div class="row" id="container">
 		<!-- 左方查詢列 -->
 		<div class="col-md-2 col-md-offset-1">
-<!-- 			---地圖---<br> ---您的搜尋條件---<br> -->
-<!-- 			<div class="row query-overlay"> -->
-<!-- 				<form action="Query.do" method="get"> -->
-<!-- 					<div class="input-group input-group-sm"> -->
-<!-- 						<p>查詢型態</p> -->
-<!-- 						<input type="text" class="form-control" placeholder="輸入區域或飯店名稱" -->
-<%-- 							name="type" value="${param.type}" /> --%>
-<!-- 					</div> -->
-<!-- 					<div class="clearfix visible-xs-block"></div> -->
-<!-- 					<div class="input-group input-group-sm"> -->
-<!-- 						<p>入住日期</p> -->
-<!-- 						<input type="text" class="form-control datepicker" -->
-<!-- 							data-date-format="yyyy/mm/dd" data-date-start-date="+0d" -->
-<%-- 							placeholder="輸入入住日期" name="start" value="${param.start}" /> --%>
-<!-- 					</div> -->
-<!-- 					<div class="clearfix visible-xs-block"></div> -->
-<!-- 					<div class="input-group input-group-sm"> -->
-<!-- 						<p>退房日期</p> -->
-<!-- 						<input type="text" class="form-control datepicker" -->
-<!-- 							data-date-format="yyyy/mm/dd" data-date-end-date="0d" -->
-<%-- 							placeholder="輸入退房日期" name="end" value="${param.end}" /> --%>
-<!-- 					</div> -->
-<!-- 					<div class="clearfix visible-xs-block"></div> -->
-<!-- 					<div class="input-group input-group-sm"> -->
-<!-- 						<p>入住人數</p> -->
-<!-- 						<input type="text" class="form-control" placeholder="輸入入住人數" -->
-<%-- 							name="peopleNum" value="${param.peopleNum}" /> --%>
-<!-- 					</div> -->
-<!-- 					<div class="clearfix visible-xs-block"></div> -->
-<!-- 					<div class="col-md-2 col-xs-12 col-sm-4" style="margin: 15px;"> -->
-<!-- 						<br /> -->
-<!-- 						<div class="btn-group"> -->
-<!-- 							<input type="submit" class="btn btn-success" value="搜尋" disable="disable"/> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 					<input type="button" id="onekey" value="一鍵輸入" /> -->
-<!-- 				</form> -->
-<!-- 			</div> -->
+			<!-- 			---地圖---<br> ---您的搜尋條件---<br> -->
+			<!-- 			<div class="row query-overlay"> -->
+			<!-- 				<form action="Query.do" method="get"> -->
+			<!-- 					<div class="input-group input-group-sm"> -->
+			<!-- 						<p>查詢型態</p> -->
+			<!-- 						<input type="text" class="form-control" placeholder="輸入區域或飯店名稱" -->
+			<%-- 							name="type" value="${param.type}" /> --%>
+			<!-- 					</div> -->
+			<!-- 					<div class="clearfix visible-xs-block"></div> -->
+			<!-- 					<div class="input-group input-group-sm"> -->
+			<!-- 						<p>入住日期</p> -->
+			<!-- 						<input type="text" class="form-control datepicker" -->
+			<!-- 							data-date-format="yyyy/mm/dd" data-date-start-date="+0d" -->
+			<%-- 							placeholder="輸入入住日期" name="start" value="${param.start}" /> --%>
+			<!-- 					</div> -->
+			<!-- 					<div class="clearfix visible-xs-block"></div> -->
+			<!-- 					<div class="input-group input-group-sm"> -->
+			<!-- 						<p>退房日期</p> -->
+			<!-- 						<input type="text" class="form-control datepicker" -->
+			<!-- 							data-date-format="yyyy/mm/dd" data-date-end-date="0d" -->
+			<%-- 							placeholder="輸入退房日期" name="end" value="${param.end}" /> --%>
+			<!-- 					</div> -->
+			<!-- 					<div class="clearfix visible-xs-block"></div> -->
+			<!-- 					<div class="input-group input-group-sm"> -->
+			<!-- 						<p>入住人數</p> -->
+			<!-- 						<input type="text" class="form-control" placeholder="輸入入住人數" -->
+			<%-- 							name="peopleNum" value="${param.peopleNum}" /> --%>
+			<!-- 					</div> -->
+			<!-- 					<div class="clearfix visible-xs-block"></div> -->
+			<!-- 					<div class="col-md-2 col-xs-12 col-sm-4" style="margin: 15px;"> -->
+			<!-- 						<br /> -->
+			<!-- 						<div class="btn-group"> -->
+			<!-- 							<input type="submit" class="btn btn-success" value="搜尋" disable="disable"/> -->
+			<!-- 						</div> -->
+			<!-- 					</div> -->
+			<!-- 					<input type="button" id="onekey" value="一鍵輸入" /> -->
+			<!-- 				</form> -->
+			<!-- 			</div> -->
 		</div>
 		<!-- 左方查詢列結束 -->
-			<!-- 飯店 -->
-			<div class="col-md-8">
-			
-				<!-- 飯店介紹資訊 -->
-				<div class="row">
-					這邊是飯店介紹資訊<br><br>
+		<!-- 飯店 -->
+		<div class="col-md-8">
+
+			<!-- 飯店基本介紹 -->
+			<div class="row">
+				<div class="col-md-12">
+					<%-- 					${hotel.hotelName}<br> --%>
+					<%-- 					${hotel.email}<br> --%>
+					<%-- 					${hotel.addr}<br> --%>
+					<%-- 					${hotel.zone}<br> --%>
+					<%-- 					${hotel.point}<br> --%>
+					<%-- 					${hotel.hot}<br> --%>
+					<%-- 					${hotel.star}<br> --%>
+					<span id="hotelname">${hotel.hotelName}</span>
+					${hotel.zone}&nbsp;&nbsp;&nbsp;${hotel.star}星級&nbsp;&nbsp;&nbsp;評分:${hotel.point}<br>
+					地址:${hotel.addr}
 				</div>
-				<!-- 飯店介紹資訊結束 --> 
-				
-				<!-- 房型 -->
-				<div class="row">
-					<div class="col-md-2">
-						房型介紹
-					</div>
-					<div class="col-md-10">
+			</div>
+			<!-- 飯店基本介紹結束 -->
+			<hr>
+			<!-- 圖片和介紹 -->
+			<div class="row">
+				<div class="col-md-5">
+					飯店照片<br> 飯店照片<br> 飯店照片<br> 飯店照片<br> 飯店照片<br>
+					飯店照片<br> 飯店照片<br>
+				</div>
+				<div class="col-md-7">
+					介紹<br> 這裡是飯店介紹<br>
+					<br>
+					<br> 設施&服務<br> 這裡是設施介紹
+
+				</div>
+			</div>
+			<!-- 圖片和介紹結束 -->
+			<hr>
+			<!-- 房型 -->
+			<div class="row">
+				<div class="col-md-1">房型介紹</div>
+				<div class="col-md-11">
 					<!-- 一筆又一筆的房間 -->
 					<c:forEach var="room" items="${rooms}">
-						<div class="row">
+						<div class="row room">
+						
+							<!-- 每間房間的資訊 -->
+							<div class="col-md-2">${room.roomTypeName}</div>
 							<div class="col-md-2">
-								${room.roomTypeName}
+								<c:if test="${room.breakfast}">
+									含早餐<br>
+								</c:if>
+								<c:if test="${room.dinner}">
+									含晚餐<br>
+								</c:if>
+								<c:if test="${room.afternoonTea}">
+									含下午茶 
+								</c:if> 
+							</div>						
+							<div class="col-md-2">
+								<c:if test="${room.bedAddable}">
+									可加床 
+								</c:if>
 							</div>
-							<div class="col-md-10">
-								<form action="../rooms/Rooms.do" name="form">
-									
+							<div class="col-md-1">
+								$${room.price}
+							</div>
+							<div class="col-md-2">
+								${room.remark}<br>
+							</div>
+							<!-- 每間房間的資訊結束 -->
+							
+							<!-- 下訂按鈕與傳送資訊 -->
+							<form action="../rooms/Rooms.do" name="form">
+							<div class="col-md-1">
+								間數<br>
+								<select name="roomNum">
+								<c:forEach var="i" begin="1" end="${room.roomNumber-room.bookedNum}">
+									<option value="${i}">${i}</option>
+								</c:forEach>
+								</select>
+							</div>
+							<div class="col-md-2">
 									<!-- 測試能否抓到資訊 -->
 									<!--
 									${room.roomId}<br>
@@ -164,23 +219,8 @@
 									${room.pricePerPerson}<br>
 									${room.remark}<br>
 									-->
-									<!-- 測試能否抓到資訊 -->
-
-									<c:if test="${room.breakfast}">
-										含早餐 
-									</c:if>
-									<c:if test="${room.dinner}">
-										含晚餐 
-									</c:if>
-									<c:if test="${room.afternoonTea}">
-										含下午茶 
-									</c:if>
-									<c:if test="${room.bedAddable}">
-										可加床 
-									</c:if>
-									$${room.price} 
-									
-									<!-- 下訂按鈕與傳送資訊 -->
+									<!-- 測試能否抓到資訊結束 -->
+									剩下${room.roomNumber-room.bookedNum}間<br> 
 									<input type="submit" value="下訂"/><br>
 									<input type="hidden" name="roomId" value="${room.roomId}"/>
 									<input type="hidden" name="hotelId" value="${room.hotelId}"/>
@@ -197,18 +237,19 @@
 									<input type="hidden" name="pricePerPerson" value="${room.pricePerPerson}"/>
 									<input type="hidden" name="remark" value="${room.remark}"/>
 									<input type="hidden" name="action" value="getOrder"/>
- 									${room.remark}<br><br>
-								</form>
 							</div>
+							</form>
+							<!-- 下訂按鈕與傳送資訊結束 -->
 						</div>
+						<br>
 					</c:forEach>
-					<!-- 一筆又一筆的房間 -->
-					
-					</div>
+					<!-- 一筆又一筆的房間結束 -->
+
 				</div>
-				<!-- 房型結束 -->
-				
 			</div>
+			<!-- 房型結束 -->
+
+		</div>
 	</div>
 	<!-- container結束 -->
 
@@ -252,76 +293,10 @@
 		$('input[name = "start"]').focus(function() {
 			$('input[name = "end"]').datepicker('hide');
 		})
-
-		var lowprice = 0;
-		var highprice = 20000;
-		//slider設定
-		// 		var slider = $("#slider");
-		// 		slider.slider({
-		// 			max : 20000,
-		// 			value : 20000,
-		// 			change : function(event, ui) {
-		// 				price = slider.slider("value");
-		// 				$("#price").text(price);
-		// 				change();
-		// 			}
-		// 		});
-		$("#slider-range").slider({
-			range : true,
-			min : 0,
-			max : 20000,
-			values : [ 0, 20000 ],
-			change : function(event, ui) {
-				lowprice = ui.values[0];
-				highprice = ui.values[1];
-				change();
-			}
-		});
-
-		var point = 0;
-		//評分
-		$(function() {
-			$("#rateYo").rateYo({
-				rating : 0,
-				halfStar : true
-			});
-		}).on("rateyo.set", function(e, data) {
-			point = data.rating;
-			$(this).next().text(point);
-			change();
-		});
-
-		//有任何改變
-		function change() {
-			console.log('lowprice:' + lowprice);
-			console.log('highprice:' + highprice);
-			console.log('rating:' + point);
-			$('#content').empty();
-			var type = $('input[name = "type"]').val();
-			var start = $('input[name = "start"]').val();
-			var end = $('input[name = "end"]').val();
-			var peopleNum = $('input[name = "peopleNum"]').val();
-			var order = $('input[name = "order"]').val();
-			var star = 0;
-			$.get('hotel/Advance.do', {
-				'type' : type,
-				'start' : start,
-				'end' : end,
-				'peopleNum' : peopleNum,
-				'order' : order,
-				'lowprice' : lowprice,
-				'highprice' : highprice,
-				'point' : point,
-				'star' : star
-			}, function(data) {
-
-			});
-		}
-
+		
+		$('select[name = "roomNum"]').select(function(){
+			console.log("hi");
+		})
 	});
-	// 	$('input[name = "type"]').val('高雄');
-	// 	$('input[name = "start"]').val('2017/01/02');
-	// 	$('input[name = "end"]').val('2017/01/04');
-	// 	$('input[name = "peopleNum"]').val(4);
 </script>
 </html>
