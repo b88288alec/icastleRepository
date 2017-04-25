@@ -133,7 +133,7 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 				hotel.setPw(rs.getString(4));
 				hotel.setAddr(rs.getString(5));
 				hotel.setZone(rs.getString(6));
-				hotel.setPoint(rs.getInt(7));
+				hotel.setPoint(rs.getDouble(7));
 				hotel.setHot(rs.getInt(8));
 				hotel.setStar(rs.getInt(9));
 				hotel.setHotelState(rs.getInt(10));

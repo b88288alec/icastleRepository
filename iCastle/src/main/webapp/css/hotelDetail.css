@@ -1,0 +1,205 @@
+﻿.form-group {
+    padding-bottom: 7px;
+    margin: 5px 0 0 0;
+}
+
+.btn-group, .btn-group-vertical {
+    position: relative;
+     margin: 0px; 
+}
+
+.form-group .form-control {
+    margin-bottom: 0px;
+}
+
+.container {
+    width: 1300px;
+    margin-top: 150px;
+}
+
+.search-row {
+    position: fixed;
+    top: 53px;
+    width: 110%;
+    z-index: 3;
+}
+
+    .search-row input {
+        color: white;
+    }
+
+.gradeRound {
+    border: 3px solid #3498db;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    padding-top: 15.5px;
+    margin-left: 50%;
+    margin-top:2%;
+}
+
+    .gradeRound p {
+        font-size: 22px;
+        color: #757575;
+    }
+
+.hot {
+    margin-left: 50%;
+    padding-top: 5px;
+    color: #757575
+}
+
+.gallery {
+    margin-right: 13px;
+    margin-bottom:20px;
+}
+
+    .gallery div {
+        position: relative;
+    }
+
+    .gallery .frist-img {
+        float: left;
+    }
+
+    .gallery .second-img {
+        float: right;
+    }
+
+    .gallery .thrid-img {
+        float: left;
+        margin-top: 11px;
+        margin-left: 9px;
+    }
+
+    .gallery .fourth-img {
+        float: right;
+        margin-top: 11px;
+        margin-left: 9px;
+    }
+
+.facility-service {
+    border-top: 0.5px solid #4CAF50;
+    border-bottom: 0.5px solid #4CAF50;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    margin-bottom: 5%;
+    background-color: #FAFAFA;
+}
+
+    .facility-service div {
+        text-align: center;
+    }
+
+    .facility-service p {
+        color: #757575;
+    }
+
+.connect-checkin {
+    border-top: 0.5px solid #4CAF50;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    background-color: #FAFAFA;
+}
+
+    .connect-checkin div {
+        text-align: center;
+    }
+
+    .connect-checkin p {
+        color: #757575;
+    }
+
+.check {
+    display: flex;
+}
+
+    .check div:first-child {
+        border: 1px solid #A5D6A7;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        padding-top: 2px;
+        margin-right: 2px;
+    }
+
+    .check p {
+        color: #4CAF50;
+    }
+
+.uncheck {
+    display: flex;
+}
+
+    .uncheck p {
+        color: #FF5722;
+    }
+
+.price {
+    color: #FF5722;
+}
+
+    .price span:first-child {
+        font-size:18px;
+    }
+
+    .price span:nth-child(2) {
+        font-size:24px;
+    }
+
+.facility-detail {
+    display: inline-flex;
+    margin-right:15px;
+}
+
+
+
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 {
+    font-size: 18px;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-28 {
+    font-size: 28px;
+}
+
+.material-icons.md-36 {
+    font-size: 36px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+    .material-icons.md-dark.md-inactive {
+        color: rgba(0, 0, 0, 0.26);
+    }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+    color: rgba(255, 255, 255, 1);
+}
+
+    .material-icons.md-light.md-inactive {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+.material-icons.green200 {
+    color: #A5D6A7;
+}
+
+.material-icons.orange500 {
+    color: #FF5722;
+}
