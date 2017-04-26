@@ -37,6 +37,7 @@ public class RoomsServlet extends HttpServlet {
 			//取得參數
 			String roomId = request.getParameter("roomId");
 			String hotelId = request.getParameter("hotelId");
+			String hotelName = request.getParameter("hotelName");
 			String roomTypeId = request.getParameter("roomTypeId");
 			String roomTypeName = request.getParameter("roomTypeName");
 			String checkinDay = request.getParameter("start");
@@ -58,6 +59,7 @@ public class RoomsServlet extends HttpServlet {
 			Map<String,String> orderMap = new HashMap<String,String>();
 			orderMap.put("roomId", roomId);
 			orderMap.put("hotelId", hotelId);
+			orderMap.put("hotelName", hotelName);
 			orderMap.put("roomTypeId", roomTypeId);
 			orderMap.put("roomTypeName", roomTypeName);
 			orderMap.put("checkinDay", checkinDay);

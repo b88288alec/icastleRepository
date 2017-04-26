@@ -282,7 +282,7 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public int getOrder(int roomId, int dayNum) {
+	public int getOrder(int roomId, int dayNum, int roomCount) {
 		int updateCount = 0;
 		try {
 			conn = ds.getConnection();
@@ -290,8 +290,9 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 			pstmt = conn.prepareStatement(GET_ORDER);
 			int roomIdEnd = roomId + (dayNum - 1);
 			
-			pstmt.setInt(1,roomId);
-			pstmt.setInt(2,roomIdEnd);
+			pstmt.setInt(1, roomCount);
+			pstmt.setInt(2,roomId);
+			pstmt.setInt(3,roomIdEnd);
 			int count = pstmt.executeUpdate();
 			updateCount += count;
 			conn.commit();
