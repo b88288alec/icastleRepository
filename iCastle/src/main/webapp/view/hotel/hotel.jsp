@@ -16,7 +16,7 @@
     <link href="/iCastle/css/material-kit.css" rel="stylesheet" />
     <link href="/iCastle/css/template.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
-    <link href="/iCastle/css/hotelDetail.css" rel="stylesheet" />
+    <link href="/iCastle/css/hotel.css" rel="stylesheet" />
 
     <title>愛客宿-iCastle</title>
 </head>
@@ -331,6 +331,7 @@
                                     <p style="color:red">剩下${room.roomNumber-room.bookedNum}間</p>
                                     <input type="hidden" name="roomId" value="${room.roomId}" />
                                     <input type="hidden" name="hotelId" value="${room.hotelId}" />
+                                    <input type="hidden" name="hotelName" value="${hotel.hotelName}" />
                                     <input type="hidden" name="roomTypeId" value="${room.roomTypeId}" />
                                     <input type="hidden" name="roomTypeName" value="${room.roomTypeName}" />
                                     <input type="hidden" name="start" value="${param.start}" />
