@@ -32,7 +32,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="HtmlPage.html">
+                <a class="navbar-brand" href="/iCastle/view/index.jsp">
                     <img alt="Brand" height="30" src="/iCastle/img/logo.png" />
                 </a>
             </div>
@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="HtmlPage.html">首頁</a>
+                        <a href="/iCastle/view/index.jsp">首頁</a>
                     </li>
                     <li>
                         <a href="#">活動</a>
@@ -151,7 +151,7 @@
                 </div>
                 <div class="col-md-2">
                     <i class="material-icons green200">mail</i>
-                    <p>reservation@richardson.com.tw</p>
+                    <p>${hotel.email}</p>
                 </div>
                 <div class="col-md-2">
                     <i class="material-icons green200">access_time</i>
@@ -220,6 +220,7 @@
                     <!-- 一筆又一筆的房間 -->
 					<c:forEach var="room" items="${rooms}">
 					<form action="../rooms/Rooms.do" name="form">
+<!-- 					<form action="Test2Servlet" name="form"> -->
                         <tr>
                             <!--房型照片-->
                             <td class="text-center" style="vertical-align:middle">
@@ -229,7 +230,7 @@
                                 </div>
                             </td>
                             <!--結束房型照片-->
-                            <!--附設服務-->
+                            <!--房間附設服務-->
                             <td style="vertical-align:middle">
                                 <c:if test="${room.breakfast}">
                                 <div class="check">
@@ -270,7 +271,7 @@
 <!--                                     </div> -->
 <!--                                 </div> -->
                             </td>
-                            <!--結束附設服務-->
+                            <!--結束房間附設服務-->
                             <!--可否加床-->
                             <td class="text-center" style="vertical-align:middle">
                             
@@ -282,9 +283,11 @@
 	                                    	</div>
 	                                   		<div>
 	                                        	<p>可加床</p>
-	                                        	<div>
-		                                        	<input type="radio" name="bedAdding" value="true"><span>加床</span><br>
-		                                        	<input type="radio" name="bedAdding" value="false" checked><span>不加床</span>
+	                                        	<div class="bed">
+	                                        		<select name="bedAdding">
+														<option value="true">加床</option>
+														<option value="false" selected>不加床</option>
+													</select>
 	                                        	</div>
 	                                    	</div>
 	                                	</div>
@@ -322,6 +325,7 @@
 								</select>
                             </td>
                             <!--結束預定房數-->
+							<!-- 預訂按鈕以及傳送資訊 -->
                             <td class="text-center" style="vertical-align:middle">
                                     <input type="submit" class="btn btn-success" value="預定" /><br>
                                     <p style="color:red">剩下${room.roomNumber-room.bookedNum}間</p>
@@ -341,8 +345,9 @@
                                     <input type="hidden" name="remark" value="${room.remark}" />
                                     <input type="hidden" name="action" value="getOrder" />
                             </td>
+                            <!-- 結束預訂按鈕以及傳送資訊 -->
                         </tr>
-                    </form>s
+                    </form>
                     </c:forEach>
 					<!-- 一筆又一筆的房間結束 -->
                     </tbody>

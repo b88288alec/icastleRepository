@@ -19,8 +19,11 @@ public class Test2Servlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String s = request.getParameter("roomNum");
-		System.out.println(s);
+		String roomNum = request.getParameter("roomNum");
+		String bedAdding = request.getParameter("bedAdding");
+		System.out.println(roomNum);
+		System.out.println(bedAdding);
+		
 	}
 
 

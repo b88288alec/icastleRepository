@@ -153,7 +153,7 @@
                 </div>
                 <!--飯店列表-->
                 <c:forEach var="hotel" items="${hotels}">
-                <a href="ShowHotel.do?hotelId=${hotel.hotelId}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
+                <a href="ShowHotel.do?hotelId=${hotel.hotelId}&type=${param.type}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
                     <div class="card">
                         <img src="../img/60395_16042612080041805392.jpg" style="width:300px;" />
                         <div class="cardContext">
