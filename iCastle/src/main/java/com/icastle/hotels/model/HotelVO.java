@@ -8,7 +8,7 @@ public class HotelVO {
 	private String pw;
 	private String addr;
 	private String zone;
-	private float point;
+	private Double point;
 	private Integer hot;
 	private Integer star;
 	private Integer hotelState;
@@ -50,10 +50,10 @@ public class HotelVO {
 	public void setZone(String zone) {
 		this.zone = zone;
 	}
-	public float getPoint() {
+	public Double getPoint() {
 		return point;
 	}
-	public void setPoint(float point) {
+	public void setPoint(Double point) {
 		this.point = point;
 	}
 	public Integer getHot() {
