@@ -35,7 +35,7 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 			+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String GET_ROOMS_BY_MONTH = "select * from Rooms where hotelId = ? and roomTypeId = ? and MONTH(roomDate) = ?";
 	private final String UPDATE_CMD = "update Rooms set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?";
-	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+1 where roomId between ? and ?";
+	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+? where roomId between ? and ?";
 	private final String GET_PER_PRICE = "select roomDate,price from Rooms where roomId between ? and ? order by roomDate";
 	private final String indexQueryGetRoom = "{call indexQueryGetRoom(?,?,?,?)}";
 	private final String UPDATE_PRICE = "UPDATE Rooms SET price = ? WHERE roomId = ?";
@@ -282,7 +282,7 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public int getOrder(int roomId, int dayNum) {
+	public int getOrder(int roomId, int dayNum, int roomCount) {
 		int updateCount = 0;
 		try {
 			conn = ds.getConnection();
@@ -290,8 +290,9 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 			pstmt = conn.prepareStatement(GET_ORDER);
 			int roomIdEnd = roomId + (dayNum - 1);
 			
-			pstmt.setInt(1,roomId);
-			pstmt.setInt(2,roomIdEnd);
+			pstmt.setInt(1, roomCount);
+			pstmt.setInt(2,roomId);
+			pstmt.setInt(3,roomIdEnd);
 			int count = pstmt.executeUpdate();
 			updateCount += count;
 			conn.commit();

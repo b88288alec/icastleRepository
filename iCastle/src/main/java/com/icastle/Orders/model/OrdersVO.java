@@ -3,9 +3,11 @@ package com.icastle.Orders.model;
 public class OrdersVO implements java.io.Serializable{
 
 	private Integer orderId;
+	private java.sql.Date orderedDate;
 	private Integer memberId;
 	private Integer roomId;
 	private Integer hotelId;
+	private String hotelName;
 	private Integer roomTypeId;
 	private String roomTypeName;
 	private java.sql.Date checkinDay;
@@ -38,6 +40,18 @@ public class OrdersVO implements java.io.Serializable{
 	}
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
+	}
+	public java.sql.Date getOrderedDate() {
+		return orderedDate;
+	}
+	public void setOrderedDate(java.sql.Date orderedDate) {
+		this.orderedDate = orderedDate;
+	}
+	public String getHotelName() {
+		return hotelName;
+	}
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
 	}
 	public Integer getMemberId() {
 		return memberId;

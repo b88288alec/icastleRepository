@@ -318,7 +318,7 @@
                             <!--結束每晚均價-->
                             <!--預定房數-->
                             <td class="text-center" style="vertical-align:middle">
-                                <select name="roomNum">
+                                <select name="roomCount">
 								<c:forEach var="i" begin="1" end="${room.roomNumber-room.bookedNum}">
 									<option value="${i}">${i}</option>
 								</c:forEach>
@@ -341,7 +341,7 @@
                                     <input type="hidden" name="dinner" value="${room.dinner}" />
                                     <input type="hidden" name="afternoonTea" value="${room.afternoonTea}" />
                                     <input type="hidden" name="price" value="${room.price}" />
-                                    <input type="hidden" name="bedAddable" value="${room.bedAddable}" />
+<%--                                     <input type="hidden" name="bedAddable" value="${room.bedAddable}" /> --%>
                                     <input type="hidden" name="pricePerPerson" value="${room.pricePerPerson}" />
                                     <input type="hidden" name="remark" value="${room.remark}" />
                                     <input type="hidden" name="action" value="getOrder" />
