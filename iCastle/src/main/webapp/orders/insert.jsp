@@ -81,19 +81,19 @@
 				<tr><td>${PerPrice.key}:</td><td>${PerPrice.value} /房/晚</td></tr>
 			</c:forEach>
 			<tr><td><span>總房價:</span></td><td><span>${orderMap.avgPrice*stayDayNum }</span><br></td></tr>
-			<tr><td><span>入住人姓名:</span></td><td><input type="text" name="reservationer">${errorMsgs.name}<br></td></tr>
-			<tr><td><span>生日:</span></td><td><input type="text" name="bdate">${errorMsgs.bdate}<br></td></tr>
-			<tr><td><span>電話:</span></td><td><input type="text" name="tel">${errorMsgs.tel}<br></td></tr>
-			<tr><td><span>信箱:</span></td><td><input type="text" name="email">${errorMsgs.email}<br></td></tr>
-			<tr><td><span>地址:</span></td><td><input type="text" name="addr">${errorMsgs.addr}<br></td></tr>
-			<tr><td><span>身分證字號:</span></td><td><input type="text" name="personId">${errorMsgs.personId}<br></td></tr>
-			<tr><td><span>國籍:</span></td><td><input type="text" name="country">${errorMsgs.country}<br></td></tr>
-			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport">${errorMsgs.passport}<br></td></tr>
+			<tr><td><span>入住人姓名:</span></td><td><input type="text" name="reservationer" value="${param.reservationer}">${errorMsgs.reservationer}<br></td></tr>
+			<tr><td><span>生日:</span></td><td><input type="text" name="bdate" value="${param.bdate}">${errorMsgs.bdate}<br></td></tr>
+			<tr><td><span>電話:</span></td><td><input type="text" name="tel" value="${param.tel}">${errorMsgs.tel}<br></td></tr>
+			<tr><td><span>信箱:</span></td><td><input type="text" name="email" value="${param.email}"><br></td></tr>
+			<tr><td><span>地址:</span></td><td><input type="text" name="addr" value="${param.addr}"><br></td></tr>
+			<tr><td><span>身分證字號:</span></td><td><input type="text" name="personId" value="${param.personId}">${errorMsgs.country}${errorMsgs.personId}<br></td></tr>
+			<tr><td><span>國籍:</span></td><td><input type="text" name="country" value="${param.country}">${errorMsgs.country}<br></td></tr>
+			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport" value="${param.passport}">${errorMsgs.country}<br></td></tr>
 			<c:if test="${orderMap.bedAddable}">
 				<tr><td><span>是否加床:</span></td><td><input type="radio" name="bedAdding" value="true"><span>加床</span><input type="radio" name="bedAdding" value="false" checked><span>不加床</span><br></td></tr>
 				<tr><td><span>加床價格:</span></td><td><span name="pricePerPerson">${orderMap.pricePerPerson } /位</span><br></td></tr>
 			</c:if>
-			<tr><td><span>顧客備註:</span></td><td><textarea rows="4" cols="50" name="customerRemark"></textarea><br></td></tr>
+			<tr><td><span>顧客備註:</span></td><td><textarea rows="4" cols="50" name="customerRemark" value="${param.customerRemark}"></textarea><br></td></tr>
 			<tr><td><span>飯店備註:</span></td><td><span>${orderMap.remark }</span><br></td></tr>
 			<tr><td></td><td><input type="submit"></td></tr>
 		</table>

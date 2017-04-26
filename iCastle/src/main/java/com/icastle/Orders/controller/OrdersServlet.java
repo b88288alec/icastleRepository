@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.icastle.Orders.model.CheckId;
 import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
 import com.icastle.rooms.model.RoomsService;
@@ -37,33 +39,19 @@ public class OrdersServlet extends HttpServlet {
 		ordersVO.setMemberId(1);
 		ordersVO.setRoomId(new Integer(req.getParameter("roomId")));
 		ordersVO.setHotelId(new Integer(req.getParameter("hotelId")));
+		ordersVO.setHotelName(req.getParameter("hotelName"));
 		ordersVO.setRoomTypeId(new Integer(req.getParameter("roomTypeId")));
 		ordersVO.setRoomTypeName(req.getParameter("roomTypeName"));
 		
-		String[] checkin = req.getParameter("start").trim().split("/");
-		int year = 0, month = 0, date = 0;
-		for(int i = 0; i < 3; i++){
-			if(i == 0){
-				year =  Integer.parseInt(checkin[i]);
-			}if(i == 1){
-				month = Integer.parseInt(checkin[i]) - 1;
-			}else{
-				date = Integer.parseInt(checkin[i]);
-			}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+		java.sql.Date checkinDay = null;
+		java.sql.Date checkoutDay = null;
+		try {
+			checkinDay = new java.sql.Date(sdf.parse(req.getParameter("start").trim()).getTime());
+			checkoutDay = new java.sql.Date(sdf.parse(req.getParameter("end").trim()).getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		java.sql.Date checkinDay = new java.sql.Date(new GregorianCalendar(year, month, date).getTimeInMillis());
-		
-		String[] checkout = req.getParameter("end").trim().split("/");
-		for(int i = 0; i < 3; i++){
-			if(i == 0){
-				year =  Integer.parseInt(checkout[i]);
-			}if(i == 1){
-				month = Integer.parseInt(checkout[i]) - 1;
-			}else{
-				date = Integer.parseInt(checkout[i]);
-			}
-		}
-		java.sql.Date checkoutDay = new java.sql.Date(new GregorianCalendar(year, month, date).getTimeInMillis());
 		
 		ordersVO.setCheckinDay(checkinDay);
 		ordersVO.setCheckoutDay(checkoutDay);
@@ -88,8 +76,9 @@ public class OrdersServlet extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		List<String> errorMsgs = new LinkedList<String>();
+		Map<String, String> errorMsgs = new HashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
+		
 		HttpSession session = req.getSession();
 		Map<String,String> orderMap = (Map)session.getAttribute("orderMap");
 		
@@ -99,6 +88,7 @@ public class OrdersServlet extends HttpServlet {
 		Integer memberId = new Integer(req.getParameter("memberId"));
 		Integer roomId = new Integer(orderMap.get("roomId"));
 		Integer hotelId = new Integer(orderMap.get("hotelId"));
+		String hotelName = "寫死的名子";
 		Integer roomTypeId = new Integer(orderMap.get("roomTypeId"));
 		String roomTypeName = orderMap.get("roomTypeName");
 		
@@ -109,7 +99,6 @@ public class OrdersServlet extends HttpServlet {
 		try {
 			checkinDay = new java.sql.Date(sdf.parse(orderMap.get("checkinDay")).getTime());
 			checkoutDay = new java.sql.Date(sdf.parse(orderMap.get("checkoutDay")).getTime());
-			bdate = new java.sql.Date(sdf.parse(req.getParameter("bdate")).getTime());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -136,13 +125,56 @@ public class OrdersServlet extends HttpServlet {
 			afternoonTea = Boolean.valueOf(tea);
 		}
 		Integer price = new Integer(req.getParameter("price"));
+		
 		String reservationer = req.getParameter("reservationer");
+		if(reservationer != ""){
+			String nameRegex = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+			if(!reservationer.trim().matches(nameRegex)){
+				errorMsgs.put("reservationer", "姓名只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+			}
+		}else{
+			errorMsgs.put("reservationer", "入住人姓名不可空白");
+		}
+		
+		if(req.getParameter("bdate") == ""){
+			errorMsgs.put("bdate", "請輸入生日");
+		}else{
+			try {
+				bdate = new java.sql.Date(sdf.parse(req.getParameter("bdate")).getTime());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		String tel = req.getParameter("tel");
+		if(tel != ""){
+			String telRegex = "^[(0-9)]{9,20}$";
+			if(!tel.trim().matches(telRegex)){
+				errorMsgs.put("tel", "電話號碼只能是數字，且長度必須在9到20之間");
+			}
+		}else{
+			errorMsgs.put("tel", "連絡人電話不可空白");
+		}
+
 		String personId = req.getParameter("personId");
-		String email = req.getParameter("email");
-		String addr = req.getParameter("addr");
 		String country = req.getParameter("country");
 		String passport = req.getParameter("passport");
+		if(personId != ""){
+			if(!CheckId.checkID(personId)){
+				errorMsgs.put("personId", "身分證字號輸入錯誤");
+			}
+		}else{
+			if(country == ""){
+				errorMsgs.put("country", "身分證字號與國籍+護照號碼必須選一項輸入");
+			}else{
+				if(passport == ""){
+					errorMsgs.put("country", "身分證字號與國籍+護照號碼必須選一項輸入");
+				}
+			}
+		}
+		
+		String email = req.getParameter("email");
+		String addr = req.getParameter("addr");
 		Boolean bedAdding = Boolean.valueOf(req.getParameter("bedAdding"));
 		
 		Integer pricePerPerson = 0;
@@ -154,8 +186,14 @@ public class OrdersServlet extends HttpServlet {
 		String hotelRemark = orderMap.get("remark");
 		Boolean orderState = true;
 		
+		if(!errorMsgs.isEmpty()){
+			RequestDispatcher rd = req.getRequestDispatcher("insert.jsp");
+			rd.forward(req, res);
+			return;
+		}
+		
 		OrdersService os = new OrdersService();
-		os.newOrder(memberId,roomId,hotelId,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,orderState);
+		os.newOrder(memberId,roomId,hotelId,hotelName,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,orderState);
 		
 		res.sendRedirect("success.jsp");
 	}
