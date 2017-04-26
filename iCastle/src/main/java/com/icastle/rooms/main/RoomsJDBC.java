@@ -166,7 +166,7 @@ public class RoomsJDBC {
 	
 	public static void getOrder(){
 		
-		int count = dao.getOrder(29, 2);
+		int count = dao.getOrder(29, 2, 2);
 		System.out.println(count);
 	}
 	
@@ -250,11 +250,11 @@ public class RoomsJDBC {
 //		insert();
 //		getRoomsByMonth();
 //		update();
-//		getOrder();
+		getOrder();
 //		findRooms();
 //		updatePrice();
 //		getstayDayNum();
-		getPerPrice();
+//		getPerPrice();
 	}
 
 }

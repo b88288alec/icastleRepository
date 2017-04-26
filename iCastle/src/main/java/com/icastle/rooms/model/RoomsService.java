@@ -26,8 +26,8 @@ public class RoomsService {
 		return dao.findRooms(hotelId, peopleNum, star, end);
 	}
 	
-	public int getOrder(int roomId, int stayDayNum){
-		return dao.getOrder(roomId, stayDayNum);
+	public int getOrder(int roomId, int stayDayNum, int roomCount){
+		return dao.getOrder(roomId, stayDayNum, roomCount);
 	}
 	
 	public int updatePrice(List<RoomsVO> roomsList){
