@@ -3,6 +3,7 @@ package com.icastle.rooms.model;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -49,5 +50,14 @@ public class RoomsService {
 	
 	public Map<String,Integer> getPerPrice(int roomId, int stayDayNum){
 		return dao.getPerPrice(roomId, stayDayNum);
+	}
+	
+	public int getTotalPrice(Map<String,Integer> PerPrice){
+		Collection<Integer> pprice = PerPrice.values();
+		int count = 0;
+		for(Integer price: pprice){
+			count += price;
+		}
+		return count;
 	}
 }

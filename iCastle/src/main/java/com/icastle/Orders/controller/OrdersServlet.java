@@ -62,7 +62,9 @@ public class OrdersServlet extends HttpServlet {
 		ordersVO.setAfternoonTea(Boolean.valueOf(req.getParameter("afternoonTea")));
 		ordersVO.setPrice(new Integer(req.getParameter("price")));
 		ordersVO.setBedAdding(Boolean.valueOf(req.getParameter("bedAdding")));
+		System.out.println("bedadding" + req.getParameter("bedAdding"));
 		ordersVO.setPricePerPerson(new Integer(req.getParameter("pricePerPerson")));
+		System.out.println("pricePerPerson" + req.getParameter("pricePerPerson"));
 		ordersVO.setHotelRemark(req.getParameter("remark"));
 		
 		req.setAttribute("ordersVO", ordersVO);
@@ -82,9 +84,6 @@ public class OrdersServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Map<String,String> orderMap = (Map)session.getAttribute("orderMap");
 		
-		RoomsService rs = new RoomsService();
-		rs.getOrder(Integer.parseInt(orderMap.get("roomId")), (int)session.getAttribute("stayDayNum"));
-		
 		Integer memberId = new Integer(req.getParameter("memberId"));
 		Integer roomId = new Integer(orderMap.get("roomId"));
 		Integer hotelId = new Integer(orderMap.get("hotelId"));
@@ -103,7 +102,6 @@ public class OrdersServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//房間數量先寫死，之後再改成動態的
 		Integer roomCount = new Integer(orderMap.get("roomCount"));
 		Integer peopleNum = new Integer(orderMap.get("peopleNum"));
 		
@@ -142,7 +140,7 @@ public class OrdersServlet extends HttpServlet {
 			try {
 				bdate = new java.sql.Date(sdf.parse(req.getParameter("bdate")).getTime());
 			} catch (ParseException e) {
-				e.printStackTrace();
+				errorMsgs.put("bdate", "輸入生日格式錯誤，請參照\"yyyy/mm/dd\"");
 			}
 		}
 		
@@ -191,6 +189,9 @@ public class OrdersServlet extends HttpServlet {
 			rd.forward(req, res);
 			return;
 		}
+		
+		RoomsService rs = new RoomsService();
+		rs.getOrder(Integer.parseInt(orderMap.get("roomId")), (int)session.getAttribute("stayDayNum"), Integer.parseInt(orderMap.get("roomCount")));
 		
 		OrdersService os = new OrdersService();
 		os.newOrder(memberId,roomId,hotelId,hotelName,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,orderState);

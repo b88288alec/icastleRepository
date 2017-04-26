@@ -26,16 +26,18 @@ public class CheckId {
 	      int E2 = Integer.parseInt(String.valueOf(E.charAt(1)));
 	      all[0] = E1;
 	      all[1] = E2;
-	      try{
-	         for(int j = 2; j <= 10; j++)
-	            all[j] = Integer.parseInt(String.valueOf(Chk2.charAt(j - 1)));
-	         for(int k = 1; k <= 9; k++)
-	            total += all[k] * (10 - k);
-	         total += all[0] + all[10];
-	         if(total % 10 == 0)
-	            return true;
-	      }
-	      catch(Exception ee){;
+	      if("1".equals(String.valueOf(Chk2.charAt(1))) || "2".equals(String.valueOf(Chk2.charAt(1)))){
+	    	  try{
+	 	         for(int j = 2; j <= 10; j++)
+	 	            all[j] = Integer.parseInt(String.valueOf(Chk2.charAt(j - 1)));
+	 	         for(int k = 1; k <= 9; k++)
+	 	            total += all[k] * (10 - k);
+	 	         total += all[0] + all[10];
+	 	         if(total % 10 == 0)
+	 	            return true;
+	 	      }catch(Exception ee){
+	 	    	  ee.printStackTrace();
+	 	      }
 	      }
 	      return false;
 	   }

@@ -55,6 +55,7 @@ public class RoomsServlet extends HttpServlet {
 			RoomsService roomS = new RoomsService();
 			int stayDayNum = roomS.getstayDayNum(checkinDay, checkoutDay);
 			Map<String,Integer> PerPrice = roomS.getPerPrice(Integer.parseInt(roomId), stayDayNum);
+			int totalPrice = roomS.getTotalPrice(PerPrice);
 			
 			//包裝資料
 			Map<String,String> orderMap = new HashMap<String,String>();
@@ -79,6 +80,7 @@ public class RoomsServlet extends HttpServlet {
 			session.setAttribute("orderMap", orderMap);
 			session.setAttribute("stayDayNum", stayDayNum);
 			session.setAttribute("PerPrice", PerPrice);
+			session.setAttribute("totalPrice", totalPrice);
 			
 			//forward
 			rd = request.getRequestDispatcher("../orders/insert.jsp");

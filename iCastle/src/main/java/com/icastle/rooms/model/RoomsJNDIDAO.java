@@ -35,7 +35,7 @@ public class RoomsJNDIDAO implements RoomsDAO_interface {
 			+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String GET_ROOMS_BY_MONTH = "select * from Rooms where hotelId = ? and roomTypeId = ? and MONTH(roomDate) = ?";
 	private final String UPDATE_CMD = "update Rooms set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?";
-	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+1 where roomId between ? and ?";
+	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+? where roomId between ? and ?";
 	private final String GET_PER_PRICE = "select roomDate,price from Rooms where roomId between ? and ? order by roomDate";
 	private final String indexQueryGetRoom = "{call indexQueryGetRoom(?,?,?,?)}";
 	private final String UPDATE_PRICE = "UPDATE Rooms SET price = ? WHERE roomId = ?";

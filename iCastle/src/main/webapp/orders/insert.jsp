@@ -55,14 +55,15 @@
     <div class="container" style="margin-top:56px">
     <form action="../orders/OrdersServlet.do" method="post">
 		<table>
-			<tr><td><span>客戶編號:</span></td><td><span>1</span><br></td></tr>
-			<tr><td><span>房間編號:</span></td><td><span>${orderMap.roomId }</span><br></td></tr>
-			<tr><td><span>飯店編號:</span></td><td><span>${orderMap.hotelId }</span><br></td></tr>
-			<tr><td><span>房型編號:</span></td><td><span>${orderMap.roomTypeId }</span><br></td></tr>
+<!-- 			<tr><td><span>客戶編號:</span></td><td><span>1</span><br></td></tr> -->
+<%-- 			<tr><td><span>房間編號:</span></td><td><span>${orderMap.roomId }</span><br></td></tr> --%>
+<%-- 			<tr><td><span>飯店編號:</span></td><td><span>${orderMap.hotelId }</span><br></td></tr> --%>
+			<tr><td><span>飯店名稱:</span></td><td><span>${orderMap.hotelName }</span><br></td></tr>
+<%-- 			<tr><td><span>房型編號:</span></td><td><span>${orderMap.roomTypeId }</span><br></td></tr> --%>
 			<tr><td><span>房型名稱:</span></td><td><span>${orderMap.roomTypeName }</span><br></td></tr>
 			<tr><td><span>入住日:</span></td><td><span>${orderMap.checkinDay }</span><br></td></tr>
 			<tr><td><span>退房日:</span></td><td><span>${orderMap.checkoutDay }</span><br></td></tr>
-<!-- 			<tr><td><span>預定間數:</span></td><td><input type="text" name="roomCount"><br></td></tr> -->
+			<tr><td><span>預定間數:</span></td><td><span>${orderMap.roomCount}</span><br></td></tr>
 			<tr><td><span>入住人數:</span></td><td><span>${orderMap.peopleNum }</span><br></td></tr>
 			
 			<tr><td><span>含餐:</span></td>
@@ -79,8 +80,18 @@
 			</td></tr>
 			<c:forEach var="PerPrice" items="${PerPrice}">
 				<tr><td>${PerPrice.key}:</td><td>${PerPrice.value} /房/晚</td></tr>
+				<tr><td><span>加床價格:</span></td><td><span>${orderMap.pricePerPerson } /位/晚</span></td></tr>
 			</c:forEach>
-			<tr><td><span>總房價:</span></td><td><span>${orderMap.avgPrice*stayDayNum }</span><br></td></tr>
+			<c:choose>
+				<c:when test="${orderMap.bedAdding}">
+					<tr><td><span>總房價:</span></td><td><span>${(totalPrice+orderMap.pricePerPerson)*orderMap.roomCount}</span><br></td></tr>
+							<input type="hidden" name="price" value="${(totalPrice+orderMap.pricePerPerson)*orderMap.roomCount}"/>
+				</c:when>
+				<c:otherwise>
+					<tr><td><span>總房價:</span></td><td><span>${totalPrice*orderMap.roomCount}</span><br></td></tr>
+							<input type="hidden" name="price" value="${totalPrice*orderMap.roomCount}"/>
+				</c:otherwise>
+			</c:choose>
 			<tr><td><span>入住人姓名:</span></td><td><input type="text" name="reservationer" value="${param.reservationer}">${errorMsgs.reservationer}<br></td></tr>
 			<tr><td><span>生日:</span></td><td><input type="text" name="bdate" value="${param.bdate}">${errorMsgs.bdate}<br></td></tr>
 			<tr><td><span>電話:</span></td><td><input type="text" name="tel" value="${param.tel}">${errorMsgs.tel}<br></td></tr>
@@ -89,30 +100,14 @@
 			<tr><td><span>身分證字號:</span></td><td><input type="text" name="personId" value="${param.personId}">${errorMsgs.country}${errorMsgs.personId}<br></td></tr>
 			<tr><td><span>國籍:</span></td><td><input type="text" name="country" value="${param.country}">${errorMsgs.country}<br></td></tr>
 			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport" value="${param.passport}">${errorMsgs.country}<br></td></tr>
-			<c:if test="${orderMap.bedAddable}">
-				<tr><td><span>是否加床:</span></td><td><input type="radio" name="bedAdding" value="true"><span>加床</span><input type="radio" name="bedAdding" value="false" checked><span>不加床</span><br></td></tr>
-				<tr><td><span>加床價格:</span></td><td><span name="pricePerPerson">${orderMap.pricePerPerson } /位</span><br></td></tr>
-			</c:if>
 			<tr><td><span>顧客備註:</span></td><td><textarea rows="4" cols="50" name="customerRemark" value="${param.customerRemark}"></textarea><br></td></tr>
 			<tr><td><span>飯店備註:</span></td><td><span>${orderMap.remark }</span><br></td></tr>
 			<tr><td></td><td><input type="submit"></td></tr>
 		</table>
 <!-- 		memberId先寫死，之後再改 -->
 		<input type="hidden" name="memberId" value="1"/>
-		<input type="hidden" name="price" value="${orderMap.avgPrice*stayDayNum }"/>
-<%-- 		<input type="hidden" name="roomId" value="${ordersVO.roomId}"/> --%>
-<%-- 		<input type="hidden" name="hotelId" value="${ordersVO.hotelId}"/> --%>
-<%-- 		<input type="hidden" name="roomTypeId" value="${ordersVO.roomTypeId}"/> --%>
-<%-- 		<input type="hidden" name="roomTypeName" value="${ordersVO.roomTypeName}"/> --%>
-<%-- 		<input type="hidden" name="checkinDay" value="${ordersVO.checkinDay}"/> --%>
-<%-- 		<input type="hidden" name="checkoutDay" value="${ordersVO.checkoutDay}"/> --%>
-<%-- 		<input type="hidden" name="peopleNum" value="${ordersVO.peopleNum}"/> --%>
-<%-- 		<input type="hidden" name="breakfast" value="${ordersVO.breakfast}"/> --%>
-<%-- 		<input type="hidden" name="dinner" value="${ordersVO.dinner}"/> --%>
-<%-- 		<input type="hidden" name="afternoonTea" value="${ordersVO.afternoonTea}"/> --%>
-<%-- 		<input type="hidden" name="price" value="${ordersVO.price}"/> --%>
-<%-- 		<input type="hidden" name="pricePerPerson" value="${ordersVO.pricePerPerson}"/> --%>
-<%-- 		<input type="hidden" name="hotelRemark" value="${ordersVO.hotelRemark}"/> --%>
+		<input type="hidden" name="roomCount" value="${orderMap.roomCount}"/>
+
 	</form>
 	</div>
     <!--footer-->
