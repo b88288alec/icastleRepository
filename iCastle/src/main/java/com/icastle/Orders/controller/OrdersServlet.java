@@ -55,13 +55,13 @@ public class OrdersServlet extends HttpServlet {
 		
 		ordersVO.setCheckinDay(checkinDay);
 		ordersVO.setCheckoutDay(checkoutDay);
-//		ordersVO.setRoomCount(new Integer(req.getParameter("roomCount")));
+		ordersVO.setRoomCount(new Integer(req.getParameter("roomCount")));
 		ordersVO.setPeopleNum(new Integer(req.getParameter("peopleNum")));
 		ordersVO.setBreakfast(Boolean.valueOf(req.getParameter("breakfast")));
 		ordersVO.setDinner(Boolean.valueOf(req.getParameter("dinner")));
 		ordersVO.setAfternoonTea(Boolean.valueOf(req.getParameter("afternoonTea")));
 		ordersVO.setPrice(new Integer(req.getParameter("price")));
-		ordersVO.setBedAdding(Boolean.valueOf(req.getParameter("bedAddable")));
+		ordersVO.setBedAdding(Boolean.valueOf(req.getParameter("bedAdding")));
 		ordersVO.setPricePerPerson(new Integer(req.getParameter("pricePerPerson")));
 		ordersVO.setHotelRemark(req.getParameter("remark"));
 		
@@ -88,7 +88,7 @@ public class OrdersServlet extends HttpServlet {
 		Integer memberId = new Integer(req.getParameter("memberId"));
 		Integer roomId = new Integer(orderMap.get("roomId"));
 		Integer hotelId = new Integer(orderMap.get("hotelId"));
-		String hotelName = "寫死的名子";
+		String hotelName = orderMap.get("hotelName");
 		Integer roomTypeId = new Integer(orderMap.get("roomTypeId"));
 		String roomTypeName = orderMap.get("roomTypeName");
 		
@@ -104,7 +104,7 @@ public class OrdersServlet extends HttpServlet {
 		}
 		
 		//房間數量先寫死，之後再改成動態的
-		Integer roomCount = 1;
+		Integer roomCount = new Integer(orderMap.get("roomCount"));
 		Integer peopleNum = new Integer(orderMap.get("peopleNum"));
 		
 		String bf = orderMap.get("breakfast");

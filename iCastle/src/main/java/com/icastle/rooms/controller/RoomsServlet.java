@@ -37,6 +37,7 @@ public class RoomsServlet extends HttpServlet {
 			//取得參數
 			String roomId = request.getParameter("roomId");
 			String hotelId = request.getParameter("hotelId");
+			String hotelName = request.getParameter("hotelName");
 			String roomTypeId = request.getParameter("roomTypeId");
 			String roomTypeName = request.getParameter("roomTypeName");
 			String checkinDay = request.getParameter("start");
@@ -45,7 +46,8 @@ public class RoomsServlet extends HttpServlet {
 			String breakfast = request.getParameter("breakfast");
 			String dinner = request.getParameter("dinner");
 			String afternoonTea = request.getParameter("afternoonTea");
-			String bedAddable = request.getParameter("bedAddable");
+			String roomCount = request.getParameter("roomCount");
+			String bedAdding = request.getParameter("bedAdding");
 			String pricePerPerson = request.getParameter("pricePerPerson");
 			String remark = request.getParameter("remark");
 			String avgPrice = request.getParameter("price");
@@ -58,15 +60,17 @@ public class RoomsServlet extends HttpServlet {
 			Map<String,String> orderMap = new HashMap<String,String>();
 			orderMap.put("roomId", roomId);
 			orderMap.put("hotelId", hotelId);
+			orderMap.put("hotelName", hotelName);
 			orderMap.put("roomTypeId", roomTypeId);
 			orderMap.put("roomTypeName", roomTypeName);
 			orderMap.put("checkinDay", checkinDay);
 			orderMap.put("checkoutDay", checkoutDay);
 			orderMap.put("peopleNum", peopleNum);
+			orderMap.put("roomCount", roomCount);
 			orderMap.put("breakfast", breakfast);
 			orderMap.put("dinner", dinner);
 			orderMap.put("afternoonTea", afternoonTea);
-			orderMap.put("bedAddable", bedAddable);
+			orderMap.put("bedAdding", bedAdding);
 			orderMap.put("pricePerPerson", pricePerPerson);
 			orderMap.put("remark", remark);
 			orderMap.put("avgPrice", avgPrice);
