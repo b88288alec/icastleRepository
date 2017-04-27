@@ -1,4 +1,4 @@
-package hotel_info_modle;
+package com.icastle.hotelInfo.modle;
 
 import java.util.List;
 

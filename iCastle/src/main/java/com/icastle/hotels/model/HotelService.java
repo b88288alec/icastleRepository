@@ -11,10 +11,12 @@ public class HotelService {
 		dao = new HotelDAO();
 	}
 	
+	//新增飯店
 	public HotelVO addHotel(HotelVO hotelVO){
 		return dao.addHotel(hotelVO);
 	}
 	
+	//修改飯店
 	public HotelVO updateHotel(int hotelId, String hotelName, String pw){
 		HotelVO hotelVO = new HotelVO();
 		hotelVO.setHotelId(hotelId);
@@ -23,6 +25,7 @@ public class HotelService {
 		return dao.updateHotel(hotelVO);
 	}
 	
+	//修改飯店狀態(管理員同意上架)
 	public HotelVO updateState(int hotelId, int state) {
 		return dao.updateState(hotelId, state);
 	}
