@@ -17,10 +17,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<!--<link href="../css/bootstrap.min.css" rel="stylesheet" />-->
-<link href="../css/material-kit.css" rel="stylesheet" />
-<link href="../css/template.css" rel="stylesheet" />
-<link href="../css/index.css" rel="stylesheet" />
+<!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
+<link href="css/material-kit.css" rel="stylesheet" />
+<link href="css/template.css" rel="stylesheet" />
+<link href="css/index.css" rel="stylesheet" />
 
 <title>愛客宿-iCastle</title>
 </head>
@@ -36,14 +36,14 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/iCastle/view/index.jsp"> <img
+				<a class="navbar-brand" href="index.jsp"> <img
 					alt="Brand" height="30" src="/iCastle/img/logo.png" />
 				</a>
 			</div>
 			<!--結束logo-->
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/iCastle/view/index.jsp">首頁</a></li>
+					<li class="active"><a href="index.jsp">首頁</a></li>
 					<li><a href="#">活動</a></li>
 					<li><a href="#">討論區</a></li>
 				</ul>
@@ -171,19 +171,19 @@
 	</div>
 	<!--結束footer-->
 
-	<!--<script src="../js/jquery.min.js"></script>-->
-	<script src="../js/jquery-3.2.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
-	<script src="../js/material.min.js"></script>
+	<!--<script src="js/jquery.min.js"></script>-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/material.min.js"></script>
 
-	<script src="../js/nouislider.min.js"></script>
+	<script src="js/nouislider.min.js"></script>
 
-	<script src="../js/bootstrap-datepicker.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.zh-TW.min.js"></script>
 
-	<script src="../js/material-kit.js"></script>
-	<script src="../js/index.js"></script>
+	<script src="js/material-kit.js"></script>
+	<script src="js/index.js"></script>
 	<script>
 		$(function() {
 			$('#onekey').click(function() {

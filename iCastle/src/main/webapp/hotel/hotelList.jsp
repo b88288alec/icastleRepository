@@ -14,9 +14,9 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet" />-->
-    <link href="hotel/css/material-kit.css" rel="stylesheet" />
-    <link href="hotel/css/template.css" rel="stylesheet" />
-    <link href="hotel/css/QueryPage.css" rel="stylesheet" />
+    <link href="css/material-kit.css" rel="stylesheet" />
+    <link href="css/template.css" rel="stylesheet" />
+    <link href="css/QueryPage.css" rel="stylesheet" />
 
     <style>
         .noUi-connect {
@@ -41,14 +41,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../view/index.jsp">
-                    <img alt="Brand" height="30" src="../img/logo.png" />
+                <a class="navbar-brand" href="index.jsp">
+                    <img alt="Brand" height="30" src="img/logo.png" />
                 </a>
             </div>
             <!--結束logo-->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="../view/index.jsp">首頁</a></li>
+                    <li class="active"><a href="index.jsp">首頁</a></li>
                     <li><a href="#">活動</a></li>
                     <li><a href="#">討論區</a></li>
                 </ul>
@@ -111,11 +111,11 @@
                                 <p>飯店星等</p>
                                 <div id="hotelLevle">
                                     <div style="text-align:center;">
-                                        <img id="hs1" width="30" src="../img/unstar.png" />
-                                        <img id="hs2" width="30" src="../img/unstar.png" />
-                                        <img id="hs3" width="30" src="../img/unstar.png" />
-                                        <img id="hs4" width="30" src="../img/unstar.png" />
-                                        <img id="hs5" width="30" src="../img/unstar.png" />
+                                        <img id="hs1" width="30" src="img/unstar.png" />
+                                        <img id="hs2" width="30" src="img/unstar.png" />
+                                        <img id="hs3" width="30" src="img/unstar.png" />
+                                        <img id="hs4" width="30" src="img/unstar.png" />
+                                        <img id="hs5" width="30" src="img/unstar.png" />
                                         <br />
                                         <span>請選擇星等</span>
                                         <input type="hidden" />
@@ -127,11 +127,11 @@
                                 <p>飯店評分</p>
                                 <div id="hotelPoint">
                                     <div style="text-align:center;">
-                                        <img id="hp1" width="30" src="../img/unstar.png" />
-                                        <img id="hp2" width="30" src="../img/unstar.png" />
-                                        <img id="hp3" width="30" src="../img/unstar.png" />
-                                        <img id="hp4" width="30" src="../img/unstar.png" />
-                                        <img id="hp5" width="30" src="../img/unstar.png" />
+                                        <img id="hp1" width="30" src="img/unstar.png" />
+                                        <img id="hp2" width="30" src="img/unstar.png" />
+                                        <img id="hp3" width="30" src="img/unstar.png" />
+                                        <img id="hp4" width="30" src="img/unstar.png" />
+                                        <img id="hp5" width="30" src="img/unstar.png" />
                                         <br />
                                         <span>請選擇分數</span>
                                         <input type="hidden" />
@@ -153,9 +153,9 @@
                 </div>
                 <!--飯店列表-->
                 <c:forEach var="hotel" items="${hotels}">
-                <a href="ShowHotel.do?hotelId=${hotel.hotelId}&type=${param.type}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
+                <a href="hotel/ShowHotel.do?hotelId=${hotel.hotelId}&type=${param.type}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
                     <div class="card">
-                        <img src="../img/60395_16042612080041805392.jpg" style="width:300px;" />
+                        <img src="img/60395_16042612080041805392.jpg" style="width:300px;" />
                         <div class="cardContext">
                             <h4>${hotel.hotelName}</h4>
                             <h4><span class="label label-info">${param.type}</span></h4>
@@ -164,10 +164,10 @@
 							<c:forEach var="i" varStatus="varsts" begin="1" end="5" >
 								<c:choose>
 									<c:when test="${i<=hotel.star}">
-										<img src="../img/star.png" width="20px" />
+										<img src="img/star.png" width="20px" />
 									</c:when>
 									<c:otherwise>
-										<img src="../img/unstar.png" width="20px" />
+										<img src="img/unstar.png" width="20px" />
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
@@ -242,23 +242,23 @@
 
     <!--footer-->
     <div class="footer">
-        <img src="../img/logo.png" width="100" />
+        <img src="img/logo.png" width="100" />
         <h6>版權所有©2005 – 2017, iCastle Company Pte. Ltd.保留所有權利</h6>
         <h6>iCastle.com隸屬於Priceline集團—線上旅遊業及相關服務的全球領導品牌。</h6>
     </div>
     <!--結束footer-->
 
-    <script src="hotel/js/jquery.min.js"></script>
-    <script src="hotel/js/bootstrap.min.js"></script>
-    <script src="hotel/js/material.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/material.min.js"></script>
 
     <!--<script src="../js/nouislider.min.js"></script>-->
-    <script src="hotel/js/nouislider.min.9.js"></script>
-    <script src="hotel/js/wNumb.js"></script>
+    <script src="js/nouislider.min.9.js"></script>
+    <script src="js/wNumb.js"></script>
 
-    <script src="hotel/js/bootstrap-datepicker.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
 
-    <script src="hotel/js/material-kit.js"></script>
+    <script src="js/material-kit.js"></script>
 
     <script>
 
@@ -270,9 +270,9 @@
             function clearAll(from) {
                 for (var i = 1; i <= 5; i++) {
                     if (from) {
-                        $('#hs' + i).attr("src", "../img/unstar.png");
+                        $('#hs' + i).attr("src", "img/unstar.png");
                     } else {
-                        $('#hp' + i).attr("src", "../img/unstar.png");
+                        $('#hp' + i).attr("src", "img/unstar.png");
                     }
                 }
             }
@@ -283,7 +283,7 @@
                 }
                 var level = $(this).attr("id").charAt(2);
                 for (var i = 1; i <= level; i++){
-                    $('#hs' + i).attr("src", "../img/star.png");
+                    $('#hs' + i).attr("src", "img/star.png");
                     hotelLevleStatus.text(level + '星級');
                 }
             },
@@ -294,7 +294,7 @@
                     } else {
                         clearAll(true);
                         for (var i = 1; i <= hotelLevle; i++) {
-                            $('#hs' + i).attr("src", "../img/star.png");
+                            $('#hs' + i).attr("src", "img/star.png");
                             hotelLevleStatus.text(hotelLevle + '星級');
                         }
                     }
@@ -302,7 +302,7 @@
                     hotelLevle = $(this).attr("id").charAt(2);
                     $('#hotelLevle input').val(hotelLevle);
                     for (var i = 1; i <= hotelLevle; i++) {
-                        $('#hs' + i).attr("src", "../img/star.png");
+                        $('#hs' + i).attr("src", "img/star.png");
                         hotelLevleStatus.text(hotelLevle + '星級');
                     }
                 });
@@ -318,7 +318,7 @@
                 }
                 var level = $(this).attr("id").charAt(2);
                 for (var i = 1; i <= level; i++) {
-                    $('#hp' + i).attr("src", "../img/star.png");
+                    $('#hp' + i).attr("src", "img/star.png");
                     hotelPointStatus.text(level + '顆星');
                 }
             },
@@ -329,7 +329,7 @@
                     } else {
                         clearAll(false);
                         for (var i = 1; i <= hotelPoint; i++) {
-                            $('#hp' + i).attr("src", "../img/star.png");
+                            $('#hp' + i).attr("src", "img/star.png");
                             hotelPointStatus.text(hotelPoint + '顆星');
                         }
                     }
@@ -337,7 +337,7 @@
                     hotelPoint = $(this).attr("id").charAt(2);
                     $('#hotelPoint input').val(hotelPoint);
                     for (var i = 1; i <= hotelPoint; i++) {
-                        $('#hp' + i).attr("src", "../img/star.png");
+                        $('#hp' + i).attr("src", "img/star.png");
                         hotelPointStatus.text(hotelPoint + '顆星');
                     }
                 });

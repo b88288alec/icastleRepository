@@ -19,7 +19,7 @@ import com.icastle.rooms.model.RoomsJDBCDAO;
 import com.icastle.rooms.model.RoomsJNDIDAO;
 import com.icastle.rooms.model.RoomsVO;
 
-@WebServlet("/view/ShowHotel.do")
+@WebServlet("/hotel/ShowHotel.do")
 public class ShowHotelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -65,7 +65,7 @@ public class ShowHotelServlet extends HttpServlet {
 		//查詢hotel photo
 		
 		//轉交給hotel.jsp
-		RequestDispatcher rd = request.getRequestDispatcher("hotel/hotel.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("hotel.jsp");
 		rd.forward(request, response);
 		return;
 	}

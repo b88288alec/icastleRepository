@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.icastle.hotels.model.*;
 
-@WebServlet("/view/Query.do")
+@WebServlet("/Query.do")
 public class QueryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;  
     public QueryServlet() {
