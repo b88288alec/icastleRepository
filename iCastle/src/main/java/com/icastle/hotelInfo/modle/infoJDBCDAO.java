@@ -1,17 +1,12 @@
-package hotel_info_modle;
+package com.icastle.hotelInfo.modle;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.management.RuntimeErrorException;
-
-import com.icastle.hotelInfo.modle.infoVO;
 
 public class infoJDBCDAO implements infoDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -24,7 +19,7 @@ public class infoJDBCDAO implements infoDAO_interface {
 			+ ",roomWifi,hallWifi,internet,mineralWater,toiletUtensils,hairDryer,tv,gameRoom,gym,spa,swimPool) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_STMT =
-			"select * from HotelInfo WHERE hotelId = ?";
+			"SELECT * FROM HotelInfo H JOIN HOTELS S ON H.hotelId = S.hotelId WHERE H.hotelId = ?";
 	private static final String UPDATE =
 			"UPDATE HotelInfo set registerName = ? ,tel = ? ,transport = ? ,website = ? ,hotelProfile = ? ,checkin = ? ,"
 			+ "checkout = ? ,GuestPolicies = ? ,cancelPolicies = ? ,roomWifi = ? ,hallWifi = ? ,internet = ? ,mineralWater = ? ,"
@@ -228,14 +223,8 @@ public class infoJDBCDAO implements infoDAO_interface {
 		return null;
 	}
 
-
-/*-----------------------------------------------------*/	
-	// 新增
-//	infoVO infoVO = new infoVO();
 	
-//	infoVO.setHotelId("2");
-//	infoVO.setRegisterName("sum");
-//	nfoVO.setTel("0800000123");
-
+	
+	
 	
 }

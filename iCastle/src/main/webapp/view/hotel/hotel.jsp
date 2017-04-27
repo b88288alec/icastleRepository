@@ -16,7 +16,7 @@
     <link href="/iCastle/css/material-kit.css" rel="stylesheet" />
     <link href="/iCastle/css/template.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
-    <link href="/iCastle/css/hotelDetail.css" rel="stylesheet" />
+    <link href="/iCastle/css/hotel.css" rel="stylesheet" />
 
     <title>愛客宿-iCastle</title>
 </head>
