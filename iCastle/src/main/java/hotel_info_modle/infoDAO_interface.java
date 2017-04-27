@@ -1,6 +1,8 @@
-package com.icastle.hotelInfo.modle;
+package hotel_info_modle;
 
 import java.util.List;
+
+import com.icastle.hotelInfo.modle.infoVO;
 
 public interface infoDAO_interface  {
 	public void insert(infoVO infoVO);
