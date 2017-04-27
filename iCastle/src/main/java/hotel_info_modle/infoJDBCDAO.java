@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.management.RuntimeErrorException;
 
+import com.icastle.hotelInfo.modle.infoVO;
+
 public class infoJDBCDAO implements infoDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=DB01";
