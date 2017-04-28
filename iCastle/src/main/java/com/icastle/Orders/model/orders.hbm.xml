@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.icastle.Orders.model.Orders" table="Orders" >
+    <class name="com.icastle.Orders.model.OrdersVO" table="Orders" >
         
         <id name="orderId" column="orderId">
             <generator class="identity"/>
@@ -41,7 +41,7 @@
         <property name="orderState" column="orderState" />
         <property name="cancelDate" column="cancelDate" />
         
-        <set name="orderFollowersVO" table="OrderFollowers" lazy="false" cascade="save-update" inverse="false">
+        <set name="orderFollowersVO" table="OrderFollowers" lazy="true" cascade="save-update" inverse="false">
         	<key><column name="orderId" /></key>
         	<one-to-many class="com.icastle.orderfollowers.model.OrderFollowersVO" />
         </set>

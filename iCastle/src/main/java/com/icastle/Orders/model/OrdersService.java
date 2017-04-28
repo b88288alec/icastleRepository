@@ -21,7 +21,7 @@ public class OrdersService {
 	public void newOrder(Integer memberId, Integer roomId, Integer hotelId, String hotelName, Integer roomTypeId, String RoomTypeName, java.sql.Date checkinDay, java.sql.Date checkoutDay, Integer roomCount, Integer peopleNum, Boolean breakfast, Boolean dinner, Boolean afternoonTea, Integer price, String reservationer, java.sql.Date bdate, String tel, String email, String addr, String personId, String country, String passport, Boolean bedAdding, Integer pricePerPerson, String customerRemark, String hotelRemark, Boolean orderState, Set<OrderFollowersVO> orderFollowersVO){
 		OrdersVO ordersVO = new OrdersVO();
 		
-		ordersVO.setOrderedDate(new java.sql.Date(new GregorianCalendar().getInstance().getTimeInMillis()));
+		ordersVO.setOrderedDate(new java.sql.Timestamp(new GregorianCalendar().getInstance().getTimeInMillis()));
 		ordersVO.setMemberId(memberId);
 		ordersVO.setRoomId(roomId);
 		ordersVO.setHotelId(hotelId);
@@ -58,7 +58,7 @@ public class OrdersService {
 	public void customerUpdate(Integer orderId, Boolean orderState){
 		OrdersVO order = dao.select_by_orderId(orderId);
 		
-		java.sql.Date day = new java.sql.Date(new GregorianCalendar().getInstance().getTimeInMillis());
+		java.sql.Timestamp day = new java.sql.Timestamp(new GregorianCalendar().getInstance().getTimeInMillis());
 		
 		order.setOrderState(orderState);
 		order.setCancelDate(day);

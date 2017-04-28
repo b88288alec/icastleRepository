@@ -8,7 +8,7 @@ import com.icastle.orderfollowers.model.OrderFollowersVO;
 public class OrdersVO implements java.io.Serializable{
 
 	private Integer orderId;
-	private java.sql.Date orderedDate;
+	private java.sql.Timestamp orderedDate;
 	private Integer memberId;
 	private Integer roomId;
 	private Integer hotelId;
@@ -38,7 +38,7 @@ public class OrdersVO implements java.io.Serializable{
 	private String hotelRemark;
 	private String memo;
 	private Boolean orderState;
-	private java.sql.Date cancelDate;
+	private java.sql.Timestamp cancelDate;
 	private Set<OrderFollowersVO> orderFollowersVO = new LinkedHashSet<OrderFollowersVO>();
 	
 	public Integer getOrderId() {
@@ -47,10 +47,10 @@ public class OrdersVO implements java.io.Serializable{
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
-	public java.sql.Date getOrderedDate() {
+	public java.sql.Timestamp getOrderedDate() {
 		return orderedDate;
 	}
-	public void setOrderedDate(java.sql.Date orderedDate) {
+	public void setOrderedDate(java.sql.Timestamp orderedDate) {
 		this.orderedDate = orderedDate;
 	}
 	public String getHotelName() {
@@ -227,10 +227,10 @@ public class OrdersVO implements java.io.Serializable{
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public java.sql.Date getCancelDate() {
+	public java.sql.Timestamp getCancelDate() {
 		return cancelDate;
 	}
-	public void setCancelDate(java.sql.Date cancelDate) {
+	public void setCancelDate(java.sql.Timestamp cancelDate) {
 		this.cancelDate = cancelDate;
 	}
 	public Set<OrderFollowersVO> getOrderFollowersVO() {
