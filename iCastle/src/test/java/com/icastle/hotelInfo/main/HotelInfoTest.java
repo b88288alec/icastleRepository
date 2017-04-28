@@ -36,6 +36,7 @@ public class HotelInfoTest {
 		InfoVO infoVO = new InfoVO();
 		infoVO.setHotelId(2);
 		infoVO.setRegisterName("小花");
+		infoVO.setTel("022222");
 		dao.insert(infoVO);
 		
 		
