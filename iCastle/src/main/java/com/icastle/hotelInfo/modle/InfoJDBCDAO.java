@@ -153,7 +153,7 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 			pstmt = con.prepareStatement(SELECT_STMT);
 			
 			pstmt.setInt(1, hotelId);
-			rs = pstmt.executeQuery();
+			rs=pstmt.executeQuery();
 			
 			while (rs.next()){
 				infoVO = new InfoVO();
