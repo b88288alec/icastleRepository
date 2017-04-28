@@ -8,7 +8,7 @@ public class HotelService {
 	HotelDAO_Interface dao = null;
 	
 	public HotelService (){
-		dao = new HotelDAO();
+		dao = new HotelDAOJNDI();
 	}
 	
 	//新增飯店
@@ -17,10 +17,9 @@ public class HotelService {
 	}
 	
 	//修改飯店
-	public HotelVO updateHotel(int hotelId, String hotelName, String pw){
+	public HotelVO updateHotel(int hotelId, String pw){
 		HotelVO hotelVO = new HotelVO();
 		hotelVO.setHotelId(hotelId);
-		hotelVO.setHotelName(hotelName);
 		hotelVO.setPw(pw);
 		return dao.updateHotel(hotelVO);
 	}

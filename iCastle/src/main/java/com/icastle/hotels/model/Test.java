@@ -7,7 +7,7 @@ public class Test {
 	public static void main(String[] args){
 	
 		//addHotel
-		HotelDAO_Interface dao = new HotelDAO();
+		HotelDAO_Interface dao = new HotelDAOJNDI();
 		HotelVO hotel = new HotelVO();
 		hotel.setHotelName("好帥");
 		hotel.setEmail("handsome@gmail.com");

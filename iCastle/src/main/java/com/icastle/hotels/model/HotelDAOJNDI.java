@@ -62,11 +62,10 @@ public class HotelDAOJNDI implements HotelDAO_Interface {
 		
 		try{
 			conn = ds.getConnection();
-			String SQL_STMT = "update Hotels set hotelName = ?, pw = ?  where hotelId=?";
+			String SQL_STMT = "update Hotels set pw = ?  where hotelId=?";
 			pStmt = conn.prepareStatement(SQL_STMT);
-			pStmt.setString(1, hotelVO.getHotelName());
-			pStmt.setString(2, hotelVO.getPw());
-			pStmt.setInt(3, hotelVO.getHotelId());
+			pStmt.setString(1, hotelVO.getPw());
+			pStmt.setInt(2, hotelVO.getHotelId());
 
 			pStmt.executeUpdate();
 			
@@ -195,11 +194,54 @@ public class HotelDAOJNDI implements HotelDAO_Interface {
 		return hotels;
 	}
 
-
 	@Override
-	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate, int peopleNum, String order,
-			int lowprice, int highprice, double point, int star) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate
+			, int peopleNum, String order, int lowprice, int highprice, double point, int star) {
+		Connection conn = null;
+		CallableStatement cStmt = null;
+		ResultSet rs = null;
+		List<ListVO> hotels = new ArrayList<ListVO>();
+		try{
+			conn = ds.getConnection();
+			cStmt = conn.prepareCall("{call advanceQuery(?,?,?,?,?,?,?,?,?)}");
+			cStmt.setEscapeProcessing(true);
+			cStmt.setQueryTimeout(90);
+			
+			cStmt.setString(1, zone);
+			cStmt.setDate(2, startDate);
+			cStmt.setDate(3, endDate);
+			cStmt.setInt(4, peopleNum);
+			cStmt.setString(5, order);
+			cStmt.setInt(6, lowprice);
+			cStmt.setInt(7, highprice);
+			cStmt.setDouble(8, point);
+			cStmt.setInt(9, star);
+			
+			rs = cStmt.executeQuery();
+
+			while (rs.next()){
+				ListVO hotel = new ListVO();
+				hotel.setHotelId(rs.getInt(1));
+				hotel.setHotelName(rs.getString(2));
+				hotel.setPrice(rs.getInt(3));
+				hotel.setStar(rs.getInt(4));
+				hotel.setPoint(rs.getDouble(5));
+				hotel.setHot(rs.getInt(6));
+				hotel.setBreakfast(rs.getBoolean(7));
+				hotel.setDinner(rs.getBoolean(8));
+				hotel.setRoomWifi(rs.getBoolean(9));
+				hotels.add(hotel);
+			}
+		} catch (SQLException e){
+			e.printStackTrace();			
+		} finally {
+			try { rs.close();
+			} catch (SQLException e) {e.printStackTrace();}
+			try { cStmt.close();
+			} catch (SQLException e) {e.printStackTrace();}
+			try { conn.close();
+			} catch (SQLException e) {e.printStackTrace();}
+		}
+		return hotels;
 	}
 }
