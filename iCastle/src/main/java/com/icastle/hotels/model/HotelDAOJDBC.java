@@ -50,38 +50,12 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 	}
 
 	@Override
-	public HotelVO updateHotel(HotelVO hotelVO) {
-		Connection conn = null;
-		PreparedStatement pStmt = null;
-		HotelVO hotel = null;
-		
-		try{
-			Class.forName(driver);
-			conn = DriverManager.getConnection(url, sa, password);
-			String SQL_STMT = "update Hotels set hotelName = ?, pw = ?  where hotelId=?";
-			pStmt = conn.prepareStatement(SQL_STMT);
-			pStmt.setString(1, hotelVO.getHotelName());
-			pStmt.setString(2, hotelVO.getPw());
-			pStmt.setInt(3, hotelVO.getHotelId());
-
-			pStmt.executeUpdate();
-			
-			hotel = findByPrimaryKey(hotelVO.getHotelId());
-		} catch (ClassNotFoundException e){
-			e.printStackTrace();
-		} catch (SQLException e){
-			e.printStackTrace();			
-		} finally {
-			try { pStmt.close();
-			} catch (SQLException e) {e.printStackTrace();}
-			try { conn.close();
-			} catch (SQLException e) {e.printStackTrace();}
-		}
-		return hotel;
+	public int changePw(Integer hotelId, String pw) {
+		return 0;
 	}
 
 	@Override
-	public HotelVO updateState(int hotelId, int state) {
+	public HotelVO updateState(Integer hotelId, Integer state) {
 		Connection conn = null;
 		PreparedStatement pStmt = null;
 		HotelVO hotel = null;
@@ -111,7 +85,7 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 	}
 
 	@Override
-	public HotelVO findByPrimaryKey(int hotelId) {
+	public HotelVO findByPrimaryKey(Integer hotelId) {
 		Connection conn = null;
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
@@ -156,7 +130,7 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 	}
 	
 	@Override
-	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, int peopleNum) {
+	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, Integer peopleNum) {
 		Connection conn = null;
 		CallableStatement cStmt = null;
 		ResultSet rs = null;
@@ -204,8 +178,8 @@ public class HotelDAOJDBC implements HotelDAO_Interface {
 	}
 
 	@Override
-	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate, int peopleNum, String order,
-			int lowprice, int highprice, double point, int star) {
+	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate, Integer peopleNum, String order,
+			Integer lowprice, Integer highprice, double point, Integer star) {
 		// TODO Auto-generated method stub
 		return null;
 	}

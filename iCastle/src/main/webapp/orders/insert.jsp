@@ -31,14 +31,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="HtmlPage.html">
+                <a class="navbar-brand" href="../index.jsp">
                     <img alt="Brand" height="30" src="../img/logo.png" />
                 </a>
             </div>
             <!--結束logo-->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="HtmlPage.html">首頁</a></li>
+                    <li class="active"><a href="../index.jsp">首頁</a></li>
                     <li><a href="#">活動</a></li>
                     <li><a href="#">討論區</a></li>
                 </ul>
