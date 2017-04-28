@@ -1,6 +1,6 @@
 package com.icastle.hotelInfo.modle;
 
-public class infoVO {
+public class InfoVO {
 	private Integer hotelId;
 	private String registerName;
 	private String tel;
