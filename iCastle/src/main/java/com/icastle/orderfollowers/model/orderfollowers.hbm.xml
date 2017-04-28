@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.icastle.orderfollowers.model" table="OrderFollowers" >
+    <class name="com.icastle.orderfollowers.model.OrderFollowersVO" table="OrderFollowers" >
         
         <id name="id" column="id">
             <generator class="identity"/>

@@ -1,5 +1,8 @@
 package com.icastle.hotels.model;
 
+import java.util.*;
+import com.icastle.rooms.model.*;
+
 public class HotelVO {
 
 	private Integer hotelId;
@@ -10,9 +13,16 @@ public class HotelVO {
 	private String zone;
 	private Double point;
 	private Integer hot;
+	public Set<RoomsVO> getRooms() {
+		return rooms;
+	}
+	public void setRooms(Set<RoomsVO> rooms) {
+		this.rooms = rooms;
+	}
 	private Integer star;
 	private Integer hotelState;
 	private String registerId;
+	private Set<RoomsVO> rooms = new HashSet<RoomsVO>(); 
 	
 	public Integer getHotelId() {
 		return hotelId;

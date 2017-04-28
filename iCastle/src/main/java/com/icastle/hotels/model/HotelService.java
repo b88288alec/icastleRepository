@@ -8,7 +8,8 @@ public class HotelService {
 	HotelDAO_Interface dao = null;
 	
 	public HotelService (){
-		dao = new HotelDAO();
+//		dao = new HotelDAOJNDI();
+		dao = new HotelDAOHibernate();
 	}
 	
 	//新增飯店
@@ -17,12 +18,8 @@ public class HotelService {
 	}
 	
 	//修改飯店
-	public HotelVO updateHotel(int hotelId, String hotelName, String pw){
-		HotelVO hotelVO = new HotelVO();
-		hotelVO.setHotelId(hotelId);
-		hotelVO.setHotelName(hotelName);
-		hotelVO.setPw(pw);
-		return dao.updateHotel(hotelVO);
+	public int changePw(Integer hotelId, String pw){
+		return dao.changePw(hotelId,pw);
 	}
 	
 	//修改飯店狀態(管理員同意上架)
