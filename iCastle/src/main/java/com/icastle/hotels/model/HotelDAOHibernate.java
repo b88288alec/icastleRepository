@@ -24,21 +24,23 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 	}
 
 	@Override
-	public HotelVO updateHotel(HotelVO hotelVO) {
+	public int changePw(Integer hotelId, String pw) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		HotelVO hotel = findByPrimaryKey(hotelId);
+		hotel.setPw(pw);
 		try {
 			session.beginTransaction();
-			session.saveOrUpdate(hotelVO);
+			session.saveOrUpdate(hotel);
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return hotelVO;
+		return 0;
 	}
 
 	@Override
-	public HotelVO updateState(int hotelId, int state) {
+	public HotelVO updateState(Integer hotelId, Integer state) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		HotelVO hotelVO = new HotelVO();
 		hotelVO.setHotelId(hotelId);
@@ -55,20 +57,20 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 	}
 
 	@Override
-	public HotelVO findByPrimaryKey(int hotelId) {
+	public HotelVO findByPrimaryKey(Integer hotelId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, int peopleNum) {
+	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, Integer peopleNum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate, int peopleNum, String order,
-			int lowprice, int highprice, double point, int star) {
+	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate, Integer peopleNum, String order,
+			Integer lowprice, Integer highprice, double point, Integer star) {
 		// TODO Auto-generated method stub
 		return null;
 	}

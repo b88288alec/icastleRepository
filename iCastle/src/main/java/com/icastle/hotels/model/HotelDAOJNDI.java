@@ -55,21 +55,21 @@ public class HotelDAOJNDI implements HotelDAO_Interface {
 	}
 
 	@Override
-	public HotelVO updateHotel(HotelVO hotelVO) {
+	public int changePw(Integer hotelId, String pw) {
 		Connection conn = null;
 		PreparedStatement pStmt = null;
 		HotelVO hotel = null;
+		int count = 0;
 		
 		try{
 			conn = ds.getConnection();
 			String SQL_STMT = "update Hotels set pw = ?  where hotelId=?";
 			pStmt = conn.prepareStatement(SQL_STMT);
-			pStmt.setString(1, hotelVO.getPw());
-			pStmt.setInt(2, hotelVO.getHotelId());
+			pStmt.setString(1, pw);
+			pStmt.setInt(2, hotelId);
 
-			pStmt.executeUpdate();
+			count = pStmt.executeUpdate();
 			
-			hotel = findByPrimaryKey(hotelVO.getHotelId());
 		} catch (SQLException e){
 			e.printStackTrace();			
 		} finally {
@@ -78,11 +78,11 @@ public class HotelDAOJNDI implements HotelDAO_Interface {
 			try { conn.close();
 			} catch (SQLException e) {e.printStackTrace();}
 		}
-		return hotel;
+		return count;
 	}
 
 	@Override
-	public HotelVO updateState(int hotelId, int state) {
+	public HotelVO updateState(Integer hotelId, Integer state) {
 		Connection conn = null;
 		PreparedStatement pStmt = null;
 		HotelVO hotel = null;
@@ -109,7 +109,7 @@ public class HotelDAOJNDI implements HotelDAO_Interface {
 	}
 
 	@Override
-	public HotelVO findByPrimaryKey(int hotelId) {
+	public HotelVO findByPrimaryKey(Integer hotelId) {
 		Connection conn = null;
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;
@@ -150,7 +150,7 @@ public class HotelDAOJNDI implements HotelDAO_Interface {
 	}
 	
 	@Override
-	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, int peopleNum) {
+	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, Integer peopleNum) {
 		Connection conn = null;
 		CallableStatement cStmt = null;
 		ResultSet rs = null;
@@ -196,7 +196,7 @@ public class HotelDAOJNDI implements HotelDAO_Interface {
 
 	@Override
 	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate
-			, int peopleNum, String order, int lowprice, int highprice, double point, int star) {
+			, Integer peopleNum, String order, Integer lowprice, Integer highprice, double point, Integer star) {
 		Connection conn = null;
 		CallableStatement cStmt = null;
 		ResultSet rs = null;

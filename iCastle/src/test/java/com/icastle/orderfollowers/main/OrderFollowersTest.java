@@ -19,7 +19,7 @@ public class OrderFollowersTest {
 		orderFollowersVO.setName("哈哈哈");
 		orderFollowersVO.setAddr("1351561");
 		orderFollowersVO.setEmail("156165@jdisafj;a");
-		orderFollowersVO.setPersonId("A115151515135");
+		orderFollowersVO.setPersonId("A1151");
 		orderFollowersVO.setTel("1561564543");
 		orderFollowersVO.setCountry("台灣");
 		orderFollowersVO.setPassport("adfafdkljkljas");

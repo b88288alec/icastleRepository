@@ -18,11 +18,8 @@ public class HotelService {
 	}
 	
 	//修改飯店
-	public HotelVO updateHotel(int hotelId, String pw){
-		HotelVO hotelVO = new HotelVO();
-		hotelVO.setHotelId(hotelId);
-		hotelVO.setPw(pw);
-		return dao.updateHotel(hotelVO);
+	public int changePw(Integer hotelId, String pw){
+		return dao.changePw(hotelId,pw);
 	}
 	
 	//修改飯店狀態(管理員同意上架)
