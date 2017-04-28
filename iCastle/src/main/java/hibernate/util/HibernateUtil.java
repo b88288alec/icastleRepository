@@ -21,9 +21,10 @@ public class HibernateUtil {
         try {
         	// 創建SessionFactory
 			sessionFactory = cfg.buildSessionFactory(registry);
+			System.out.println("成功建造工廠");
         } catch (Throwable ex) {
         	// Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
+            System.err.println("Initial SessionFactory creation failed. " + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

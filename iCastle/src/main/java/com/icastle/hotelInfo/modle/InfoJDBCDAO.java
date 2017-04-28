@@ -12,7 +12,7 @@ import javax.management.RuntimeErrorException;
 
 public class InfoJDBCDAO implements InfoDAO_interface {
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=DB01";
+	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
 	String userid = "sa";
 	String password = "sa123456";
 	
@@ -21,7 +21,7 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 			+ ",roomWifi,hallWifi,internet,mineralWater,toiletUtensils,hairDryer,tv,gameRoom,gym,spa,swimPool) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SELECT_STMT =
-			"SELECT * FROM HotelInfo H JOIN HOTELS S ON H.hotelId = S.hotelId WHERE H.hotelId = ?";
+			"select * from HotelInfo where hotelId = ?";
 	private static final String UPDATE =
 			"UPDATE HotelInfo set registerName = ? ,tel = ? ,transport = ? ,website = ? ,hotelProfile = ? ,checkin = ? ,"
 			+ "checkout = ? ,GuestPolicies = ? ,cancelPolicies = ? ,roomWifi = ? ,hallWifi = ? ,internet = ? ,mineralWater = ? ,"
@@ -153,7 +153,7 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 			pstmt = con.prepareStatement(SELECT_STMT);
 			
 			pstmt.setInt(1, hotelId);
-			rs = pstmt.executeQuery();
+			rs=pstmt.executeQuery();
 			
 			while (rs.next()){
 				infoVO = new InfoVO();
