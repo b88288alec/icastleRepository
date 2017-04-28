@@ -19,8 +19,8 @@ public class OrderFollowersTest {
 		orderFollowersVO.setName("哈哈哈");
 		orderFollowersVO.setAddr("1351561");
 		orderFollowersVO.setEmail("156165@jdisafj;a");
-		orderFollowersVO.setPersonId("A115151515135");
-		orderFollowersVO.setTel("1561564543");
+		orderFollowersVO.setPersonId("A1155135");
+		orderFollowersVO.setTel("15615543");
 		orderFollowersVO.setCountry("台灣");
 		orderFollowersVO.setPassport("adfafdkljkljas");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
@@ -34,20 +34,21 @@ public class OrderFollowersTest {
 
 //		查詢
 //		OrderFollowersDAO_interface test = new OrderFollowersDAO();
-//		List<OrderFollowersVO> orderFollowersVOs = test.select_By_OrderId(1);
-//		
-//		for(OrderFollowersVO result: orderFollowersVOs){
-//			System.out.println("id = " + result.getId());
-//			System.out.println("orderid = " + result.getOrderId());
-//			System.out.println("name = " + result.getName());
-//			System.out.println("bdate = " + result.getBdate());
-//			System.out.println("addr = " + result.getAddr());
-//			System.out.println("email = " + result.getEmail());
-//			System.out.println("tel = " + result.getTel());
-//			System.out.println("personid = " + result.getPersonId());
-//			System.out.println("country = " + result.getCountry());
-//			System.out.println("passport = " + result.getPassport());
-//		}
+		List<OrderFollowersVO> orderFollowersVOs = test.select_By_OrderId(1);
+		
+		for(OrderFollowersVO result: orderFollowersVOs){
+			System.out.println("id = " + result.getId());
+			System.out.println("orderid = " + result.getOrderId());
+			System.out.println("name = " + result.getName());
+			System.out.println("bdate = " + result.getBdate());
+			System.out.println("addr = " + result.getAddr());
+			System.out.println("email = " + result.getEmail());
+			System.out.println("tel = " + result.getTel());
+			System.out.println("personid = " + result.getPersonId());
+			System.out.println("country = " + result.getCountry());
+			System.out.println("passport = " + result.getPassport());
+			System.out.println("-----------------------------------------------");
+		}
 		
 	}
 

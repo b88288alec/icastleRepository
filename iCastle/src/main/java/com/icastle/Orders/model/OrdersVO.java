@@ -1,5 +1,10 @@
 package com.icastle.Orders.model;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import com.icastle.orderfollowers.model.OrderFollowersVO;
+
 public class OrdersVO implements java.io.Serializable{
 
 	private Integer orderId;
@@ -34,6 +39,7 @@ public class OrdersVO implements java.io.Serializable{
 	private String memo;
 	private Boolean orderState;
 	private java.sql.Date cancelDate;
+	private Set<OrderFollowersVO> orderFollowersVO = new LinkedHashSet<OrderFollowersVO>();
 	
 	public Integer getOrderId() {
 		return orderId;
@@ -226,6 +232,12 @@ public class OrdersVO implements java.io.Serializable{
 	}
 	public void setCancelDate(java.sql.Date cancelDate) {
 		this.cancelDate = cancelDate;
+	}
+	public Set<OrderFollowersVO> getOrderFollowersVO() {
+		return orderFollowersVO;
+	}
+	public void setOrderFollowersVO(Set<OrderFollowersVO> orderFollowersVO) {
+		this.orderFollowersVO = orderFollowersVO;
 	}
 	
 }

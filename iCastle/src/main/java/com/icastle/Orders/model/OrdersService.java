@@ -2,8 +2,11 @@ package com.icastle.Orders.model;
 
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.ws.RespectBinding;
+
+import com.icastle.orderfollowers.model.OrderFollowersVO;
 
 public class OrdersService {
 	
@@ -15,7 +18,7 @@ public class OrdersService {
 	}
 	
 //	新增訂單
-	public void newOrder(Integer memberId, Integer roomId, Integer hotelId, String hotelName, Integer roomTypeId, String RoomTypeName, java.sql.Date checkinDay, java.sql.Date checkoutDay, Integer roomCount, Integer peopleNum, Boolean breakfast, Boolean dinner, Boolean afternoonTea, Integer price, String reservationer, java.sql.Date bdate, String tel, String email, String addr, String personId, String country, String passport, Boolean bedAdding, Integer pricePerPerson, String customerRemark, String hotelRemark, Boolean orderState){
+	public void newOrder(Integer memberId, Integer roomId, Integer hotelId, String hotelName, Integer roomTypeId, String RoomTypeName, java.sql.Date checkinDay, java.sql.Date checkoutDay, Integer roomCount, Integer peopleNum, Boolean breakfast, Boolean dinner, Boolean afternoonTea, Integer price, String reservationer, java.sql.Date bdate, String tel, String email, String addr, String personId, String country, String passport, Boolean bedAdding, Integer pricePerPerson, String customerRemark, String hotelRemark, Boolean orderState, Set<OrderFollowersVO> orderFollowersVO){
 		OrdersVO ordersVO = new OrdersVO();
 		
 		ordersVO.setOrderedDate(new java.sql.Date(new GregorianCalendar().getInstance().getTimeInMillis()));
@@ -46,6 +49,7 @@ public class OrdersService {
 		ordersVO.setCustomerRemark(customerRemark);
 		ordersVO.setHotelRemark(hotelRemark);
 		ordersVO.setOrderState(orderState);
+		ordersVO.setOrderFollowersVO(orderFollowersVO);
 		
 		dao.insert(ordersVO);
 	}
