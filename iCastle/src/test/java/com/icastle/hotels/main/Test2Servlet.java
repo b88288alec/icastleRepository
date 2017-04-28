@@ -1,4 +1,4 @@
-package com.icastle.hotels.controller;
+package com.icastle.hotels.main;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

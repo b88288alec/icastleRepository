@@ -3,24 +3,55 @@ package com.icastle.hotels.model;
 import java.sql.Date;
 import java.util.List;
 
+import org.hibernate.Session;
+
+import hibernate.util.HibernateUtil;
+
 public class HotelDAOHibernate implements HotelDAO_Interface {
 
 	@Override
 	public HotelVO addHotel(HotelVO hotelVO) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(hotelVO);// 新增
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return hotelVO;
 	}
 
 	@Override
 	public HotelVO updateHotel(HotelVO hotelVO) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(hotelVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return hotelVO;
 	}
 
 	@Override
 	public HotelVO updateState(int hotelId, int state) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		HotelVO hotelVO = new HotelVO();
+		hotelVO.setHotelId(hotelId);
+		hotelVO.setHotelState(state);
+		try {
+			session.beginTransaction();
+			session.saveOrUpdate(hotelVO);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return hotelVO;
 	}
 
 	@Override
