@@ -47,7 +47,7 @@ public class RoomsService {
 		String checkoutMonth = checkoutDay.substring(6, 8);
 		Integer updateCount = 0;
 		
-		if(!checkinMonth.equals(checkoutMonth)){
+		if(checkinMonth.equals(checkoutMonth)){
 			updateCount = getOrder(roomId, stayDayNum, roomCount);
 		}else{
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
@@ -101,7 +101,7 @@ public class RoomsService {
 		String checkoutMonth = checkoutDay.substring(6, 8);
 		Map<String,Integer> PerPrice = null;
 		
-		if(!checkinMonth.equals(checkoutMonth)){
+		if(checkinMonth.equals(checkoutMonth)){
 			PerPrice = getPerPrice(roomId, stayDayNum);
 		}else{
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");

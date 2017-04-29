@@ -190,7 +190,7 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 			query.setParameter(1, roomIdEnd);
 			List<Object[]> listObj = query.list();
 			for(Object[] arrayObj : listObj){
-				perPrice.put((String)arrayObj[0], (Integer)arrayObj[1]);
+				perPrice.put(((Date)arrayObj[0]).toString(), (Integer)arrayObj[1]);
 			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
@@ -213,7 +213,7 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 			query.setParameter(3, checkoutDay);
 			List<Object[]> listObj = query.list();
 			for(Object[] arrayObj : listObj){
-				perPrice.put((String)arrayObj[0], (Integer)arrayObj[1]);
+				perPrice.put(((Date)arrayObj[0]).toString(), (Integer)arrayObj[1]);
 			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
