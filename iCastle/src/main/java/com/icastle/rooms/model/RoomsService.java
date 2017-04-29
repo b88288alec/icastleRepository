@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class RoomsService {
-	RoomsDAO_interface dao = new RoomsJNDIDAO();
+	RoomsDAO_interface dao = new RoomsHibernateDAO();
 	
 	//批次新增房間
 	public Integer insertRooms(List<RoomsVO> roomList){
@@ -44,7 +44,7 @@ public class RoomsService {
 	//下訂單時修改bookedNum(自動判斷使用哪種getOrder)
 	public Integer getOrderByAuto(Integer roomId, Integer hotelId, Integer roomTypeId, String checkinDay, String checkoutDay, Integer stayDayNum, Integer roomCount){
 		String checkinMonth = checkinDay.substring(6, 8);
-		String checkoutMonth = checkinDay.substring(6, 8);
+		String checkoutMonth = checkoutDay.substring(6, 8);
 		Integer updateCount = 0;
 		
 		if(!checkinMonth.equals(checkoutMonth)){
@@ -98,7 +98,7 @@ public class RoomsService {
 	//得每日房價(自動判斷使用哪種getPerPrice)
 	public Map<String,Integer> getPerPriceByAuto(Integer roomId, Integer hotelId, Integer roomTypeId, String checkinDay, String checkoutDay, Integer stayDayNum){
 		String checkinMonth = checkinDay.substring(6, 8);
-		String checkoutMonth = checkinDay.substring(6, 8);
+		String checkoutMonth = checkoutDay.substring(6, 8);
 		Map<String,Integer> PerPrice = null;
 		
 		if(!checkinMonth.equals(checkoutMonth)){

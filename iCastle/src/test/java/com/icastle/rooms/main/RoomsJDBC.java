@@ -8,13 +8,16 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import com.icastle.rooms.model.RoomsDAO_interface;
+import com.icastle.rooms.model.RoomsHibernateDAO;
 import com.icastle.rooms.model.RoomsJDBCDAO;
 import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
 
 public class RoomsJDBC {
 	
-	static RoomsJDBCDAO dao = new RoomsJDBCDAO();
+//	static RoomsJDBCDAO dao = new RoomsJDBCDAO();
+	static RoomsDAO_interface dao = new RoomsHibernateDAO();
 	
 	public static void insert(){
 		RoomsVO vo = new RoomsVO();
