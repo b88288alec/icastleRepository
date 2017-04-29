@@ -5,9 +5,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import com.icastle.Orders.model.CheckId;
 import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
+import com.icastle.orderfollowers.model.OrderFollowersVO;
 import com.icastle.rooms.model.RoomsService;
 
 @WebServlet("/orders/OrdersServlet.do")
@@ -184,6 +187,8 @@ public class OrdersServlet extends HttpServlet {
 			String customerRemark = req.getParameter("customerRemark");
 			String hotelRemark = orderMap.get("remark");
 			Boolean orderState = true;
+//			還沒寫!!!!!!!!!!!!!!!!!
+			Set<OrderFollowersVO> orderFollowersVO = new LinkedHashSet<OrderFollowersVO>();
 
 			if (!errorMsgs.isEmpty()) {
 				RequestDispatcher rd = req.getRequestDispatcher("insert.jsp");
@@ -199,7 +204,7 @@ public class OrdersServlet extends HttpServlet {
 			os.newOrder(memberId, roomId, hotelId, hotelName, roomTypeId, roomTypeName, checkinDay, checkoutDay,
 					roomCount, peopleNum, breakfast, dinner, afternoonTea, price, reservationer, bdate, tel, email,
 					addr, personId, country, passport, bedAdding, pricePerPerson, customerRemark, hotelRemark,
-					orderState);
+					orderState, orderFollowersVO);
 
 			res.sendRedirect("success.jsp");
 		} catch (Exception e) {

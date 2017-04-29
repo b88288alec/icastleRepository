@@ -45,7 +45,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			conn = DriverManager.getConnection(url, userid, passwd);
 			pstat = conn.prepareStatement(INSERT_STMT);
 			
-			pstat.setDate(1, ordersVO.getOrderedDate());
+			pstat.setTimestamp(1, ordersVO.getOrderedDate());
 			pstat.setInt(2, ordersVO.getMemberId());
 			pstat.setInt(3, ordersVO.getRoomId());
 			pstat.setInt(4, ordersVO.getHotelId());
@@ -115,7 +115,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			
 			pstat.setBoolean(1, ordersVO.getOrderState());
 			pstat.setString(2, ordersVO.getMemo());
-			pstat.setDate(3, ordersVO.getCancelDate());
+			pstat.setTimestamp(3, ordersVO.getCancelDate());
 			pstat.setInt(4, ordersVO.getOrderId());
 			
 			pstat.executeUpdate();
@@ -167,7 +167,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -196,7 +196,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -253,7 +253,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			
 			while(rs.next()){
 				result.setOrderId(rs.getInt("orderId"));
-				result.setOrderedDate(rs.getDate("orderedDate"));
+				result.setOrderedDate(rs.getTimestamp("orderedDate"));
 				result.setMemberId(rs.getInt("memberId"));
 				result.setRoomId(rs.getInt("roomId"));
 				result.setHotelId(rs.getInt("hotelId"));
@@ -282,7 +282,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				result.setHotelRemark(rs.getString("hotelRemark"));
 				result.setMemo(rs.getString("memo"));
 				result.setOrderState(rs.getBoolean("orderState"));
-				result.setCancelDate(rs.getDate("cancelDate"));
+				result.setCancelDate(rs.getTimestamp("cancelDate"));
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -339,7 +339,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -368,7 +368,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -429,7 +429,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -458,7 +458,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -521,7 +521,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -550,7 +550,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -612,7 +612,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -641,7 +641,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -703,7 +703,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -732,7 +732,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -797,7 +797,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -826,7 +826,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -890,7 +890,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -919,7 +919,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -981,7 +981,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -1010,7 +1010,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1075,7 +1075,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -1104,7 +1104,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1168,7 +1168,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -1197,7 +1197,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1261,7 +1261,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -1290,7 +1290,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1356,7 +1356,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -1385,7 +1385,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			
@@ -1450,7 +1450,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			while(rs.next()){
 				order = new OrdersVO();
 				order.setOrderId(rs.getInt("orderId"));
-				order.setOrderedDate(rs.getDate("orderedDate"));
+				order.setOrderedDate(rs.getTimestamp("orderedDate"));
 				order.setMemberId(rs.getInt("memberId"));
 				order.setRoomId(rs.getInt("roomId"));
 				order.setHotelId(rs.getInt("hotelId"));
@@ -1479,7 +1479,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 				order.setHotelRemark(rs.getString("hotelRemark"));
 				order.setMemo(rs.getString("memo"));
 				order.setOrderState(rs.getBoolean("orderState"));
-				order.setCancelDate(rs.getDate("cancelDate"));
+				order.setCancelDate(rs.getTimestamp("cancelDate"));
 				result.add(order);
 			}
 			

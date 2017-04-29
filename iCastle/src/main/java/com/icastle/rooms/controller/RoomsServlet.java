@@ -53,8 +53,8 @@ public class RoomsServlet extends HttpServlet {
 			String avgPrice = request.getParameter("price");
 			
 			RoomsService roomS = new RoomsService();
-			int stayDayNum = roomS.getstayDayNum(checkinDay, checkoutDay);
-			Map<String,Integer> PerPrice = roomS.getPerPrice(Integer.parseInt(roomId), stayDayNum);
+			Integer stayDayNum = roomS.getstayDayNum(checkinDay, checkoutDay);
+			Map<String,Integer> PerPrice = roomS.getPerPriceByAuto(Integer.parseInt(roomId), Integer.parseInt(hotelId), Integer.parseInt(roomTypeId), checkinDay, checkoutDay, stayDayNum);
 			int totalPrice = roomS.getTotalPrice(PerPrice);
 			
 			//包裝資料

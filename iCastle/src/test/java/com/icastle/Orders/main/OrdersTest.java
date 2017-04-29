@@ -4,6 +4,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.icastle.Orders.model.OrdersDAO_interface;
+import com.icastle.Orders.model.OrdersHibernateDAO;
 import com.icastle.Orders.model.OrdersJDBC;
 import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
@@ -14,9 +15,10 @@ public class OrdersTest {
 
 		// 查詢-orderId
 //		OrdersDAO_interface dao = new OrdersJDBC();
-//		OrdersVO result = dao.select_by_orderId(2);
+		OrdersDAO_interface dao = new OrdersHibernateDAO();
+//		OrdersVO result = dao.select_by_orderId(1);
 //
-//		System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//		System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
 //				+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
 //				+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
 //				+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
@@ -32,7 +34,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_memberId(1);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
 //					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
 //					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
 //					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
@@ -49,7 +51,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_all();
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
 //					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
 //					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
 //					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
@@ -69,8 +71,8 @@ public class OrdersTest {
 //		ordersVO.setHotelId(1);
 //		ordersVO.setRoomTypeId(1);
 //		ordersVO.setRoomTypeName("好帥");
-//		ordersVO.setCheckinDay(new java.sql.Date(new GregorianCalendar(2017, 9, 10).getTimeInMillis()));
-//		ordersVO.setCheckoutDay(new java.sql.Date(new GregorianCalendar(2017, 9, 13).getTimeInMillis()));
+//		ordersVO.setCheckinDay(new java.sql.Date(new GregorianCalendar(2018, 1, 1).getTimeInMillis()));
+//		ordersVO.setCheckoutDay(new java.sql.Date(new GregorianCalendar(2018, 9, 13).getTimeInMillis()));
 //		ordersVO.setRoomCount(1);
 //		ordersVO.setPeopleNum(2);
 //		ordersVO.setBreakfast(true);
@@ -101,10 +103,10 @@ public class OrdersTest {
 
 		// //業者查詢-年
 //		OrdersDAO_interface dao = new OrdersJDBC();
-//		List<OrdersVO> orders = dao.select_by_hotelId_year(3, 2017);
+//		List<OrdersVO> orders = dao.select_by_hotelId_year(1, 2017);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
 //					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
 //					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
 //					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
@@ -121,7 +123,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_month(3, 2017, 9);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
 //					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
 //					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
 //					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
@@ -138,7 +140,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_day(3, 2017, 9, 1);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
 //					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
 //					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
 //					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
@@ -155,7 +157,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_year_roomTypeId(3, 2, 2017);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
 //					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
 //					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
 //					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
@@ -172,7 +174,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_month_roomTypeId(3, 2, 2017, 9);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
 //					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
 //					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
 //					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
@@ -189,7 +191,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_day_roomTypeId(3, 2, 2017, 9, 1);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
 //					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
 //					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
 //					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
@@ -206,7 +208,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_year_orderstate(3, 2017, true);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
 //					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
 //					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
 //					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
@@ -223,7 +225,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_month_orderstate(3, 2017, 9, true);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
 //					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
 //					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
 //					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
@@ -240,7 +242,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_day_orderstate(3, 2017, 9, 1, true);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
 //					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
 //					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
 //					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
@@ -257,7 +259,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_year_roomTypeId_orderstate(3, 2, 2017, true);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
 //					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
 //					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
 //					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
@@ -274,7 +276,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_month_roomTypeId_orderstate(3, 2, 2017, 9, true);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
 //					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
 //					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
 //					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
@@ -291,7 +293,7 @@ public class OrdersTest {
 //		List<OrdersVO> orders = dao.select_by_hotelId_day_roomTypeId_orderstate(3, 2, 2017, 9, 1, true);
 //
 //		for (OrdersVO result : orders) {
-//			System.out.println(+result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
+//			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
 //					+ result.getHotelId() + "   " + result.getRoomTypeId() + "   " + result.getRoomTypeName() + "   "
 //					+ result.getCheckinDay() + "   " + result.getCheckoutDay() + "   " + result.getRoomCount() + "   "
 //					+ result.getPeopleNum() + "   " + result.getBreakfast() + "   " + result.getDinner() + "   "
