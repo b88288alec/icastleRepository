@@ -155,7 +155,7 @@
                 <c:forEach var="hotel" items="${hotels}">
                 <a href="hotel/ShowHotel.do?hotelId=${hotel.hotelId}&type=${param.type}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
                     <div class="card">
-                        <img src="img/60395_16042612080041805392.jpg" style="width:300px;" />
+                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${hotel.hotelId}" style="width:300px;" />
                         <div class="cardContext">
                             <h4>${hotel.hotelName}</h4>
                             <h4><span class="label label-info">${param.type}</span></h4>
@@ -218,7 +218,7 @@
                     </div>
                 </a>
                 </c:forEach>
-                <c:if test="${hotels == null}">
+                <c:if test="${empty hotels}">
 					<h2>查無飯店!</h2>
 				</c:if>
                 <!--結束飯店列表-->

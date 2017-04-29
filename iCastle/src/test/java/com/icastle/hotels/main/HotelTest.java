@@ -79,7 +79,7 @@ public class HotelTest {
 		//飯店登入
 //		HotelService dao = new HotelService();
 //		String email = "handsome@gmail.com"; 
-//		String pw = "hand466";
+//		String pw = "928749";
 //		HotelVO hotelvo = dao.checkAccountPw(email, pw);
 //		System.out.println(hotelvo.getHotelId());
 //		System.out.println(hotelvo.getHotelName());
