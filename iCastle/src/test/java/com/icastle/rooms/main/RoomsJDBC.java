@@ -170,6 +170,18 @@ public class RoomsJDBC {
 		System.out.println(count);
 	}
 	
+	public static void getOrderByDate(){
+		Calendar cal = Calendar.getInstance();
+		cal.set(2017, 0, 2);
+		long star = cal.getTimeInMillis();
+		
+		cal.set(2017, 0, 4);
+		long end = cal.getTimeInMillis();
+		
+		int count = dao.getOrder(5, 13, new Date(star), new Date(end), 3000);
+		System.out.println(count);
+	}
+	
 	public static void findRooms(){
 		Calendar cal = Calendar.getInstance();
 		cal.set(2017, 0, 2);
@@ -250,7 +262,8 @@ public class RoomsJDBC {
 //		insert();
 //		getRoomsByMonth();
 //		update();
-		getOrder();
+//		getOrder();
+//		getOrderByDate();
 //		findRooms();
 //		updatePrice();
 //		getstayDayNum();

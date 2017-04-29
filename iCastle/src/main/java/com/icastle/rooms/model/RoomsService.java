@@ -11,31 +11,68 @@ import java.util.Map;
 public class RoomsService {
 	RoomsDAO_interface dao = new RoomsJNDIDAO();
 	
-	public int insertRooms(List<RoomsVO> roomList){
+	//批次新增房間
+	public Integer insertRooms(List<RoomsVO> roomList){
 		return dao.insert(roomList);
 	}
 	
-	public int updateDetail(List<RoomsVO> roomList){
+	//更新除了價錢以外的欄位
+	public Integer updateDetail(List<RoomsVO> roomList){
 		return dao.updateDetail(roomList);
 	}
 	
-	public List<RoomsVO> getRoomsByMonth(int hotelId, int roomTypeId, int month){
+	//取得飯店整月的特定房型價錢
+	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Integer month){
 		return dao.getRoomsByMonth(hotelId, roomTypeId, month);
 	}
 	
-	public List<RoomsVO> findRooms(int hotelId, int peopleNum, Date star, Date end){
+	//查詢該飯店所在期間內的空房型
+	public List<RoomsVO> findRooms(Integer hotelId, Integer peopleNum, Date star, Date end){
 		return dao.findRooms(hotelId, peopleNum, star, end);
 	}
 	
-	public int getOrder(int roomId, int stayDayNum, int roomCount){
+	//下訂單時修改bookedNum(以roomId及入住天數修改)
+	public Integer getOrder(Integer roomId, Integer stayDayNum, Integer roomCount){
 		return dao.getOrder(roomId, stayDayNum, roomCount);
 	}
 	
-	public int updatePrice(List<RoomsVO> roomsList){
+	//下訂單時修改bookedNum(以hotelId、roomTypeId、checkinDay、checkoutDay修改)
+	public Integer getOrder(Integer hotelId, Integer roomTypeId, Date checkinDay, Date checkoutDay, Integer roomCount){
+		return dao.getOrder(hotelId, roomTypeId, checkinDay, checkoutDay, roomCount);
+	}
+	
+	//下訂單時修改bookedNum(自動判斷使用哪種getOrder)
+	public Integer getOrderByAuto(Integer roomId, Integer hotelId, Integer roomTypeId, String checkinDay, String checkoutDay, Integer stayDayNum, Integer roomCount){
+		String checkinMonth = checkinDay.substring(6, 8);
+		String checkoutMonth = checkinDay.substring(6, 8);
+		Integer updateCount = 0;
+		
+		if(!checkinMonth.equals(checkoutMonth)){
+			updateCount = getOrder(roomId, stayDayNum, roomCount);
+		}else{
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			long start = 0;
+			long end = 0;
+			
+			try {
+				start = sdf.parse(checkinDay).getTime();
+				end = sdf.parse(checkoutDay).getTime() - (1000*60*60*24);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			updateCount = getOrder(hotelId, roomTypeId, new Date(start), new Date(end), roomCount);
+		}
+		return updateCount;
+	}
+	
+	//更新房價
+	public Integer updatePrice(List<RoomsVO> roomsList){
 		return dao.updatePrice(roomsList);
 	}
 	
-	public int getstayDayNum(String checkinDay, String checkoutDay){
+	//計算入住天數
+	public Integer getstayDayNum(String checkinDay, String checkoutDay){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
 		int stayDayNum = 0;
 		try {
@@ -48,11 +85,43 @@ public class RoomsService {
 		return stayDayNum;
 	}
 	
-	public Map<String,Integer> getPerPrice(int roomId, int stayDayNum){
+	//取得每日房價(以roomId及入住天數取得)
+	public Map<String,Integer> getPerPrice(Integer roomId, Integer stayDayNum){
 		return dao.getPerPrice(roomId, stayDayNum);
 	}
 	
-	public int getTotalPrice(Map<String,Integer> PerPrice){
+	//得每日房價(以hotelId、roomTypeId、checkinDay、checkoutDay取得)
+	public Map<String,Integer> getPerPrice(Integer hotelId, Integer roomTypeId, Date checkinDay, Date checkoutDay){
+		return dao.getPerPrice(hotelId, roomTypeId, checkinDay, checkoutDay);
+	}
+	
+	//得每日房價(自動判斷使用哪種getPerPrice)
+	public Map<String,Integer> getPerPriceByAuto(Integer roomId, Integer hotelId, Integer roomTypeId, String checkinDay, String checkoutDay, Integer stayDayNum){
+		String checkinMonth = checkinDay.substring(6, 8);
+		String checkoutMonth = checkinDay.substring(6, 8);
+		Map<String,Integer> PerPrice = null;
+		
+		if(!checkinMonth.equals(checkoutMonth)){
+			PerPrice = getPerPrice(roomId, stayDayNum);
+		}else{
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			long start = 0;
+			long end = 0;
+			
+			try {
+				start = sdf.parse(checkinDay).getTime();
+				end = sdf.parse(checkoutDay).getTime() - (1000*60*60*24);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			PerPrice = getPerPrice(hotelId, roomTypeId, new Date(start), new Date(end));
+		}
+		return PerPrice;
+	}
+	
+	//計算總價
+	public Integer getTotalPrice(Map<String,Integer> PerPrice){
 		Collection<Integer> pprice = PerPrice.values();
 		int count = 0;
 		for(Integer price: pprice){

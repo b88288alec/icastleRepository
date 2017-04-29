@@ -18,15 +18,17 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	private final String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private final String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
 	private final String user = "sa";
-	private final String password = "sa123456";
-//	private final String password = "Alec88288";
+//	private final String password = "sa123456";
+	private final String password = "Alec88288";
 
 	private final String INSERT_CMD = "insert into Rooms(roomTypeId, hotelId, roomDate, RoomTypeName, peopleNum, bookedNum, roomNumber, price,  breakfast, dinner, afternoonTea, bedAddable, pricePerPerson, remark) "
 			+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private final String GET_ROOMS_BY_MONTH = "select * from Rooms where hotelId = ? and roomTypeId = ? and MONTH(roomDate) = ?";
 	private final String UPDATE_CMD = "update Rooms set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?";
 	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+? where roomId between ? and ?";
+	private final String GET_ORDER_BY_DATE = "UPDATE Rooms set bookedNum = bookedNum + ? where hotelId = ? and roomTypeId = ? and  roomDate between ? and ?";
 	private final String GET_PER_PRICE = "select roomDate,price from Rooms where roomId between ? and ? order by roomDate";
+	private final String GET_PER_PRICE_BY_DATE = "select roomDate, price from Rooms where hotelId = ? and roomTypeId = ? and  roomDate between ? and ? order by roomDate";
 	private final String indexQueryGetRoom = "{call indexQueryGetRoom(?,?,?,?)}";
 	private final String UPDATE_PRICE = "UPDATE Rooms SET price = ? WHERE roomId = ?";
 	
@@ -36,7 +38,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	ResultSet rs = null;
 
 	@Override
-	public int insert(List<RoomsVO> roomList) {
+	public Integer insert(List<RoomsVO> roomList) {
 		int insertCount = 0;
 		try {
 			Class.forName(driver);
@@ -99,7 +101,8 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public int updateDetail(List<RoomsVO> roomList) {
+	@Deprecated
+	public Integer updateDetail(List<RoomsVO> roomList) {
 		int updateCount = 0;
 		try {
 			Class.forName(driver);
@@ -156,7 +159,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public List<RoomsVO> getRoomsByMonth(int hotelId, int roomTypeId, int month) {
+	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Integer month) {
 		List<RoomsVO> list = new ArrayList<RoomsVO>();
 		try {
 			Class.forName(driver);
@@ -221,7 +224,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public List<RoomsVO> findRooms(int hotelId, int peopleNum, Date star, Date end) {
+	public List<RoomsVO> findRooms(Integer hotelId, Integer peopleNum, Date star, Date end) {
 		List<RoomsVO> list = new ArrayList<RoomsVO>();
 		
 		try {
@@ -288,7 +291,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public int getOrder(int roomId, int dayNum, int roomCount) {
+	public Integer getOrder(Integer roomId, Integer dayNum, Integer roomCount) {
 		int updateCount = 0;
 		try {
 			Class.forName(driver);
@@ -336,10 +339,55 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 		}
 		return updateCount;
 	}
-	
 
 	@Override
-	public int updatePrice(List<RoomsVO> roomsList) {
+	public Integer getOrder(Integer hotelId, Integer roomTypeId, Date checkinDay, Date checkoutDay, Integer roomCount) {
+		Integer updateCount = 0;
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(GET_ORDER_BY_DATE);
+			pstmt.setInt(1, roomCount);
+			pstmt.setInt(2, hotelId);
+			pstmt.setInt(3, roomTypeId);
+			pstmt.setDate(4, checkinDay);
+			pstmt.setDate(5, checkoutDay);
+			
+			int count = pstmt.executeUpdate();
+			updateCount += count;
+			conn.commit();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}finally {
+			if (!(pstmt == null)) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (!(conn == null)) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return updateCount;
+	}
+
+	@Override
+	public Integer updatePrice(List<RoomsVO> roomsList) {
 		int updateCount = 0;
 		try {
 			Class.forName(driver);
@@ -388,7 +436,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public Map<String,Integer> getPerPrice(int roomId, int stayDayNum) {
+	public Map<String,Integer> getPerPrice(Integer roomId, Integer stayDayNum) {
 		Map<String,Integer> perPrice = new TreeMap<String,Integer>();
 		try {
 			Class.forName(driver);
@@ -404,6 +452,54 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 				String date = rs.getString(1);
 				Integer price = new Integer(rs.getInt(2));
 				perPrice.put(date,price);
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (!(rs == null)) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (!(pstmt == null)) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (!(conn == null)) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return perPrice;
+	}
+
+	@Override
+	public Map<String, Integer> getPerPrice(Integer hotelId, Integer roomTypeId, Date checkinDay, Date checkoutDay) {
+		Map<String,Integer> perPrice = new TreeMap<String,Integer>();
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			pstmt = conn.prepareStatement(GET_PER_PRICE_BY_DATE);
+			pstmt.setInt(1, hotelId);
+			pstmt.setInt(2, roomTypeId);
+			pstmt.setDate(3, checkinDay);
+			pstmt.setDate(4, checkoutDay);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				perPrice.put(rs.getString(1), rs.getInt(2));
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
