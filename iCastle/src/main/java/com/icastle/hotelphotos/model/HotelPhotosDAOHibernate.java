@@ -12,6 +12,46 @@ import hibernate.util.HibernateUtil;
 public class HotelPhotosDAOHibernate implements HotelPhotos_Interface{
 
 	@Override
+	public int addPhoto(List<HotelPhotosVO> photovos) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		int count = 0;
+		try {
+			session.beginTransaction();
+			
+			for (HotelPhotosVO photovo : photovos){
+				session.saveOrUpdate(photovo);
+				count++;
+			}
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+
+	@Override
+	public int updatePhoto(List<HotelPhotosVO> photovos) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		int count = 0;
+		try {
+			session.beginTransaction();
+			
+			for (HotelPhotosVO photovo : photovos){
+				session.update(photovo);
+				count++;
+			}
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
+
+	@Override
 	public HotelPhotosVO findByPrimaryKey(Integer id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		HotelPhotosVO photo = null;
@@ -46,5 +86,60 @@ public class HotelPhotosDAOHibernate implements HotelPhotos_Interface{
 		return photovo;
 	}
 
-	
+	@Override
+	public List<HotelPhotosVO> findByHotelId(Integer hotelId) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<HotelPhotosVO> photos = null;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(
+					"from HotelPhotosVO where hotelId=:hotelId");
+			query.setParameter("hotelId", hotelId);
+			
+			photos = query.list();
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return photos;
+	}
+
+	@Override
+	public List<HotelPhotosVO> findByRoomTypeId(Integer roomTypeId) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<HotelPhotosVO> photos = null;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery(
+					"from HotelPhotosVO where roomTypeId=:roomTypeId");
+			query.setParameter("roomTypeId", roomTypeId);
+			
+			photos = query.list();
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return photos;
+	}
+
+	@Override
+	public int deletePhoto(Integer id) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		int count = 0;
+		try {
+			session.beginTransaction();
+			HotelPhotosVO photo = (HotelPhotosVO)session.get(HotelPhotosVO.class, id);
+			session.delete(photo);
+			count++;
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return count;
+	}
 }
