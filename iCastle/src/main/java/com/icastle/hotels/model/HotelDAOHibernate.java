@@ -1,8 +1,10 @@
 package com.icastle.hotels.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import hibernate.util.HibernateUtil;
@@ -24,27 +26,8 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 	}
 
 	@Override
-	public int changePw(Integer hotelId, String pw) {
+	public void update(HotelVO hotelVO) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		HotelVO hotel = findByPrimaryKey(hotelId);
-		hotel.setPw(pw);
-		try {
-			session.beginTransaction();
-			session.saveOrUpdate(hotel);
-			session.getTransaction().commit();
-		} catch (RuntimeException ex) {
-			session.getTransaction().rollback();
-			throw ex;
-		}
-		return 0;
-	}
-
-	@Override
-	public HotelVO updateState(Integer hotelId, Integer state) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		HotelVO hotelVO = new HotelVO();
-		hotelVO.setHotelId(hotelId);
-		hotelVO.setHotelState(state);
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(hotelVO);
@@ -53,26 +36,131 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return hotelVO;
 	}
+
+
 
 	@Override
 	public HotelVO findByPrimaryKey(Integer hotelId) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		HotelVO hotel = null;
+		try {
+			session.beginTransaction();
+			hotel = (HotelVO) session.get(HotelVO.class, hotelId);
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return hotel;
 	}
 
 	@Override
-	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, Integer peopleNum) {
-		// TODO Auto-generated method stub
-		return null;
+	public HotelVO checkAccountPw(String email, String pw){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		HotelVO hotel = null;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from HotelVO where email=:email and pw=:pw");
+			query.setParameter("email", email);
+			query.setParameter("pw", pw);
+			List<HotelVO> list = query.list();
+			hotel = (list.size()==1) ? list.get(0) : null;
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return hotel;
+	}
+	
+	@Override
+	public List<ListVO> indexQuery(String type, Date startDate, Date endDate, Integer peopleNum) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<ListVO> list = new ArrayList<ListVO>();
+		try {
+			session.beginTransaction();
+			Query query = session.createSQLQuery("{call indexQuery(?,?,?,?)}");
+			query.setParameter(0, type);
+			query.setParameter(1, startDate);
+			query.setParameter(2, endDate);
+			query.setParameter(3, peopleNum);
+			query.setTimeout(90);
+			List<Object[]> objects = query.list();
+			for (Object[] object : objects){
+				ListVO alist = new ListVO();
+				alist.setHotelId((Integer)object[0]);
+				alist.setHotelName((String)object[1]);
+				alist.setPrice((Integer)object[2]);
+				alist.setStar((Integer)object[3]);
+				alist.setPoint((Double)object[4]);
+				alist.setHot((Integer)object[5]);
+				alist.setBreakfast((Boolean)object[6]);
+				alist.setDinner((Boolean)object[7]);
+				alist.setRoomWifi((Boolean)object[8]);
+				list.add(alist);
+			}
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}     	
+		return list;
 	}
 
 	@Override
-	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate, Integer peopleNum, String order,
+	public List<ListVO> advancedQuery(String type, Date startDate, Date endDate, Integer peopleNum, String order,
 			Integer lowprice, Integer highprice, double point, Integer star) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<ListVO> list = new ArrayList<ListVO>();
+		try {
+			session.beginTransaction();
+			Query query = session.createSQLQuery("{call advanceQuery(?,?,?,?,?,?,?,?,?)}");
+			query.setParameter(0, type);
+			query.setParameter(1, startDate);
+			query.setParameter(2, endDate);
+			query.setParameter(3, peopleNum);
+			query.setParameter(4, order);
+			query.setParameter(5, lowprice);
+			query.setParameter(6, highprice);
+			query.setParameter(7, point);
+			query.setParameter(8, star);
+			query.setTimeout(90);
+			List<Object[]> objects = query.list();
+			for (Object[] object : objects){
+				ListVO alist = new ListVO();
+				alist.setHotelId((Integer)object[0]);
+				alist.setHotelName((String)object[1]);
+				alist.setPrice((Integer)object[2]);
+				alist.setStar((Integer)object[3]);
+				alist.setPoint((Double)object[4]);
+				alist.setHot((Integer)object[5]);
+				alist.setBreakfast((Boolean)object[6]);
+				alist.setDinner((Boolean)object[7]);
+				alist.setRoomWifi((Boolean)object[8]);
+				list.add(alist);
+			}
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}     	
+		return list;
 	}
 
+	@Override
+	public List<HotelVO> getAll() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<HotelVO> hotels = null;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from HotelVO");
+			hotels = query.list();
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return hotels;
+	}
 }

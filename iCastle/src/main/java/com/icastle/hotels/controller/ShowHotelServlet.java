@@ -17,6 +17,7 @@ import com.icastle.hotels.model.*;
 import com.icastle.rooms.model.RoomsDAO_interface;
 import com.icastle.rooms.model.RoomsJDBCDAO;
 import com.icastle.rooms.model.RoomsJNDIDAO;
+import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
 
 @WebServlet("/hotel/ShowHotel.do")
@@ -50,7 +51,7 @@ public class ShowHotelServlet extends HttpServlet {
 		}
 	
 		//查詢這間飯店可以住的房間
-		RoomsDAO_interface roomsdao = new RoomsJNDIDAO();
+		RoomsService roomsdao = new RoomsService();
 		List<RoomsVO> roomsvo =  roomsdao.findRooms(hotelId, peopleNum, start, end);
 		request.setAttribute("rooms", roomsvo);
 		System.out.println("抓到"+roomsvo.size()+"筆符合條件的房間");
