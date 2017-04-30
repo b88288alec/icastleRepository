@@ -267,7 +267,7 @@ public class RoomsJDBC {
 //		update();
 //		getOrder();
 //		getOrderByDate();
-//		findRooms();
+		findRooms();
 //		updatePrice();
 //		getstayDayNum();
 //		getPerPrice();
