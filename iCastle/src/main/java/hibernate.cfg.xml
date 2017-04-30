@@ -41,6 +41,8 @@
 		<mapping resource="com/icastle/Orders/model/orders.hbm.xml" />
 		<mapping resource="com/icastle/hotels/model/hotel.hbm.xml" />
 		<mapping resource="com/icastle/hotelphotos/model/hotelphotos.hbm.xml" />		
+		<mapping resource="com/icastle/rooms/model/rooms.hbm.xml" />
+
 	</session-factory>
 	
 </hibernate-configuration>
