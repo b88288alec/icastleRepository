@@ -66,9 +66,11 @@ public class OrdersTest {
 		// 新增
 //		OrdersDAO_interface dao = new OrdersJDBC();
 //		OrdersVO ordersVO = new OrdersVO();
+//		ordersVO.setOrderedDate(new java.sql.Timestamp(new GregorianCalendar().getInstance().getTimeInMillis()));
 //		ordersVO.setMemberId(1);
 //		ordersVO.setRoomId(1);
 //		ordersVO.setHotelId(1);
+//		ordersVO.setHotelName("好累");
 //		ordersVO.setRoomTypeId(1);
 //		ordersVO.setRoomTypeName("好帥");
 //		ordersVO.setCheckinDay(new java.sql.Date(new GregorianCalendar(2018, 1, 1).getTimeInMillis()));
@@ -95,15 +97,15 @@ public class OrdersTest {
 
 		// 修改訂單狀態
 //		OrdersDAO_interface dao = new OrdersJDBC();
-//		OrdersVO order = new OrdersVO();
-//		order.setOrderId(3);
+//		OrdersVO order = dao.select_by_orderId(6);
 //		order.setMemo("毛很多");
 //		order.setOrderState(false);
+//		order.setCancelDate(new java.sql.Timestamp(new GregorianCalendar().getInstance().getTimeInMillis()));
 //		dao.update(order);
 
 		// //業者查詢-年
 //		OrdersDAO_interface dao = new OrdersJDBC();
-//		List<OrdersVO> orders = dao.select_by_hotelId_year(1, 2017);
+//		List<OrdersVO> orders = dao.select_by_hotelId_year(2, 2017);
 //
 //		for (OrdersVO result : orders) {
 //			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
@@ -120,7 +122,7 @@ public class OrdersTest {
 
 		// 業者查詢-年-月
 //		OrdersDAO_interface dao = new OrdersJDBC();
-//		List<OrdersVO> orders = dao.select_by_hotelId_month(3, 2017, 9);
+//		List<OrdersVO> orders = dao.select_by_hotelId_month(2, 2017, 6);
 //
 //		for (OrdersVO result : orders) {
 //			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "
@@ -137,7 +139,7 @@ public class OrdersTest {
 
 //		// 業者查詢-年-月-日
 //		OrdersDAO_interface dao = new OrdersJDBC();
-//		List<OrdersVO> orders = dao.select_by_hotelId_day(3, 2017, 9, 1);
+//		List<OrdersVO> orders = dao.select_by_hotelId_day(2, 2017, 6, 1);
 //
 //		for (OrdersVO result : orders) {
 //			System.out.println(result.getHotelId() + "   " + result.getMemberId() + "   " + result.getRoomId() + "   "

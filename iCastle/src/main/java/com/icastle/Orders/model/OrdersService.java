@@ -73,7 +73,7 @@ public class OrdersService {
 		return result;
 	}
 	
-//	客戶搜尋單筆訂單
+//	客戶和業者搜尋單筆訂單
 	public OrdersVO search_By_OrderId(Integer orderId){
 		OrdersVO result = dao.select_by_orderId(orderId);
 		

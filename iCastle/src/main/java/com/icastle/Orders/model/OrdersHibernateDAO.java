@@ -64,6 +64,7 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(SELECT_BY_MEMBERID);
+			query.setParameter("memberId", memberId);
 			result = query.list();
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
@@ -374,7 +375,7 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 			session.getTransaction().rollback();
 			throw e;
 		}
-		return null;
+		return result;
 	}
 
 }
