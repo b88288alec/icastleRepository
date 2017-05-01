@@ -42,6 +42,7 @@
 		<mapping resource="com/icastle/hotels/model/hotel.hbm.xml" />
 		<mapping resource="com/icastle/hotelphotos/model/hotelphotos.hbm.xml" />		
 		<mapping resource="com/icastle/rooms/model/rooms.hbm.xml" />
+		<mapping resource="com/icastle/roomtype/model/roomtype.hbm.xml" />
 
 	</session-factory>
 	

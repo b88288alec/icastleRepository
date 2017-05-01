@@ -30,8 +30,7 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 	
 	
 	
-	
-	
+//  新增會員
 	@Override
 	public void insert(MembersVO membersVO) {
 		
@@ -84,7 +83,7 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 	}
 		
 
-
+//  更新會員
 	@Override
 	public void update(MembersVO membersVO) {
 
@@ -138,7 +137,7 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 
 		
 
-		
+//  刪除會員	
 	@Override
 	public void delete(String email) {
 		
@@ -185,7 +184,7 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 
 		
 		
-
+//  查詢會員一筆
 	@Override
 	public MembersVO findByPrimaryKey(String email) {
 		
@@ -256,7 +255,7 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 		
 		
 
-
+//  查詢會員多筆
 	@Override
 	public List<MembersVO> getAll() {
 		List<MembersVO> list = new ArrayList<MembersVO>();

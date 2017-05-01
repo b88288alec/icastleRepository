@@ -20,13 +20,23 @@ public class ShowPhotoServlet extends HttpServlet {
         super();
     }
 
+    /*
+     *	將HotelPhotos的照片讀出並秀在網頁上
+     *  根據id查詢飯店                 http://localhost:8081/iCastle/ShowPhoto.do?id=4
+     *  查詢某家飯店的第一張照片  http://localhost:8081/iCastle/ShowPhoto.do?id=4&type=hotelid
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Integer id = Integer.parseInt(request.getParameter("id"));
+		String type = request.getParameter("type");
 		
 		//從資料庫取得二進制資料
 		HotelPhotosService dao = new HotelPhotosService();
-		HotelPhotosVO photo = dao.findByHotelIdTop1(id);		
+		HotelPhotosVO photo = null;
+		if ("hotelid".equalsIgnoreCase(type))
+			photo = dao.findByHotelIdTop1(id);
+		else
+			photo = dao.findByPrimaryKey(id);
 		byte[] buffer = photo.getPhoto();
 		
 		//將二進制資料寫出到網頁
