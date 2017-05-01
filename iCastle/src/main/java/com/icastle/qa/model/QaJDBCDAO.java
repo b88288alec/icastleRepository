@@ -1,4 +1,4 @@
-package com.icastle.followers.model;
+package com.icastle.qa.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,30 +8,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FollowersJDBCDAO implements FollowersDAO_interface{
-	
+
+public class QaJDBCDAO implements QaDAO_interface{
+
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
 	String userid = "sa";
 	String passwd = "sa123456";
 	
 	private static final String INSERT_STMT =
-			"INSERT INTO Followers (name, bdate, tel, personId, email, country, addr, passport, memberId) VALUES (?,?,?,?,?,?,?,?,?)";
-	
+			"INSERT INTO QA (question, answer) VALUES (?,?)";
 	private static final String UPDATE =
-			"UPDATE Followers set name=?, bdate=?, tel=?, personId=?, email=?, country=?, addr=? ,passport=? where memberId = ?";
-	
+			"UPDATE QA set question=?, answer=? where id = ?";
 	private static final String DELETE =
-			"DELETE FROM Followers where memberId = ?";
-	
+			"DELETE FROM QA where id = ?";
 	private static final String GET_ALL_STMT =
-			"SELECT name, bdate, tel, personId, email, country, addr, passport FROM Followers where memberId = ?";
+			"SELECT question, answer FROM QA ";
 	
-	
-	//新增同行人
+//  新增QA	
 	@Override
-	public void insert(FollowersVO followersVO) {
-
+	public void insert(QaVO qaVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -41,16 +37,9 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setString(1, followersVO.getName());
-			pstmt.setDate(2, followersVO.getBdate());
-			pstmt.setString(3, followersVO.getTel());
-			pstmt.setString(4, followersVO.getPersonId());
-			pstmt.setString(5, followersVO.getEmail());
-			pstmt.setString(6, followersVO.getCountry());
-			pstmt.setString(7, followersVO.getAddr());
-			pstmt.setString(8, followersVO.getPassport());
-			pstmt.setInt(9, followersVO.getMemberId());
-
+			pstmt.setString(1, qaVO.getQuestion());
+			pstmt.setString(2, qaVO.getAnswer());
+			
 			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
@@ -77,10 +66,10 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 		}
 
 	}
-	//修改同行人資料
+	
+//  更新 QA	
 	@Override
-	public void update(FollowersVO followersVO) {
-		
+	public void update(QaVO qaVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -91,16 +80,11 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 			pstmt = con.prepareStatement(UPDATE);
 
 
-			pstmt.setString(1, followersVO.getName());
-			pstmt.setDate(2, followersVO.getBdate());
-			pstmt.setString(3, followersVO.getTel());
-			pstmt.setString(4, followersVO.getPersonId());
-			pstmt.setString(5, followersVO.getEmail());
-			pstmt.setString(6, followersVO.getCountry());
-			pstmt.setString(7, followersVO.getAddr());
-			pstmt.setString(8, followersVO.getPassport());
-            pstmt.setInt(9, followersVO.getMemberId());
+			pstmt.setString(1, qaVO.getQuestion());
+			pstmt.setString(2, qaVO.getAnswer());
+			pstmt.setInt(3, qaVO.getId());
 			pstmt.executeUpdate();	
+
 
 
 		} catch (ClassNotFoundException e) {
@@ -127,10 +111,10 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 		}
 
 	}
-
-	//刪除同行人資料
+	
+//  刪除QA	
 	@Override
-	public void delete(Integer memberId) {
+	public void delete(Integer id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -140,7 +124,7 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(DELETE);
 
-			pstmt.setInt(1, memberId);
+			pstmt.setInt(1, id);
 
 			pstmt.executeUpdate();
 
@@ -168,11 +152,12 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 		}
 
 	}
-	//查詢同行人資料	
+	
+//  查詢QA	
 	@Override
-	public List<FollowersVO> getAll(Integer memberId) {
-		List<FollowersVO> list = new ArrayList<FollowersVO>();
-		FollowersVO followersVO = null;
+	public List<QaVO> getAll() {
+		List<QaVO> list = new ArrayList<QaVO>();
+		QaVO qaVO = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -183,25 +168,15 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ALL_STMT);
-			
-			pstmt.setInt(1, memberId);
-
 			rs = pstmt.executeQuery();
-			
 
 			while (rs.next()) {
-				followersVO = new FollowersVO();
-				
-				followersVO.setName(rs.getString("name"));
-				followersVO.setBdate(rs.getDate("bdate"));
-				followersVO.setTel(rs.getString("tel"));
-				followersVO.setPersonId(rs.getString("personId"));
-				followersVO.setEmail(rs.getString("email"));
-				followersVO.setCountry(rs.getString("country"));
-				followersVO.setAddr(rs.getString("addr"));
-				followersVO.setPassport(rs.getString("passport"));
-
-				list.add(followersVO);
+				qaVO = new QaVO();
+				qaVO.setQuestion(rs.getString("question"));
+				qaVO.setAnswer(rs.getString("answer"));
+//				qaVO.setId(rs.getInt("id"));
+			
+				list.add(qaVO);
 			}
 
 
@@ -237,5 +212,5 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 		}
 		return list;
 	}
-}
 	
+}
