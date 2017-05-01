@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.icastle.hotelphotos.model.HotelPhotosService;
+import com.icastle.hotelphotos.model.HotelPhotosVO;
 import com.icastle.hotels.model.*;
 import com.icastle.rooms.model.RoomsDAO_interface;
 import com.icastle.rooms.model.RoomsJDBCDAO;
@@ -64,6 +66,9 @@ public class ShowHotelServlet extends HttpServlet {
 		//查詢hotel info
 		
 		//查詢hotel photo
+		HotelPhotosService photoserv = new HotelPhotosService();
+		List<HotelPhotosVO> photos = photoserv.findByHotelId(hotel.getHotelId());
+		request.setAttribute("photos", photos);
 		
 		//轉交給hotel.jsp
 		RequestDispatcher rd = request.getRequestDispatcher("hotel.jsp");
