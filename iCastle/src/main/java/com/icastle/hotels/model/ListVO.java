@@ -3,6 +3,7 @@ package com.icastle.hotels.model;
 public class ListVO {
 	private Integer hotelId;
 	private String hotelName;
+	private String zone;
 	private Integer price;
 	private Integer star;
 	private Double point;
@@ -22,6 +23,12 @@ public class ListVO {
 	}
 	public void setHotelName(String hotelName) {
 		this.hotelName = hotelName;
+	}
+	public String getZone() {
+		return zone;
+	}
+	public void setZone(String zone) {
+		this.zone = zone;
 	}
 	public Integer getPrice() {
 		return price;

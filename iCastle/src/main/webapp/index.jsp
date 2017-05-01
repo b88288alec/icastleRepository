@@ -188,10 +188,10 @@
 		$(function() {
 			$('#onekey').click(function() {
 				event.preventDefault();
-				$('input[name = "type"]').val('高雄');
-				$('input[name = "start"]').val('2017/01/02');
-				$('input[name = "end"]').val('2017/01/04');
-				$('input[name = "peopleNum"]').val(4);
+    			$('input[name = "type"]').val('台北');
+    			$('input[name = "start"]').val('2017/06/02');
+    			$('input[name = "end"]').val('2017/06/04');
+    			$('input[name = "peopleNum"]').val(4);
 			});
 
 			$('input[name = "end"]').focus(function() {
