@@ -1,5 +1,8 @@
 package com.icastle.Comments.model;
 
+import java.sql.Date;
+
+
 public class CommentVO {
 	
 	private Integer commentId;
@@ -12,6 +15,9 @@ public class CommentVO {
 	private Integer good;
 	private String comment;
 	private String response;
+	private Date commentTime;
+	private Date responseTime;
+	
 	
 	public Integer getCommentId(){
 		return commentId;
@@ -73,7 +79,19 @@ public class CommentVO {
 	public void setResponse(String response) {
 		this.response = response;
 	}
-	
+	public Date getCommentTime() {
+		return commentTime;
+	}
+	public void setCommentTime(Date commentTime) {
+		this.commentTime = commentTime;
+	}
+	public Date getResponseTime() {
+		return responseTime;
+	}
+	public void setResponseTime(Date responseTime) {
+		this.responseTime = responseTime;
+	}
+
 	
 	
 	
