@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.icastle.hotels.model.HotelService;
-import com.icastle.hotels.model.HotelVO;
+import com.icastle.hotelInfo.modle.*;
+import com.icastle.hotels.model.*;
 
 @WebServlet("/hotel/Registerhotel.do")
 public class RegisterhotelServlet extends HttpServlet {
@@ -24,12 +24,14 @@ public class RegisterhotelServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String,String> errMap = new HashMap<String,String>();
 		request.setAttribute("errMap", errMap);
+		request.setCharacterEncoding("UTF-8");
 		
 		//接收資料
 		String hotelName = request.getParameter("hotelName");
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
 		String pwcheck = request.getParameter("pwcheck");
+		Integer star = Integer.parseInt(request.getParameter("star"));
 		String registerName = request.getParameter("registerName");
 		String registerId = request.getParameter("registerId");
 		String tel = request.getParameter("tel");
@@ -53,7 +55,7 @@ public class RegisterhotelServlet extends HttpServlet {
 		String gymStr = request.getParameter("gym");
 		String spaStr = request.getParameter("spa");
 		String swimPoolStr = request.getParameter("swimPool");
-
+		
 		//檢驗是否沒有輸入
 		if (hotelName=="" || hotelName==null)
 			errMap.put("hotelNameErr", "請輸入飯店名稱");
@@ -66,6 +68,9 @@ public class RegisterhotelServlet extends HttpServlet {
 		
 		if (pwcheck=="" || pwcheck==null)
 			errMap.put("pwcheckErr", "請輸入確認密碼");
+		
+		if (star == 0)
+			errMap.put("starErr", "請選擇飯店星等");
 		
 		if (registerName=="" || registerName==null)
 			errMap.put("registerNameErr", "請輸入登記人姓名");
@@ -107,16 +112,21 @@ public class RegisterhotelServlet extends HttpServlet {
 			return;
 		}
 		
+		//確認無誤之後準備寫入資料庫
 		if (!pw.equals(pwcheck))
 			errMap.put("pwcheckErr", "確認密碼錯誤");
 		
-		//確認密碼錯誤
+		HotelService hotelServ = new HotelService();
+		if (!hotelServ.isEmailOK(email))
+			errMap.put("emailErr", "此email已經註冊");
+		
+		//若是有錯秀出錯誤訊息
 		if (!errMap.isEmpty()){
 			RequestDispatcher rd = request.getRequestDispatcher("registerhotel.jsp");
 			rd.forward(request, response);
 			return;
 		}
-		
+
 		//取得設施
 		Boolean roomWifi = (roomWifiStr==null) ? false : true;
 		Boolean hallWifi = (hallWifiStr==null) ? false : true;
@@ -131,13 +141,22 @@ public class RegisterhotelServlet extends HttpServlet {
 		Boolean swimPool = (swimPoolStr==null) ? false : true;
 		
 		//呼叫HotelDAO
-		HotelService hotelServ = new HotelService();
 		HotelVO hotelvo = new HotelVO();
 		hotelvo.setHotelName(hotelName);
 		hotelvo.setEmail(email);
-//		hotelServ.addHotel(hotelVO);
+		hotelvo.setPw(pw);
+		hotelvo.setAddr(addr);
+		hotelvo.setZone(zone);
+		hotelvo.setPoint(0.0);
+		hotelvo.setHot(0);
+		hotelvo.setStar(star);
+		hotelvo.setHotelState(0);
+		hotelvo.setRegisterId(registerId);
+		HotelVO hotel = hotelServ.addHotel(hotelvo);
 		
 		//呼叫HotelInfoDAO
+		InfoService infoServ = new InfoService();
+		infoServ.insert(hotel.getHotelId(), registerName, tel, transport, website, hotelProfile, checkinStr, checkoutStr, guestPolicies, cancelPolicies, roomWifi, hallWifi, internet, mineralWater, toiletUtensils, hairDryer, tv, gameRoom, gym, spa, swimPool);
 		
 		//呼叫HotelPhotoDAO
 		
