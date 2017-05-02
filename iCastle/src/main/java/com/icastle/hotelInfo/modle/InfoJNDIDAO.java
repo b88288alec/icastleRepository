@@ -1,42 +1,45 @@
 package com.icastle.hotelInfo.modle;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 
-import javax.management.RuntimeErrorException;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
-public class InfoJDBCDAO implements InfoDAO_interface {
-	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
-	String userid = "sa";
-	String password = "sa123456";
+public class InfoJNDIDAO implements InfoDAO_interface{
+	//一個資料庫 ,共用一個DataSource
+	private static DataSource ds = null;
+	static {
+		try{
+			Context ctx = new InitialContext();
+			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/iCastle");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
-	private static final String INSERT_STMT =
-			"INSERT INTO HotelInfo (hotelId,registerName,tel,transport,website,hotelProfile,checkin,checkout,GuestPolicies,cancelPolicies"
-			+ ",roomWifi,hallWifi,internet,mineralWater,toiletUtensils,hairDryer,tv,gameRoom,gym,spa,swimPool) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String SELECT_STMT =
+	private static final String INSERT_STMT = 
+	  "INSERT INTO HotelInfo (hotelId,registerName,tel,transport,website,hotelProfile,checkin,checkout,GuestPolicies,cancelPolicies"
+	  + ",roomWifi,hallWifi,internet,mineralWater,toiletUtensils,hairDryer,tv,gameRoom,gym,spa,swimPool) "
+	  + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String SELECT_STMT = 
 			"select * from HotelInfo where hotelId = ?";
-	private static final String UPDATE =
-			"UPDATE HotelInfo set registerName = ? ,tel = ? ,transport = ? ,website = ? ,hotelProfile = ? ,checkin = ? ,"
-			+ "checkout = ? ,GuestPolicies = ? ,cancelPolicies = ? ,roomWifi = ? ,hallWifi = ? ,internet = ? ,mineralWater = ? ,"
-			+ "toiletUtensils = ? ,hairDryer = ? ,tv = ? ,gameRoom = ? ,gym = ? ,spa = ? ,swimPool = ? where hotelId = ? ";
-	//沒有hotelId的UPDATE
-	
-/* ------------飯店註冊時新增--------------- */	
-	@Override		
+	private static final String UPDATE = 
+	  "UPDATE HotelInfo set registerName = ? ,tel = ? ,transport = ? ,website = ? ,hotelProfile = ? ,checkin = ? ,"
+	  + "checkout = ? ,GuestPolicies = ? ,cancelPolicies = ? ,roomWifi = ? ,hallWifi = ? ,internet = ? ,mineralWater = ? ,"
+	  + "toiletUtensils = ? ,hairDryer = ? ,tv = ? ,gameRoom = ? ,gym = ? ,spa = ? ,swimPool = ? ";
+
+	@Override
 	public void insert(InfoVO infoVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try{
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
 			pstmt.setInt(1, infoVO.getHotelId());
@@ -62,37 +65,34 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 			pstmt.setBoolean(21, infoVO.isSwimPool() );		
 			
 			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver."+e.getMessage());
-		} catch (SQLException se){
-			throw new RuntimeException("A database error occured." + se.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A datasource error occured" +
+						se.getMessage());
 		} finally {
 			if (pstmt != null){
 				try{
 					pstmt.close();
-				} catch (SQLException se){
+				}catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null){
 				try{
 					con.close();
-				} catch (Exception e){
+				} catch (SQLException e) {
 					e.printStackTrace(System.err);
 				}
 			}
 		}
 	}
-	
-/* ------------修改飯店資訊--------------- */		
+
 	@Override
 	public void updateHotelInfo(InfoVO infoVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
 		try{
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, password);
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(UPDATE);
 			
 			pstmt.setString(1, infoVO.getRegisterName());
@@ -115,48 +115,42 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 			pstmt.setBoolean(18, infoVO.isGym() );
 			pstmt.setBoolean(19, infoVO.isSpa() );
 			pstmt.setBoolean(20, infoVO.isSwimPool() );
-			pstmt.setInt(21, infoVO.getHotelId() );
 			
-			pstmt.executeUpdate();
-		} catch (ClassNotFoundException e){
-			throw new RuntimeException("Couldn't load database driver."+e.getMessage());
-		} catch (SQLException e){
-			throw new RuntimeException("A database error occured."+e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
 		} finally {
-			if  (pstmt != null){
-				try{
+			if (pstmt != null){
+				try {
 					pstmt.close();
-				} catch (SQLException se){
+				} catch (SQLException se) {
 					se.printStackTrace(System.err);
 				}
 			}
 			if (con != null){
-				try{
+				try {
 					con.close();
-				} catch (Exception e){
-					e.printStackTrace(System.err);
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
 				}
 			}
 		}
 	}
-/* ------------(客、管) 進入飯店頁面時查詢--------------- */		
+
 	@Override
 	public InfoVO findByHotelId(Integer hotelId) {
-		
 		InfoVO infoVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, password);
+		try{
+			con = ds.getConnection();
 			pstmt = con.prepareStatement(SELECT_STMT);
 			
 			pstmt.setInt(1, hotelId);
-			rs=pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
-			while (rs.next()){
+			while (rs.next()) {
 				infoVO = new InfoVO();
 				infoVO.setHotelId(rs.getInt("hotelId"));
 				infoVO.setRegisterName(rs.getString("registerName"));
@@ -179,36 +173,35 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 				infoVO.setGym(rs.getBoolean("gym"));
 				infoVO.setSpa(rs.getBoolean("spa"));
 				infoVO.setSwimPool(rs.getBoolean("swimPool"));
-			}
-		} catch (ClassNotFoundException e){
-			throw new RuntimeException("Couldn't load database driver."+ e.getMessage());
-		} catch (SQLException se){
-			throw new RuntimeException("A database error occured."+ se.getMessage());
-		} finally {
-			if (rs != null){
-				try {
-					rs.close();
-				} catch (SQLException se ){
-					se.printStackTrace(System.err);
+				}
+				
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+			} finally {
+				if (rs != null){
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null){
+					try{
+						pstmt.close();
+					}catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null){
+					try {
+						con.close();
+					}catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
 				}
 			}
-			if (pstmt != null){
-				try{
-					pstmt.close();
-				} catch(SQLException se){
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null){
-				try {
-					con.close();
-				} catch (Exception e){
-					e.printStackTrace(System.err);
-				}
-			}
-		}
 		return infoVO;
 	}
-	
-	
+
 }
