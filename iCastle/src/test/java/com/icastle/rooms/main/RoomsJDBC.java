@@ -8,13 +8,16 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import com.icastle.rooms.model.RoomsDAO_interface;
+import com.icastle.rooms.model.RoomsHibernateDAO;
 import com.icastle.rooms.model.RoomsJDBCDAO;
 import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
 
 public class RoomsJDBC {
 	
-	static RoomsJDBCDAO dao = new RoomsJDBCDAO();
+//	static RoomsJDBCDAO dao = new RoomsJDBCDAO();
+	static RoomsDAO_interface dao = new RoomsHibernateDAO();
 	
 	public static void insert(){
 		RoomsVO vo = new RoomsVO();
@@ -170,6 +173,18 @@ public class RoomsJDBC {
 		System.out.println(count);
 	}
 	
+	public static void getOrderByDate(){
+		Calendar cal = Calendar.getInstance();
+		cal.set(2017, 0, 2);
+		long star = cal.getTimeInMillis();
+		
+		cal.set(2017, 0, 4);
+		long end = cal.getTimeInMillis();
+		
+		int count = dao.getOrder(5, 13, new Date(star), new Date(end), 3000);
+		System.out.println(count);
+	}
+	
 	public static void findRooms(){
 		Calendar cal = Calendar.getInstance();
 		cal.set(2017, 0, 2);
@@ -250,9 +265,10 @@ public class RoomsJDBC {
 //		insert();
 //		getRoomsByMonth();
 //		update();
-		getOrder();
+//		getOrder();
+//		getOrderByDate();
 //		findRooms();
-//		updatePrice();
+		updatePrice();
 //		getstayDayNum();
 //		getPerPrice();
 	}

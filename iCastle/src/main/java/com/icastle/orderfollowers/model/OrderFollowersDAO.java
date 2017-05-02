@@ -9,7 +9,7 @@ import hibernate.util.HibernateUtil;
 
 public class OrderFollowersDAO implements OrderFollowersDAO_interface{
 	
-	public static final String SELECT_BY_ORDERID = "from OrderFollowersVO where orderId = ?"; 
+	private static final String SELECT_BY_ORDERID = "from OrderFollowersVO where orderId = ?"; 
 
 	@Override
 	public void insert(OrderFollowersVO orderFollowersVO) {

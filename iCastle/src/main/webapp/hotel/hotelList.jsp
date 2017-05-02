@@ -155,10 +155,10 @@
                 <c:forEach var="hotel" items="${hotels}">
                 <a href="hotel/ShowHotel.do?hotelId=${hotel.hotelId}&type=${param.type}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
                     <div class="card">
-                        <img src="img/60395_16042612080041805392.jpg" style="width:300px;" />
+                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${hotel.hotelId}&type=hotelid" style="width:300px;" />
                         <div class="cardContext">
                             <h4>${hotel.hotelName}</h4>
-                            <h4><span class="label label-info">${param.type}</span></h4>
+                            <h4><span class="label label-info">${hotel.zone}</span></h4>
 							
 							<!-- 飯店星等 -->
 							<c:forEach var="i" varStatus="varsts" begin="1" end="5" >
@@ -218,7 +218,7 @@
                     </div>
                 </a>
                 </c:forEach>
-                <c:if test="${hotels == null}">
+                <c:if test="${empty hotels}">
 					<h2>查無飯店!</h2>
 				</c:if>
                 <!--結束飯店列表-->
@@ -421,9 +421,9 @@
             //一鍵輸入
             $('#onekey').click(function() {
     			event.preventDefault();
-    			$('input[name = "type"]').val('高雄');
-    			$('input[name = "start"]').val('2017/01/02');
-    			$('input[name = "end"]').val('2017/01/04');
+    			$('input[name = "type"]').val('台北');
+    			$('input[name = "start"]').val('2017/06/02');
+    			$('input[name = "end"]').val('2017/06/04');
     			$('input[name = "peopleNum"]').val(4);
     		});
             //一鍵輸入結束

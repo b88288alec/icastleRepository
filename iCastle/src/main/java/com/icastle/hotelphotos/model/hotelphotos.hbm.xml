@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 設定與table對應的VO -->
+	<class name="com.icastle.hotelphotos.model.HotelPhotosVO" table="HotelPhotos">
+
+		<!-- 設定主鍵 -->
+		<id name="id" column="id">
+			<generator class="identity" />
+		</id>
+
+		<!-- 變數與欄位的對應關係 -->
+		<property name="hotelId" column="hotelId" />
+		<property name="photoOrder" column="photoOrder" />
+		<property name="photo" column="photo" />
+		<property name="roomTypeId" column="roomTypeId" />
+		<property name="pohtoDescription" column="pohtoDescription" />
+
+		<!-- 一對多的關聯，變數emps型態為EmpVO，對應到emp2的deptno欄位，排序根據table的欄位名稱 -->
+<!-- 		<set name="rooms" table="Rooms" lazy="true" order-by="roomId asc"> -->
+<!-- 			<key> -->
+<!-- 				<column name="hotelId" /> -->
+<!-- 			</key> -->
+<!-- 			<one-to-many class="com.icastle.rooms.model.RoomsVO" /> -->
+<!-- 		</set> -->
+	</class>
+</hibernate-mapping>
