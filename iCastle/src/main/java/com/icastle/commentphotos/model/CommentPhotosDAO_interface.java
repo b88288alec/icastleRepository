@@ -1,8 +1,12 @@
 package com.icastle.commentphotos.model;
 
+import java.io.File;
+import java.io.InputStream;
+import java.util.List;
+
 public interface CommentPhotosDAO_interface {
-	public void uploadCommentPhoto(CommentPhotosVO photo);
-	public void deleteCommentPhoto(CommentPhotosVO id);
-	public CommentPhotosVO findByCommentId(CommentPhotosVO commentId);
+	public String uploadCommentPhoto(int commentId,InputStream x,long length);
+	public String deleteCommentPhoto(int commentId);
+	public List<CommentPhotosVO> findByCommentId(int commentId);
 
 }

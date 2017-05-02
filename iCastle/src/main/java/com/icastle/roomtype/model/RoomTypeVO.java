@@ -17,6 +17,7 @@ public class RoomTypeVO implements java.io.Serializable{
 	private Boolean bedAddable;
 	private Integer pricePerPerson;
 	private String remark;
+	private Boolean deleteStatus;
 	public Integer getRoomTypeId() {
 		return roomTypeId;
 	}
@@ -112,6 +113,12 @@ public class RoomTypeVO implements java.io.Serializable{
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public Boolean getDeleteStatus() {
+		return deleteStatus;
+	}
+	public void setDeleteStatus(Boolean deleteStatus) {
+		this.deleteStatus = deleteStatus;
 	}
 	
 	

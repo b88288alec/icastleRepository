@@ -30,11 +30,12 @@ public class MembersJNDIDAO implements MembersDAO_interface {
 			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport FROM Members order by email";
 	private static final String GET_ONE_STMT =
 			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport FROM Members where email = ?";
-	private static final String DELETE =
-			"DELETE FROM Members where email = ?";
+//	private static final String DELETE =
+//			"DELETE FROM Members where email = ?";
 	private static final String UPDATE =
 			"UPDATE Members set email=?, pw=?, name=?, gender=?, bdate=?, addr=?, tel=?, personId=?, country=?, passport=? where memberId = ?";
-	
+	private static final String LOGIN = 
+			"SELECT * FROM Members WHERE email = ? AND pw = ?";
 	
 	@Override
 	public void insert(MembersVO membersVO) {
@@ -137,44 +138,44 @@ public void update(MembersVO membersVO) {
 	
 
 	
-@Override
-public void delete(String email) {
-	
-	
-	Connection con = null;
-	PreparedStatement pstmt = null;
-
-	try {
-
-		con = ds.getConnection();
-		pstmt = con.prepareStatement(DELETE);
-
-		pstmt.setString(1, email);
-
-		pstmt.executeUpdate();
-
-	} catch (SQLException se) {
-		throw new RuntimeException("A database error occured. "
-				+ se.getMessage());
-		// Clean up JDBC resources
-	} finally {
-		if (pstmt != null) {
-			try {
-				pstmt.close();
-			} catch (SQLException se) {
-				se.printStackTrace(System.err);
-			}
-		}
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace(System.err);
-			}
-		}
-	}
-
-}
+//@Override
+//public void delete(String email) {
+//	
+//	
+//	Connection con = null;
+//	PreparedStatement pstmt = null;
+//
+//	try {
+//
+//		con = ds.getConnection();
+//		pstmt = con.prepareStatement(DELETE);
+//
+//		pstmt.setString(1, email);
+//
+//		pstmt.executeUpdate();
+//
+//	} catch (SQLException se) {
+//		throw new RuntimeException("A database error occured. "
+//				+ se.getMessage());
+//		// Clean up JDBC resources
+//	} finally {
+//		if (pstmt != null) {
+//			try {
+//				pstmt.close();
+//			} catch (SQLException se) {
+//				se.printStackTrace(System.err);
+//			}
+//		}
+//		if (con != null) {
+//			try {
+//				con.close();
+//			} catch (Exception e) {
+//				e.printStackTrace(System.err);
+//			}
+//		}
+//	}
+//
+//}
 	
 
 	
@@ -311,8 +312,70 @@ public List<MembersVO> getAll() {
 	}
 	return list;
 }
-	
 
+
+
+@Override
+public MembersVO login(String email, String pw) {
+	MembersVO membersVO = null;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+
+	try {
+
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(LOGIN);
+
+		pstmt.setString(1, email);
+		pstmt.setString(2, pw);
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			membersVO = new MembersVO();
+			membersVO.setMemberId(rs.getInt("memberId"));
+			membersVO.setEmail(rs.getString("email"));
+			membersVO.setPw(rs.getString("pw"));
+			membersVO.setName(rs.getString("name"));
+			membersVO.setGender(rs.getString("gender"));
+			membersVO.setBdate(rs.getDate("bdate"));
+			membersVO.setAddr(rs.getString("addr"));
+			membersVO.setTel(rs.getString("tel"));
+			membersVO.setPersonId(rs.getString("personId"));
+			membersVO.setCountry(rs.getString("country"));
+			membersVO.setPassport(rs.getString("passport"));
 	
+		}
+
+	} catch (SQLException se) {
+		throw new RuntimeException("A database error occured. "
+				+ se.getMessage());
+		// Clean up JDBC resources
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	return membersVO;
+}
+
 
 }
