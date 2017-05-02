@@ -56,6 +56,24 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 	}
 
 	@Override
+	public Boolean isEmailOK(String email) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Boolean ok = null;
+		try {
+			session.beginTransaction();
+			Query query = session.createQuery("from HotelVO where email = :email");
+			query.setParameter("email", email);
+			List<Object[]> list = query.list();
+			ok = (list.size()==0) ? true : false;
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return ok;
+	}
+
+	@Override
 	public HotelVO checkAccountPw(String email, String pw){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		HotelVO hotel = null;
