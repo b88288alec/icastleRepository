@@ -34,9 +34,10 @@ public class RoomTypeHibernateDAO implements RoomTypeDAO_interface{
 		Integer updateCount = 0;
 		try{
 			session.beginTransaction();
+			Query query = session.createQuery("update RoomTypeVO set deleteStatus = 1 where roomTypeId = ?");
 			for(RoomTypeVO vo : roomTypeList){
-				session.delete(vo);
-				updateCount += 1;
+				query.setParameter(0, vo.getRoomTypeId());
+				updateCount = query.executeUpdate();
 			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
@@ -49,32 +50,12 @@ public class RoomTypeHibernateDAO implements RoomTypeDAO_interface{
 	@Override
 	public List<RoomTypeVO> findRoomTypeByHotelId(Integer hotelId) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		List<RoomTypeVO> list = new ArrayList<RoomTypeVO>();
+		List<RoomTypeVO> list = null;
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery("from RoomTypeVO where hotelId = ?");
 			query.setParameter(0, hotelId);
-			List<Object[]> listObj = query.list();
-			for(Object[] arrayObj : listObj){
-				RoomTypeVO vo = new RoomTypeVO();
-				vo.setRoomTypeId((Integer)arrayObj[0]);
-				vo.setHotelId((Integer)arrayObj[1]);
-				vo.setRoomTypeName((String)arrayObj[2]);
-				vo.setPeopleNum((Integer)arrayObj[3]);
-				vo.setRoomNumber((Integer)arrayObj[4]);
-				vo.setWeekdaysPrice((Integer)arrayObj[5]);
-				vo.setHolidayPrice((Integer)arrayObj[6]);
-				vo.setSeasonPrice((Integer)arrayObj[7]);
-				vo.setCustomizedPrice((Integer)arrayObj[8]);
-				vo.setCustomizedName((String)arrayObj[9]);
-				vo.setBreakfast((Boolean)arrayObj[10]);
-				vo.setAfternoonTea((Boolean)arrayObj[11]);
-				vo.setDinner((Boolean)arrayObj[12]);
-				vo.setBedAddable((Boolean)arrayObj[13]);
-				vo.setPricePerPerson((Integer)arrayObj[14]);
-				vo.setRemark((String)arrayObj[15]);
-				list.add(vo);
-			}
+			list = query.list();
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();

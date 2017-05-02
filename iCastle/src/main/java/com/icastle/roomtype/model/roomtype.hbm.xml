@@ -24,6 +24,7 @@
         <property name="bedAddable" column="bedAddable" />
         <property name="pricePerPerson" column="pricePerPerson" />
         <property name="remark" column="remark" />
+        <property name="deleteStatus" column="deleteStatus" />
         
     </class>
 </hibernate-mapping>
