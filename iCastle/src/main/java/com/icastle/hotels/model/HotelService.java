@@ -8,8 +8,8 @@ public class HotelService {
 	HotelDAO_Interface dao = null;
 	
 	public HotelService (){
-//		dao = new HotelDAOJNDI();
-		dao = new HotelDAOHibernate();
+		dao = new HotelDAOJNDI();
+//		dao = new HotelDAOHibernate();
 	}
 	
 	//新增飯店
