@@ -91,13 +91,14 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 				ListVO alist = new ListVO();
 				alist.setHotelId((Integer)object[0]);
 				alist.setHotelName((String)object[1]);
-				alist.setPrice((Integer)object[2]);
-				alist.setStar((Integer)object[3]);
-				alist.setPoint((Double)object[4]);
-				alist.setHot((Integer)object[5]);
-				alist.setBreakfast((Boolean)object[6]);
-				alist.setDinner((Boolean)object[7]);
-				alist.setRoomWifi((Boolean)object[8]);
+				alist.setZone((String)object[2]);
+				alist.setPrice((Integer)object[3]);
+				alist.setStar((Integer)object[4]);
+				alist.setPoint((Double)object[5]);
+				alist.setHot((Integer)object[6]);
+				alist.setBreakfast((Boolean)object[7]);
+				alist.setDinner((Boolean)object[8]);
+				alist.setRoomWifi((Boolean)object[9]);
 				list.add(alist);
 			}
 			session.getTransaction().commit();

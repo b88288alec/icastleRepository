@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentDAO implements CommentDAO_interface {
-	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,comment) VALUES(?,?,?,?,?,?,?)";
-	private static final String SHOW_COMT = "SELECT avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE orderId = ?";
-	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE hotelId = ?";
-	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ? WHERE commentId = ?";
-	private static final String SHOW_RESPONSE = "SELECT response FROM Comments WHERE commentId = ?";
-	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=? where Comment id = ?";
+	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String SHOW_COMT = "SELECT avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE orderId = ?";
+	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE hotelId = ?";
+	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ?,responseTime = ? WHERE commentId = ?";
+	private static final String SHOW_RESPONSE = "SELECT response,responseTime FROM Comments WHERE commentId = ?";
+	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=?,commentTime=? where commentId = ?";
 	private static final String GOOD_COMT = "UPDATE Comments SET good = ? WHERE commentId = ?";
 	private static final String SHOW_GOOD = "SELECT good FROM Comments WHERE commentId = ?";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
@@ -42,6 +42,7 @@ public class CommentDAO implements CommentDAO_interface {
 			stmt.setInt(5,comt.getQualityScore());
 			stmt.setInt(6,comt.getSceneScore());
 			stmt.setString(7,comt.getComment());
+			stmt.setDate(8,comt.getCommentTime());
 			stmt.executeUpdate();
 			
 			stmt = conn.prepareStatement(SHOW_COMT);
@@ -56,6 +57,7 @@ public class CommentDAO implements CommentDAO_interface {
 			com.setSceneScore(rs.getInt("sceneScore"));
 			com.setGood(rs.getInt("good"));
 			com.setComment(rs.getString("comment"));
+			com.setCommentTime(rs.getDate("commentTime"));
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -94,6 +96,7 @@ public class CommentDAO implements CommentDAO_interface {
 			com.setSceneScore(rs.getInt("sceneScore"));
 			com.setGood(rs.getInt("good"));
 			com.setComment(rs.getString("comment"));
+			com.setCommentTime(rs.getDate("commentTime"));
 			comtList.add(com);
 			}
 			
@@ -117,13 +120,14 @@ public class CommentDAO implements CommentDAO_interface {
 			
 	}
 	
-	public CommentVO response(Integer commentId,String response){
+	public CommentVO response(Integer commentId,java.sql.Date responseTime,String response){
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, user, password);
 			stmt = conn.prepareStatement(HOST_RESPONSE);
 			stmt.setString(1,response);
-			stmt.setInt(2, commentId);
+			stmt.setDate(2,responseTime);
+			stmt.setInt(3, commentId);
 			stmt.executeUpdate();
 			
 			stmt = conn.prepareStatement(SHOW_RESPONSE);
@@ -132,7 +136,9 @@ public class CommentDAO implements CommentDAO_interface {
 			rs.next();
 			
 			com = new CommentVO();
-			com.setResponse(rs.getString("response"));
+			com.setResponse(rs.getString(1));
+			com.setResponseTime(rs.getDate(2));
+
 				
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -148,6 +154,7 @@ public class CommentDAO implements CommentDAO_interface {
 				e.printStackTrace();
 			}
 		}
+
 		return com;
 		
 	}
@@ -157,16 +164,18 @@ public class CommentDAO implements CommentDAO_interface {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, user, password);
 			stmt = conn.prepareStatement(UPD_COMT);
-			stmt.setDouble(1,comt.getSceneScore()+comt.getQualityScore()+comt.getServiceScore());
+			stmt.setDouble(1,(comt.getSceneScore()+comt.getQualityScore()+comt.getServiceScore())/3);
             stmt.setInt(2,comt.getServiceScore());
             stmt.setInt(3,comt.getQualityScore());
             stmt.setInt(4,comt.getSceneScore());
             stmt.setString(5,comt.getComment());
-            stmt.setInt(6,comt.getCommentId());
+            stmt.setDate(6,comt.getCommentTime());
+            stmt.setInt(7,comt.getCommentId());
+            
             stmt.executeUpdate();
             
             stmt = conn.prepareStatement(SHOW_COMT);
-			stmt.setInt(1, comt.getOrderId());
+			stmt.setInt(1, comt.getCommentId());
 			rs = stmt.executeQuery();
 			rs.next();
 			
@@ -177,6 +186,7 @@ public class CommentDAO implements CommentDAO_interface {
 			com.setSceneScore(rs.getInt("sceneScore"));
 			com.setGood(rs.getInt("good"));
 			com.setComment(rs.getString("comment"));
+			com.setResponseTime(rs.getDate("commentTime"));
 				
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -207,8 +217,8 @@ public class CommentDAO implements CommentDAO_interface {
 			stmt.setInt(2, commentId);
 			stmt.executeUpdate();
 			
-			stmt = conn.prepareStatement(GOOD_COMT);
-			stmt.setInt(1,good);
+			stmt = conn.prepareStatement(SHOW_GOOD);
+			stmt.setInt(1,commentId);
 			rs = stmt.executeQuery();
 			rs.next();
 			

@@ -28,7 +28,7 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 			"SELECT name, bdate, tel, personId, email, country, addr, passport FROM Followers where memberId = ?";
 	
 	
-
+	//新增同行人
 	@Override
 	public void insert(FollowersVO followersVO) {
 
@@ -77,7 +77,7 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 		}
 
 	}
-
+	//修改同行人資料
 	@Override
 	public void update(FollowersVO followersVO) {
 		
@@ -128,7 +128,7 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 
 	}
 
-
+	//刪除同行人資料
 	@Override
 	public void delete(Integer memberId) {
 		Connection con = null;
@@ -168,7 +168,7 @@ public class FollowersJDBCDAO implements FollowersDAO_interface{
 		}
 
 	}
-		
+	//查詢同行人資料	
 	@Override
 	public List<FollowersVO> getAll(Integer memberId) {
 		List<FollowersVO> list = new ArrayList<FollowersVO>();

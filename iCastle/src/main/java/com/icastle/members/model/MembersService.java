@@ -13,7 +13,7 @@ public class MembersService {
 		dao = new MembersJNDIDAO();
 	}
 	
-// 興增會員	
+//  新增會員	
 	public void insert(String email, String pw, String name, String gender, Date bdate, String addr, String tel, String personId, String country, String passport){
 		MembersVO membersVO = new MembersVO();
 		membersVO.setEmail(email);
@@ -50,12 +50,12 @@ public class MembersService {
 		
 	}
 // 刪除	
-   public void delete(String email){
-	   MembersVO membersVO = new MembersVO();
-	   membersVO.setEmail(email);
-	   dao.delete(email);
+//   public void delete(String email){
+//	   MembersVO membersVO = new MembersVO();
+//	   membersVO.setEmail(email);
+//	   dao.delete(email);
 	   
-   }
+//   }
 // 查詢一筆
    public MembersVO findByPrimaryKey(String email){
 	   return dao.findByPrimaryKey(email);
@@ -66,7 +66,10 @@ public class MembersService {
 	   return dao.getAll();
    }
 	
-	
+// 會員登入
+   public MembersVO login(String email, String pw){
+	   return dao.login (email, pw);
+   }
 	
 	
 	

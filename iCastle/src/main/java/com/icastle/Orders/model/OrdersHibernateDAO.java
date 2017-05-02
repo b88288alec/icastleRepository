@@ -1,6 +1,7 @@
 package com.icastle.Orders.model;
 
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.taglibs.standard.lang.jstl.parser.ParseException;
@@ -63,6 +64,7 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(SELECT_BY_MEMBERID);
+			query.setParameter("memberId", memberId);
 			result = query.list();
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
@@ -138,9 +140,7 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(SELECT_BY_HOTELID_DAY);
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
-			java.sql.Date checkDay = new java.sql.Date(sdf.parse(String.valueOf(year + month + day)).getTime());
+			java.sql.Date checkDay = new java.sql.Date(new GregorianCalendar(year, month, day).getTimeInMillis());
 			query.setParameter("hotelId", hotelId);
 			query.setParameter("checkinDay", checkDay);
 			query.setParameter("checkoutDay", checkDay);
@@ -149,77 +149,233 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
 			throw e;
-		} catch (java.text.ParseException e) {
-			e.printStackTrace();
 		}
 		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_year_roomTypeId(Integer hotelId, Integer roomTypeId, Integer year) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_YEAR_ROOMTYPEID);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("roomTypeId", roomTypeId);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_month_roomTypeId(Integer hotelId, Integer roomTypeId, Integer year,
 			Integer month) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_MONTH_ROOMTYPEID);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("monthin", month);
+			query.setParameter("monthout", month);
+			query.setParameter("roomTypeId", roomTypeId);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_day_roomTypeId(Integer hotelId, Integer roomTypeId, Integer year,
 			Integer month, Integer day) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_DAY_ROOMTYPEID);
+			java.sql.Date checkDay = new java.sql.Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("checkinDay", checkDay);
+			query.setParameter("checkoutDay", checkDay);
+			query.setParameter("roomTypeId", roomTypeId);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_year_orderstate(Integer hotelId, Integer year, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_YEAR_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("orderstate", state);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_month_orderstate(Integer hotelId, Integer year, Integer month,
 			Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_MONTH_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("monthin", month);
+			query.setParameter("monthout", month);
+			query.setParameter("orderstate", state);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_day_orderstate(Integer hotelId, Integer year, Integer month, Integer day,
 			Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_DAY_ORDERSTATE);
+			java.sql.Date checkDay = new java.sql.Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("checkinDay", checkDay);
+			query.setParameter("checkoutDay", checkDay);
+			query.setParameter("orderstate", state);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_year_roomTypeId_orderstate(Integer hotelId, Integer roomTypeId,
 			Integer year, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("roomTypeId", roomTypeId);
+			query.setParameter("orderstate", state);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_month_roomTypeId_orderstate(Integer hotelId, Integer roomTypeId,
 			Integer year, Integer month, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("monthin", month);
+			query.setParameter("monthout", month);
+			query.setParameter("roomTypeId", roomTypeId);
+			query.setParameter("orderstate", state);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_by_hotelId_day_roomTypeId_orderstate(Integer hotelId, Integer roomTypeId, Integer year,
 			Integer month, Integer day, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE);
+			java.sql.Date checkDay = new java.sql.Date(new GregorianCalendar(year, month, day).getTimeInMillis());
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("checkinDay", checkDay);
+			query.setParameter("checkoutDay", checkDay);
+			query.setParameter("roomTypeId", roomTypeId);
+			query.setParameter("orderstate", state);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
 	public List<OrdersVO> select_all() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery("from OrdersVO");
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 }
