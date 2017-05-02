@@ -31,7 +31,7 @@ public class InfoJNDIDAO implements InfoDAO_interface{
 	private static final String UPDATE = 
 	  "UPDATE HotelInfo set registerName = ? ,tel = ? ,transport = ? ,website = ? ,hotelProfile = ? ,checkin = ? ,"
 	  + "checkout = ? ,GuestPolicies = ? ,cancelPolicies = ? ,roomWifi = ? ,hallWifi = ? ,internet = ? ,mineralWater = ? ,"
-	  + "toiletUtensils = ? ,hairDryer = ? ,tv = ? ,gameRoom = ? ,gym = ? ,spa = ? ,swimPool = ? ";
+	  + "toiletUtensils = ? ,hairDryer = ? ,tv = ? ,gameRoom = ? ,gym = ? ,spa = ? ,swimPool = ? where hotelId = ?";
 
 	@Override
 	public void insert(InfoVO infoVO) {
@@ -115,6 +115,7 @@ public class InfoJNDIDAO implements InfoDAO_interface{
 			pstmt.setBoolean(18, infoVO.isGym() );
 			pstmt.setBoolean(19, infoVO.isSpa() );
 			pstmt.setBoolean(20, infoVO.isSwimPool() );
+			pstmt.setInt(21, infoVO.getHotelId());
 			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
