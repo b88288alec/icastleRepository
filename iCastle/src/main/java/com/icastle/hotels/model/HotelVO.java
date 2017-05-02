@@ -13,15 +13,10 @@ public class HotelVO {
 	private String zone;
 	private Double point;
 	private Integer hot;
-	public Set<RoomsVO> getRooms() {
-		return rooms;
-	}
-	public void setRooms(Set<RoomsVO> rooms) {
-		this.rooms = rooms;
-	}
 	private Integer star;
 	private Integer hotelState;
 	private String registerId;
+	
 	private Set<RoomsVO> rooms = new HashSet<RoomsVO>(); 
 	
 	public Integer getHotelId() {
@@ -90,5 +85,10 @@ public class HotelVO {
 	public void setRegisterId(String registerId) {
 		this.registerId = registerId;
 	}
-	
+	public Set<RoomsVO> getRooms() {
+		return rooms;
+	}
+	public void setRooms(Set<RoomsVO> rooms) {
+		this.rooms = rooms;
+	}
 }
