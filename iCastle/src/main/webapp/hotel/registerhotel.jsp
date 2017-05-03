@@ -99,7 +99,7 @@
 			</tr>
 			<tr>
 				<td>上傳照片</td>
-				<td><input type="file" name="photo"/></td>
+				<td><input type="file" name="photo"/>${errMap.photoErr}</td>
 			</tr>
 			<tr>
 				<td>飯店介紹</td>

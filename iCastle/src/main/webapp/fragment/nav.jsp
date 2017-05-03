@@ -36,12 +36,39 @@
 						</c:otherwise>
     				</c:choose>    
                     <li><a href="#">活動</a></li>
-                    <li><a href="#">討論區</a></li>
+                    <li><a href="#">討論區 </a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span>會員中心</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登入</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登出</a></li>
+						<c:if test="${not empty LoginOK}">
+							<li><a href="${pageContext.servletContext.contextPath}/hotel/hotelcenter.jsp"><span class="glyphicon glyphicon-user"></span>${LoginOK.email}</a></li>	
+						</c:if>
+    				
+                    <c:choose>
+						<c:when test="${servletPath  == '/hotel/register.jsp' || servletPath == '/hotel/registerhotel.jsp'}">
+							<li class="active"><a href="${pageContext.servletContext.contextPath}/hotel/register.jsp"><span class="glyphicon glyphicon-registration-mark"></span> 註冊</a></li>	
+						</c:when>
+						<c:otherwise>
+							<li><a href="${pageContext.servletContext.contextPath}/hotel/register.jsp"><span class="glyphicon glyphicon-registration-mark"></span> 註冊</a></li>	
+						</c:otherwise>
+    				</c:choose> 
+                    
+                    <c:choose>
+						<c:when test="${empty LoginOK}">
+						<!-- 沒有登入 -->
+							<c:choose>
+								<c:when test="${servletPath == '/hotel/login.jsp' || servletPath == '/hotel/loginhotel.jsp'}">
+									<li class="active"><a href="${pageContext.servletContext.contextPath}/hotel/login.jsp"><span class="glyphicon glyphicon-user"></span> 登入</a></li>	
+								</c:when>
+								<c:otherwise>
+									<li><a href="${pageContext.servletContext.contextPath}/hotel/login.jsp"><span class="glyphicon glyphicon-user"></span> 登入</a></li>
+								</c:otherwise>
+			   				</c:choose>	
+						</c:when>
+						<c:otherwise>
+						<!-- 已經登入 -->
+							<li><a href="${pageContext.servletContext.contextPath}/hote/Logout.do"><span class="glyphicon glyphicon-log-in"></span> 登出</a></li>	
+						</c:otherwise>
+    				</c:choose>
                 </ul>
             </div>
         </div>

@@ -302,8 +302,9 @@ public class RegisterhotelServlet extends HttpServlet {
 		photoServ.addPhoto(photos);
 		
 		//轉交到展示層
-		
-		
+		RequestDispatcher rd = request.getRequestDispatcher("registerOK.jsp");
+		rd.forward(request, response);
+		return;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

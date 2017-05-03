@@ -23,6 +23,7 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		String contextPath = request.getContextPath();
 		Map<String,String> errMap = new HashMap<String,String>();
 		request.setAttribute("errMap", errMap);
 		
@@ -56,6 +57,7 @@ public class LoginServlet extends HttpServlet {
 		}else{
 			//登入成功!
 			session.setAttribute("LoginOK", hotelvo);
+			
 			System.out.println(hotelvo.getHotelId());
 			System.out.println(hotelvo.getHotelName());
 			System.out.println(hotelvo.getEmail());
@@ -67,6 +69,9 @@ public class LoginServlet extends HttpServlet {
 			System.out.println(hotelvo.getStar());
 			System.out.println(hotelvo.getHotelState());
 			System.out.println(hotelvo.getRegisterId());
+			
+			response.sendRedirect(contextPath + "/index.jsp");
+			return;
 		}
 	}
 
