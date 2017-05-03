@@ -9,12 +9,12 @@
 <body>
 <%-- ${comment.orderId}<br> --%>
 <%-- ${comment.hotelId}<br> --%>
-avgScore : ${comment.avgScore}<br>
-serviceScore : ${comment.serviceScore}<br>
-qualityScore : ${comment.qualityScore}<br>
-sceneScore : ${comment.sceneScore}<br>
-good : ${comment.good}<br>
-comment : ${comment.comment}<br>
+<p>平均評分 : </p>${requestScope.comment.avgScore}<br>
+<p>服務評分 : </p>${requestScope.comment.serviceScore}<br>
+<p>品質評分 : </p>${requestScope.comment.qualityScore}<br>
+<p>風景評分 : </p>${requestScope.comment.sceneScore}<br>
+<p>按讚人數 : </p>${requestScope.comment.good}<br>
+<p>評論內容 : </p>${requestScope.comment.comment}<br>
 <%-- ${comment.response}<br> --%>
 
 </body>

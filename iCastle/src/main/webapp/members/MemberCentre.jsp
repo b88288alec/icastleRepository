@@ -20,13 +20,47 @@
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="fragment/nav.jsp"/>
+		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     
+    <div class="container" style="margin-top: 100px;">
+		<form
+			action="${pageContext.servletContext.contextPath}/MemberInformationCentre.do"
+			method="POST">
+			<div class="form">
+				<p>姓名:</p>
+				<input class="form-control" placeholder="輸入姓名" name="nameId" value="${membersKey.name}" />
+				<p>性別:</p>
+				<div class="radio" >
+					<label><input type="radio" name="gender" value="true" value="${membersKey.gender}">男生</label>
+					<label><input type="radio" name="gender" value="true" value="${membersKey.gender}">女生</label>
+				</div>
+				<p>生日:</p>
+				<input class="form-control" placeholder="輸入生日" name="bdateId" value="${membersKey.bdate}"/>
+				<p>電話:</p>
+				<input class="form-control" placeholder="輸入電話" name="telId" value="${membersKey.tel}"/>
+				<p>身分證號碼:</p>
+				<input class="form-control" placeholder="輸入身分證" name="personId" value="${membersKey.personId}"/>
+				<p>護照號碼:</p>
+				<input class="form-control" placeholder="輸入護照號碼" name="passportId" value="${membersKey.passport}"/>
+				<p>email:</p>
+				<input class="form-control" placeholder="輸入email" name="email" value="${membersKey.email}"/>
+				<p>密碼:</p>
+				<input class="form-control" placeholder="輸入密碼" name="pw" value="${membersKey.pw}"/>
+				<p>國家:</p>
+				<input class="form-control" placeholder="輸入國家" name="country" value="${membersKey.country}"/>
+				<p>地址:</p>
+				<input class="form-control" placeholder="輸入地址" name="addr" value="${membersKey.addr}"/>
+				<p>歷史訂單:</p>
+				<input type="submit" class="btn btn-success" value="確定" />
+			</div>
+		</form>
+	</div>
+    
     <!--開始footer-->
-		<jsp:include page="fragment/footer.jsp"/>
+		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>

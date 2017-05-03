@@ -5,97 +5,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-<H2>飯店評論</H2>
-<form action = "CommentServlet" method = "POST">
+<style>
+    .photodiv{ 
+    border:3px black solid; 
+	height:300px; 
+    width:500px; 
+    } 
+
+
+</style>
 <script>
 
 window.onload = function(){
 	
 	var x = 0
-
-	document.getElementById("star1").onmouseover = function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="unstar.png";
-		document.getElementById("star3").src="unstar.png";
-		document.getElementById("star4").src="unstar.png";
-		document.getElementById("star5").src="unstar.png";
-	}
-	
-	document.getElementById("star1").onmouseout = function(){
-			document.getElementById("star1").src="unstar.png";
-			document.getElementById("star2").src="unstar.png";
-			document.getElementById("star3").src="unstar.png";
-			document.getElementById("star4").src="unstar.png";
-			document.getElementById("star5").src="unstar.png";
-	
-
-	}
-	
-	document.getElementById("star2").onmouseover = function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="star.png";
-		document.getElementById("star3").src="unstar.png";
-		document.getElementById("star4").src="unstar.png";
-		document.getElementById("star5").src="unstar.png";
-	}
-	
-	document.getElementById("star2").onmouseout= function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="unstar.png";
-		document.getElementById("star3").src="unstar.png";
-		document.getElementById("star4").src="unstar.png";
-		document.getElementById("star5").src="unstar.png";
-	}
-	
-	document.getElementById("star3").onmouseover = function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="star.png";
-		document.getElementById("star3").src="star.png";
-		document.getElementById("star4").src="unstar.png";
-		document.getElementById("star5").src="unstar.png";
-	}
-	
-	document.getElementById("star3").onmouseout= function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="star.png";
-		document.getElementById("star3").src="unstar.png";
-		document.getElementById("star4").src="unstar.png";
-		document.getElementById("star5").src="unstar.png";
-	}
-	
-	document.getElementById("star4").onmouseover = function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="star.png";
-		document.getElementById("star3").src="star.png";
-		document.getElementById("star4").src="star.png";
-		document.getElementById("star5").src="unstar.png";
-	}
-	
-	document.getElementById("star4").onmouseout= function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="star.png";
-		document.getElementById("star3").src="star.png";
-		document.getElementById("star4").src="unstar.png";
-		document.getElementById("star5").src="unstar.png";
-	}
-	
-	document.getElementById("star5").onmouseover = function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="star.png";
-		document.getElementById("star3").src="star.png";
-		document.getElementById("star4").src="star.png";
-		document.getElementById("star5").src="star.png";
-	}
-	
-	document.getElementById("star5").onmouseout= function(){
-		document.getElementById("star1").src="star.png";
-		document.getElementById("star2").src="star.png";
-		document.getElementById("star3").src="star.png";
-		document.getElementById("star4").src="star.png";
-		document.getElementById("star5").src="unstar.png";
-	}
 	
 	document.getElementById("star1").onclick = function(){
 		document.getElementById("serviceScore").value="1";
@@ -270,25 +193,26 @@ window.onload = function(){
 }
 
 
-	
-
-
-
-
-
-  
-
 </script>
+ 
+</head>
+<body>
+<H2>飯店評論</H2>
+<!-- enctype="multipart/form-data" -->
+<form action = "CommentServlet" method = "POST" enctype="multipart/form-data">
 
-訂單編號:<input type = "text" name = "orderId"><br>
-飯店編號:<input type = "text" name = "hotelId"><br>
+
+
+訂單編號:<input type = "text" name="orderId"><span style="color:red">${error.orderIdKey}</span><br>
+飯店編號:<input type = "text" name = "hotelId"><span style="color:red">${error.hotelIdKey}</span><br>
 服務評分:
 <img src="unstar.png" width="50" id="star1">
 <img src="unstar.png" width="50" id="star2">
 <img src="unstar.png" width="50" id="star3">
 <img src="unstar.png" width="50" id="star4">
 <img src="unstar.png" width="50" id="star5">
-<input type="hidden" id="serviceScore" value="0" name="service"><br>
+<input type="hidden" id="serviceScore" value="0" name="service"><span style="color:red">${error.serviceKey}</span><br>
+
 
 品質評分:
 <img src="unstar.png" width="50" id="star6">
@@ -296,7 +220,8 @@ window.onload = function(){
 <img src="unstar.png" width="50" id="star8">
 <img src="unstar.png" width="50" id="star9">
 <img src="unstar.png" width="50" id="star10">
-<input type="hidden" id="qualityScore" value="0" name="quality"><br>
+<input type="hidden" id="qualityScore" value="0" name="quality"><span style="color:red">${error.qualityKey}</span><br>
+
 
 風景評分:
 <img src="unstar.png" width="50" id="star11">
@@ -304,11 +229,19 @@ window.onload = function(){
 <img src="unstar.png" width="50" id="star13">
 <img src="unstar.png" width="50" id="star14">
 <img src="unstar.png" width="50" id="star15">
-<input type="hidden" id="sceneScore" value="0" name="scene"><br>
+<input type="hidden" id="sceneScore" value="0" name="scene"><span style="color:red">${error.sceneKey}</span><br>
 
-會員評論<input type = "text" name = "comment"><br>
+<div class="photodiv">
+</div>
+上傳照片:
+<input type="file" name="uploadphoto"><br>
+
+
+會員評論<textarea name = "comment" value="${error.comment}"></textarea><span style="color:red">${error.commentKey}</span><br>
+
 
 <Input type = "submit"  value = "送出" >
+
 </form>
 
 </body>
