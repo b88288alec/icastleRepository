@@ -16,17 +16,19 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 	@Override
 	public Integer insert(List<RoomsVO> roomList) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Integer updateCount = 0;
 		try{
 			session.beginTransaction();
 			for(RoomsVO vo : roomList){
 				session.saveOrUpdate(vo);
+				updateCount += 1;
 			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
 			throw e;
 		}
-		return null;
+		return updateCount;
 	}
 
 	@Override

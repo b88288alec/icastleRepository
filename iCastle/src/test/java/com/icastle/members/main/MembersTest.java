@@ -13,8 +13,8 @@ public class MembersTest {
 //		新增
 		MembersJDBCDAO mjo = new MembersJDBCDAO();
 //		MembersVO mvo = new MembersVO();
-//		mvo.setEmail("abc@yahoo.com.tw");
-//		mvo.setPw("123");
+//		mvo.setEmail("qwe@yahoo.com.tw");
+//		mvo.setPw("456");
 //		mvo.setName("TAKA");
 //		mvo.setGender("女");
 //		mvo.setBdate(java.sql.Date.valueOf("2017-04-15"));
@@ -27,7 +27,7 @@ public class MembersTest {
 //		mjo.insert(mvo);
 //		
 //		System.out.println("新增成功");
-//		
+		
 		
 //		修改
 //	    MembersVO mem2 = new MembersVO();
@@ -66,22 +66,40 @@ public class MembersTest {
 //		System.out.println("---------------------");
 
 //		查詢
-		List<MembersVO> list = mjo.getAll();
-		for (MembersVO aMembers : list) {
-			System.out.println(aMembers.getMemberId() + ",");
-			System.out.println(aMembers.getEmail() + ",");
-			System.out.println(aMembers.getPw() + ",");
-			System.out.println(aMembers.getName() + ",");
-			System.out.println(aMembers.getGender() + ",");
-			System.out.println(aMembers.getBdate() + ",");
-			System.out.println(aMembers.getAddr() + ",");
-			System.out.println(aMembers.getTel() + ",");
-			System.out.println(aMembers.getPersonId() + ",");
-			System.out.println(aMembers.getCountry() + ",");
-			System.out.println(aMembers.getPassport());
-			System.out.println();
-		}
-	    
+//		List<MembersVO> list = mjo.getAll();
+//		for (MembersVO aMembers : list) {
+//			System.out.println(aMembers.getMemberId() + ",");
+//			System.out.println(aMembers.getEmail() + ",");
+//			System.out.println(aMembers.getPw() + ",");
+//			System.out.println(aMembers.getName() + ",");
+//			System.out.println(aMembers.getGender() + ",");
+//			System.out.println(aMembers.getBdate() + ",");
+//			System.out.println(aMembers.getAddr() + ",");
+//			System.out.println(aMembers.getTel() + ",");
+//			System.out.println(aMembers.getPersonId() + ",");
+//			System.out.println(aMembers.getCountry() + ",");
+//			System.out.println(aMembers.getPassport());
+//			System.out.println();
+//		}
+	
+//  登入
+		
+		MembersVO mem4 = mjo.login("qwe@yahoo.com.tw","456");
+		
+		System.out.println(mem4.getMemberId() + ",");
+		System.out.println(mem4.getEmail() + ",");
+		System.out.println(mem4.getPw() + ",");
+		System.out.println(mem4.getName() + ",");
+		System.out.println(mem4.getGender() + ",");
+		System.out.println(mem4.getBdate() + ",");
+		System.out.println(mem4.getAddr()+ ",");
+		System.out.println(mem4.getTel()+ ",");
+		System.out.println(mem4.getPersonId()+ ",");
+		System.out.println(mem4.getCountry()+ ",");
+		System.out.println(mem4.getPassport());
+		System.out.println("---------------------");
+		
+		
 		
 //		
 //		MembersJNDIDAO mjo = new MembersJNDIDAO();

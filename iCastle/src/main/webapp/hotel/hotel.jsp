@@ -128,6 +128,16 @@
 			<!--飯店圖片-->
 			<div class="col-md-12">
 				<div class="gallery">
+					
+<!-- 					magnific-popup -->
+<!-- 					<div class="popup-gallery"> -->
+<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
+<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
+<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
+<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
+<!-- 					</div> -->
+				
+					<!--秀出飯店圖片 -->
 					<c:forEach var="photo" items="${photos}">
 						<div class="frist-img">
 							<img
@@ -135,6 +145,7 @@
 								width="300"/>
 						</div>
 					</c:forEach>
+					
 					<!--                     <div class="frist-img"> -->
 					<%--                         <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="700" height="389" /> --%>
 					<!--                     </div> -->
@@ -448,5 +459,29 @@
 	<script src="/iCastle/js/bootstrap-datepicker.js"></script>
 
 	<script src="/iCastle/js/material-kit.js"></script>
+	
+	<script src="../js/magnific-popup.js"></script>
+	
+	<script>
+	$(document).ready(function() {
+		$('.popup-gallery').magnificPopup({
+			delegate: 'a',
+			type: 'image',
+			tLoading: 'Loading image #%curr%...',
+			mainClass: 'mfp-img-mobile',
+			gallery: {
+				enabled: true,
+				navigateByImgClick: true,
+				preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+			},
+			image: {
+				tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+				titleSrc: function(item) {
+					return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+				}
+			}
+		});
+	});
+	</script>
 </body>
 </html>

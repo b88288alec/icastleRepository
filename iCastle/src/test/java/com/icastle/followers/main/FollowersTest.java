@@ -12,18 +12,18 @@ public class FollowersTest {
 	
 //		新增
 		FollowersJDBCDAO fjo = new FollowersJDBCDAO();
-//		FollowersVO fvo = new FollowersVO();
-//		fvo.setName("abc");
-//	    fvo.setBdate(java.sql.Date.valueOf("2017-04-28"));
-//		fvo.setTel("27758858");
-//		fvo.setPersonId("D123546789");
-//		fvo.setEmail("qeqe@yahoo.com.tw");
-//		fvo.setCountry("台灣");
-//		fvo.setAddr("大安區");
-//		fvo.setPassport("asd");
-//		fvo.setMemeberId(4);
-//		fjo.insert(fvo);
-//		System.out.println("新增成功");
+		FollowersVO fvo = new FollowersVO();
+		fvo.setName("abc");
+	    fvo.setBdate(java.sql.Date.valueOf("2017-04-28"));
+		fvo.setTel("27758858");
+		fvo.setPersonId("D123546789");
+		fvo.setEmail("qeqe@yahoo.com.tw");
+		fvo.setCountry("台灣");
+		fvo.setAddr("大安區");
+		fvo.setPassport("asd");
+		fvo.setMemberId(1);
+		fjo.insert(fvo);
+		System.out.println("新增成功");
 	
 		
 //      更新
@@ -46,19 +46,19 @@ public class FollowersTest {
 //		System.out.println("刪除成功");
 		
 //		查詢
-		List<FollowersVO> list = fjo.getAll(4);
-		for (FollowersVO aFollowers : list) {
-			System.out.println(aFollowers.getName() + ",");
-			System.out.println(aFollowers.getBdate() + ",");
-			System.out.println(aFollowers.getTel() + ",");
-			System.out.println(aFollowers.getPersonId() + ",");
-			System.out.println(aFollowers.getEmail() + ",");
-			System.out.println(aFollowers.getCountry() + ",");
-			System.out.println(aFollowers.getAddr() + ",");
-			System.out.println(aFollowers.getPassport() + ",");
-			System.out.println();
+//		List<FollowersVO> list = fjo.getAll(4);
+//		for (FollowersVO aFollowers : list) {
+//			System.out.println(aFollowers.getName() + ",");
+//			System.out.println(aFollowers.getBdate() + ",");
+//			System.out.println(aFollowers.getTel() + ",");
+//			System.out.println(aFollowers.getPersonId() + ",");
+//			System.out.println(aFollowers.getEmail() + ",");
+//			System.out.println(aFollowers.getCountry() + ",");
+//			System.out.println(aFollowers.getAddr() + ",");
+//			System.out.println(aFollowers.getPassport() + ",");
+//			System.out.println();
 		
-		}
+//		}
 	}
 
 }
