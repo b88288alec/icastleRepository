@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,38 +51,31 @@
     </nav>
     <!--結束導覽列-->
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
+
 <div class="member" style="margin-top:56px">
-<form METHOD="post" ACTION="Member.do">
-<h1>會員註冊</h1>
+<h1>恭喜您註冊成功</h1>
 <table>
-<tr><td><span>帳號:</span></td><td><input type="text" name="email" value="${param.email}">${errorMsgs.emailErr}<br></td></tr>
-<tr><td><span>密碼:</span></td><td><input type="text" name="pw" value="${param.pw}">${errorMsgs.pwErr}<br></td></tr>
-<tr><td><span>姓名:</span></td><td><input type="text" name="name" value="${param.name}">${errorMsgs.nameErr}<br></td></tr>
+<tr><td><span>帳號:${membersVO.email}</span></td><td><br></td></tr>
+<tr><td><span>密碼:${membersVO.pw}</span></td><td><br></td></tr>
+<tr><td><span>性名:${membersVO.name}</span></td><td><br></td></tr>
+<tr><td><span>性別:${membersVO.gender}</span></td><td><br></td></tr>
+<tr><td><span>生日:${membersVO.bdate}</span></td><td><br></td></tr>
+<tr><td><span>地址:${membersVO.addr}</span></td><td><br></td></tr>
+<tr><td><span>電話:${membersVO.tel}</span></td><td><br></td></tr>
+<tr><td><span>身分證字號:${membersVO.personId}</span></td><td><br></td></tr>
+<tr><td><span>國家:${membersVO.country}</span></td><td><br></td></tr>
+<tr><td><span>護照:${membersVO.passport}</span></td><td><br></td></tr>
 
-<tr><td><span>請選擇性別:</span></td><td><input type="radio" name="gender" value="男" 
-<c:if test="${param.gender == '男'}">
-checked
-</c:if>
->男${errorMsgs.genderErr}<br></td></tr>
-<tr><td><span></span></td><td><input type="radio" name="gender" value="女"
-<c:if test="${param.gender == '女'}">
-checked
-</c:if>
->女${errorMsgs.genderErr}<br></td></tr>
-<tr><td><span>生日:</span></td><td><input type="text" name="bdate" value="${param.bdate}"/>${errorMsgs.bdateError}<br></td></tr>
-<tr><td><span>地址:</span></td><td><input type="text" name="addr" value="${param.addr}">${errorMsgs.addrErr}<br></td></tr>
-<tr><td><span>電話:</span></td><td><input type="text" name="tel" value="${param.tel}">${errorMsgs.telErr}<br></td></tr>
-<tr><td><span>身分證字號:</span></td><td><input type="text" name="personId" value="${param.personId}">${errorMsgs.personIdErr}<br></td></tr>
-<tr><td><span>國家:</span></td><td><input type="text" name="country" value="${param.country}"><br></td></tr>
-<tr><td><span>護照:</span></td><td><input type="text" name="passport" value="${param.passport}"><br></td></tr>
-<tr><td></td><td><input type="submit"></td></tr>
 </table>
-
-
-
-</form>
+<input type="button" value="回首頁" onclick="location.href='http://localhost:8081/iCastle/index.jsp'">
 </div>
 
+    
+    
+    
+    
+    
+    
     <!--footer-->
     <div class="footer">
         <img src="${pageContext.servletContext.contextPath}/img/logo.png" width="100" />
