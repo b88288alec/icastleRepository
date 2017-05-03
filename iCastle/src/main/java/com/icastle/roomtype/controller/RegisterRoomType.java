@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
-@WebServlet("/RegisterRoomType.do")
+@WebServlet("/roomtype/RegisterRoomType.do")
 public class RegisterRoomType extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,16 +32,30 @@ public class RegisterRoomType extends HttpServlet {
 		String seasonPrice[] = request.getParameterValues("seasonPrice");
 		String customizedPrice[] = request.getParameterValues("customizedPrice");
 		String customizedName[] = request.getParameterValues("customizedName");
-		String breakfast[] = request.getParameterValues("breakfast");
-		String afternoonTea[] = request.getParameterValues("afternoonTea");
-		String dinner[] = request.getParameterValues("dinner");
-		String bedAddable[] = request.getParameterValues("bedAddable");
 		String pricePerPerson[] = request.getParameterValues("pricePerPerson");
 		String remark[] = request.getParameterValues("remark");
+		String times = request.getParameter("times");
+		
+		List<String> bedAddablesList = new ArrayList<String>();
+		List<String[]> mealsList = new ArrayList<String[]>();
+		if(times.equals("")){
+			String bedAddables = request.getParameter("bedAddable0");
+			bedAddablesList.add(bedAddables);
+			String meals[] = request.getParameterValues("meals0");
+			mealsList.add(meals);
+		}else{
+			for(int i = 0; i <= Integer.parseInt(times); i++){
+				String bedAddables = request.getParameter("bedAddable"+i);
+				bedAddablesList.add(bedAddables);
+				String meals[] = request.getParameterValues("meals"+i);
+				mealsList.add(meals);
+			}
+		}
+		
 		
 		List<RoomTypeVO> list = new ArrayList<RoomTypeVO>();
 		
-		for(int i = 0; i < roomTypeName.length; i++){
+		for(int i = 0; i <= Integer.parseInt(times); i++){
 			RoomTypeVO vo = new RoomTypeVO();
 			vo.setHotelId(Integer.parseInt(hotelId[i]));
 			vo.setRoomTypeName(roomTypeName[i]);
@@ -50,10 +66,39 @@ public class RegisterRoomType extends HttpServlet {
 			vo.setSeasonPrice(Integer.parseInt(seasonPrice[i]));
 			vo.setCustomizedPrice(Integer.parseInt(customizedPrice[i]));
 			vo.setCustomizedName(customizedName[i]);
-			vo.setBreakfast(Boolean.valueOf(breakfast[i]));
-			vo.setAfternoonTea(Boolean.valueOf(afternoonTea[i]));
-			vo.setDinner(Boolean.valueOf(dinner[i]));
-			vo.setBedAddable(Boolean.valueOf(bedAddable[i]));
+			
+			Boolean isbreakfast = false;
+			Boolean isdinner = false;
+			Boolean isafternoontea = false;
+			for(int j = 0; j < mealsList.get(i).length; j++){
+				String meals[] = mealsList.get(i);
+				if(meals[j].equals("0")){
+					isbreakfast = true;
+				}
+				if(meals[j].equals("1")){
+					isafternoontea = true;
+				}
+				if(meals[j].equals("2")){
+					isdinner  = true;
+				}
+				
+			}
+			if(isbreakfast==true)
+				vo.setBreakfast(true);
+			else
+				vo.setBreakfast(false);
+			
+			if(isafternoontea==true)
+				vo.setAfternoonTea(true);
+			else
+				vo.setAfternoonTea(false);
+			
+			if(isdinner==true)
+				vo.setDinner(true);
+			else
+				vo.setDinner(false);
+			
+			vo.setBedAddable(Boolean.valueOf(bedAddablesList.get(i)));
 			vo.setPricePerPerson(Integer.parseInt(pricePerPerson[i]));
 			vo.setRemark(remark[i]);
 			list.add(vo);
@@ -62,7 +107,11 @@ public class RegisterRoomType extends HttpServlet {
 		RoomTypeService rots = new RoomTypeService();
 		Integer count = rots.addOrUpdateRoomType(list);
 		
+		HttpSession session = request.getSession();
 		
+		session.setAttribute("RoomTypeVOList", list);
+		RequestDispatcher rd = request.getRequestDispatcher("../rooms/FakeDataGen.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CommentDAO implements CommentDAO_interface {
 	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime) VALUES(?,?,?,?,?,?,?,?)";
-	private static final String SHOW_COMT = "SELECT avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE orderId = ?";
+	private static final String SHOW_COMT = "SELECT commentId,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE orderId = ?";
 	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE hotelId = ?";
 	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ?,responseTime = ? WHERE commentId = ?";
 	private static final String SHOW_RESPONSE = "SELECT response,responseTime FROM Comments WHERE commentId = ?";
@@ -51,6 +51,7 @@ public class CommentDAO implements CommentDAO_interface {
 			rs.next();
 			
 			com = new CommentVO();
+			com.setCommentId(rs.getInt("commentId"));
 			com.setAvgScore(rs.getDouble("avgScore"));
 			com.setServiceScore(rs.getInt("serviceScore"));
 			com.setQualityScore(rs.getInt("qualityScore"));
