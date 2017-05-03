@@ -130,7 +130,6 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 			query.setParameter(1, roomId);
 			query.setParameter(2, roomIdEnd);
 			updateCount = query.executeUpdate();
-			session.getTransaction().commit();
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
 			throw e;
