@@ -146,6 +146,9 @@
 		</table>
 		</form>
 	</div>
+
+	${pageContext.request.servletPath}
+
 <!-- 本頁內容結束 -->
 
     <!--開始footer-->

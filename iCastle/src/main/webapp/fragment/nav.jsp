@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
 <body>
+<%
+	String servletPath = request.getServletPath();
+	request.setAttribute("servletPath", servletPath);
+%>
 	<!--開始導覽列-->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" height:55px;">
         <div class="container-fluid">
@@ -22,7 +27,14 @@
             <!--結束logo-->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="${pageContext.servletContext.contextPath}/index.jsp">首頁</a></li>
+					<c:choose>
+						<c:when test="${servletPath  == '/index.jsp'}">
+							<li class="active"><a href="${pageContext.servletContext.contextPath}/index.jsp">首頁</a></li>	
+						</c:when>
+						<c:otherwise>
+							<li><a href="${pageContext.servletContext.contextPath}/index.jsp">首頁</a></li>	
+						</c:otherwise>
+    				</c:choose>    
                     <li><a href="#">活動</a></li>
                     <li><a href="#">討論區</a></li>
                 </ul>
