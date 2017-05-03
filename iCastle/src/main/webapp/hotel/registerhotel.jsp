@@ -68,7 +68,7 @@
 		style="background-color: white; padding-bottom: 100px;">
 		<h1>業者註冊</h1>
 	
-		<form action="Registerhotel.do" method="post">
+		<form action="Registerhotel.do" method="post" enctype="multipart/form-data">
 		<table class="">
 			<tbody>
 			<tr>
@@ -97,7 +97,7 @@
 						<option value="3">3</option>
 						<option value="4">4</option>
 						<option value="5">5</option>
-					</select>
+					</select>${errMap.starErr}
 				</td>
 			</tr>
 			<tr>
@@ -170,7 +170,7 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="送出"></td>
-				<td><input type="submit" value="清除"></td>
+				<td><input type="reset" value="清除"></td>
 				<td><input id="onekey" type="submit" value="一鍵輸入"></td>
 			</tr>
 			</tbody>
@@ -240,9 +240,6 @@
 			$(':input[name = "guestPolicies"]').val('不可攜帶寵物入內');
 			$(':input[name = "cancelPolicies"]').val('不可以取消');
 			$('input[name = "roomWifi"]').prop('checked');
-			
-			
-			
 		});
 	});
 	</script>
