@@ -14,13 +14,13 @@ public class MembersService {
 	}
 	
 //  新增會員	
-	public void insert(String email, String pw, String name, String gender, Date bdate, String addr, String tel, String personId, String country, String passport){
+	public void insert(String email, String pw, String name, String gender, Date bDate, String addr, String tel, String personId, String country, String passport){
 		MembersVO membersVO = new MembersVO();
 		membersVO.setEmail(email);
 		membersVO.setPw(pw);
 		membersVO.setName(name);
 		membersVO.setGender(gender);
-		membersVO.setBdate(bdate);
+		membersVO.setBdate(bDate);
 		membersVO.setAddr(addr);
 		membersVO.setTel(tel);
 		membersVO.setPersonId(personId);
