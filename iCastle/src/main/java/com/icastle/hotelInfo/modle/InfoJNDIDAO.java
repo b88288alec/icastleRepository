@@ -16,7 +16,7 @@ public class InfoJNDIDAO implements InfoDAO_interface{
 	static {
 		try{
 			Context ctx = new InitialContext();
-			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/iCastle");
+			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/iCastleDB");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

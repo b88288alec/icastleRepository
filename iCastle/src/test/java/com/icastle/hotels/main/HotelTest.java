@@ -13,20 +13,20 @@ public class HotelTest {
 
 	public static void main(String[] args) {
 		//addHotel
-//		HotelService dao = new HotelService();
-//		HotelVO hotel = new HotelVO();
-//		hotel.setHotelName("好帥");
-//		hotel.setEmail("handsome@gmail.com");
-//		hotel.setPw("handsome");
-//		hotel.setAddr("台北市松山區南京東路四段2號");
-//		hotel.setZone("台北市");
-//		hotel.setPoint(4.0);
-//		hotel.setHot(135);
-//		hotel.setStar(5);
-//		hotel.setHotelState(1);
-//		hotel.setRegisterId("好帥第210號");
-//		dao.addHotel(hotel);
-//		System.out.println("成功新增");
+//		HOTELSERVICE DAO = NEW HOTELSERVICE();
+//		HOTELVO HOTEL = NEW HOTELVO();
+//		HOTEL.SETHOTELNAME("好帥");
+//		HOTEL.SETEMAIL("HANDSOME@GMAIL.COM");
+//		HOTEL.SETPW("HANDSOME");
+//		HOTEL.SETADDR("台北市松山區南京東路四段2號");
+//		HOTEL.SETZONE("台北市");
+//		HOTEL.SETPOINT(4.0);
+//		HOTEL.SETHOT(135);
+//		HOTEL.SETSTAR(5);
+//		HOTEL.SETHOTELSTATE(1);
+//		HOTEL.SETREGISTERID("好帥第210號");
+//		HOTELVO HOTELVO = DAO.ADDHOTEL(HOTEL);
+//		SYSTEM.OUT.PRINTLN("成功新增");
 		
 		//changePw
 //		HotelService dao = new HotelService();
@@ -92,6 +92,11 @@ public class HotelTest {
 //		System.out.println(hotelvo.getStar());
 //		System.out.println(hotelvo.getHotelState());
 //		System.out.println(hotelvo.getRegisterId());
+		
+		//查詢email是否已經註冊過
+		HotelService dao = new HotelService();
+		Boolean ok = dao.isEmailOK("Forwar@gmail.com");
+		System.out.println(ok);
 		
 		//首頁查詢
 //		HotelService dao = new HotelService();
