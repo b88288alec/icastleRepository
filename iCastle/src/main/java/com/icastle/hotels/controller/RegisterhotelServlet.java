@@ -156,7 +156,30 @@ public class RegisterhotelServlet extends HttpServlet {
 		
 		//呼叫HotelInfoDAO
 		InfoService infoServ = new InfoService();
-		infoServ.insert(hotel.getHotelId(), registerName, tel, transport, website, hotelProfile, checkinStr, checkoutStr, guestPolicies, cancelPolicies, roomWifi, hallWifi, internet, mineralWater, toiletUtensils, hairDryer, tv, gameRoom, gym, spa, swimPool);
+		InfoVO infoVO = new InfoVO();
+		infoVO.setHotelId(hotel.getHotelId());
+		infoVO.setRegisterName(registerName);
+		infoVO.setTel(tel);
+		infoVO.setTransport(transport);
+		infoVO.setWebsite(website);
+		infoVO.setHotelProfile(hotelProfile);
+		infoVO.setCheckin(checkinStr);
+		infoVO.setCheckout(checkoutStr);
+		infoVO.setGuestPolicies(guestPolicies);
+		infoVO.setCancelPolicies(cancelPolicies);
+		infoVO.setRoomWifi(roomWifi);
+		infoVO.setHallWifi(hallWifi);
+		infoVO.setInternet(internet);
+		infoVO.setMineralWater(mineralWater);
+		infoVO.setToiletUtensils(toiletUtensils);
+		infoVO.setHairDryer(hairDryer);
+		infoVO.setTv(tv);
+		infoVO.setGameRoom(gameRoom);
+		infoVO.setGym(gym);
+		infoVO.setSpa(spa);
+		infoVO.setSwimPool(swimPool);
+		
+		infoServ.insert(infoVO);
 		
 		//呼叫HotelPhotoDAO
 		
