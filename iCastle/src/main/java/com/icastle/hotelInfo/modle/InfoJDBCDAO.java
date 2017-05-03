@@ -25,12 +25,12 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 	private static final String UPDATE =
 			"UPDATE HotelInfo set registerName = ? ,tel = ? ,transport = ? ,website = ? ,hotelProfile = ? ,checkin = ? ,"
 			+ "checkout = ? ,GuestPolicies = ? ,cancelPolicies = ? ,roomWifi = ? ,hallWifi = ? ,internet = ? ,mineralWater = ? ,"
-			+ "toiletUtensils = ? ,hairDryer = ? ,tv = ? ,gameRoom = ? ,gym = ? ,spa = ? ,swimPool = ? ";
+			+ "toiletUtensils = ? ,hairDryer = ? ,tv = ? ,gameRoom = ? ,gym = ? ,spa = ? ,swimPool = ? where hotelId = ? ";
 	//沒有hotelId的UPDATE
 	
 /* ------------飯店註冊時新增--------------- */	
 	@Override		
-	public void insert(InfoVO InfoVO) {
+	public void insert(InfoVO infoVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -39,27 +39,27 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 			con = DriverManager.getConnection(url, userid, password);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			pstmt.setInt(1, InfoVO.getHotelId());
-			pstmt.setString(2, InfoVO.getRegisterName());
-			pstmt.setString(3, InfoVO.getTel());
-			pstmt.setString(4, InfoVO.getTransport());
-			pstmt.setString(5, InfoVO.getWebsite() );
-			pstmt.setString(6, InfoVO.getHotelProfile() );
-			pstmt.setString(7, InfoVO.getCheckin() );
-			pstmt.setString(8, InfoVO.getCheckout() );
-			pstmt.setString(9, InfoVO.getGuestPolicies() );
-			pstmt.setString(10, InfoVO.getCancelPolicies() );
-			pstmt.setBoolean(11, InfoVO.isRoomWifi());
-			pstmt.setBoolean(12, InfoVO.isHallWifi() );
-			pstmt.setBoolean(13, InfoVO.isInternet() );
-			pstmt.setBoolean(14, InfoVO.isMineralWater() );
-			pstmt.setBoolean(15, InfoVO.isToiletUtensils() );
-			pstmt.setBoolean(16, InfoVO.isHairDryer() );
-			pstmt.setBoolean(17, InfoVO.isTv() );
-			pstmt.setBoolean(18, InfoVO.isGameRoom() );
-			pstmt.setBoolean(19, InfoVO.isGym() );
-			pstmt.setBoolean(20, InfoVO.isSpa() );
-			pstmt.setBoolean(21, InfoVO.isSwimPool() );		
+			pstmt.setInt(1, infoVO.getHotelId());
+			pstmt.setString(2, infoVO.getRegisterName());
+			pstmt.setString(3, infoVO.getTel());
+			pstmt.setString(4, infoVO.getTransport());
+			pstmt.setString(5, infoVO.getWebsite() );
+			pstmt.setString(6, infoVO.getHotelProfile() );
+			pstmt.setString(7, infoVO.getCheckin() );
+			pstmt.setString(8, infoVO.getCheckout() );
+			pstmt.setString(9, infoVO.getGuestPolicies() );
+			pstmt.setString(10, infoVO.getCancelPolicies() );
+			pstmt.setBoolean(11, infoVO.isRoomWifi());
+			pstmt.setBoolean(12, infoVO.isHallWifi() );
+			pstmt.setBoolean(13, infoVO.isInternet() );
+			pstmt.setBoolean(14, infoVO.isMineralWater() );
+			pstmt.setBoolean(15, infoVO.isToiletUtensils() );
+			pstmt.setBoolean(16, infoVO.isHairDryer() );
+			pstmt.setBoolean(17, infoVO.isTv() );
+			pstmt.setBoolean(18, infoVO.isGameRoom() );
+			pstmt.setBoolean(19, infoVO.isGym() );
+			pstmt.setBoolean(20, infoVO.isSpa() );
+			pstmt.setBoolean(21, infoVO.isSwimPool() );		
 			
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
@@ -86,7 +86,7 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 	
 /* ------------修改飯店資訊--------------- */		
 	@Override
-	public void updateHotelInfo(InfoVO InfoVO) {
+	public void updateHotelInfo(InfoVO infoVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -95,26 +95,27 @@ public class InfoJDBCDAO implements InfoDAO_interface {
 			con = DriverManager.getConnection(url, userid, password);
 			pstmt = con.prepareStatement(UPDATE);
 			
-			pstmt.setString(1, InfoVO.getRegisterName());
-			pstmt.setString(2, InfoVO.getTel());
-			pstmt.setString(3, InfoVO.getTransport());
-			pstmt.setString(4, InfoVO.getWebsite());
-			pstmt.setString(5, InfoVO.getCheckin());
-			pstmt.setString(6, InfoVO.getCheckout());
-			pstmt.setString(7, InfoVO.getGuestPolicies());
-			pstmt.setString(8, InfoVO.getCancelPolicies());
-			pstmt.setString(9, InfoVO.getCancelPolicies() );
-			pstmt.setBoolean(10, InfoVO.isRoomWifi());
-			pstmt.setBoolean(11, InfoVO.isHallWifi() );
-			pstmt.setBoolean(12, InfoVO.isInternet() );
-			pstmt.setBoolean(13, InfoVO.isMineralWater() );
-			pstmt.setBoolean(14, InfoVO.isToiletUtensils() );
-			pstmt.setBoolean(15, InfoVO.isHairDryer() );
-			pstmt.setBoolean(16, InfoVO.isTv() );
-			pstmt.setBoolean(17, InfoVO.isGameRoom() );
-			pstmt.setBoolean(18, InfoVO.isGym() );
-			pstmt.setBoolean(19, InfoVO.isSpa() );
-			pstmt.setBoolean(20, InfoVO.isSwimPool() );
+			pstmt.setString(1, infoVO.getRegisterName());
+			pstmt.setString(2, infoVO.getTel());
+			pstmt.setString(3, infoVO.getTransport());
+			pstmt.setString(4, infoVO.getWebsite());
+			pstmt.setString(5, infoVO.getCheckin());
+			pstmt.setString(6, infoVO.getCheckout());
+			pstmt.setString(7, infoVO.getGuestPolicies());
+			pstmt.setString(8, infoVO.getCancelPolicies());
+			pstmt.setString(9, infoVO.getCancelPolicies() );
+			pstmt.setBoolean(10, infoVO.isRoomWifi());
+			pstmt.setBoolean(11, infoVO.isHallWifi() );
+			pstmt.setBoolean(12, infoVO.isInternet() );
+			pstmt.setBoolean(13, infoVO.isMineralWater() );
+			pstmt.setBoolean(14, infoVO.isToiletUtensils() );
+			pstmt.setBoolean(15, infoVO.isHairDryer() );
+			pstmt.setBoolean(16, infoVO.isTv() );
+			pstmt.setBoolean(17, infoVO.isGameRoom() );
+			pstmt.setBoolean(18, infoVO.isGym() );
+			pstmt.setBoolean(19, infoVO.isSpa() );
+			pstmt.setBoolean(20, infoVO.isSwimPool() );
+			pstmt.setInt(21, infoVO.getHotelId() );
 			
 			pstmt.executeUpdate();
 		} catch (ClassNotFoundException e){

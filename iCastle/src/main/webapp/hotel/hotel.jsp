@@ -27,40 +27,10 @@
 <title>愛客宿-iCastle</title>
 </head>
 <body>
-	<!--開始導覽列-->
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"height:55px;">
-		<div class="container-fluid">
-			<!--logo-->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="../index.jsp"> <img alt="Brand"
-					height="30" src="/iCastle/img/logo.png" />
-				</a>
-			</div>
-			<!--結束logo-->
-			<div class="collapse navbar-collapse" id="navbar">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="../index.jsp">首頁</a></li>
-					<li><a href="#">活動</a></li>
-					<li><a href="#">討論區</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-cog"></span>會員中心</a>
-					</li>
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
-							登入</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>
-							登出</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+    <!--開始導覽列-->
+		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
+	
 	<!--上方搜尋列-->
 	<div class="container-fluid search-row">
 		<div class="row" style="background-color: #607D8B; width: 100%">
@@ -128,6 +98,16 @@
 			<!--飯店圖片-->
 			<div class="col-md-12">
 				<div class="gallery">
+					
+<!-- 					magnific-popup -->
+<!-- 					<div class="popup-gallery"> -->
+<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
+<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
+<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
+<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
+<!-- 					</div> -->
+				
+					<!--秀出飯店圖片 -->
 					<c:forEach var="photo" items="${photos}">
 						<div class="frist-img">
 							<img
@@ -135,6 +115,7 @@
 								width="300"/>
 						</div>
 					</c:forEach>
+					
 					<!--                     <div class="frist-img"> -->
 					<%--                         <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="700" height="389" /> --%>
 					<!--                     </div> -->
@@ -431,12 +412,8 @@
 		</div>
 	</div>
 
-	<!--footer-->
-	<div class="footer">
-		<img src="/iCastle/img/logo.png" width="100" />
-		<h6>版權所有©2005 – 2017, iCastle Company Pte. Ltd.保留所有權利</h6>
-		<h6>iCastle.com隸屬於Priceline集團—線上旅遊業及相關服務的全球領導品牌。</h6>
-	</div>
+    <!--開始footer-->
+		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 
 	<script src="/iCastle/js/jquery.min.js"></script>
@@ -448,5 +425,29 @@
 	<script src="/iCastle/js/bootstrap-datepicker.js"></script>
 
 	<script src="/iCastle/js/material-kit.js"></script>
+	
+	<script src="../js/magnific-popup.js"></script>
+	
+	<script>
+	$(document).ready(function() {
+		$('.popup-gallery').magnificPopup({
+			delegate: 'a',
+			type: 'image',
+			tLoading: 'Loading image #%curr%...',
+			mainClass: 'mfp-img-mobile',
+			gallery: {
+				enabled: true,
+				navigateByImgClick: true,
+				preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+			},
+			image: {
+				tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+				titleSrc: function(item) {
+					return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
+				}
+			}
+		});
+	});
+	</script>
 </body>
 </html>

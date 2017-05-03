@@ -21,45 +21,13 @@
 </head>
 <body>
     <!--開始導覽列-->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" height:55px;">
-        <div class="container-fluid">
-            <!--logo-->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="../index.jsp">
-                    <img alt="Brand" height="30" src="../img/logo.png" />
-                </a>
-            </div>
-            <!--結束logo-->
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="../index.jsp">首頁</a></li>
-                    <li><a href="#">活動</a></li>
-                    <li><a href="#">討論區</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span>會員中心</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登入</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登出</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!--結束導覽列-->
+		<jsp:include page="../fragment/nav.jsp"/>
+	<!--結束導覽列-->
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container" style="margin-top:56px">
     <form action="../orders/OrdersServlet.do" method="post">
 		<table>
-<!-- 			<tr><td><span>客戶編號:</span></td><td><span>1</span><br></td></tr> -->
-<%-- 			<tr><td><span>房間編號:</span></td><td><span>${orderMap.roomId }</span><br></td></tr> --%>
-<%-- 			<tr><td><span>飯店編號:</span></td><td><span>${orderMap.hotelId }</span><br></td></tr> --%>
 			<tr><td><span>飯店名稱:</span></td><td><span>${orderMap.hotelName }</span><br></td></tr>
-<%-- 			<tr><td><span>房型編號:</span></td><td><span>${orderMap.roomTypeId }</span><br></td></tr> --%>
 			<tr><td><span>房型名稱:</span></td><td><span>${orderMap.roomTypeName }</span><br></td></tr>
 			<tr><td><span>入住日:</span></td><td><span>${orderMap.checkinDay }</span><br></td></tr>
 			<tr><td><span>退房日:</span></td><td><span>${orderMap.checkoutDay }</span><br></td></tr>
@@ -84,8 +52,8 @@
 			</c:forEach>
 			<c:choose>
 				<c:when test="${orderMap.bedAdding}">
-					<tr><td><span>總房價:</span></td><td><span>${(totalPrice+orderMap.pricePerPerson)*orderMap.roomCount}</span><br></td></tr>
-							<input type="hidden" name="price" value="${(totalPrice+orderMap.pricePerPerson)*orderMap.roomCount}"/>
+					<tr><td><span>總房價:</span></td><td><span>${(totalPrice+orderMap.pricePerPerson*stayDayNum)*orderMap.roomCount}</span><br></td></tr>
+							<input type="hidden" name="price" value="${(totalPrice+orderMap.pricePerPerson*stayDayNum)*orderMap.roomCount}"/>
 				</c:when>
 				<c:otherwise>
 					<tr><td><span>總房價:</span></td><td><span>${totalPrice*orderMap.roomCount}</span><br></td></tr>
@@ -102,21 +70,17 @@
 			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport" value="${param.passport}">${errorMsgs.country}<br></td></tr>
 			<tr><td><span>顧客備註:</span></td><td><textarea rows="4" cols="50" name="customerRemark" value="${param.customerRemark}"></textarea><br></td></tr>
 			<tr><td><span>飯店備註:</span></td><td><span>${orderMap.remark }</span><br></td></tr>
-			<tr><td></td><td><input type="submit"></td></tr>
+			<tr><td><input type="button" onclick="history.back()" value="上一頁"></td><td><input type="submit" value="下一步"></td></tr>
 		</table>
 <!-- 		memberId先寫死，之後再改 -->
 		<input type="hidden" name="memberId" value="1"/>
-		<input type="hidden" name="roomCount" value="${orderMap.roomCount}"/>
+		<input type="hidden" name="action" value="keyin"/>
 
 	</form>
 	</div>
-    <!--footer-->
-    <div class="footer">
-        <img src="../img/logo.png" width="100" />
-        <h6>版權所有©2005 – 2017, iCastle Company Pte. Ltd.保留所有權利</h6>
-        <h6>iCastle.com隸屬於Priceline集團—線上旅遊業及相關服務的全球領導品牌。</h6>
-    </div>
-    <!--結束footer-->
+    <!--開始footer-->
+		<jsp:include page="../fragment/footer.jsp"/>
+	<!--結束footer-->
 </body>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
