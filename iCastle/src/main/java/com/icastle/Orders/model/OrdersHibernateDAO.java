@@ -31,7 +31,7 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
-			session.beginTransaction();
+			session.getTransaction();
 			session.save(ordersVO);
 			session.getTransaction().commit();
 		}catch(RuntimeException e){

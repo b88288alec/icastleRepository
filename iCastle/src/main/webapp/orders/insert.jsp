@@ -55,11 +55,7 @@
     <div class="container" style="margin-top:56px">
     <form action="../orders/OrdersServlet.do" method="post">
 		<table>
-<!-- 			<tr><td><span>客戶編號:</span></td><td><span>1</span><br></td></tr> -->
-<%-- 			<tr><td><span>房間編號:</span></td><td><span>${orderMap.roomId }</span><br></td></tr> --%>
-<%-- 			<tr><td><span>飯店編號:</span></td><td><span>${orderMap.hotelId }</span><br></td></tr> --%>
 			<tr><td><span>飯店名稱:</span></td><td><span>${orderMap.hotelName }</span><br></td></tr>
-<%-- 			<tr><td><span>房型編號:</span></td><td><span>${orderMap.roomTypeId }</span><br></td></tr> --%>
 			<tr><td><span>房型名稱:</span></td><td><span>${orderMap.roomTypeName }</span><br></td></tr>
 			<tr><td><span>入住日:</span></td><td><span>${orderMap.checkinDay }</span><br></td></tr>
 			<tr><td><span>退房日:</span></td><td><span>${orderMap.checkoutDay }</span><br></td></tr>
@@ -84,8 +80,8 @@
 			</c:forEach>
 			<c:choose>
 				<c:when test="${orderMap.bedAdding}">
-					<tr><td><span>總房價:</span></td><td><span>${(totalPrice+orderMap.pricePerPerson)*orderMap.roomCount}</span><br></td></tr>
-							<input type="hidden" name="price" value="${(totalPrice+orderMap.pricePerPerson)*orderMap.roomCount}"/>
+					<tr><td><span>總房價:</span></td><td><span>${(totalPrice+orderMap.pricePerPerson*stayDayNum)*orderMap.roomCount}</span><br></td></tr>
+							<input type="hidden" name="price" value="${(totalPrice+orderMap.pricePerPerson*stayDayNum)*orderMap.roomCount}"/>
 				</c:when>
 				<c:otherwise>
 					<tr><td><span>總房價:</span></td><td><span>${totalPrice*orderMap.roomCount}</span><br></td></tr>
@@ -102,11 +98,11 @@
 			<tr><td><span>護照號碼:</span></td><td><input type="text" name="passport" value="${param.passport}">${errorMsgs.country}<br></td></tr>
 			<tr><td><span>顧客備註:</span></td><td><textarea rows="4" cols="50" name="customerRemark" value="${param.customerRemark}"></textarea><br></td></tr>
 			<tr><td><span>飯店備註:</span></td><td><span>${orderMap.remark }</span><br></td></tr>
-			<tr><td></td><td><input type="submit"></td></tr>
+			<tr><td><input type="button" onclick="history.back()" value="上一頁"></td><td><input type="submit" value="下一步"></td></tr>
 		</table>
 <!-- 		memberId先寫死，之後再改 -->
 		<input type="hidden" name="memberId" value="1"/>
-		<input type="hidden" name="roomCount" value="${orderMap.roomCount}"/>
+		<input type="hidden" name="action" value="keyin"/>
 
 	</form>
 	</div>
