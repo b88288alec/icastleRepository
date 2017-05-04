@@ -9,7 +9,7 @@ public class CommentService {
 	
 	
 	
-	public CommentVO comtIns(CommentVO comt){
+	public String comtIns(CommentVO comt){
 		return comtDAO.comtIns(comt);	
 	}
 	
@@ -21,12 +21,17 @@ public class CommentService {
 		return comtDAO.response(commentId,responseTime,response);	
 	}
 	
-	public CommentVO comUpdate(CommentVO comt){
+	public String comUpdate(CommentVO comt){
 		return comtDAO.comUpdate(comt);	
 	}
 	
 	public CommentVO pressGood(Integer commentId,Integer good){
 		return comtDAO.pressGood(commentId,good);
+		
+	}
+	
+	public CommentVO findByOrderId(Integer orderId){
+		return comtDAO.findByOrderId(orderId);
 		
 	}
 	

@@ -142,7 +142,6 @@ window.onload = function(){
 	
 	document.getElementById("star13").onclick = function(){
 		document.getElementById("sceneScore").value="3";
-		document.getElementById("sceneScore").value="4";
 		document.getElementById("star11").src="star.png";
 		document.getElementById("star12").src="star.png";
 		document.getElementById("star13").src="star.png";
@@ -203,8 +202,8 @@ window.onload = function(){
 
 
 
-訂單編號:<input type = "text" name="orderId"><span style="color:red">${error.orderIdKey}</span><br>
-飯店編號:<input type = "text" name = "hotelId"><span style="color:red">${error.hotelIdKey}</span><br>
+<%-- 訂單編號:<input type = "text" name="orderId"><span style="color:red">${error.orderIdKey}</span><br> --%>
+<%-- 飯店編號:<input type = "text" name = "hotelId"><span style="color:red">${error.hotelIdKey}</span><br> --%>
 服務評分:
 <img src="unstar.png" width="50" id="star1">
 <img src="unstar.png" width="50" id="star2">

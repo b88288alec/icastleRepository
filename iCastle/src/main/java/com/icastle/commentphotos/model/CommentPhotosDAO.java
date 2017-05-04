@@ -25,7 +25,7 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 	private final String SHOW_PHOTO = "SELECT commentId,photo FROM CommentPhotos WHERE commentId=?";
 	private final String DEL_PHOTO = "DELETE CommentPhotos WHERE commentId = ?";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private String url = "jdbc:sqlserver://localhost:1433;DatabaseName=i-Castle";
+	private String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
 	private String user = "sa";
 	private String password = "sa123456";
 	
