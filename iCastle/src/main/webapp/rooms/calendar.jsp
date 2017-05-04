@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,12 @@
 	<!--結束導覽列-->
 	
     <div class="container" style="margin-top:100px;">
+    
+    	<select>
+    	<c:forEach var="roomType" items="${roomTypeList}">
+    		<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
+    	</c:forEach>
+		</select>
         <div id="calendar"></div>
     </div>
     
