@@ -22,8 +22,8 @@ public class RoomsService {
 	}
 	
 	//取得飯店整月的特定房型價錢
-	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Integer month){
-		return dao.getRoomsByMonth(hotelId, roomTypeId, month);
+	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Date start, Date end){
+		return dao.getRoomsByMonth(hotelId, roomTypeId, start, end);
 	}
 	
 	//查詢該飯店所在期間內的空房型
@@ -50,7 +50,7 @@ public class RoomsService {
 		if(checkinMonth.equals(checkoutMonth)){
 			updateCount = getOrder(roomId, stayDayNum, roomCount);
 		}else{
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			long start = 0;
 			long end = 0;
 			
@@ -73,7 +73,7 @@ public class RoomsService {
 	
 	//計算入住天數
 	public Integer getstayDayNum(String checkinDay, String checkoutDay){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		int stayDayNum = 0;
 		try {
 			long start = sdf.parse(checkinDay).getTime();
@@ -104,7 +104,7 @@ public class RoomsService {
 		if(checkinMonth.equals(checkoutMonth)){
 			PerPrice = getPerPrice(roomId, stayDayNum);
 		}else{
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			long start = 0;
 			long end = 0;
 			

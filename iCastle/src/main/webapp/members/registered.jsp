@@ -76,7 +76,7 @@ checked
 <tr><td><span>身分證字號:</span></td><td><input type="text" name="personId" value="${param.personId}">${errorMsgs.personIdErr}<br></td></tr>
 <tr><td><span>國家:</span></td><td><input type="text" name="country" value="${param.country}"><br></td></tr>
 <tr><td><span>護照:</span></td><td><input type="text" name="passport" value="${param.passport}"><br></td></tr>
-<tr><td></td><td><input type="submit"></td></tr>
+<tr><td></td><td><input type="submit"><input id="onekey" type="submit" value="一鍵輸入"></td></tr>
 </table>
 
 
@@ -101,5 +101,28 @@ checked
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+
+
+<script>
+	$(function(){
+		$('#onekey').click(function() {
+			event.preventDefault();
+			$('input[name = "email"]').val("andy@yahoo.com.tw");
+			$('input[name = "pw"]').val("123");
+			$('input[name = "name"]').val("劉德華");
+			$('input[name = "pw"]').val("123");
+			$(':radio:eq(0)').prop("checked", "true");
+// 			$(':radio:eq(1)').prop("checked", "true");  <-----女生 上面是男生
+			$('input[name = "bdate"]').val("1990/11/11");
+			$('input[name = "addr"]').val("台北市大安區市民大道2段222號");
+			$('input[name = "tel"]').val("0988210926");
+			$('input[name = "personId"]').val("A125878167");
+			$('input[name = "country"]').val("台灣");
+
+		});
+	})
+</script>
+
+
 
 </html>

@@ -109,30 +109,30 @@ public class RoomsJDBC {
 		System.out.println(count);
 	}
 
-	public static void getRoomsByMonth(){
-		
-		
-		List<RoomsVO> lis = dao.getRoomsByMonth(5, 10, 1);
-		
-		for(RoomsVO vo : lis){
-			System.out.println("RoomId = " +vo.getRoomId());
-			System.out.println("RoomTypeId = " +vo.getRoomTypeId());
-			System.out.println("HotelId = " + vo.getHotelId());
-			System.out.println("RoomDate = " + vo.getRoomDate());
-			System.out.println("RoomTypeName = " + vo.getRoomTypeName());
-			System.out.println("PeopleNum = " + vo.getPeopleNum());
-			System.out.println("BookedNum = " + vo.getBookedNum());
-			System.out.println("RoomNumber = " + vo.getRoomNumber());
-			System.out.println("Price = " + vo.getPrice());
-			System.out.println("Breakfast = " + vo.isBreakfast());
-			System.out.println("Dinner = " + vo.isDinner());
-			System.out.println("AfternoonTea = " + vo.isAfternoonTea());
-			System.out.println("BedAddable = " + vo.isBedAddable());
-			System.out.println("PricePerPerson = " + vo.getPricePerPerson());
-			System.out.println("Remark = " + vo.getRemark());
-			System.out.println("------------------------------------------------------------------------------------------");
-		}
-	}
+//	public static void getRoomsByMonth(){
+//		
+//		
+//		List<RoomsVO> lis = dao.getRoomsByMonth(5, 10, 1);
+//		
+//		for(RoomsVO vo : lis){
+//			System.out.println("RoomId = " +vo.getRoomId());
+//			System.out.println("RoomTypeId = " +vo.getRoomTypeId());
+//			System.out.println("HotelId = " + vo.getHotelId());
+//			System.out.println("RoomDate = " + vo.getRoomDate());
+//			System.out.println("RoomTypeName = " + vo.getRoomTypeName());
+//			System.out.println("PeopleNum = " + vo.getPeopleNum());
+//			System.out.println("BookedNum = " + vo.getBookedNum());
+//			System.out.println("RoomNumber = " + vo.getRoomNumber());
+//			System.out.println("Price = " + vo.getPrice());
+//			System.out.println("Breakfast = " + vo.isBreakfast());
+//			System.out.println("Dinner = " + vo.isDinner());
+//			System.out.println("AfternoonTea = " + vo.isAfternoonTea());
+//			System.out.println("BedAddable = " + vo.isBedAddable());
+//			System.out.println("PricePerPerson = " + vo.getPricePerPerson());
+//			System.out.println("Remark = " + vo.getRemark());
+//			System.out.println("------------------------------------------------------------------------------------------");
+//		}
+//	}
 	
 	public static void update(){
 		RoomsVO vo = new RoomsVO();

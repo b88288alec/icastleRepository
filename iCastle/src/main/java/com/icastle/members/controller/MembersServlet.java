@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.icastle.Orders.model.CheckId;
 import com.icastle.members.model.MembersService;
@@ -136,10 +137,19 @@ public class MembersServlet extends HttpServlet {
         MembersVO membersVO = ms.findByPrimaryKey(email);
 		
 		req.setAttribute("membersVO", membersVO);
+		
+		HttpSession session = req.getSession();
+		
+		
+		MembersVO membersvo = ms.login(email, pw);
+		
+		session.setAttribute("LoginOK", membersvo);
 
 		RequestDispatcher rd = req.getRequestDispatcher("registeredOk.jsp");
 		rd.forward(req, res);
 		return;
+		
+
 		
 		
 //		RequestDispatcher rd = req.getRequestDispatcher("registered.jsp");
