@@ -73,8 +73,8 @@ public class HotelService {
 	}
 	
 	//查詢email是否已經註冊過
-	public Boolean isEmailOK(String email){
-		return dao.isEmailOK(email);
+	public HotelVO findByEmail(String email){
+		return dao.findByEmail(email);
 	}
 	
 	//首頁查詢，根據關鍵字(飯店名稱or地區的模糊搜尋)、入住日、退房日、人數尋找符合條件的飯店，並將資料封裝成ListVO物件

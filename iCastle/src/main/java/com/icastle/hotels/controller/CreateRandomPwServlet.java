@@ -14,10 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import com.icastle.hotels.model.*;
 
-@WebServlet("/hotel/Login.do")
-public class LoginServlet extends HttpServlet {
+import globalservice.GlobalService;
+
+@WebServlet("/hotel/CreateRandomPw.do")
+public class CreateRandomPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public LoginServlet() {
+
+    public CreateRandomPwServlet() {
         super();
     }
 
@@ -28,51 +31,34 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("errMap", errMap);
 		
 		String email = request.getParameter("email");
-		String pw = request.getParameter("pw");
 		
 		//檢查是否所有欄位都有輸入
 		if (email==null || email=="")
 			errMap.put("emailErr", "請輸入Email");
-		
-		if (pw==null || pw=="")
-			errMap.put("pwErr", "請輸入密碼");
-		
+				
 		//如果有任何欄位沒有輸入
 		if (!errMap.isEmpty()){
-			RequestDispatcher rd = request.getRequestDispatcher("loginhotel.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("createrandompw.jsp");
 			rd.forward(request, response);
 			return;
-		}
+		}	
 		
-		//呼叫model
+		//查詢此email是否存在，若是不存在則秀出錯誤訊息
 		HotelService hotelServ = new HotelService();
-		HotelVO hotelvo = hotelServ.checkAccountPw(email, pw);
-		
+		HotelVO hotelvo = hotelServ.findByEmail(email);
 		if (hotelvo == null){
-			//帳號或密碼錯誤
-			errMap.put("accountErr", "帳號或密碼錯誤");
-			RequestDispatcher rd = request.getRequestDispatcher("loginhotel.jsp");
+			errMap.put("emailErr2", "Email不正確");
+			RequestDispatcher rd = request.getRequestDispatcher("createrandompw.jsp");
 			rd.forward(request, response);
 			return;
-		}else{
-			//登入成功!
-			session.setAttribute("LoginOK", hotelvo);
-			
-			System.out.println(hotelvo.getHotelId());
-			System.out.println(hotelvo.getHotelName());
-			System.out.println(hotelvo.getEmail());
-			System.out.println(hotelvo.getPw());
-			System.out.println(hotelvo.getAddr());
-			System.out.println(hotelvo.getZone());
-			System.out.println(hotelvo.getPoint());
-			System.out.println(hotelvo.getHot());
-			System.out.println(hotelvo.getStar());
-			System.out.println(hotelvo.getHotelState());
-			System.out.println(hotelvo.getRegisterId());
-			
-			response.sendRedirect(contextPath + "/index.jsp");
-			return;
 		}
+		
+		//產生新的亂數密碼並寄出email
+		String newPw = hotelServ.createPw(hotelvo.getHotelId());
+		System.out.println("您的新密碼為"+newPw);
+		GlobalService gs = new GlobalService();
+		gs.SendGmail(email, "忘記密碼", "您的新密碼為"+newPw);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

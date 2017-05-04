@@ -50,7 +50,7 @@ public class RoomsService {
 		if(checkinMonth.equals(checkoutMonth)){
 			updateCount = getOrder(roomId, stayDayNum, roomCount);
 		}else{
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			long start = 0;
 			long end = 0;
 			
@@ -73,7 +73,7 @@ public class RoomsService {
 	
 	//計算入住天數
 	public Integer getstayDayNum(String checkinDay, String checkoutDay){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		int stayDayNum = 0;
 		try {
 			long start = sdf.parse(checkinDay).getTime();
@@ -104,7 +104,7 @@ public class RoomsService {
 		if(checkinMonth.equals(checkoutMonth)){
 			PerPrice = getPerPrice(roomId, stayDayNum);
 		}else{
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			long start = 0;
 			long end = 0;
 			

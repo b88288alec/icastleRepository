@@ -25,7 +25,7 @@
 	<!--結束導覽列-->
     <!--content start!!!!!!!!!!!!~~~~~~~~~~-->
 	<div class="container">
-	<h1>業者登入</h1>
+	<h1>會員登入</h1>
     
     
     <form action="Login.do" method="post">
@@ -43,7 +43,6 @@
 			<tr>
 				<td><input type="submit" value="確定"></td>
 				<td><input id="onekey" type="submit" value="一鍵輸入"></td>
-				<td><a href="createrandompw.jsp">忘記密碼</a></td>
 			</tr>
 			</tbody>
 		</table>
@@ -68,14 +67,18 @@
 <script src="../js/bootstrap-datepicker.js"></script>
 
 <script src="../js/material-kit.js"></script>
+
 <script>
 	$(function(){
 		$('#onekey').click(function() {
 			event.preventDefault();
-			$('input[name = "email"]').val("midtown@richardson.com");
-			$('input[name = "pw"]').val("123456");
+			$('input[name = "email"]').val("andy@yahoo.com.tw");
+			$('input[name = "pw"]').val("123");
 		
 		});
 	})
 </script>
+
+
+
 </html>
