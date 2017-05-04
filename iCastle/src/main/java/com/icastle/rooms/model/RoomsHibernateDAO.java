@@ -61,15 +61,16 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Integer month) {
+	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Date start, Date end) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		List<RoomsVO> list = null;
 		try{
 			session.beginTransaction();
-			Query query = session.createQuery("from RoomsVO where hotelId = ? and roomTypeId = ? and MONTH(roomDate) = ?");
+			Query query = session.createQuery("from RoomsVO where hotelId = ? and roomTypeId = ? and roomDate between ? and ?");
 			query.setParameter(0, hotelId);
 			query.setParameter(1, roomTypeId);
-			query.setParameter(2, month);
+			query.setParameter(2, start);
+			query.setParameter(3, end);
 			list = query.list();
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
