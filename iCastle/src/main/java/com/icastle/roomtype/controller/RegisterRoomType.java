@@ -34,17 +34,17 @@ public class RegisterRoomType extends HttpServlet {
 		String customizedName[] = request.getParameterValues("customizedName");
 		String pricePerPerson[] = request.getParameterValues("pricePerPerson");
 		String remark[] = request.getParameterValues("remark");
-		String times = request.getParameter("times");
+		Integer times = Integer.parseInt((request.getParameter("times").equals(""))? "0" : request.getParameter("times"));
 		
 		List<String> bedAddablesList = new ArrayList<String>();
 		List<String[]> mealsList = new ArrayList<String[]>();
-		if(times.equals("")){
+		if(times == 0){
 			String bedAddables = request.getParameter("bedAddable0");
 			bedAddablesList.add(bedAddables);
 			String meals[] = request.getParameterValues("meals0");
 			mealsList.add(meals);
 		}else{
-			for(int i = 0; i <= Integer.parseInt(times); i++){
+			for(int i = 0; i <= times; i++){
 				String bedAddables = request.getParameter("bedAddable"+i);
 				bedAddablesList.add(bedAddables);
 				String meals[] = request.getParameterValues("meals"+i);
@@ -55,7 +55,7 @@ public class RegisterRoomType extends HttpServlet {
 		
 		List<RoomTypeVO> list = new ArrayList<RoomTypeVO>();
 		
-		for(int i = 0; i <= Integer.parseInt(times); i++){
+		for(int i = 0; i <= times; i++){
 			RoomTypeVO vo = new RoomTypeVO();
 			vo.setHotelId(Integer.parseInt(hotelId[i]));
 			vo.setRoomTypeName(roomTypeName[i]);
