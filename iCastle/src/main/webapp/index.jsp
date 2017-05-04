@@ -83,7 +83,6 @@
 		</div>
 	</div>
 	<!--結束搜尋列表-->
-	${pageContext.servletContext.contextPath}
 	<!--精選飯店-->
 	<div class="container">
 		<div class="page-header">

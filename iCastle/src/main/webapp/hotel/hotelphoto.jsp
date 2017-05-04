@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +14,8 @@
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
     <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
-    <link href="${pageContext.servletContext.contextPath}/css/fullcalendar.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
+	<link href="${pageContext.servletContext.contextPath}/css/hotelphoto.css" rel="stylesheet" />
 
     <title>愛客宿-iCastle</title>
 </head>
@@ -25,15 +24,38 @@
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
-    <div class="container" style="margin-top:100px;">
-    
-    	<select>
-    	<c:forEach var="roomType" items="${roomTypeList}">
-    		<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
-    	</c:forEach>
-		</select>
-        <div id="calendar"></div>
-    </div>
+    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
+    <div class="container">
+		<h1>編輯照片</h1>
+		<div class="row bigImagediv">
+			<img class="bigImage" src="../img/hotelphoto/101.jpg">
+		</div>
+	<div id="div1"></div>
+	<!-- 下面一排 -->
+	<div class="row">
+		<div class="col-md-2">
+			<button type="button" id="left">左</button>
+		</div>
+		
+		<div class="col-md-8">
+			<div id="abgneBlock">
+				<ul id="list" class="list">
+					<li><a href="#"><img src="../img/hotelphoto/101.jpg"></a></li>
+					<li><a href="#"><img src="../img/hotelphoto/102.jpg"></a></li>
+					<li><a href="#"><img src="../img/hotelphoto/103.jpg"></a></li>
+					<li><a href="#"><img src="../img/hotelphoto/104.jpg"></a></li>
+					<li><a href="#"><img src="../img/hotelphoto/105.jpg"></a></li>
+					<li><a href="#"><img src="../img/hotelphoto/106.jpg"></a></li>
+					<li><a href="#"><img src="../img/hotelphoto/107.jpg"></a></li>
+					<li><a href="#"><img src="../img/hotelphoto/108.jpg"></a></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="col-md-2">
+			<button type="button" id="right">右</button>
+		</div>		
+	</div>
     
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
@@ -49,26 +71,5 @@
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 
-<script src="${pageContext.servletContext.contextPath}/js/moment.min.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/fullcalendar.js"></script>
-
-<script>
-        $(function () {
-            $('#calendar').fullCalendar({
-            	eventSources: [
-                	{
-                		url : '/iCastle/rooms/MonthRoomsToJason',
-                		data : {
-                			hotelId : '5',
-                			roomTypeId : '14',
-                		},
-                		error: function() {
-                            alert('there was an error while fetching events!');
-                        }
-                	}
-                ]
-            })
-        });
-</script>
-
+<script src="${pageContext.servletContext.contextPath}/js/hotelphoto.js"></script>
 </html>
