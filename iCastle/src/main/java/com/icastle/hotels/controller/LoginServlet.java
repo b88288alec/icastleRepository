@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}else{
 			//登入成功!
-			session.setAttribute("LoginOK", hotelvo);
+			session.setAttribute("HotelLoginOK", hotelvo);
 			
 			System.out.println(hotelvo.getHotelId());
 			System.out.println(hotelvo.getHotelName());

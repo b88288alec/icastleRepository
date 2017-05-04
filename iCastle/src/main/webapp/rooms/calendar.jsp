@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,32 +15,26 @@
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
     <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
+    <link href="${pageContext.servletContext.contextPath}/css/fullcalendar.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
-    <style>
-.container {
-    width: 1300px;
-    margin-top: 150px;
-}   
-    </style>
 </head>
 <body>
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container">
-    <div class="row">
-    	<div class="col-md-6">
-		    <a href="${pageContext.servletContext.contextPath}/hotel/registerhotel.jsp">業者註冊</a>
-		</div>   
-		<div class="col-md-6">
-		    <a href="${pageContext.servletContext.contextPath}/members/registered.jsp">會員註冊</a>
-		</div>   
-	</div>
+    <div class="container" style="margin-top:100px;">
+    
+    	<select>
+    	<c:forEach var="roomType" items="${roomTypeList}">
+    		<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
+    	</c:forEach>
+		</select>
+        <div id="calendar"></div>
     </div>
+    
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
@@ -53,5 +48,27 @@
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+
+<script src="${pageContext.servletContext.contextPath}/js/moment.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/fullcalendar.js"></script>
+
+<script>
+        $(function () {
+            $('#calendar').fullCalendar({
+            	eventSources: [
+                	{
+                		url : '/iCastle/rooms/MonthRoomsToJason',
+                		data : {
+                			hotelId : '5',
+                			roomTypeId : '14',
+                		},
+                		error: function() {
+                            alert('there was an error while fetching events!');
+                        }
+                	}
+                ]
+            })
+        });
+</script>
 
 </html>

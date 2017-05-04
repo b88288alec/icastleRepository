@@ -23,7 +23,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 
 	private final String INSERT_CMD = "insert into Rooms(roomTypeId, hotelId, roomDate, RoomTypeName, peopleNum, bookedNum, roomNumber, price,  breakfast, dinner, afternoonTea, bedAddable, pricePerPerson, remark) "
 			+ "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private final String GET_ROOMS_BY_MONTH = "select * from Rooms where hotelId = ? and roomTypeId = ? and MONTH(roomDate) = ?";
+	private final String GET_ROOMS_BY_MONTH = "select * from Rooms where hotelId = ? and roomTypeId = ? and roomDate between ? and ?";
 	private final String UPDATE_CMD = "update Rooms set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?";
 	private final String GET_ORDER = "update Rooms set bookedNum = bookedNum+? where roomId between ? and ?";
 	private final String GET_ORDER_BY_DATE = "UPDATE Rooms set bookedNum = bookedNum + ? where hotelId = ? and roomTypeId = ? and  roomDate between ? and ?";
@@ -159,7 +159,7 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 	}
 
 	@Override
-	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Integer month) {
+	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Date start, Date end) {
 		List<RoomsVO> list = new ArrayList<RoomsVO>();
 		try {
 			Class.forName(driver);
@@ -167,7 +167,8 @@ public class RoomsJDBCDAO implements RoomsDAO_interface {
 			pstmt = conn.prepareStatement(GET_ROOMS_BY_MONTH);
 			pstmt.setInt(1, hotelId);
 			pstmt.setInt(2, roomTypeId);
-			pstmt.setInt(3, month);
+			pstmt.setDate(3, start);
+			pstmt.setDate(4, end);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

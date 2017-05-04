@@ -34,14 +34,49 @@
 						<c:otherwise>
 							<li><a href="${pageContext.servletContext.contextPath}/index.jsp">首頁</a></li>	
 						</c:otherwise>
-    				</c:choose>    
-                    <li><a href="#">活動</a></li>
-                    <li><a href="#">討論區 </a></li>
+    				</c:choose>   
+    				<c:choose>
+    					<c:when test="${not empty MemberLoginOK}">
+							<!--會員標頭使用區塊 -->
+    					</c:when>
+    					<c:when test="${not empty HotelLoginOK}">
+							<!--飯店標頭使用區塊 -->
+    					</c:when>
+    					<c:when test="${not empty ManagerLoginOK}">
+    						<!--管理員標頭使用區塊 -->
+    						<c:choose>
+	    						<c:when test="">
+    					
+	    						</c:when>
+    						</c:choose>
+    					</c:when>
+    					<c:otherwise>
+    						<li><a href="#">活動</a></li>
+                   			<li><a href="#">討論區 </a></li>
+    					</c:otherwise>
+    				</c:choose>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-						<c:if test="${not empty LoginOK}">
-							<li><a href="${pageContext.servletContext.contextPath}/hotel/hotelcenter.jsp"><span class="glyphicon glyphicon-user"></span>${LoginOK.email}</a></li>	
-						</c:if>
+					<c:choose>
+    					<c:when test="${not empty MemberLoginOK}">
+							<!--會員標頭使用區塊 -->
+    					</c:when>
+    					<c:when test="${not empty HotelLoginOK}">
+							<!--飯店標頭使用區塊 -->
+							<li><a href="${pageContext.servletContext.contextPath}/hotel/hotelcenter.jsp"><span class="glyphicon glyphicon-user"></span>${HotelLoginOK.email}</a></li>
+    					</c:when>
+    					<c:when test="${not empty ManagerLoginOK}">
+							<!--管理員標頭使用區塊 -->
+    						<c:choose>
+	    						<c:when test="">
+    					
+	    						</c:when>
+    						</c:choose>
+    					</c:when>
+    					<c:otherwise>
+    					</c:otherwise>
+    				</c:choose>
     				
                     <c:choose>
 						<c:when test="${servletPath  == '/hotel/register.jsp' || servletPath == '/hotel/registerhotel.jsp'}">
@@ -53,7 +88,7 @@
     				</c:choose> 
                     
                     <c:choose>
-						<c:when test="${empty LoginOK}">
+						<c:when test="${empty HotelLoginOK && empty MemberLoginOK && empty ManagerLoginOK}">
 						<!-- 沒有登入 -->
 							<c:choose>
 								<c:when test="${servletPath == '/hotel/login.jsp' || servletPath == '/hotel/loginhotel.jsp'}">

@@ -1,6 +1,7 @@
-package com.icastle.hotels.controller;
+package com.icastle.rooms.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,22 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/hote/Logout.do")
-public class LogoutServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    public LogoutServlet() {
-        super();
-    }
+import com.icastle.roomtype.model.RoomTypeService;
+import com.icastle.roomtype.model.RoomTypeVO;
 
+@WebServlet("/rooms/SetRoomPrice")
+public class SetRoomPrice extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String contextPath = request.getContextPath();
 		HttpSession session = request.getSession();
-		session.removeAttribute("HotelLoginOK");
 		
-		//轉交到index.jsp
-		response.sendRedirect(contextPath + "/index.jsp");
-		return;
+		RoomTypeService rots = new RoomTypeService();
+		List<RoomTypeVO> roomTypeList = rots.findRoomTypeByHotelId(5);
+		
+		request.setAttribute("roomTypeList", roomTypeList);
+		RequestDispatcher rd = request.getRequestDispatcher("calendar.jsp");
+		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

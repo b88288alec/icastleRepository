@@ -13,7 +13,7 @@ public interface RoomsDAO_interface {
 	public Integer updateDetail(List<RoomsVO> roomList);
 	
 	//取得飯店整月的特定房型價錢
-	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Integer month);
+	public List<RoomsVO> getRoomsByMonth(Integer hotelId, Integer roomTypeId, Date start, Date end);
 	
 	//查詢該飯店所在期間內的空房型
 	public List<RoomsVO> findRooms(Integer hotelId, Integer peopleNum, Date star, Date end);
