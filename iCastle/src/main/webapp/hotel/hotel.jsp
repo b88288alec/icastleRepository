@@ -19,10 +19,11 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <!--<link href="../css/bootstrap.min.css" rel="stylesheet" />-->
-<link href="/iCastle/css/material-kit.css" rel="stylesheet" />
-<link href="/iCastle/css/template.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
 <!--以下請加入各自頁面的css-->
-<link href="/iCastle/css/hotel.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/hotel.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/lightbox.min.css" rel="stylesheet" />
 
 <title>愛客宿-iCastle</title>
 </head>
@@ -99,35 +100,58 @@
 			<div class="col-md-12">
 				<div class="gallery">
 					
-<!-- 					magnific-popup -->
-<!-- 					<div class="popup-gallery"> -->
-<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
-<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
-<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
-<%-- 						<a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" title="The Cleaner"><img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=1" width="75" height="75"></a> --%>
-<!-- 					</div> -->
-				
 					<!--秀出飯店圖片 -->
-					<c:forEach var="photo" items="${photos}">
-						<div class="frist-img">
-							<img
-								src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
-								width="300"/>
-						</div>
+					<c:forEach var="photo" items="${photos}" varStatus="loop">
+						
+						<c:if test="${loop.index == 0}">
+							<div class="frist-img">
+		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="700" height="389" />
+		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs" data-title="飯店大門">
+		                            <div class="overlay">
+		                                <h3 style="color:white;position:absolute;bottom:10px;left:10px;">飯店大門</h3>
+		                            </div>
+		                        </a>
+		                    </div>
+	                    </c:if>
+	                    
+	                    <c:if test="${loop.index == 1}">
+		                    <div class="second-img">
+		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="550" height="189" />
+		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs">
+		                            <div class="overlay"></div>
+		                        </a>
+		                    </div>
+	                    </c:if>
+	                    
+	                    <c:if test="${loop.index == 2}">
+		                    <div class="thrid-img">
+		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="268" height="189" />
+		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs">
+		                            <div class="overlay"></div>
+		                        </a>
+		                    </div>
+	                    </c:if>
+	                    
+	                    <c:if test="${loop.index == 3}">
+		                    <div class="fourth-img">
+		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="268" height="189" />
+		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs">
+		                            <div class="overlay"></div>
+		                        </a>
+		                    </div>
+						</c:if>
+
+						<c:if test="${loop.index > 3}">
+							<!-- 第5張以後的圖片 -->
+		                    <div style="display:none">
+		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs">
+		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" /></a>
+							</div>
+						</c:if>
+						
 					</c:forEach>
-					
-					<!--                     <div class="frist-img"> -->
-					<%--                         <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="700" height="389" /> --%>
-					<!--                     </div> -->
-					<!--                     <div class="second-img"> -->
-					<!--                         <img src="/iCastle/img/hotelphoto/908412_17040615450052164261.jpg" width="550" height="189" /> -->
-					<!--                     </div> -->
-					<!--                     <div class="thrid-img"> -->
-					<!--                         <img src="/iCastle/img/hotelphoto/908412_17040615450052164309.jpg" width="268" height="189" /> -->
-					<!--                     </div> -->
-					<!--                     <div class="fourth-img"> -->
-					<!--                         <img src="/iCastle/img/hotelphoto/908412_17040615450052164302.jpg" width="268" height="189" /> -->
-					<!--                     </div> -->
+									
+
 					<div style="clear: both"></div>
 				</div>
 			</div>
@@ -427,6 +451,7 @@
 	<script src="/iCastle/js/material-kit.js"></script>
 	
 	<script src="../js/magnific-popup.js"></script>
+	<script src="../js/lightbox.min.js"></script>
 	
 	<script>
 	$(document).ready(function() {
@@ -447,6 +472,9 @@
 				}
 			}
 		});
+		lightbox.option({
+            'wrapAround': true
+        })
 	});
 	</script>
 </body>

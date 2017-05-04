@@ -43,7 +43,7 @@
 			<tr>
 				<td><input type="submit" value="確定"></td>
 				<td><input id="onekey" type="submit" value="一鍵輸入"></td>
-				<td><a href="../hotel/createrandompw.jsp">忘記密碼</a></td>
+				<td><a href="">忘記密碼</a></td>
 			</tr>
 			</tbody>
 		</table>

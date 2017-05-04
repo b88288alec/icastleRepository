@@ -97,8 +97,6 @@
 							<!--管理員標頭使用區塊 -->
     					</c:when>
     					<c:otherwise>
-    						<li><a href="#">活動</a></li>
-                   			<li><a href="#">討論區 </a></li>
     					</c:otherwise>
     				</c:choose>
     				
@@ -112,7 +110,7 @@
     				</c:choose> 
                     
                     <c:choose>
-						<c:when test="${empty LoginOK}">
+						<c:when test="${empty HotelLoginOK && empty MemberLoginOK && empty ManagerLoginOK}">
 						<!-- 沒有登入 -->
 							<c:choose>
 								<c:when test="${servletPath == '/hotel/login.jsp' || servletPath == '/hotel/loginhotel.jsp'}">

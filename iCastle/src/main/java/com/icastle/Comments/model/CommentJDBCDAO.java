@@ -12,9 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class CommentDAO implements CommentDAO_interface {
-	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime) VALUES(?,?,?,?,?,?,?,?,?)";
-	private static final String SHOW_COMT = "SELECT commentId,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE orderId = ?";
+public class CommentJDBCDAO implements CommentDAO_interface {
+	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String SHOW_COMT = "SELECT commentId,avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE orderId = ?";
 	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE hotelId = ?";
 	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ? WHERE commentId = ?";
 	private static final String SHOW_RESPONSE = "SELECT response FROM Comments WHERE commentId = ?";
@@ -22,33 +22,25 @@ public class CommentDAO implements CommentDAO_interface {
 	private static final String GOOD_COMT = "UPDATE Comments SET good = ? WHERE commentId = ?";
 	private static final String SHOW_GOOD = "SELECT good FROM Comments WHERE commentId = ?";
 	
+	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
+	private String user = "sa";
+	private String password = "sa123456";
+	
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs; 
 	CommentVO com;
-	CommentDAO commt;
 	List<CommentVO> comtList = new ArrayList<CommentVO>();
-	
-	private static DataSource ds = null;
-	static{
-		
-		try {
-			InitialContext context = new InitialContext();
-			ds = (DataSource) context.lookup("java:comp/env/jdbc/iCastleDB");
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 	
 	
 	public String comtIns(CommentVO comt){
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,user,password);
 			stmt = conn.prepareStatement(INS_COMT);
 			stmt.setInt(1,comt.getOrderId());
 			stmt.setInt(2,comt.getHotelId());
-			System.out.println(comt.getEmail());
 			stmt.setString(3,comt.getEmail());
 			stmt.setDouble(4,(comt.getServiceScore()+comt.getSceneScore()+comt.getQualityScore())/3.0);
 			stmt.setInt(5,comt.getServiceScore());
@@ -62,11 +54,16 @@ public class CommentDAO implements CommentDAO_interface {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally{
-			try { stmt.close();
-			} catch (SQLException e) {e.printStackTrace();}
-			try { conn.close();
-			} catch (SQLException e) {e.printStackTrace();}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return "新增成功";
 		
@@ -74,7 +71,8 @@ public class CommentDAO implements CommentDAO_interface {
 	
 	public List<CommentVO> hotelComtSearch(Integer hotelId){
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,user,password);
 			stmt = conn.prepareStatement(SEL_HOTELID);
 			stmt.setInt(1, hotelId);
 			rs = stmt.executeQuery();
@@ -99,6 +97,9 @@ public class CommentDAO implements CommentDAO_interface {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally{
 			try {
 				conn.close();
@@ -113,7 +114,8 @@ public class CommentDAO implements CommentDAO_interface {
 	
 	public CommentVO response(Integer commentId,java.sql.Date responseTime,String response){
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,user,password);
 			stmt = conn.prepareStatement(HOST_RESPONSE);
 			stmt.setString(1,response);
 			stmt.setDate(2,responseTime);
@@ -133,6 +135,9 @@ public class CommentDAO implements CommentDAO_interface {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally{
 			try {
 				conn.close();
@@ -148,7 +153,8 @@ public class CommentDAO implements CommentDAO_interface {
 	
 	public String comUpdate(CommentVO comt){
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,user,password);
 			stmt = conn.prepareStatement(UPD_COMT);
 			stmt.setDouble(1,(comt.getSceneScore()+comt.getQualityScore()+comt.getServiceScore())/3);
             stmt.setInt(2,comt.getServiceScore());
@@ -162,6 +168,9 @@ public class CommentDAO implements CommentDAO_interface {
             
 				
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
@@ -180,7 +189,8 @@ public class CommentDAO implements CommentDAO_interface {
 		
 
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,user,password);
 			stmt = conn.prepareStatement(GOOD_COMT);
 			stmt.setInt(1, good);
 			stmt.setInt(2, commentId);
@@ -198,6 +208,9 @@ public class CommentDAO implements CommentDAO_interface {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally{
 			try {
 				conn.close();
@@ -212,9 +225,9 @@ public class CommentDAO implements CommentDAO_interface {
 	
 	public CommentVO findByOrderId(Integer orderId){
 		
-		
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,user,password);
 			stmt = conn.prepareStatement(SHOW_COMT);
 			stmt.setInt(1,orderId);
 			rs = stmt.executeQuery();			
@@ -232,6 +245,9 @@ public class CommentDAO implements CommentDAO_interface {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}finally{
 			try {
 				conn.close();
@@ -245,12 +261,4 @@ public class CommentDAO implements CommentDAO_interface {
 		
 	}
 } 
-
-
-
-
-
-
-
-
 

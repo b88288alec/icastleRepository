@@ -55,29 +55,66 @@
     margin-bottom:20px;
 }
 
-    .gallery div {
+    /*.gallery div {
         position: relative;
-    }
+    }*/
 
     .gallery .frist-img {
+        position: relative;
         float: left;
     }
 
+
     .gallery .second-img {
+        position: relative;
         float: right;
     }
 
     .gallery .thrid-img {
+        position: relative;
         float: left;
         margin-top: 11px;
         margin-left: 9px;
     }
 
     .gallery .fourth-img {
+        position: relative;
         float: right;
         margin-top: 11px;
         margin-left: 9px;
     }
+
+    .overlay {
+    position:absolute;
+    background-color:black;
+    opacity:0;
+    bottom:0px;
+    float:left;
+}
+
+    .overlay:hover {
+        opacity:0.4;
+    }
+
+.frist-img .overlay {
+    width:700px;
+    height:389px;
+}
+
+.second-img .overlay {
+    width:550px;
+    height:189px;
+}
+
+.thrid-img .overlay {
+    width:268px;
+    height:189px;
+}
+
+.fourth-img .overlay {
+    width:268px;
+    height:189px;
+}
 
 .facility-service {
     border-top: 0.5px solid #4CAF50;

@@ -8,6 +8,7 @@ public class CommentVO {
 	private Integer commentId;
 	private Integer orderId;
 	private Integer hotelId;
+	private String email;
 	private Double avgScore;
 	private Integer serviceScore;
 	private Integer qualityScore;
@@ -36,6 +37,12 @@ public class CommentVO {
 	}
 	public void setHotelId(Integer hotelId) {
 		this.hotelId = hotelId;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public Double getAvgScore() {
 		return avgScore;
