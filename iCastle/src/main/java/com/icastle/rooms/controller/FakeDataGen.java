@@ -44,7 +44,14 @@ public class FakeDataGen extends HttpServlet {
 				vo.setPeopleNum(typeVO.getPeopleNum());
 				vo.setBookedNum(0);
 				vo.setRoomNumber(typeVO.getRoomNumber());
-				vo.setPrice(typeVO.getWeekdaysPrice());
+				
+				int week = cal2.get(Calendar.DAY_OF_WEEK);
+				if(week == 6 || week == 7 || week == 1){
+					vo.setPrice(typeVO.getHolidayPrice());
+				}else{
+					vo.setPrice(typeVO.getWeekdaysPrice());
+				}
+				
 				vo.setBreakfast(typeVO.getBreakfast());
 				vo.setDinner(typeVO.getDinner());
 				vo.setBedAddable(typeVO.getBedAddable());

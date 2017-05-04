@@ -94,9 +94,22 @@ public class HotelTest {
 //		System.out.println(hotelvo.getRegisterId());
 		
 		//查詢email是否已經註冊過
-		HotelService dao = new HotelService();
-		Boolean ok = dao.isEmailOK("Forwar@gmail.com");
-		System.out.println(ok);
+//		HotelService dao = new HotelService();
+//		HotelVO hotelvo = dao.findByEmail("midtown@richardson.com");
+//		if (hotelvo != null){
+//			System.out.println(hotelvo.getHotelId());
+//			System.out.println(hotelvo.getHotelName());
+//			System.out.println(hotelvo.getEmail());
+//			System.out.println(hotelvo.getPw());
+//			System.out.println(hotelvo.getAddr());
+//			System.out.println(hotelvo.getZone());
+//			System.out.println(hotelvo.getPoint());
+//			System.out.println(hotelvo.getHot());
+//			System.out.println(hotelvo.getStar());
+//			System.out.println(hotelvo.getHotelState());
+//			System.out.println(hotelvo.getRegisterId());
+//		}else
+//			System.out.println("不存在此email帳號");
 		
 		//首頁查詢
 //		HotelService dao = new HotelService();

@@ -14,7 +14,7 @@ public interface HotelDAO_Interface {
 	//登入
 	public HotelVO checkAccountPw(String email, String pw);
 	//查詢email是否已經註冊過
-	public Boolean isEmailOK(String email);
+	public HotelVO findByEmail(String email);
 	//首頁查詢
 	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, Integer peopleNum);//首頁查詢
 	//進階查詢

@@ -56,21 +56,28 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 	}
 
 	@Override
-	public Boolean isEmailOK(String email) {
+	public HotelVO findByEmail(String email) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Boolean ok = null;
+		HotelVO hotelvo = new HotelVO();
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery("from HotelVO where email = :email");
 			query.setParameter("email", email);
-			List<Object[]> list = query.list();
-			ok = (list.size()==0) ? true : false;
+			List<HotelVO> hotels = new ArrayList<HotelVO>();
+			hotels = query.list();
+			//查無此email
+			if (hotels.size() == 0)
+				hotelvo = null;
+			else {
+				//有查到資料，封裝到HotelVO
+				hotelvo = hotels.get(0);
+			}
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return ok;
+		return hotelvo;
 	}
 
 	@Override
