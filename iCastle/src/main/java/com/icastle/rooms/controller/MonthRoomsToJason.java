@@ -43,19 +43,19 @@ public class MonthRoomsToJason extends HttpServlet {
 		RoomsService roms = new RoomsService();
 		List<RoomsVO> list = roms.getRoomsByMonth(hotelId, roomTypeId, new Date(startlong), new Date(endlong));
 		
-		JSONArray jsonList = new JSONArray();
+		JSONArray jsonArray = new JSONArray();
 		for(RoomsVO vo : list){
 			JSONObject jsonObj = new JSONObject();
 			jsonObj.put("id", vo.getRoomId().toString());
 			jsonObj.put("title", vo.getPrice().toString());
 			jsonObj.put("start", vo.getRoomDate().toString());
 			
-			jsonList.add(jsonObj);
+			jsonArray.add(jsonObj);
 		}
-		System.out.println(jsonList);
+		System.out.println(jsonArray);
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		out.println(jsonList);
+		out.println(jsonArray);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
