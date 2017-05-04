@@ -218,7 +218,7 @@ public class RegisterhotelServlet extends HttpServlet {
 		
 		//email是否有重複
 		HotelService hotelServ = new HotelService();
-		if (!hotelServ.isEmailOK(email))
+		if (hotelServ.findByEmail(email) != null)
 			errMap.put("emailErr", "此email已經註冊");
 		
 		//得到圖檔的byte
