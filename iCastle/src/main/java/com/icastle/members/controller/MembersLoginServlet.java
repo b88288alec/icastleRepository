@@ -31,6 +31,7 @@ public class MembersLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
 		HttpSession session = req.getSession();
+		String contextPath = req.getContextPath();
 		Map<String,String> errMap = new HashMap<String,String>();
 		req.setAttribute("errMap", errMap);
 		

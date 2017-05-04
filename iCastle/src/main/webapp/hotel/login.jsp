@@ -36,7 +36,7 @@
 		    <a href="${pageContext.servletContext.contextPath}/hotel/loginhotel.jsp">業者登入</a>
 		</div>   
 		<div class="col-md-6">
-		    <a href="#">會員登入</a>
+		    <a href="${pageContext.servletContext.contextPath}/members/loginMembers.jsp">會員登入</a>
 		</div>   
 	</div>
     </div>
