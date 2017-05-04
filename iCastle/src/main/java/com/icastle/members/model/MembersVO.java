@@ -15,7 +15,23 @@ public class MembersVO {
 	private String personId;
 	private String country;
 	private String passport;
+	private boolean manager;
+	private boolean suspension; //停權
 	
+	
+	
+	public boolean isManager() {
+		return manager;
+	}
+	public void setManager(boolean manager) {
+		this.manager = manager;
+	}
+	public boolean isSuspension() {
+		return suspension;
+	}
+	public void setSuspension(boolean suspension) {
+		this.suspension = suspension;
+	}
 	public Integer getMemberId() {
 		return memberId;
 	}
