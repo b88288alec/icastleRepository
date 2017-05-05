@@ -80,15 +80,15 @@
 					<!--標題列 -->
 					<thead>
 						<tr>
-							<th>hotelName</th>
+							<th>hotelName飯店名稱</th>
 							<th>roomCount訂購房間數</th>
 							<th>price價錢</th>
 							<th>pricePerPerson個人價錢</th>
 							<th>roomTypeName房型</th>
-							<th>reservationer</th>
+							<th>reservationer訂購人</th>
 							<th>tel</th>
-							<th>country</th>
-							<th>addr</th>
+							<th>country國家</th>
+							<th>addr地址</th>
 							<th>orderState訂單狀態</th>
 							<th>cancelDate取銷日期</th>
 						</tr>
@@ -106,7 +106,7 @@
 							<tr>
 							<td>${myData.hotelName}</td>
 							<td>${myData.roomCount}</td>
-							<td>${myData.price}}</td>
+							<td>${myData.price}</td>
 							<td>${myData.pricePerPerson}</td>
 							<td>${myData.roomTypeName}</td>
 							<td>${myData.reservationer}</td>
