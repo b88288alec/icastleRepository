@@ -14,9 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.icastle.Orders.model.CheckId;
 import com.icastle.members.model.MembersService;
 import com.icastle.members.model.MembersVO;
+
+import globalservice.CheckId;
 
 @WebServlet("/members/Member.do")
 public class MembersServlet extends HttpServlet {
@@ -143,7 +144,7 @@ public class MembersServlet extends HttpServlet {
 		
 		MembersVO membersvo = ms.login(email, pw);
 		
-		session.setAttribute("LoginOK", membersvo);
+		session.setAttribute("MemberLoginOK", membersvo);
 
 		RequestDispatcher rd = req.getRequestDispatcher("registeredOk.jsp");
 		rd.forward(req, res);

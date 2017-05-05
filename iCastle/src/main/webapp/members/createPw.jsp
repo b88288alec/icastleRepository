@@ -15,10 +15,16 @@
     <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
-	<link href="${pageContext.servletContext.contextPath}/css/hotelphoto.css" rel="stylesheet" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <title>愛客宿-iCastle</title>
+    <style>
+		.container {
+		    width: 1300px;
+		    margin-top: 100px;
+		    background-color: white; 
+		    padding-bottom: 100px;
+		}
+    </style>
 </head>
 <body>
     <!--開始導覽列-->
@@ -27,34 +33,23 @@
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container">
-		<h1>編輯照片</h1>
-		<div class="row bigImagediv" ondragover="dragoverHandler(event)" ondrop="dropHandler(event)">
-			<img class="bigImage" src="../img/hotelphoto/101.jpg">
-		</div>
-		
-	<div id="div1"></div>
-	
-	<!-- 下面一排 -->
-	<div class="row">
-	<form method="post" action="UploadPhoto.do" enctype="multipart/form-data">
-		<div class="col-md-2">
-			<button type="button" id="left">左</button>
-		</div>
-
-		<div class="col-md-8">
-			<div id="abgneBlock">
-					<ul id="selectable" class="list">
-					
-					</ul>
-			</div>
-		</div>
-		
-		<div class="col-md-2">
-			<button type="button" id="right">右</button>
-			<input type="submit" value="送出"/>
-		</div>	
-	</form>	
-	</div>
+    	<h1>是否忘記密碼?</h1>
+    	
+    	<form action="CreatePw.do" method="post">
+		<table class="">
+			<tbody>
+			<tr>
+				<td>請輸入您的Email</td>
+				<td><input type="text" name="email" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2}</td>
+			</tr>			
+			<tr>
+				<td><input type="submit" value="確定"></td>
+				<td><input id="onekey" type="submit" value="一鍵輸入"></td>
+			</tr>
+			</tbody>
+		</table>
+		</form>
+    </div>
     
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
@@ -69,7 +64,12 @@
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
-
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/hotelphoto.js"></script>
+<script>
+	$(function(){
+		$('#onekey').click(function() {
+			event.preventDefault();
+			$('input[name = "email"]').val("eeit93no1@gmail.com");		
+		});
+	})
+</script>
 </html>

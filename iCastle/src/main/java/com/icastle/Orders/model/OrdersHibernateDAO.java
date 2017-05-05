@@ -16,15 +16,15 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 	private static final String SELECT_BY_HOTELID_YEAR = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout)";
 	private static final String SELECT_BY_HOTELID_MONTH = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout)";
 	private static final String SELECT_BY_HOTELID_DAY = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay";
-	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and roomtypeid=:roomtypeid";
-	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout) and roomtypeid=:roomtypeid";
-	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay and roomtypeid=:roomtypeid";
+	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and roomtypeid=:roomTypeId";
+	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout) and roomtypeid=:roomTypeId";
+	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay and roomtypeid=:roomTypeId";
 	private static final String SELECT_BY_HOTELID_YEAR_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate";
 	private static final String SELECT_BY_HOTELID_MONTH_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout) and orderstate=:orderstate";
 	private static final String SELECT_BY_HOTELID_DAY_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay and orderstate=:orderstate";
-	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate and roomtypeid=:roomtypeid";
-	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout) and orderstate=:orderstate and roomtypeid=:roomtypeid";
-	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay and orderstate=:orderstate and roomtypeid=:roomtypeid";
+	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate and roomtypeid=:roomTypeId";
+	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout) and orderstate=:orderstate and roomtypeid=:roomTypeId";
+	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay and orderstate=:orderstate and roomtypeid=:roomTypeId";
 	
 	@Override
 	public void insert(OrdersVO ordersVO) {

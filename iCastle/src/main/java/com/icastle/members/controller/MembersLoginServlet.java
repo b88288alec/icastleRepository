@@ -24,7 +24,6 @@ public class MembersLoginServlet extends HttpServlet {
 
     public MembersLoginServlet() {
         super();
-       
     }
 
 	
@@ -65,7 +64,11 @@ public class MembersLoginServlet extends HttpServlet {
 			return;
 		}else{
 			//登入成功!
-			session.setAttribute("LoginOK", membersvo);
+			if(membersvo.isManager()){
+				session.setAttribute("ManagerLoginOK", membersvo);
+			}else{
+				session.setAttribute("MemberLoginOK", membersvo);
+			}
 			System.out.println(membersvo.getMemberId());
 			System.out.println(membersvo.getEmail());
 			System.out.println(membersvo.getPw());

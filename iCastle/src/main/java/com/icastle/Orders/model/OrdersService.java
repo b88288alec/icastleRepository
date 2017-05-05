@@ -96,15 +96,15 @@ public class OrdersService {
 		}else{
 			if(state == null){
 				if(roomTypeId == null){
-					return dao.select_by_hotelId_day(hotelId, year, month, day);
+					return dao.select_by_hotelId_day(hotelId, year, (month-1), day);
 				}else{
-					return dao.select_by_hotelId_day_roomTypeId(hotelId, roomTypeId, year, month, day);
+					return dao.select_by_hotelId_day_roomTypeId(hotelId, roomTypeId, year, (month-1), day);
 				}
 			}else{
 				if(roomTypeId == null){
-					return dao.select_by_hotelId_day_orderstate(hotelId, year, month, day, state);
+					return dao.select_by_hotelId_day_orderstate(hotelId, year, (month-1), day, state);
 				}else{
-					return dao.select_by_hotelId_day_roomTypeId_orderstate(hotelId, roomTypeId, year, month, day, state);
+					return dao.select_by_hotelId_day_roomTypeId_orderstate(hotelId, roomTypeId, year, (month-1), day, state);
 				}
 			}
 		}

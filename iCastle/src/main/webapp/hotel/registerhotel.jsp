@@ -141,6 +141,7 @@
 				<td><input type="submit" value="送出"></td>
 				<td><input type="reset" value="清除"></td>
 				<td><input id="onekey" type="submit" value="一鍵輸入"></td>
+				<td><button type="button" id="but">秀value</button></td>
 			</tr>
 			</tbody>
 		</table>
@@ -206,6 +207,9 @@
 			$(':input[name = "guestPolicies"]').val('不可攜帶寵物入內');
 			$(':input[name = "cancelPolicies"]').val('不可以取消');
 			$('input[name = "roomWifi"]').prop('checked');
+		});
+		$('#but').click(function(){
+			console.log($('#photo'));
 		});
 	});
 	</script>

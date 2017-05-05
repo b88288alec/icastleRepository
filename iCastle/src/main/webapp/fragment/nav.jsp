@@ -45,9 +45,44 @@
     					<c:when test="${not empty ManagerLoginOK}">
     						<!--管理員標頭使用區塊 -->
     						<c:choose>
-	    						<c:when test="">
-    					
+	    						<c:when test="${servletPath  == '/manager/manager_index.jsp'}">
+    								<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/manager_index.jsp">管理員首頁</a></li>
 	    						</c:when>
+	    						<c:otherwise>
+	    							<li><a href="${pageContext.servletContext.contextPath}/manager/manager_index.jsp">管理員首頁</a></li>
+	    						</c:otherwise>
+    						</c:choose>
+    						<c:choose>
+	    						<c:when test="${servletPath  == '/manager/hotels_and_members_datas.jsp'}">
+    								<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/hotels_and_members_datas.jsp">業者/會員資料</a></li>
+	    						</c:when>
+	    						<c:otherwise>
+	    							<li><a href="${pageContext.servletContext.contextPath}/manager/hotels_and_members_datas.jsp">業者/會員資料</a></li>
+	    						</c:otherwise>
+    						</c:choose>
+    						<c:choose>
+	    						<c:when test="${servletPath  == '/manager/checkhotels.jsp'}">
+    								<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/checkhotels.jsp">業者資料審核</a></li>
+	    						</c:when>
+	    						<c:otherwise>
+	    							<li><a href="${pageContext.servletContext.contextPath}/manager/checkhotels.jsp">業者資料審核</a></li>
+	    						</c:otherwise>
+    						</c:choose>
+    						<c:choose>
+	    						<c:when test="${servletPath  == '/manager/customers_service.jsp'}">
+    								<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/customers_service.jsp">線上客服</a></li>
+	    						</c:when>
+	    						<c:otherwise>
+	    							<li><a href="${pageContext.servletContext.contextPath}/manager/customers_service.jsp">線上客服</a></li>
+	    						</c:otherwise>
+    						</c:choose>
+    						<c:choose>
+	    						<c:when test="${servletPath  == '/manager/new_manager.jsp'}">
+    								<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/new_manager.jsp">管理員權限</a></li>
+	    						</c:when>
+	    						<c:otherwise>
+	    							<li><a href="${pageContext.servletContext.contextPath}/manager/new_manager.jsp">管理員權限</a></li>
+	    						</c:otherwise>
     						</c:choose>
     					</c:when>
     					<c:otherwise>
@@ -68,11 +103,6 @@
     					</c:when>
     					<c:when test="${not empty ManagerLoginOK}">
 							<!--管理員標頭使用區塊 -->
-    						<c:choose>
-	    						<c:when test="">
-    					
-	    						</c:when>
-    						</c:choose>
     					</c:when>
     					<c:otherwise>
     					</c:otherwise>
