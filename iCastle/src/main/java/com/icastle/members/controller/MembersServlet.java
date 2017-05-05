@@ -144,7 +144,7 @@ public class MembersServlet extends HttpServlet {
 		
 		MembersVO membersvo = ms.login(email, pw);
 		
-		session.setAttribute("LoginOK", membersvo);
+		session.setAttribute("MemberLoginOK", membersvo);
 
 		RequestDispatcher rd = req.getRequestDispatcher("registeredOk.jsp");
 		rd.forward(req, res);

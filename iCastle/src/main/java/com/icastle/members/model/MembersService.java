@@ -2,6 +2,7 @@ package com.icastle.members.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Random;
 
 
 
@@ -71,9 +72,19 @@ public class MembersService {
 	   return dao.login (email, pw);
    }
 	
-	
-	
-	
-	
+//  忘記密碼
+   
+   public String createPw(String email){
+	   MembersVO membersVO = dao.findByPrimaryKey(email);
+	   Random ran = new Random();
+		int range = 999999;
+		String newpw = String.valueOf(ran.nextInt(range));
+		membersVO.setPw(newpw);
+		dao.update(membersVO);
+		return newpw;
+	}
+	   
+
+   
 	
 }

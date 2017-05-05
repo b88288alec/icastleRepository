@@ -78,16 +78,19 @@ public class RegisterhotelServlet extends HttpServlet {
 							if (hotelName == null || hotelName.trim().length() == 0) {
 								errMap.put("hotelNameErr", "請輸入飯店名稱");
 							}
+							System.out.println("飯店名稱");
 						} else if (fldName.equals("email")) {
 							email = value;
 							if (email == null || email.trim().length() == 0) {
 								errMap.put("emailErr", "請輸入E-mail");
 							}
+							System.out.println("email");
 						} else if (fldName.equals("pw")) {
 							pw = value;
 							if (pw == null || pw.trim().length() == 0) {
 								errMap.put("pwErr", "請輸入密碼");
 							} 
+							System.out.println("密碼");
 						} else if (fldName.equals("pwcheck")) {
 							pwcheck = value;
 							if (pwcheck == null || pwcheck.trim().length() == 0) {
@@ -185,6 +188,7 @@ public class RegisterhotelServlet extends HttpServlet {
 						System.out.println("size= " + size);
 						if (size == 0)
 							errMap.put("photoErr", "必須挑選圖片檔");
+						System.out.println("圖片");
 					}
 				}//for (Part p : parts)結束
 			} else {

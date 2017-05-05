@@ -64,7 +64,6 @@ public class MembersLoginServlet extends HttpServlet {
 			return;
 		}else{
 			//登入成功!
-			System.out.println(membersvo.isManager());
 			if(membersvo.isManager()){
 				session.setAttribute("ManagerLoginOK", membersvo);
 			}else{
