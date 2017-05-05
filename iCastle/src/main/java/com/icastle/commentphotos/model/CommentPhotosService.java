@@ -22,6 +22,8 @@ public class CommentPhotosService {
 		
 	}
 	
+//	public CommentPhotosVO findById()
+	
 	
 
 }

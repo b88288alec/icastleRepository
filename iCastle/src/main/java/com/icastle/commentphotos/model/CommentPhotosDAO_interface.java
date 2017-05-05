@@ -8,5 +8,6 @@ public interface CommentPhotosDAO_interface {
 	public String uploadCommentPhoto(int commentId,InputStream x,long length);
 	public String deleteCommentPhoto(int commentId);
 	public List<CommentPhotosVO> findByCommentId(int commentId);
+	public CommentPhotosVO findById(int id);
 
 }

@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import com.icastle.commentphotos.model.CommentPhotosDAO;
+import com.icastle.commentphotos.model.CommentPhotosJDBCDAO;
 import com.icastle.commentphotos.model.CommentPhotosVO;
 
 public class CommentPhotos_Test {
@@ -70,44 +71,36 @@ public class CommentPhotos_Test {
 //		}
 		 
 		
-//		File f;
-//		FileOutputStream fis;
-//		BufferedOutputStream bop;
-//		CommentPhotosVO vo = new CommentPhotosVO();
+		File f;
+		FileOutputStream fis;
+		BufferedOutputStream bop;
+		CommentPhotosVO vo = new CommentPhotosVO();
+		CommentPhotosJDBCDAO dao = new CommentPhotosJDBCDAO();
+		CommentPhotosVO photoSingle;
+		List<CommentPhotosVO> photo = dao.findByCommentId(1);
+				
+		try {
+			photoSingle =photo.get(0);
+		    f = new File("C:\\Users\\Student\\Desktop\\789.jpg");
+			fis = new FileOutputStream(f);
+		    bop = new BufferedOutputStream(fis);
+			bop.write(photoSingle.getPhoto(),0,photoSingle.getPhoto().length);
+			fis.close();
+			bop.close();
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 //		CommentPhotosDAO dao = new CommentPhotosDAO();
-//		CommentPhotosVO photoSingle;
-//		List<CommentPhotosVO> photo = dao.findByCommentId(1);
-//				
-//		try {
-//			photoSingle =photo.get(0);
-//		    f = new File("C:\\Users\\Student\\Desktop\\789.jpg");
-//			fis = new FileOutputStream(f);
-//		    bop = new BufferedOutputStream(fis);
-//			bop.write(photoSingle.getPhoto(),0,photoSingle.getPhoto().length);
-//			fis.close();
-//			bop.close();
-//			
-//			photoSingle =photo.get(1);
-//		    f = new File("C:\\Users\\Student\\Desktop\\456.jpg");
-//			fis = new FileOutputStream(f);
-//		    bop = new BufferedOutputStream(fis);
-//			bop.write(photoSingle.getPhoto(),0,photoSingle.getPhoto().length);
-//			fis.close();
-//			bop.close();
-//			
-//			
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		
-		CommentPhotosDAO dao = new CommentPhotosDAO();
-		String message = dao.deleteCommentPhoto(1);
-		System.out.println(message);
+//		String message = dao.deleteCommentPhoto(1);
+//		System.out.println(message);
 		
 	}
 	

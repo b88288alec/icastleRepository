@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 import com.icastle.Comments.model.CommentDAO;
 import com.icastle.Comments.model.CommentVO;
 
-public class CommentPhotosDAOJNDI implements CommentPhotosDAO_interface{
+public class CommentPhotosJNDIDAO implements CommentPhotosDAO_interface{
 	
 	private final String INS_PHOTO = "INSERT INTO CommentPhotos(commentId,photo) VALUES (?,?)";
 	private final String SHOW_PHOTO = "SELECT commentId,photo FROM CommentPhotos WHERE commentId=?";
@@ -133,6 +133,13 @@ public class CommentPhotosDAOJNDI implements CommentPhotosDAO_interface{
 		}
 	}
 	return listPhoto;
+	}
+
+
+	@Override
+	public CommentPhotosVO findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
