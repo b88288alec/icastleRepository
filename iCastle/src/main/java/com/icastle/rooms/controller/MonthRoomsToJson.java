@@ -20,7 +20,7 @@ import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
 
 @WebServlet("/rooms/MonthRoomsToJason")
-public class MonthRoomsToJason extends HttpServlet {
+public class MonthRoomsToJson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

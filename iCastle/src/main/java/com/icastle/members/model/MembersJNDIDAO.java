@@ -344,6 +344,8 @@ public MembersVO login(String email, String pw) {
 			membersVO.setPersonId(rs.getString("personId"));
 			membersVO.setCountry(rs.getString("country"));
 			membersVO.setPassport(rs.getString("passport"));
+			membersVO.setManager(rs.getBoolean("manager"));
+			membersVO.setSuspension(rs.getBoolean("suspension"));
 	
 		}
 

@@ -15,8 +15,6 @@
     <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
-	<link href="${pageContext.servletContext.contextPath}/css/hotelphoto.css" rel="stylesheet" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <title>愛客宿-iCastle</title>
 </head>
@@ -25,41 +23,17 @@
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container">
-		<h1>編輯照片</h1>
-		<div class="row bigImagediv" ondragover="dragoverHandler(event)" ondrop="dropHandler(event)">
-			<img class="bigImage" src="../img/hotelphoto/101.jpg">
-		</div>
-		
-	<div id="div1"></div>
-	
-	<!-- 下面一排 -->
-	<div class="row">
-	<form method="post" action="UploadPhoto.do" enctype="multipart/form-data">
-		<div class="col-md-2">
-			<button type="button" id="left">左</button>
-		</div>
-
-		<div class="col-md-8">
-			<div id="abgneBlock">
-					<ul id="selectable" class="list">
-					
-					</ul>
-			</div>
-		</div>
-		
-		<div class="col-md-2">
-			<button type="button" id="right">右</button>
-			<input type="submit" value="送出"/>
-		</div>	
-	</form>	
-	</div>
+    <div class="container" style="margin-top:56px">
+    	<select id='idSelectYear'></select>
+    	<select id='idSelectMonth'></select>
+    	<select id='idSelectDate'></select>
+    </div>
     
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
+<script src="${pageContext.servletContext.contextPath}/js/calendar.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
@@ -70,6 +44,4 @@
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="${pageContext.servletContext.contextPath}/js/hotelphoto.js"></script>
 </html>

@@ -325,7 +325,7 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 		return list;
 	}
 
-
+// 登入
 	@Override
 	public MembersVO login(String email, String pw) {
 		
@@ -389,7 +389,14 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 			}
 		}
 		return membersVO;
-	}	
+	}
+
+
+//	@Override
+//	public MembersVO findByEmail(String email) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}	
 
 
 	

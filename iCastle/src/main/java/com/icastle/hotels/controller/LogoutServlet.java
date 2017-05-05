@@ -22,6 +22,8 @@ public class LogoutServlet extends HttpServlet {
 		String contextPath = request.getContextPath();
 		HttpSession session = request.getSession();
 		session.removeAttribute("HotelLoginOK");
+		session.removeAttribute("MemberLoginOK");
+		session.removeAttribute("ManagerLoginOK");
 		
 		//轉交到index.jsp
 		response.sendRedirect(contextPath + "/index.jsp");
