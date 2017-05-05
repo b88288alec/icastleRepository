@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.icastle.Orders.model.OrdersService;
+import com.icastle.Orders.model.OrdersVO;
 import com.icastle.members.model.MembersService;
 import com.icastle.members.model.MembersVO;
+
+
 
 @WebServlet("/MemberInformationCentre.do")
 public class MemberInformationCentre extends HttpServlet {
@@ -22,10 +27,29 @@ public class MemberInformationCentre extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MembersService membersService = new MembersService();
-		MembersVO XX =membersService.findByPrimaryKey("Sally@gmail.com");
+		MembersVO membersvo =membersService.findByPrimaryKey("Sally@gmail.com");
 		HttpSession session = request.getSession();
-		session.setAttribute("membersKey", XX);
-		RequestDispatcher rd =request.getRequestDispatcher("members/MemberCentre.jsp");
+		session.setAttribute("membersKey", membersvo);
+		
+/*動態寫法 先暫時註解
+ 		HttpSession session = request.getSession();
+		
+		//拿到LoginOK物件
+		MembersVO membervo = (MembersVO)session.getAttribute("LoginOK");
+		
+		if (membervo == null)
+			System.out.println("尚未登入");
+		
+		MembersService membersService = new MembersService();
+//		MembersVO membersvo =membersService.findByPrimaryKey(membersvo.getEmail());
+		session.setAttribute("membersKey", membervo);
+ */		
+	//----------------顯示訂單歷史資料------------------
+		OrdersService ordersService = new OrdersService();
+		List<OrdersVO> VO = ordersService.search_By_MemberId(1);//membersvo.getmemberId()
+		request.setAttribute("ordersKey", VO);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("members/MemberCentre.jsp");
 		rd.forward(request, response);
 	}
 
@@ -45,7 +69,7 @@ public class MemberInformationCentre extends HttpServlet {
 		String pw = request.getParameter("pw");
 		String country = request.getParameter("country");
 		String addr = request.getParameter("addr");
-		
+		System.out.println(gender);
 		Date dt = null;
 		try {
 			SimpleDateFormat sdf =new SimpleDateFormat("yyyy/MM/dd");
@@ -53,9 +77,9 @@ public class MemberInformationCentre extends HttpServlet {
 			dt = new Date(dtlong);
 			
 			/*相同於上面寫法*/
-			java.util.Date log =sdf.parse(bdate);
-			long ss= log.getTime();
-			Date sqldate = new Date(dtlong);
+//			java.util.Date log =sdf.parse(bdate);
+//			long ss= log.getTime();
+//			Date sqldate = new Date(dtlong);
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
