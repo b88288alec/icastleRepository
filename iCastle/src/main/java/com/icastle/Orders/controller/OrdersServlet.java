@@ -20,18 +20,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.icastle.Orders.model.CheckId;
 import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
 import com.icastle.orderfollowers.model.OrderFollowersVO;
 import com.icastle.rooms.model.RoomsService;
+
+import globalservice.CheckId;
 
 @WebServlet("/orders/OrdersServlet.do")
 public class OrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+		res.sendRedirect("../index.jsp");
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

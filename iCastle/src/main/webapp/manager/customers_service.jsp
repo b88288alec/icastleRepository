@@ -23,7 +23,9 @@
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
+    <div class="container" style="margin-top:56px">
+    
+    </div>
     
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>

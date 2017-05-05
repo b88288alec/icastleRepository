@@ -23,7 +23,14 @@
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
+    <div class="container" style="margin-top:56px">
+    <ul class="nav navbar-nav">
+		<li><a href="${pageContext.servletContext.contextPath}/manager/hotels_and_members_datas.jsp"><h1>業者/會員資料</h1></a></li>
+		<li><a href="${pageContext.servletContext.contextPath}/manager/checkhotels.jsp"><h1>業者資料審核</h1></a></li>
+		<li><a href="${pageContext.servletContext.contextPath}/manager/customers_service.jsp"><h1>線上客服</h1></a></li>
+		<li><a href="${pageContext.servletContext.contextPath}/manager/new_manager.jsp"><h1>管理員權限</h1></a></li>
+    </ul>
+    </div>
     
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>

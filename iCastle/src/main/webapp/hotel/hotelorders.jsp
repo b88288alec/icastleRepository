@@ -24,13 +24,16 @@
 	<!--結束導覽列-->
 	
     <div class="container" style="margin-top:56px">
-    
+    	<select id='idSelectYear'></select>
+    	<select id='idSelectMonth'></select>
+    	<select id='idSelectDate'></select>
     </div>
     
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
+<script src="${pageContext.servletContext.contextPath}/js/calendar.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>

@@ -1,4 +1,4 @@
-package com.icastle.Orders.model;
+package globalservice;
 
 public class CheckId {
 
