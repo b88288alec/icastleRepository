@@ -65,7 +65,7 @@ public class MembersLoginServlet extends HttpServlet {
 			return;
 		}else{
 			//登入成功!
-			session.setAttribute("LoginOK", membersvo);
+			session.setAttribute("MemberLoginOK", membersvo);
 			System.out.println(membersvo.getMemberId());
 			System.out.println(membersvo.getEmail());
 			System.out.println(membersvo.getPw());
