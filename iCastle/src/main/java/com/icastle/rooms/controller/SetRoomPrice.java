@@ -24,7 +24,7 @@ public class SetRoomPrice extends HttpServlet {
 		RoomTypeService rots = new RoomTypeService();
 		List<RoomTypeVO> roomTypeList = rots.findRoomTypeByHotelId(5);
 		
-		request.setAttribute("roomTypeList", roomTypeList);
+		session.setAttribute("roomTypeList", roomTypeList);
 		RequestDispatcher rd = request.getRequestDispatcher("calendar.jsp");
 		rd.forward(request, response);
 	}
