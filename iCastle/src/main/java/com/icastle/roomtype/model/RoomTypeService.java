@@ -1,6 +1,7 @@
 package com.icastle.roomtype.model;
 
 import java.util.List;
+import java.util.Map;
 
 public class RoomTypeService {
 	
@@ -16,6 +17,10 @@ public class RoomTypeService {
 	
 	public List<RoomTypeVO> findRoomTypeByHotelId(Integer hotelId){
 		return dao.findRoomTypeByHotelId(hotelId);
+	}
+	
+	public Map<String,String> findRoomTypePrice(Integer roomTypeId){
+		return dao.findRoomTypePrice(roomTypeId);
 	}
 
 }

@@ -1,7 +1,8 @@
 package com.icastle.roomtype.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -62,6 +63,30 @@ public class RoomTypeHibernateDAO implements RoomTypeDAO_interface{
 			throw e;
 		}
 		return list;
+	}
+
+	@Override
+	public Map<String, String> findRoomTypePrice(Integer roomTypeId) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Map<String, String> price = new TreeMap<String, String>();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery("select weekdaysPrice, holidayPrice, seasonPrice, customizedPrice, customizedName from RoomTypeVO where roomTypeId = ?");
+			query.setParameter(0, roomTypeId);
+			List<Object[]> list = query.list();
+			for(Object[] obj : list){
+				price.put("weekdaysPrice", ((Integer)obj[0]).toString());
+				price.put("holidayPrice", ((Integer)obj[1]).toString());
+				price.put("seasonPrice", ((Integer)obj[2]).toString());
+				price.put("customizedPrice", ((Integer)obj[3]).toString());
+				price.put("customizedName", (String)obj[4]);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return price;
 	}
 
 }
