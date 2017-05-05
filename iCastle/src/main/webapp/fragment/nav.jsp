@@ -96,6 +96,7 @@
 					<c:choose>
     					<c:when test="${not empty MemberLoginOK}">
 							<!--會員標頭使用區塊 -->
+							<li><a href="${pageContext.servletContext.contextPath}/members/MemberCentre.jsp"><span class="glyphicon glyphicon-user"></span>${MemberLoginOK.email}</a></li>
     					</c:when>
     					<c:when test="${not empty HotelLoginOK}">
 							<!--飯店標頭使用區塊 -->
