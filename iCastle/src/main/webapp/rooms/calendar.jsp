@@ -32,6 +32,9 @@
     		<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
     	</c:forEach>
 		</select>
+		<button class="btn btn-info" id="plusFri">+Fri</button>
+		<button class="btn btn-info" id="plusSat">+Sat</button>
+		<button class="btn btn-info" id="plusSun">+Sun</button>
         <div id="calendar"></div>
     </div>
     
@@ -54,13 +57,28 @@
 
 <script>
         $(function () {
+        	$('select').change(function(){
+        		var events = {
+        				url : '/iCastle/rooms/MonthRoomsToJason',
+                		data : {
+                			hotelId : '5',
+                			roomTypeId : $('select').val(),
+                		}
+        		}
+        		
+//         		$('#calendar').fullCalendar( 'removeEventSource', events);
+        		$('#calendar').fullCalendar( 'removeEventSources');
+                $('#calendar').fullCalendar( 'addEventSource', events);         
+                $('#calendar').fullCalendar( 'refetchEvents' );
+        	})
+        	
             $('#calendar').fullCalendar({
             	eventSources: [
                 	{
                 		url : '/iCastle/rooms/MonthRoomsToJason',
                 		data : {
                 			hotelId : '5',
-                			roomTypeId : '14',
+                			roomTypeId : $('select').val(),
                 		},
                 		error: function() {
                             alert('there was an error while fetching events!');
@@ -68,6 +86,98 @@
                 	}
                 ]
             })
+            
+            $('#plusFri').click(function(e){
+            	addFri()
+            })
+            $('#plusSat').click(function(e){
+            	addSat()
+            })
+            $('#plusSun').click(function(e){
+            	addSun()
+            })
+            
+            function update(){
+        		$('#calendar').fullCalendar( 'addEventSource', events);         
+                $('#calendar').fullCalendar( 'refetchEvents' );
+        	}
+            
+            function addFri(){
+        		$('#calendar').fullCalendar('addEventSource',
+        				function(start, end, timezone, callback){
+        			var events = [];
+        			var startd = new Date(start);
+        			var endd = new Date(end);
+//         			console.log(startd.getTime())
+//         			console.log(endd.getTime())
+        			var end = endd.getTime()
+        			for(var loop = startd.getTime(); loop <= end; loop += (24 * 60 * 60 * 1000)){
+        				var date = new Date(loop);
+//         				console.log('loop = ' + date.getTime())
+        				if(date.getDay() == 5){
+        					events.push({
+        						title : 'test',
+        						start : moment(date).format(),
+        						color : 'red'
+        					});
+        				}
+        			}
+        			callback(events);
+        		})
+        	}
+            
+            
+            
+            
+            function addSat(){
+        		$('#calendar').fullCalendar('addEventSource',
+        				function(start, end, timezone, callback){
+        			var events = [];
+        			var startd = new Date(start);
+        			var endd = new Date(end);
+//         			console.log(startd.getTime())
+//         			console.log(endd.getTime())
+        			var end = endd.getTime()
+        			for(var loop = startd.getTime(); loop <= end; loop += (24 * 60 * 60 * 1000)){
+        				var date = new Date(loop);
+//         				console.log('loop = ' + date.getTime())
+        				if(date.getDay() == 6){
+        					events.push({
+        						title : 'test',
+        						start : moment(date).format(),
+        						color : 'green'
+        					});
+        				}
+        			}
+        			callback(events);
+        		})
+        	}
+            
+            
+            
+            function addSun(){
+        		$('#calendar').fullCalendar('addEventSource',
+        				function(start, end, timezone, callback){
+        			var events = [];
+        			var startd = new Date(start);
+        			var endd = new Date(end);
+//         			console.log(startd.getTime())
+//         			console.log(endd.getTime())
+        			var end = endd.getTime()
+        			for(var loop = startd.getTime(); loop <= end; loop += (24 * 60 * 60 * 1000)){
+        				var date = new Date(loop);
+//         				console.log('loop = ' + date.getTime())
+        				if(date.getDay() == 0){
+        					events.push({
+        						title : 'test',
+        						start : moment(date).format(),
+        						color : 'pink'
+        					});
+        				}
+        			}
+        			callback(events);
+        		})
+        	}
         });
 </script>
 

@@ -16,6 +16,7 @@
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
 	<link href="${pageContext.servletContext.contextPath}/css/hotelphoto.css" rel="stylesheet" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <title>愛客宿-iCastle</title>
 </head>
@@ -27,34 +28,32 @@
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container">
 		<h1>編輯照片</h1>
-		<div class="row bigImagediv">
+		<div class="row bigImagediv" ondragover="dragoverHandler(event)" ondrop="dropHandler(event)">
 			<img class="bigImage" src="../img/hotelphoto/101.jpg">
 		</div>
+		
 	<div id="div1"></div>
+	
 	<!-- 下面一排 -->
 	<div class="row">
+	<form method="post" action="UploadPhoto.do" enctype="multipart/form-data">
 		<div class="col-md-2">
 			<button type="button" id="left">左</button>
 		</div>
-		
+
 		<div class="col-md-8">
 			<div id="abgneBlock">
-				<ul id="list" class="list">
-					<li><a href="#"><img src="../img/hotelphoto/101.jpg"></a></li>
-					<li><a href="#"><img src="../img/hotelphoto/102.jpg"></a></li>
-					<li><a href="#"><img src="../img/hotelphoto/103.jpg"></a></li>
-					<li><a href="#"><img src="../img/hotelphoto/104.jpg"></a></li>
-					<li><a href="#"><img src="../img/hotelphoto/105.jpg"></a></li>
-					<li><a href="#"><img src="../img/hotelphoto/106.jpg"></a></li>
-					<li><a href="#"><img src="../img/hotelphoto/107.jpg"></a></li>
-					<li><a href="#"><img src="../img/hotelphoto/108.jpg"></a></li>
-				</ul>
+					<ul id="selectable" class="list">
+					
+					</ul>
 			</div>
 		</div>
 		
 		<div class="col-md-2">
 			<button type="button" id="right">右</button>
-		</div>		
+			<input type="submit" value="送出"/>
+		</div>	
+	</form>	
 	</div>
     
     <!--開始footer-->
@@ -71,5 +70,6 @@
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/hotelphoto.js"></script>
 </html>

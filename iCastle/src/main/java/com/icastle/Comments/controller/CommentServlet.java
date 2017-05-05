@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -18,7 +19,11 @@ import javax.servlet.http.Part;
 import com.icastle.Comments.model.CommentDAO;
 import com.icastle.Comments.model.CommentService;
 import com.icastle.Comments.model.CommentVO;
+import com.icastle.Orders.model.OrdersVO;
 import com.icastle.commentphotos.model.CommentPhotosService;
+import com.icastle.commentphotos.model.OrdersJDBCTest;
+import com.icastle.hotels.model.HotelVO;
+import com.icastle.members.model.MembersVO;
 
 /**
  * Servlet implementation class CommentServlet
@@ -40,7 +45,34 @@ public class CommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String s = request.getParameter("hotelCommentSearch");
+		if(s == "顧客評論"){
+			
+			HotelVO hvo = new HotelVO();
+			hvo.setHotelId(1);
+	
+			CommentService comtService = new CommentService(); 
+			
+			List<CommentVO> comtList= comtService.hotelComtSearch(hvo.getHotelId());			
+			CommentVO comt; 
+			
+			
+			MembersVO mvo = new MembersVO();
+			
+			
+			
+			comt = new CommentVO();
+			for(int i = 0;i < comtList.size();i++){				
+				comt = comtList.get(i);
+				comt.getOrderId();
+				
+				comt.getCommentTime();
+			}
+			
+			
+			
+		}
+ 
 	}
 
 	/**
@@ -49,8 +81,8 @@ public class CommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String orderId = request.getParameter("orderId");
-		String hotelId = request.getParameter("hotelId");
+//		String orderId = request.getParameter("orderId");
+//		String hotelId = request.getParameter("hotelId");
 		String service = request.getParameter("service");
 		String quality = request.getParameter("quality");
 		String scene = request.getParameter("scene");
@@ -59,8 +91,8 @@ public class CommentServlet extends HttpServlet {
 		Part photo=request.getPart("uploadphoto");
 //		Collection<Part> photos=request.getParts();
 		
-		int orderIdInt = Integer.parseInt(orderId);
-		int hotelIdInt = Integer.parseInt(hotelId);
+//		int orderIdInt = Integer.parseInt(orderId);
+//		int hotelIdInt = Integer.parseInt(hotelId);
 		int serviceInt = Integer.parseInt(service);
 		int qualityInt = Integer.parseInt(quality);
 		int sceneInt = Integer.parseInt(scene);
@@ -95,26 +127,33 @@ public class CommentServlet extends HttpServlet {
 		CommentService comtService = new CommentService();
 		java.sql.Date d = comtService.getCurrentDate();
 		
-		
-	
-		
-		
+				
 		comt = new CommentVO();
-		comt.setOrderId(orderIdInt);
-		comt.setHotelId(hotelIdInt);
+		comt.setOrderId(1);
+		comt.setHotelId(1);
+		comt.setEmail("abc@gmail.com");
 		comt.setServiceScore(serviceInt);
 		comt.setSceneScore(sceneInt);
 		comt.setQualityScore(qualityInt);
 		comt.setComment(comment);
 		comt.setCommentTime(d);
-		comt = comtService.comtIns(comt);
+		comtService.comtIns(comt);
+		System.out.println(comt);
+		
+		comt = comtService.findByOrderId(comt.getOrderId());
+		System.out.println(comt);
+		
 		
 		if(photo!=null){
 			
 			InputStream ips = photo.getInputStream();
 			Integer lenInt = new Integer(ips.available());
-			long lenLong = lenInt.longValue();
+//			long lenLong = lenInt.longValue();
+			long lenLong = photo.getSize();
 			CommentPhotosService comtPhotoService = new CommentPhotosService();
+			System.out.println(ips);
+			System.out.println(comt.getCommentId());
+			System.out.println(lenLong);
 			comtPhotoService.uploadCommentPhoto(comt.getCommentId(),ips,lenLong);
 			
 		}

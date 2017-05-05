@@ -12,9 +12,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class CommentDAOJNDI implements CommentDAO_interface {
-	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,comment) VALUES(?,?,?,?,?,?,?)";
-	private static final String SHOW_COMT = "SELECT avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE orderId = ?";
+public class CommentJNDIDAO implements CommentDAO_interface {
+	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String SHOW_COMT = "SELECT commentId,avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE orderId = ?";
 	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE hotelId = ?";
 	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ? WHERE commentId = ?";
 	private static final String SHOW_RESPONSE = "SELECT response FROM Comments WHERE commentId = ?";
@@ -26,7 +26,6 @@ public class CommentDAOJNDI implements CommentDAO_interface {
 	PreparedStatement stmt;
 	ResultSet rs; 
 	CommentVO com;
-	CommentDAO commt;
 	List<CommentVO> comtList = new ArrayList<CommentVO>();
 	
 	private static DataSource ds = null;
@@ -34,7 +33,7 @@ public class CommentDAOJNDI implements CommentDAO_interface {
 		
 		try {
 			InitialContext context = new InitialContext();
-			ds = (DataSource) context.lookup("java:comp/env/jdbc/iCastleDB(private)");
+			ds = (DataSource) context.lookup("java:comp/env/jdbc/iCastleDB");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,33 +41,21 @@ public class CommentDAOJNDI implements CommentDAO_interface {
 	}
 	
 	
-	public CommentVO comtIns(CommentVO comt){
+	public String comtIns(CommentVO comt){
 		try {
 			conn = ds.getConnection();
 			stmt = conn.prepareStatement(INS_COMT);
 			stmt.setInt(1,comt.getOrderId());
 			stmt.setInt(2,comt.getHotelId());
-			stmt.setDouble(3,(comt.getServiceScore()+comt.getSceneScore()+comt.getQualityScore())/3.0);
-			stmt.setInt(4,comt.getServiceScore());
-			stmt.setInt(5,comt.getQualityScore());
-			stmt.setInt(6,comt.getSceneScore());
-			stmt.setString(7,comt.getComment());
-			stmt.setDate(8,comt.getCommentTime());
+			stmt.setString(3,comt.getEmail());
+			stmt.setDouble(4,(comt.getServiceScore()+comt.getSceneScore()+comt.getQualityScore())/3.0);
+			stmt.setInt(5,comt.getServiceScore());
+			stmt.setInt(6,comt.getQualityScore());
+			stmt.setInt(7,comt.getSceneScore());
+			stmt.setString(8,comt.getComment());
+			stmt.setDate(9,comt.getCommentTime());
 			stmt.executeUpdate();
-			
-			stmt = conn.prepareStatement(SHOW_COMT);
-			stmt.setInt(1, comt.getOrderId());
-			rs = stmt.executeQuery();
-			rs.next();
-			
-			com = new CommentVO();
-			com.setAvgScore(rs.getDouble("avgScore"));
-			com.setServiceScore(rs.getInt("serviceScore"));
-			com.setQualityScore(rs.getInt("qualityScore"));
-			com.setSceneScore(rs.getInt("sceneScore"));
-			com.setGood(rs.getInt("good"));
-			com.setComment(rs.getString("comment"));
-			com.setCommentTime(rs.getDate("commentTime"));
+		
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -81,7 +68,7 @@ public class CommentDAOJNDI implements CommentDAO_interface {
 				e.printStackTrace();
 			}
 		}
-		return com;
+		return "新增成功";
 		
 	}
 	
@@ -159,7 +146,7 @@ public class CommentDAOJNDI implements CommentDAO_interface {
 		
 	}
 	
-	public CommentVO comUpdate(CommentVO comt){
+	public String comUpdate(CommentVO comt){
 		try {
 			conn = ds.getConnection();
 			stmt = conn.prepareStatement(UPD_COMT);
@@ -173,19 +160,6 @@ public class CommentDAOJNDI implements CommentDAO_interface {
             
             stmt.executeUpdate();
             
-            stmt = conn.prepareStatement(SHOW_COMT);
-			stmt.setInt(1, comt.getCommentId());
-			rs = stmt.executeQuery();
-			rs.next();
-			
-			com = new CommentVO();
-			com.setAvgScore(rs.getDouble("avgScore"));
-			com.setServiceScore(rs.getInt("serviceScore"));
-			com.setQualityScore(rs.getInt("qualityScore"));
-			com.setSceneScore(rs.getInt("sceneScore"));
-			com.setGood(rs.getInt("good"));
-			com.setComment(rs.getString("comment"));
-			com.setResponseTime(rs.getDate("commentTime"));
 				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -198,7 +172,7 @@ public class CommentDAOJNDI implements CommentDAO_interface {
 				e.printStackTrace();
 			}
 		}
-		return com;
+		return "修改成功";
 		
 	}
 	
@@ -233,7 +207,40 @@ public class CommentDAOJNDI implements CommentDAO_interface {
 			}
 		}
 		return com;
+			
+	}
+	
+	public CommentVO findByOrderId(Integer orderId){
 		
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SHOW_COMT);
+			stmt.setInt(1,orderId);
+			rs = stmt.executeQuery();			
+			rs.next();
+			
+			com = new CommentVO();
+			com.setCommentId(rs.getInt("commentId"));
+			com.setAvgScore(rs.getDouble("avgScore"));
+			com.setServiceScore(rs.getInt("serviceScore"));
+			com.setQualityScore(rs.getInt("qualityScore"));
+			com.setSceneScore(rs.getInt("sceneScore"));
+			com.setGood(rs.getInt("good"));
+			com.setComment(rs.getString("comment"));
+			com.setCommentTime(rs.getDate("commentTime"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return com;
 		
 	}
 } 

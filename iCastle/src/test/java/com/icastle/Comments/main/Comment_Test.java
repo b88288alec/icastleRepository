@@ -14,82 +14,16 @@ public class Comment_Test {
 		CommentVO comt = new CommentVO();
 		
 		
-//		java.sql.Date d = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-//		System.out.println(d);
-//		comt.setOrderId(1);
-//		comt.setHotelId(1);
-//		comt.setServiceScore(5);
-//		comt.setQualityScore(1);
-//		comt.setSceneScore(5);
-//		comt.setComment("飯店還可以，品質再加油");
-//		comt.setCommentTime(d);
-//		comt = comm.comtIns(comt);
-//		System.out.println(comt.getAvgScore());
-//		System.out.println(comt.getServiceScore());
-//		System.out.println(comt.getQualityScore());
-//		System.out.println(comt.getSceneScore());
-//		System.out.println(comt.getComment());
-//		System.out.println(comt.getCommentTime());
-//		
-//		comt.setOrderId(2);
-//		comt.setHotelId(1);
-//		comt.setServiceScore(4);
-//		comt.setQualityScore(1);
-//		comt.setSceneScore(3);
-//		comt.setComment("飯店很有事");	
-//		comt.setCommentTime(d);
-//		comt = comm.comtIns(comt);
-//		System.out.println(comt.getAvgScore());
-//		System.out.println(comt.getServiceScore());
-//		System.out.println(comt.getQualityScore());
-//		System.out.println(comt.getSceneScore());
-//		System.out.println(comt.getComment());
-//		System.out.println(comt.getCommentTime());
-//		
-//		comt.setOrderId(3);
-//		comt.setHotelId(1);
-//		comt.setServiceScore(1);
-//		comt.setQualityScore(1);
-//		comt.setSceneScore(3);
-//		comt.setComment("飯店沒倒閉很厲害");
-//		comt.setCommentTime(d);
-//		comt = comm.comtIns(comt);
-//		System.out.println(comt.getAvgScore());
-//		System.out.println(comt.getServiceScore());
-//		System.out.println(comt.getQualityScore());
-//		System.out.println(comt.getSceneScore());
-//		System.out.println(comt.getComment());
-//		System.out.println(comt.getCommentTime());
-//		
-//		comt.setOrderId(4);
-//		comt.setHotelId(2);
-//		comt.setServiceScore(1);
-//		comt.setQualityScore(1);
-//		comt.setSceneScore(1);
-//		comt.setComment("痾...飯店不予置評");	
-//		comt.setCommentTime(d);
-//		comt = comm.comtIns(comt);
-//		System.out.println(comt.getAvgScore());
-//		System.out.println(comt.getServiceScore());
-//		System.out.println(comt.getQualityScore());
-//		System.out.println(comt.getSceneScore());
-//		System.out.println(comt.getComment());
-//		System.out.println(comt.getCommentTime());
-//		
-//		comt.setOrderId(5);
-//		comt.setHotelId(2);
-//		comt.setServiceScore(5);
-//		comt.setQualityScore(5);
-//		comt.setSceneScore(5);
-//		comt.setComment("不愧是五星級");	
-//		comt.setCommentTime(d);
-//		comt = comm.comtIns(comt);
-//		System.out.println(comt.getAvgScore());
-//		System.out.println(comt.getServiceScore());
-//		System.out.println(comt.getQualityScore());
-//		System.out.println(comt.getSceneScore());
-//		System.out.println(comt.getComment());
-//		System.out.println(comt.getCommentTime());
+		java.sql.Date d = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+		comt.setOrderId(1);
+		comt.setHotelId(1);
+		comt.setEmail("abc@gmail.com");
+		comt.setServiceScore(5);
+		comt.setQualityScore(1);
+		comt.setSceneScore(5);
+		comt.setComment("飯店還可以，品質再加油");
+		comt.setCommentTime(d);
+		comm.comtIns(comt);			
 		
 //		List<CommentVO> listCom =comm.hotelComtSearch(1);
 //		for(int i=0;i<listCom.size();i++){
