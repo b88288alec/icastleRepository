@@ -182,8 +182,8 @@ public class RoomTypeTest {
 	public static void main(String[] args) {
 //		addRoomType();
 //		updateRoomType();
-		deleteRoomType();
-//		findRoomTypeByHotelId();
+//		deleteRoomType();
+		findRoomTypeByHotelId();
 	}
 
 }

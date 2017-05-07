@@ -28,7 +28,8 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 	private final String INS_PHOTO = "INSERT INTO CommentPhotos(commentId,photo) VALUES (?,?)";
 	private final String SHOW_PHOTO = "SELECT commentId,photo FROM CommentPhotos WHERE commentId=?";
 	private final String DEL_PHOTO = "DELETE CommentPhotos WHERE commentId = ?";
-	private final String SEL_ID = "SELECT photo WHERE id = ?";
+	private final String SEL_ID = "SELECT photo from CommentPhotos WHERE id = ?";
+	
 	
 	Connection conn;
 	PreparedStatement stmt;
@@ -140,6 +141,7 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 		
 		Blob b;
 		byte[] data;
+		comtPhoto = new CommentPhotosVO();
 		
 		try {
 			conn = ds.getConnection();
@@ -150,7 +152,7 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
             
             b = rs.getBlob("photo");
             data = b.getBytes(1,(int)b.length());
-//            comtPhoto.
+            comtPhoto.setPhoto(data);
             
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
