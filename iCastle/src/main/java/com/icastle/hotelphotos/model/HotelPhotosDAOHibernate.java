@@ -93,7 +93,7 @@ public class HotelPhotosDAOHibernate implements HotelPhotos_Interface{
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery(
-					"from HotelPhotosVO where hotelId=:hotelId");
+					"from HotelPhotosVO where hotelId=:hotelId order by photoOrder asc");
 			query.setParameter("hotelId", hotelId);
 			
 			photos = query.list();
@@ -127,14 +127,19 @@ public class HotelPhotosDAOHibernate implements HotelPhotos_Interface{
 	}
 
 	@Override
-	public int deletePhoto(Integer id) {
+	public int deletePhoto(List<Integer> ids) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		int count = 0;
 		try {
 			session.beginTransaction();
-			HotelPhotosVO photo = (HotelPhotosVO)session.get(HotelPhotosVO.class, id);
-			session.delete(photo);
-			count++;
+			
+			for (Integer id : ids){
+				HotelPhotosVO photo = (HotelPhotosVO)session.get(HotelPhotosVO.class, id);
+				session.delete(photo);
+				count++;
+			}
+				
+			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
