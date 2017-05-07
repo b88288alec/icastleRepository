@@ -27,7 +27,7 @@ public class MembersJNDIDAO implements MembersDAO_interface {
 	private static final String INSERT_STMT =
 			"INSERT INTO Members (email,pw,name,gender,bdate,addr,tel,personId,country,passport) VALUES (?,?,?,?,?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT =
-			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport FROM Members order by email";
+			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport,manager,suspension FROM Members order by email";
 	private static final String GET_ONE_STMT =
 			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport FROM Members where email = ?";
 //	private static final String DELETE =
@@ -277,6 +277,8 @@ public List<MembersVO> getAll() {
 			membersVO.setPersonId(rs.getString("personId"));
 			membersVO.setCountry(rs.getString("country"));
 			membersVO.setPassport(rs.getString("passport"));
+			membersVO.setManager(rs.getBoolean("manager"));
+			membersVO.setSuspension(rs.getBoolean("suspension"));
 		
 			
 			list.add(membersVO);
