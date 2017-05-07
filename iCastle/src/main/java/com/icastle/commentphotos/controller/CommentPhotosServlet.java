@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -33,24 +34,23 @@ public class CommentPhotosServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String commentId = request.getParameter("commentId");
-		int commentIdInt = Integer.parseInt(commentId);
+		String id = request.getParameter("id");
+		System.out.println(id);
+		int idInt = Integer.parseInt(id);
+		System.out.println(idInt);
 		
 		CommentPhotosService comtPhotoService = new CommentPhotosService();
-		List<CommentPhotosVO> photos; 
-		photos = new ArrayList<CommentPhotosVO>(); 
+	    CommentPhotosVO photo;
+	    photo = comtPhotoService.findById(idInt);
+		byte[] photoByte = photo.getPhoto();
+		ServletOutputStream sops =response.getOutputStream();
+		sops.write(photoByte);
 		
-		photos = comtPhotoService.findByCommentId(commentIdInt);
-		for(CommentPhotosVO photo :photos){	
-			byte[] photoByte = photo.getPhoto();
-			ServletOutputStream sops =response.getOutputStream();
-			sops.write(photoByte);
-		}
-		
-		
+		request.setAttribute("ShowPhoto",id);
+		RequestDispatcher rd = request.getRequestDispatcher("HotelComment.jsp");
+		rd.forward(request,response);
 		
 		
-
 	}
 
 	/**

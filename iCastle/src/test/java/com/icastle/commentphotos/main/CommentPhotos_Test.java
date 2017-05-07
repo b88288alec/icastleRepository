@@ -49,7 +49,7 @@ public class CommentPhotos_Test {
 		
 //		try {
 //			CommentPhotosVO vo = new CommentPhotosVO();
-//			CommentPhotosDAO dao = new CommentPhotosDAO();
+//			CommentPhotosJDBCDAO dao = new CommentPhotosJDBCDAO();
 //			
 //			File f = new File("C:\\Users\\Student\\Desktop\\123.jpg");
 //			InputStream fis = new FileInputStream(f);
@@ -71,36 +71,41 @@ public class CommentPhotos_Test {
 //		}
 		 
 		
-		File f;
-		FileOutputStream fis;
-		BufferedOutputStream bop;
-		CommentPhotosVO vo = new CommentPhotosVO();
-		CommentPhotosJDBCDAO dao = new CommentPhotosJDBCDAO();
-		CommentPhotosVO photoSingle;
-		List<CommentPhotosVO> photo = dao.findByCommentId(1);
-				
-		try {
-			photoSingle =photo.get(0);
-		    f = new File("C:\\Users\\Student\\Desktop\\789.jpg");
-			fis = new FileOutputStream(f);
-		    bop = new BufferedOutputStream(fis);
-			bop.write(photoSingle.getPhoto(),0,photoSingle.getPhoto().length);
-			fis.close();
-			bop.close();
-			
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		File f;
+//		FileOutputStream fis;
+//		BufferedOutputStream bop;
+//		CommentPhotosVO vo = new CommentPhotosVO();
+//		CommentPhotosJDBCDAO dao = new CommentPhotosJDBCDAO();
+//		CommentPhotosVO photoSingle;
+//		List<CommentPhotosVO> photo = dao.findByCommentId(1);
+//				
+//		try {
+//			photoSingle =photo.get(0);
+//		    f = new File("C:\\Users\\Student\\Desktop\\789.jpg");
+//			fis = new FileOutputStream(f);
+//		    bop = new BufferedOutputStream(fis);
+//			bop.write(photoSingle.getPhoto(),0,photoSingle.getPhoto().length);
+//			fis.close();
+//			bop.close();
+//			
+//			
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
-//		CommentPhotosDAO dao = new CommentPhotosDAO();
+//		CommentPhotosJDBCDAO dao = new CommentPhotosJDBCDAO();
 //		String message = dao.deleteCommentPhoto(1);
 //		System.out.println(message);
+		
+		
+		CommentPhotosJDBCDAO dao = new CommentPhotosJDBCDAO();
+		CommentPhotosVO vo = dao.findById(1);
+		System.out.println(vo);
 		
 	}
 	
