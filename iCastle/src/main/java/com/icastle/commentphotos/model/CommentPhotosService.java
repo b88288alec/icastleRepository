@@ -22,7 +22,10 @@ public class CommentPhotosService {
 		
 	}
 	
-//	public CommentPhotosVO findById()
+	public CommentPhotosVO findById(int id){
+		return comtphotoDAO.findById(id);
+		
+	}
 	
 	
 
