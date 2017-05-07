@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
 
-@WebServlet("/rooms/MonthRoomsToJason")
+@WebServlet("/rooms/MonthRoomsToJson")
 public class MonthRoomsToJson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -46,9 +46,11 @@ public class MonthRoomsToJson extends HttpServlet {
 		JSONArray jsonArray = new JSONArray();
 		for(RoomsVO vo : list){
 			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("id", vo.getRoomId().toString());
+			jsonObj.put("id", vo.getRoomDate().toString());
+			jsonObj.put("roomId", vo.getRoomId().toString());
 			jsonObj.put("title", vo.getPrice().toString());
 			jsonObj.put("start", vo.getRoomDate().toString());
+			jsonObj.put("allDay", "true");
 			
 			jsonArray.add(jsonObj);
 		}
