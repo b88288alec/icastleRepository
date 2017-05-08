@@ -27,6 +27,11 @@
 <link href="${pageContext.servletContext.contextPath}/css/template.css"
 	rel="stylesheet" />
 <!--以下請加入各自頁面的css-->
+<style>
+.container {
+	width: 1400px;
+}
+</style>
 
 <title>愛客宿-iCastle</title>
 </head>
@@ -37,7 +42,7 @@
 
 	<!--content here!!!!!!!!!!!!~~~~~~~~~~-->
 
-	<div class="container" style="margin-top: 100px;">
+	<div class="container" style="margin-top: 100px; ">
 		<form
 			action="${pageContext.servletContext.contextPath}/MemberInformationCentre.do"
 			method="POST">
@@ -76,45 +81,71 @@
 					value="${membersKey.addr}" />
 
 				<p>歷史訂單:</p>
-				<table class="table">
+				<table class="table"  align="center">
 					<!--標題列 -->
 					<thead>
 						<tr>
-							<th>hotelName飯店名稱</th>
-							<th>roomCount訂購房間數</th>
-							<th>price價錢</th>
-							<th>pricePerPerson個人價錢</th>
-							<th>roomTypeName房型</th>
-							<th>reservationer訂購人</th>
-							<th>tel</th>
-							<th>country國家</th>
-							<th>addr地址</th>
-							<th>orderState訂單狀態</th>
-							<th>cancelDate取銷日期</th>
+							<th>飯店名稱</th>
+							<th>房間數</th>
+							<th>價錢</th>
+							<th>加床</th>
+							<th>加床價格</th>
+							<th>房型</th>
+							<th>訂購人</th>
+							<th>電話</th>
+							<th>地址</th>
+							<th>下單日期</th>
+							<th>訂單狀態</th>
+							<th>取消訂單時間</th>
+							<th class="text-right">Actions</th><!--評論 -->
 						</tr>
 					</thead>
-					<c:forEach var="myData" items="${ordersKey}">
-						<!--取出VO裡的List-->
-						<!--此orderKey相當於List概念-->
-<%-- 					${myData.orderId} ${myData.orderedDate} ${myData.memberId} ${myData.roomId} ${myData.hotelId} ${myData.hotelName} --%>
-<%-- 					${myData.roomTypeId} ${myData.roomTypeName} ${myData.checkinDay} ${myData.checkoutDay} ${myData.roomCount} --%>
-<%-- 					${myData.peopleNum} ${myData.breakfast} ${myData.dinner} ${myData.afternoonTea} ${myData.price}${myData.roomNo} --%>
-<%-- 					${myData.reservationer} ${myData.bdate} ${myData.tel} ${myData.email} ${myData.addr} ${myData.personId} ${myData.country} --%>
-<%-- 					${myData.passport} ${myData.bedAdding} ${myData.pricePerPerson} --%>
-<%-- 					${myData.customerRemark} ${myData.hotelRemark} ${myData.memo} ${myData.orderState} ${myData.cancelDate}		 --%>
-					<tbody>
+					<c:forEach var="myData" items="${ordersKey}"><!--取出VO裡的List 此orderKey相當於List概念-->
+						<%-- 						${myData.orderId} ${myData.orderedDate} ${myData.memberId} ${myData.roomId} ${myData.hotelId} ${myData.hotelName} --%>
+						<%-- 						${myData.roomTypeId} ${myData.roomTypeName} ${myData.checkinDay} ${myData.checkoutDay} ${myData.roomCount} --%>
+						<%-- 						${myData.peopleNum} ${myData.breakfast} ${myData.dinner} ${myData.afternoonTea} ${myData.price}${myData.roomNo} --%>
+						<%-- 						${myData.reservationer} ${myData.bdate} ${myData.tel} ${myData.email} ${myData.addr} ${myData.personId} ${myData.country} --%>
+						<%-- 						${myData.passport} ${myData.bedAdding} ${myData.pricePerPerson}${myData.customerRemark} ${myData.hotelRemark} ${myData.memo}  --%>
+						<%-- 						${myData.orderState} ${myData.cancelDate}		 --%>
+						<tbody>
 							<tr>
-							<td>${myData.hotelName}</td>
-							<td>${myData.roomCount}</td>
-							<td>${myData.price}</td>
-							<td>${myData.pricePerPerson}</td>
-							<td>${myData.roomTypeName}</td>
-							<td>${myData.reservationer}</td>
-							<td>${myData.tel}</td>
-							<td>${myData.country}</td>
-							<td>${myData.addr}</td>
-							<td>${myData.orderState}</td>
-							<td>${myData.cancelDate}</td>
+								<td>${myData.hotelName}</td>
+								<td>${myData.roomCount}</td>
+								<td>${myData.price}</td>
+								<%-- 								<td>${myData.bedAdding}</td> --%>
+								<td><c:choose>
+										<%--orderState布林值判斷改顯示字串--%>
+										<c:when test="${myData.bedAdding == true}">有</c:when>
+										<c:otherwise>無</c:otherwise>
+									</c:choose></td>
+								<td>${myData.pricePerPerson}</td>
+								<td>${myData.roomTypeName}</td>
+								<td>${myData.reservationer}</td>
+								<td>${myData.tel}</td>
+								<td>${myData.addr}</td>
+								<%-- 								<td>${myData.cancelDate}</td> --%>
+								<td><c:choose>
+										<%--判斷下單日期--%>
+										<c:when test="${myData.orderedDate == null}"> - </c:when>
+										<c:otherwise> ${myData.orderedDate} </c:otherwise>
+									</c:choose></td>
+								<td><c:choose>
+										<%--orderState布林值判斷改顯示字串 --%>
+										<c:when test="${myData.orderState == true}">訂單成立</c:when>
+										<c:otherwise>取消訂單</c:otherwise>
+									</c:choose></td>
+								<td><c:choose>
+										<c:when test="${myData.cancelDate == null}">-</c:when>
+										<c:otherwise>${myData.cancelDate}</c:otherwise>
+									</c:choose></td>
+									
+								<!--評論 -->
+								<td class="td-actions text-right">
+									<button type="button" rel="tooltip" title="評論"
+										class="btn btn-success btn-simple btn-xs">
+										<i class="fa fa-edit"></i>
+									</button>
+								</td>
 							</tr>
 						</tbody>
 					</c:forEach>
