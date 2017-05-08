@@ -163,7 +163,7 @@
 		
 		//生成價錢選擇器
 		function genPriceSelect(selector, inputName){
-			$.getJSON("/iCastle/roomtype/RoomTypePriceToJson",{"roomTypeId" : $('select').val()},
+			$.getJSON("${pageContext.servletContext.contextPath}/roomtype/RoomTypePriceToJson",{"roomTypeId" : $('select').val()},
 					function(data){
 						var checkbox_div = $(selector);
 						checkbox_div.empty();
@@ -235,10 +235,16 @@
 		
 		//註冊勾選星期事件
 		$('input[name=weekday]').click(function(){
-			var weekdayNum = $(this).val();
-			if(weekdaycheck.length > 0){
+			var weekdayNum = ($(this).prop("checked"))? $(this).val() : null;
+			if(weekdaycheck.length > 0 && weekdayNum != null){
 				for(var i = 0; i < weekdaycheck.length; i++){
 					if(weekdaycheck[i] == parseInt(weekdayNum)){
+						delete weekdaycheck[i];
+					}
+				}
+			}else if(weekdayNum == null){
+				for(var i = 0; i < weekdaycheck.length; i++){
+					if(weekdaycheck[i] == parseInt($(this).val())){
 						delete weekdaycheck[i];
 					}
 				}
@@ -367,7 +373,7 @@
 			})
 			json.length = 0;
 			var events = {
-					url : '/iCastle/rooms/MonthRoomsToJson',
+					url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
 					data : {
 						hotelId : '${HotelLoginOK.hotelId}',
 						roomTypeId : $('select').val(),
