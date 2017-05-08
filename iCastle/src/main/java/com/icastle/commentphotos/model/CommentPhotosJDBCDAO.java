@@ -1,5 +1,4 @@
 package com.icastle.commentphotos.model;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
