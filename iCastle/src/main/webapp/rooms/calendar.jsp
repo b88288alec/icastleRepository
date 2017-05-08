@@ -68,6 +68,9 @@
 		<div id="checkbox">
 		</div>
 		<div class="checkbox">
+					<label> <input type="checkbox" name="weekday" value="0">
+						星期日
+					</label>
 					<label> <input type="checkbox" name="weekday"
 						value="1"> 星期一
 					</label> <label> <input type="checkbox" name="weekday"
@@ -83,9 +86,6 @@
 					</label>
 					<label> <input type="checkbox" name="weekday" value="6">
 						星期六
-					</label>
-					<label> <input type="checkbox" name="weekday" value="0">
-						星期日
 					</label>
 				</div>
 		<button class="btn btn-info" id="plus">+</button>
@@ -144,7 +144,7 @@
 		//選擇房型後更新日曆
 		$('select').change(function() {
 			var events = {
-				url : '/iCastle/rooms/MonthRoomsToJson',
+				url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
 				data : {
 					hotelId : '${HotelLoginOK.hotelId}',
 					roomTypeId : $('select').val(),
@@ -200,7 +200,7 @@
 				right: 'prev,next today'
 			},
 			eventSources : [ {
-				url : '/iCastle/rooms/MonthRoomsToJson',
+				url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
 				data : {
 					hotelId : '${HotelLoginOK.hotelId}',
 					roomTypeId : $('select').val(),
@@ -213,6 +213,8 @@
 				}
 			} ],
 			dayClick: function(date, jsEvent, view){
+				$('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
+				genPriceSelect('#price-select', 'priceBySingle');
 				$('#myModal').modal('show');
 			},
 			eventClick: function(calEvent, jsEvent, view){
@@ -314,22 +316,44 @@
 			var date = $('#myModalLabel').text();
 			var price = $('input[name=priceBySingle]:checked').val()
 			var eventoObj = $("#calendar").fullCalendar( 'clientEvents', date)[0];
-			eventoObj.title = price;
-			eventoObj.color = 'lightgreen';
-			$('#myModal').modal('hide');
-			$('#calendar').fullCalendar('updateEvent', eventoObj);
-			json.push({
-				roomId : eventoObj.roomId,
-				date : date,
-				price : price,
-			});
+			if(eventoObj != null){
+				eventoObj.title = price;
+				eventoObj.color = 'lightgreen';
+				$('#myModal').modal('hide');
+				$('#calendar').fullCalendar('updateEvent', eventoObj);
+				json.push({
+					roomId : eventoObj.roomId,
+					date : date,
+					price : price,
+				});
+			}else{
+				$("#calendar").fullCalendar('addEventSource',
+						function(start, end, timezone, callback){
+					var events = [];
+					events.push({
+						id : $('#myModalLabel').text(),
+						title : price,
+						start : moment(date).format('YYYY-MM-DD'),
+						color : 'lightgreen',
+						allDay : 'true',
+					});
+					//將新增事件的資料儲存至json準備新增
+					json.push({
+						date : moment(date).format('YYYY-MM-DD'),
+						price : price,
+					});
+					$('#myModal').modal('hide');
+					callback(events);
+				})
+			}
+			
 		});
 		
 		//將暫存於json內的資料傳送至server新增到資料庫，並重新整理頁面
 		$('#submit').click(function(){
 			$.ajax({
 				type : 'POST',
-				url : '/iCastle/rooms/SetRoomPrice',
+				url : '${pageContext.servletContext.contextPath}/rooms/SetRoomPrice',
 				data : {
 					jsonData : JSON.stringify(json),
 					roomTypeId : $('select').val(),
