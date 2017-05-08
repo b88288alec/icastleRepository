@@ -28,6 +28,7 @@ public class CommentPhotosJNDIDAO implements CommentPhotosDAO_interface{
 	private final String INS_PHOTO = "INSERT INTO CommentPhotos(commentId,photo) VALUES (?,?)";
 	private final String SHOW_PHOTO = "SELECT commentId,photo FROM CommentPhotos WHERE commentId=?";
 	private final String DEL_PHOTO = "DELETE CommentPhotos WHERE commentId = ?";
+	private final String SEL_ID = "SELECT photo from CommentPhotos WHERE id = ?";
 	
 	Connection conn;
 	PreparedStatement stmt;
@@ -137,9 +138,30 @@ public class CommentPhotosJNDIDAO implements CommentPhotosDAO_interface{
 
 
 	@Override
-	public CommentPhotosVO findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public CommentPhotosVO findById(int id){
+		
+		Blob b;
+		byte[] data;
+		comtPhoto = new CommentPhotosVO();
+		
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SEL_ID);
+			stmt.setInt(1,id);
+			rs = stmt.executeQuery();
+            rs.next();
+            
+            b = rs.getBlob("photo");
+            data = b.getBytes(1,(int)b.length());
+            comtPhoto.setPhoto(data);
+            
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return comtPhoto;
+		
 	}
 	
 	

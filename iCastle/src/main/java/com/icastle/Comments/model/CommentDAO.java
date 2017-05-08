@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 public class CommentDAO implements CommentDAO_interface {
 	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime) VALUES(?,?,?,?,?,?,?,?,?)";
 	private static final String SHOW_COMT = "SELECT commentId,orderId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE orderId = ?";
-	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE hotelId = ?";
+	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE hotelId = ?";
 	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ? WHERE commentId = ?";
 	private static final String SHOW_RESPONSE = "SELECT response FROM Comments WHERE commentId = ?";
 	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=? where commentId = ?";
@@ -84,6 +84,7 @@ public class CommentDAO implements CommentDAO_interface {
 			com.setCommentId(rs.getInt("commentId"));
 			com.setOrderId(rs.getInt("orderId"));
 			com.setHotelId(rs.getInt("hotelId"));
+			com.setEmail(rs.getString("email"));
 			com.setAvgScore(rs.getDouble("avgScore"));
 			com.setServiceScore(rs.getInt("serviceScore"));
 			com.setQualityScore(rs.getInt("qualityScore"));

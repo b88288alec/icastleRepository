@@ -10,6 +10,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class GlobalService {
 	
 	public Boolean SendGmail(String to, String subject, String content){
@@ -64,4 +66,12 @@ public class GlobalService {
 		return true;
 	}
 
+	public static void main(String[] args){
+		byte[] bytes2 = Base64.decodeBase64("DFSDFDSFFD");
+		System.out.println(bytes2.length);
+		
+		
+		for (byte b : bytes2)
+			System.out.println(b);
+	}
 }

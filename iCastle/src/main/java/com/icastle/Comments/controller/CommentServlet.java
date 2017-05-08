@@ -26,6 +26,7 @@ import com.icastle.commentphotos.model.CommentPhotosService;
 import com.icastle.commentphotos.model.CommentPhotosVO;
 import com.icastle.commentphotos.model.OrdersJDBCTest;
 import com.icastle.hotels.model.HotelVO;
+import com.icastle.members.model.MembersService;
 import com.icastle.members.model.MembersVO;
 
 /**
@@ -48,34 +49,7 @@ public class CommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String s = request.getParameter("hotelCommentSearch");
-		if(s == "顧客評論"){
-			
-			HotelVO hvo = new HotelVO();
-			hvo.setHotelId(1);
-	
-			CommentService comtService = new CommentService(); 
-			
-			List<CommentVO> comtList= comtService.hotelComtSearch(hvo.getHotelId());			
-			CommentVO comt; 
-			
-			
-			MembersVO mvo = new MembersVO();
-			
-			
-			
-			comt = new CommentVO();
-			for(int i = 0;i < comtList.size();i++){				
-				comt = comtList.get(i);
-				comt.getOrderId();
-				
-				comt.getCommentTime();
-			}
-			
-			
-			
-		}
- 
+
 	}
 
 	/**
@@ -132,9 +106,9 @@ public class CommentServlet extends HttpServlet {
 		
 				
 		comt = new CommentVO();
-		comt.setOrderId(1);
+		comt.setOrderId(3);
 		comt.setHotelId(1);
-		comt.setEmail("abc@gmail.com");
+		comt.setEmail("def@gmail.com");
 		comt.setServiceScore(serviceInt);
 		comt.setSceneScore(sceneInt);
 		comt.setQualityScore(qualityInt);
@@ -143,6 +117,7 @@ public class CommentServlet extends HttpServlet {
 		comtService.comtIns(comt);	
 		
 		comt = comtService.findByOrderId(comt.getOrderId());
+		System.out.println(comt.getCommentId());
 			
 		if(photo!=null){
 			List<CommentPhotosVO> comtphotos = new ArrayList<CommentPhotosVO>();
@@ -153,6 +128,7 @@ public class CommentServlet extends HttpServlet {
 			Integer lenInt = new Integer(ips.available());
 			long lenLong = photo.getSize();
 			CommentPhotosService comtPhotoService = new CommentPhotosService();
+			System.out.println(comt.getCommentId());
 			comtPhotoService.uploadCommentPhoto(comt.getCommentId(),ips,lenLong);
 							   			
 		}

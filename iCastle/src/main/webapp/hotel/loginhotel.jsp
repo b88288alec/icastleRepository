@@ -72,7 +72,7 @@
 	$(function(){
 		$('#onekey').click(function() {
 			event.preventDefault();
-			$('input[name = "email"]').val("midtown@richardson.com");
+			$('input[name = "email"]').val("eeit93no1@gmail.com");
 			$('input[name = "pw"]').val("123456");
 		
 		});

@@ -190,7 +190,7 @@
 		$('#onekey').click(function() {
 			event.preventDefault();
 			$('input[name = "hotelName"]').val('涵碧樓酒店');
-			$('input[name = "email"]').val('bilo@gmail.com');
+			$('input[name = "email"]').val('eeit93no1@gmail.com');
 			$('input[name = "pw"]').val('123456');
 			$('input[name = "pwcheck"]').val('123456');
 			$('#star').val('5');
