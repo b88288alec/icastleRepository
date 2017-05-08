@@ -13,11 +13,11 @@ public class OrdersTest {
 
 	public static void main(String[] args) {
 
+//		OrdersDAO_interface dao = new OrdersHibernateDAO();
+
 		// 查詢-orderId
 //		OrdersDAO_interface dao = new OrdersJDBC();
-		OrdersDAO_interface dao = new OrdersHibernateDAO();
-//		OrdersVO result = dao.select_by_orderId(1);
-//
+//		OrdersVO result = dao.select_by_orderId(64);
 //		System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
 //				+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
 //				+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
@@ -30,21 +30,21 @@ public class OrdersTest {
 //		System.out.println("---------------------------------------------");
 
 		// 查詢-memberId
-//		OrdersDAO_interface dao = new OrdersJDBC();
-//		List<OrdersVO> orders = dao.select_by_memberId(1);
-//
-//		for (OrdersVO result : orders) {
-//			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
-//					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
-//					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
-//					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
-//					+ result.getAfternoonTea() + " " + result.getPrice() + " " + result.getReservationer() + " "
-//					+ result.getBdate() + " " + result.getTel() + " " + result.getEmail() + " " + result.getAddr() + " "
-//					+ result.getPersonId() + " " + result.getCountry() + " " + result.getPassport() + " "
-//					+ result.getBedAdding() + " " + result.getPricePerPerson() + " " + result.getCustomerRemark() + " "
-//					+ result.getHotelRemark() + " " + result.getMemo() + " " + result.getOrderState());
-//			System.out.println("---------------------------------------------");
-//		}
+		OrdersDAO_interface dao = new OrdersJDBC();
+		List<OrdersVO> orders = dao.select_by_memberId(6);
+
+		for (OrdersVO result : orders) {
+			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
+					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
+					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
+					+ result.getAfternoonTea() + " " + result.getPrice() + " " + result.getReservationer() + " "
+					+ result.getBdate() + " " + result.getTel() + " " + result.getEmail() + " " + result.getAddr() + " "
+					+ result.getPersonId() + " " + result.getCountry() + " " + result.getPassport() + " "
+					+ result.getBedAdding() + " " + result.getPricePerPerson() + " " + result.getCustomerRemark() + " "
+					+ result.getHotelRemark() + " " + result.getMemo() + " " + result.getOrderState());
+			System.out.println("---------------------------------------------");
+		}
 
 		// 查詢全部
 //		OrdersDAO_interface dao = new OrdersJDBC();
@@ -65,36 +65,36 @@ public class OrdersTest {
 
 		// 新增
 //		OrdersDAO_interface dao = new OrdersJDBC();
-		OrdersVO ordersVO = new OrdersVO();
-		ordersVO.setOrderedDate(new java.sql.Timestamp(new GregorianCalendar().getInstance().getTimeInMillis()));
-		ordersVO.setMemberId(1);
-		ordersVO.setRoomId(8);
-		ordersVO.setHotelId(1);
-		ordersVO.setHotelName("好累");
-		ordersVO.setRoomTypeId(3);
-		ordersVO.setRoomTypeName("四人房（無窗）");
-		ordersVO.setCheckinDay(new java.sql.Date(new GregorianCalendar(2017, 0, 2).getTimeInMillis()));
-		ordersVO.setCheckoutDay(new java.sql.Date(new GregorianCalendar(2017, 0, 4).getTimeInMillis()));
-		ordersVO.setRoomCount(1);
-		ordersVO.setPeopleNum(4);
-		ordersVO.setBreakfast(false);
-		ordersVO.setDinner(false);
-		ordersVO.setAfternoonTea(false);
-		ordersVO.setPrice(14800);
-		ordersVO.setReservationer("王曉華");
-		ordersVO.setBdate(new java.sql.Date(new GregorianCalendar(1922, 0, 3).getTimeInMillis()));
-		ordersVO.setTel("0955555555");
-		ordersVO.setEmail("qqq@gmail.com");
-		ordersVO.setAddr("fdasfdsaf");
-		ordersVO.setPersonId("A192648793");
-		ordersVO.setCountry("台灣");
-		ordersVO.setPassport("546343");
-		ordersVO.setBedAdding(false);
-		ordersVO.setPricePerPerson(0);
-		ordersVO.setCustomerRemark("我朋友需要大張一點的床");
-		ordersVO.setHotelRemark("若單筆預訂超過5間客房，可能會需要遵守其他相關規定以及符合額外的要求。");
-		ordersVO.setOrderState(true);
-		dao.insert(ordersVO);
+//		OrdersVO ordersVO = new OrdersVO();
+//		ordersVO.setOrderedDate(new java.sql.Timestamp(new GregorianCalendar().getInstance().getTimeInMillis()));
+//		ordersVO.setMemberId(1);
+//		ordersVO.setRoomId(8);
+//		ordersVO.setHotelId(1);
+//		ordersVO.setHotelName("好累");
+//		ordersVO.setRoomTypeId(3);
+//		ordersVO.setRoomTypeName("四人房（無窗）");
+//		ordersVO.setCheckinDay(new java.sql.Date(new GregorianCalendar(2017, 0, 2).getTimeInMillis()));
+//		ordersVO.setCheckoutDay(new java.sql.Date(new GregorianCalendar(2017, 0, 4).getTimeInMillis()));
+//		ordersVO.setRoomCount(1);
+//		ordersVO.setPeopleNum(4);
+//		ordersVO.setBreakfast(false);
+//		ordersVO.setDinner(false);
+//		ordersVO.setAfternoonTea(false);
+//		ordersVO.setPrice(14800);
+//		ordersVO.setReservationer("王曉華");
+//		ordersVO.setBdate(new java.sql.Date(new GregorianCalendar(1922, 0, 3).getTimeInMillis()));
+//		ordersVO.setTel("0955555555");
+//		ordersVO.setEmail("qqq@gmail.com");
+//		ordersVO.setAddr("fdasfdsaf");
+//		ordersVO.setPersonId("A192648793");
+//		ordersVO.setCountry("台灣");
+//		ordersVO.setPassport("546343");
+//		ordersVO.setBedAdding(false);
+//		ordersVO.setPricePerPerson(0);
+//		ordersVO.setCustomerRemark("我朋友需要大張一點的床");
+//		ordersVO.setHotelRemark("若單筆預訂超過5間客房，可能會需要遵守其他相關規定以及符合額外的要求。");
+//		ordersVO.setOrderState(true);
+//		dao.insert(ordersVO);
 
 		// 修改訂單狀態
 //		OrdersDAO_interface dao = new OrdersJDBC();

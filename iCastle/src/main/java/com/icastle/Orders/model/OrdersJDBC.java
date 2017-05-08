@@ -12,9 +12,16 @@ import java.util.List;
 public class OrdersJDBC implements OrdersDAO_interface{
 	
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
-	String userid = "sa";
-	String passwd = "sa123456";
+
+//	azure
+	String url = "jdbc:sqlserver://starbooksdb12.database.windows.net:1433;database=iCastle";
+	String userid = "starbooksuser@starbooksdb12";
+	String passwd = "Bb0192837465";
+
+//	localhost
+//	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
+//	String userid = "sa";
+//	String passwd = "sa123456";
 	
 	private static final String INSERT_STMT = "insert into orders(orderedDate,memberId,roomId,hotelId,hotelName,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,orderState) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "update orders set orderState=? , memo=? , cancelDate=? where orderid=?";

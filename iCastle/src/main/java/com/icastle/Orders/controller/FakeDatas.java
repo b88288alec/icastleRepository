@@ -201,8 +201,8 @@ public class FakeDatas extends HttpServlet {
 								result.append("'" + new java.sql.Timestamp(checkin.getTime() - (long)(Math.random()*31536000000.0)) + "'" + ",");
 								int memberId = 0;
 								do{
-									memberId = (int)(Math.random()*12.0);
-								}while(memberId < 2);
+									memberId = (int)(Math.random()*16.0);
+								}while(memberId <= 5);
 								result.append("'" + memberId + "'" + ",");
 								result.append(rdsb1);
 								result.append("'" + checkin + "'" + ",");

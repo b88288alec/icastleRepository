@@ -24,9 +24,15 @@
 	<!--結束導覽列-->
 	
     <div class="container" style="margin-top:56px">
-    	<select id='idSelectYear'></select>
-    	<select id='idSelectMonth'></select>
-    	<select id='idSelectDate'></select>
+    <table class="table">
+    	<tr>
+    		<td><span>房型名稱:</span><select id='idSelectRoomTypeName'></select></td>
+    		<td><span>訂單狀態:</span><select id='idSelectOrderState'></select></td>
+    		<td><select id='idSelectYear'></select><span>年</span></td>
+    		<td><select id='idSelectMonth'></select><span>月</span></td>
+    		<td><select id='idSelectDate'></select><span>日</span></td>
+    	</tr>
+    </table>
     </div>
     
     <!--開始footer-->

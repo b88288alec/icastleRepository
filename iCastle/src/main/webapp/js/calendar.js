@@ -1,53 +1,31 @@
-window.onload = function(){
-
+$(function(){
 //	新增年
-	for(i = 2018; i >= 2010; i--){
-		var opt = document.createElement('option');
-		opt.setAttribute('value', i);
-		opt.innerHTML = i;
-		
-		document.getElementById('idSelectYear').appendChild(opt);
+	for(i = 2017; i >= 2010; i--){
+		$('#idSelectYear').append("<option value='" + i + "'>" + i +"</option>");
 	}
 	
 //	新增月
 	var opt = document.createElement('option');
 	opt.innerHTML = '--';
-	document.getElementById('idSelectMonth').appendChild(opt);
+	$('#idSelectMonth').append("<option>--</option>");
 	for(i = 1; i <= 12; i++){
-		var opt = document.createElement('option');
-		opt.setAttribute('value', i);
-		opt.innerHTML = i;
-		
-		document.getElementById('idSelectMonth').appendChild(opt);
+		$('#idSelectMonth').append("<option value='" + i + "'>" + i +"</option>");
 	}
 	
 //	新增日
-	var opt = document.createElement('option');
-	opt.innerHTML = '--';
-	document.getElementById('idSelectDate').appendChild(opt);
+	$('#idSelectDate').append("<option>--</option>");
 	
-	document.getElementById('idSelectMonth').onchange = dayChange;
-	
+	$('#idSelectMonth').change(dayChange);
+
 	function dayChange(){
-		document.getElementById('idSelectDate').innerHTML = "";
-		var opt = document.createElement('option');
-		opt.innerHTML = "--";
-		document.getElementById('idSelectDate').appendChild(opt);
-
-		var m = document.getElementById('idSelectMonth').value;
-
-		if(m != null){
-			var y = document.getElementById('idSelectYear').value;
-			var d = (new Date(y, m, 0)).getDate();
-			
-			for(i = 1; i <= d; i++){
-				var opt = document.createElement('option');
-				opt.setAttribute('value', i);
-				opt.innerHTML = i;
-				
-				document.getElementById('idSelectDate').appendChild(opt);
-			}
+		$('#idSelectDate').empty().append("<option>--</option>");
+		if($('#idSelectMonth').attr('value') != null){
+			var d = (new Date($('#idSelectYear').attr('value'),$('#idSelectMonth').attr('value'),0)).getDate();
 		}
-	}
-
-}
+		
+		for(i = 1; i <= d; i++){
+			$('#idSelectDate').append("<option value='" + i + "'>" + i +"</option>");
+		}
+		
+	}	
+});
