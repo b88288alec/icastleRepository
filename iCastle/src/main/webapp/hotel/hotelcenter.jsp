@@ -17,12 +17,12 @@
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
-    <style>
-.container {
-    width: 1300px;
-    margin-top: 100px;
-}
-    </style>
+	<style>
+		.container {
+		    width: 1300px;
+		    margin-top: 100px;
+		}
+	</style>
 </head>
 <body>
     <!--開始導覽列-->
@@ -33,7 +33,8 @@
     <div class="container"
 		style="background-color: white; padding-bottom: 100px;">
 			<h1>飯店會員中心</h1>
-			<a href="#">更改密碼</a>
+			<a href="#">修改飯店資訊</a>
+			<a href="updateHotelPw.jsp">修改密碼</a>
 			<a href="ShowHotelPhoto.do">編輯圖片</a>
 			<a href="${pageContext.servletContext.contextPath}/roomtype/setRoomType.jsp">新增房型</a>
 			<a href="${pageContext.servletContext.contextPath}/rooms/SetRoomPrice">新增房價</a>
