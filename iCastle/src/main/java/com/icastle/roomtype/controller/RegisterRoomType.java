@@ -110,8 +110,8 @@ public class RegisterRoomType extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("RoomTypeVOList", list);
-		RequestDispatcher rd = request.getRequestDispatcher("../rooms/FakeDataGen.jsp");
-//		RequestDispatcher rd = request.getRequestDispatcher("../rooms/SetRoomPrice");
+//		RequestDispatcher rd = request.getRequestDispatcher("../rooms/FakeDataGen.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("../rooms/SetRoomPrice");
 		rd.forward(request, response);
 	}
 

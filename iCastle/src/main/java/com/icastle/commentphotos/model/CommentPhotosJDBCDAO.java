@@ -16,51 +16,43 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 import com.icastle.Comments.model.CommentDAO;
 import com.icastle.Comments.model.CommentVO;
 
-public class CommentPhotosDAO implements CommentPhotosDAO_interface{
+public class CommentPhotosJDBCDAO implements CommentPhotosDAO_interface{
 	
 	private final String INS_PHOTO = "INSERT INTO CommentPhotos(commentId,photo) VALUES (?,?)";
 	private final String SHOW_PHOTO = "SELECT commentId,photo FROM CommentPhotos WHERE commentId=?";
 	private final String DEL_PHOTO = "DELETE CommentPhotos WHERE commentId = ?";
 	private final String SEL_ID = "SELECT photo from CommentPhotos WHERE id = ?";
-	
+	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
+	private String user = "sa";
+	private String password = "sa123456";
 	
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs;
-	List<CommentPhotosVO> listPhoto;
 	CommentPhotosVO comtPhoto;
-	
-	private static DataSource ds = null;
-	static{
-		
-		try {
-			InitialContext context = new InitialContext();
-			ds = (DataSource) context.lookup("java:comp/env/jdbc/iCastleDB");
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	List<CommentPhotosVO> listPhoto;
 
+
+	
 	
 	public String uploadCommentPhoto(int commentId,InputStream x,long len){
 		
 		try {
 
-			
-		    conn = ds.getConnection();
+			Class.forName(driver);
+		    conn = DriverManager.getConnection(url, user, password);
 			stmt = conn.prepareStatement(INS_PHOTO);
 			stmt.setInt(1,commentId);
 			stmt.setBinaryStream(2,x,len);
 			stmt.executeUpdate();
 			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,10 +73,14 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 	
 	public String deleteCommentPhoto(int commentId){
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
 			stmt = conn.prepareStatement(DEL_PHOTO);
 			stmt.setInt(1,commentId);
 			stmt.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,40 +99,45 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 	
 	public List<CommentPhotosVO> findByCommentId(int commentId){
 		
-		
-	     Blob b;
-	     byte[] data;
-	     comtPhoto = new CommentPhotosVO();
-	try {
-		
-		conn = ds.getConnection();
-		stmt = conn.prepareStatement(SHOW_PHOTO);
-		stmt.setInt(1,commentId);
-		rs = stmt.executeQuery();
-		listPhoto = new ArrayList<CommentPhotosVO>();
-		
-		while(rs.next()){
-			b = rs.getBlob("photo");
-			data = b.getBytes(1,(int)b.length());	
-			comtPhoto.setPhoto(data);
-			comtPhoto.setCommentId(rs.getInt("commentId"));	
-			listPhoto.add(comtPhoto);
-		}
-		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}finally{
+		     Blob b;
+		     byte[] data;
+		     comtPhoto = new CommentPhotosVO();
 		try {
-			conn.close();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			stmt = conn.prepareStatement(SHOW_PHOTO);
+			stmt.setInt(1,commentId);
+			rs = stmt.executeQuery();
+			listPhoto = new ArrayList<CommentPhotosVO>();
+			
+			while(rs.next()){
+				b = rs.getBlob("photo");
+				data = b.getBytes(1,(int)b.length());	
+				comtPhoto.setPhoto(data);
+				comtPhoto.setCommentId(rs.getInt("commentId"));	
+				listPhoto.add(comtPhoto);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		return listPhoto;
+		
 	}
-	return listPhoto;
-	}
-	
+
+
+	@Override
 	public CommentPhotosVO findById(int id){
 		
 		Blob b;
@@ -144,7 +145,8 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 		comtPhoto = new CommentPhotosVO();
 		
 		try {
-			conn = ds.getConnection();
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
 			stmt = conn.prepareStatement(SEL_ID);
 			stmt.setInt(1,id);
 			rs = stmt.executeQuery();
@@ -154,15 +156,24 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
             data = b.getBytes(1,(int)b.length());
             comtPhoto.setPhoto(data);
             
+            
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return comtPhoto;
 		
 	}
 
-	
-	
 }

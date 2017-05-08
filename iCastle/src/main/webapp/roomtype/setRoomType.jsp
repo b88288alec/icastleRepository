@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:if test="${empty HotelLoginOK}">
+	<c:redirect url="/hotel/loginhotel.jsp"></c:redirect>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +32,7 @@
 <title>愛客宿-iCastle</title>
 </head>
 <body>
+
 	<!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
@@ -39,7 +44,7 @@
 			<div class="form">
 				<p>飯店ID</p>
 				<input type="text" class="form-control" placeholder="輸入飯店ID"
-					name="hotelId" />
+					name="hotelId" value="${HotelLoginOK.hotelId}" disabled/>
 				<p>房型名稱</p>
 				<input type="text" class="form-control" placeholder="輸入房型名稱"
 					name="roomTypeName" />
@@ -126,7 +131,7 @@
 			
 			var hr = $('<hr/>')
 			var hotelIdp = $('<p></p>').text("飯店ID");
-			var hotelId_input = $('<input/>').attr({type : "text", class : "form-control", placeholder : "輸入飯店ID", name : "hotelId"});
+			var hotelId_input = $('<input/>').attr({type : "text", class : "form-control", placeholder : "輸入飯店ID", name : "hotelId", value : "${HotelLoginOK.hotelId}", disabled : "true"});
 			var roomTypeNamep = $('<p></p>').text("房型名稱");
 			var roomTypeName_input = $('<input/>').attr({type : "text", class : "form-control", placeholder : "輸入房型名稱", name : "roomTypeName"});
 			var peopleNump = $('<p></p>').text("房型人數");

@@ -68,7 +68,7 @@
 	$(function(){
 		$('#onekey').click(function() {
 			event.preventDefault();
-			$('input[name = "email"]').val("eeit93no1@gmail.com");		
+			$('input[name = "email"]').val("eeit93no1@gmail.com");	
 		});
 	})
 </script>

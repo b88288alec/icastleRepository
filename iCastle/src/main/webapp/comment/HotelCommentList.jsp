@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,32 +18,46 @@
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
+    <style>
+     .myStyle{
+        border:3px solid black;
+     }
+    </style>
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="fragment/nav.jsp"/>
+		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
-	
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div style="margin-top:60px">
+	   <div style="margin-top:60px">
     <table class="table">
     <thead>
         <tr>
-            <th class="text-center">#</th>
-            <th>Name</th>
-            <th>Job Position</th>
-            <th>Since</th>
-            <th class="text-right">Salary</th>
+            <th class="text-center">編號</th>
+            <th>會員姓名</th>
+            <th>會員信箱</th>
+            <th>會員評論時間</th>
             <th class="text-right">Actions</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td class="text-center">1</td>
-            <td>Andrew Mike</td>
-            <td>Develop</td>
-            <td>2013</td>
-            <td class="text-right">&euro; 99,225</td>
+ 
+         <c:forEach var="comment" items="${commentData}">
+         <tr>       
+            <td class="text-center">
+            ${comment.id}
+            </td>
+                     
+            <td>
+            ${comment.name}
+            </td>
+   
+            <td>
+            ${comment.email}
+            </td>
+            
+            <td>
+            ${comment.commentTime}
+            </td>
             <td class="td-actions text-right">
                 <button type="button" rel="tooltip" title="View Profile" class="btn btn-info btn-simple btn-xs">
                     <i class="fa fa-user"></i>
@@ -54,49 +69,16 @@
                     <i class="fa fa-times"></i>
                 </button>
             </td>
-        </tr>
-        <tr>
-            <td class="text-center">2</td>
-            <td>John Doe</td>
-            <td>Design</td>
-            <td>2012</td>
-            <td class="text-right">&euro; 89,241</td>
-            <td class="td-actions text-right">
-                <button type="button" rel="tooltip" title="View Profile" class="btn btn-info btn-simple btn-xs">
-                    <i class="fa fa-user"></i>
-                </button>
-                <button type="button" rel="tooltip" title="Edit Profile" class="btn btn-success btn-simple btn-xs">
-                    <i class="fa fa-edit"></i>
-                </button>
-                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                    <i class="fa fa-times"></i>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="text-center">3</td>
-            <td>Alex Mike</td>
-            <td>Design</td>
-            <td>2010</td>
-            <td class="text-right">&euro; 92,144</td>
-            <td class="td-actions text-right">
-                <button type="button" rel="tooltip" title="View Profile" class="btn btn-info btn-simple btn-xs">
-                    <i class="fa fa-user"></i>
-                </button>
-                <button type="button" rel="tooltip" title="Edit Profile" class="btn btn-success btn-simple btn-xs">
-                    <i class="fa fa-edit"></i>
-                </button>
-                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                    <i class="fa fa-times"></i>
-                </button>
-            </td>
-        </tr>
+            </tr>
+       </c:forEach> 
     </tbody>
 </table>
 </div>
+	
+    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     
     <!--開始footer-->
-		<jsp:include page="fragment/footer.jsp"/>
+		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>

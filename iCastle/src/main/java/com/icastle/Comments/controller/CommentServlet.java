@@ -1,7 +1,9 @@
 package com.icastle.Comments.controller;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +23,16 @@ import com.icastle.Comments.model.CommentService;
 import com.icastle.Comments.model.CommentVO;
 import com.icastle.Orders.model.OrdersVO;
 import com.icastle.commentphotos.model.CommentPhotosService;
+import com.icastle.commentphotos.model.CommentPhotosVO;
 import com.icastle.commentphotos.model.OrdersJDBCTest;
 import com.icastle.hotels.model.HotelVO;
+import com.icastle.members.model.MembersService;
 import com.icastle.members.model.MembersVO;
 
 /**
  * Servlet implementation class CommentServlet
  */
-@WebServlet("/CommentServlet")
+@WebServlet("/comment/CommentServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class CommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -45,34 +49,7 @@ public class CommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String s = request.getParameter("hotelCommentSearch");
-		if(s == "顧客評論"){
-			
-			HotelVO hvo = new HotelVO();
-			hvo.setHotelId(1);
-	
-			CommentService comtService = new CommentService(); 
-			
-			List<CommentVO> comtList= comtService.hotelComtSearch(hvo.getHotelId());			
-			CommentVO comt; 
-			
-			
-			MembersVO mvo = new MembersVO();
-			
-			
-			
-			comt = new CommentVO();
-			for(int i = 0;i < comtList.size();i++){				
-				comt = comtList.get(i);
-				comt.getOrderId();
-				
-				comt.getCommentTime();
-			}
-			
-			
-			
-		}
- 
+
 	}
 
 	/**
@@ -129,33 +106,31 @@ public class CommentServlet extends HttpServlet {
 		
 				
 		comt = new CommentVO();
-		comt.setOrderId(1);
+		comt.setOrderId(3);
 		comt.setHotelId(1);
-		comt.setEmail("abc@gmail.com");
+		comt.setEmail("def@gmail.com");
 		comt.setServiceScore(serviceInt);
 		comt.setSceneScore(sceneInt);
 		comt.setQualityScore(qualityInt);
 		comt.setComment(comment);
 		comt.setCommentTime(d);
-		comtService.comtIns(comt);
-		System.out.println(comt);
+		comtService.comtIns(comt);	
 		
 		comt = comtService.findByOrderId(comt.getOrderId());
-		System.out.println(comt);
-		
-		
-		if(photo!=null){
+		System.out.println(comt.getCommentId());
 			
+		if(photo!=null){
+			List<CommentPhotosVO> comtphotos = new ArrayList<CommentPhotosVO>();
+			CommentPhotosVO comtphotoVO = new CommentPhotosVO();
+//			File f = new File()
+//			FileOutputStream fos = new FileOutputStream();
 			InputStream ips = photo.getInputStream();
 			Integer lenInt = new Integer(ips.available());
-//			long lenLong = lenInt.longValue();
 			long lenLong = photo.getSize();
 			CommentPhotosService comtPhotoService = new CommentPhotosService();
-			System.out.println(ips);
 			System.out.println(comt.getCommentId());
-			System.out.println(lenLong);
 			comtPhotoService.uploadCommentPhoto(comt.getCommentId(),ips,lenLong);
-			
+							   			
 		}
 
 		request.setAttribute("comment", comt);

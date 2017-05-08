@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.icastle.roomtype.model.RoomTypeService;
 
-@WebServlet("/roomtype/RoomTypePriceToJason")
+@WebServlet("/roomtype/RoomTypePriceToJson")
 public class RoomTypePriceToJson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,16 +33,20 @@ public class RoomTypePriceToJson extends HttpServlet {
 		Map<String, String> price = roms.findRoomTypePrice(roomTypeId);
 
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("平日價", price.get("weekdaysPrice"));
-		jsonObj.put("假日價", price.get("holidayPrice"));
-		jsonObj.put("旺季價", price.get("seasonPrice"));
-		jsonObj.put(price.get("customizedName"), price.get("customizedPrice"));
+		JSONArray jsonArray = new JSONArray();
+		jsonObj.put("weekdaysPrice", price.get("weekdaysPrice"));
+		jsonObj.put("holidayPrice", price.get("holidayPrice"));
+		jsonObj.put("seasonPrice", price.get("seasonPrice"));
+		jsonObj.put("customizedName", price.get("customizedName"));
+		jsonObj.put("customizedPrice", price.get("customizedPrice"));
+		
+		jsonArray.add(jsonObj);
 
-		System.out.println(jsonObj);
+		System.out.println(jsonArray);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		out.println(jsonObj);
+		out.println(jsonArray);
 	}
 
 }

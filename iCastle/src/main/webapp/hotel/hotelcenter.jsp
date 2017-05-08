@@ -34,7 +34,9 @@
 		style="background-color: white; padding-bottom: 100px;">
 			<h1>飯店會員中心</h1>
 			<a href="#">更改密碼</a>
-			<a href="hotelphoto.jsp">編輯圖片</a>
+			<a href="ShowHotelPhoto.do">編輯圖片</a>
+			<a href="${pageContext.servletContext.contextPath}/roomtype/setRoomType.jsp">新增房型</a>
+			<a href="${pageContext.servletContext.contextPath}/rooms/SetRoomPrice">新增房價</a>
 	</div>
     
     <!--開始footer-->
