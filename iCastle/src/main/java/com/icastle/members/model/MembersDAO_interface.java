@@ -10,6 +10,7 @@ public interface MembersDAO_interface {
       public List<MembersVO> getAll();          //查詢會員多筆
       public MembersVO login(String email, String pw); //會員登入
 //      public MembersVO findByEmail(String email); //查詢email是否已經註冊過
+      public MembersVO lineLogin(String name,String pw);  // 檢查line登入
       
       
 }

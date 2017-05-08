@@ -97,50 +97,105 @@ $(function() {
 //點擊多張圖片上傳
 var fileObj = document.getElementById("file");
 fileObj.onchange = function (){
-    var theFiles = document.getElementById("file").files
+    var theFiles = document.getElementById("file").files;
+    
     for (var i = 0; i < theFiles.length; i++) {
         var reader = new FileReader();
         reader.readAsDataURL(theFiles[i]);
         
-        reader.onload = function (e) {         
-            var fileContent = e.target.result;
-
-            //產生img
-            var imgObj = document.createElement("img");  //<img>
-            imgObj.setAttribute("src", fileContent);  //<img src=...
-            imgObj.setAttribute("id", "img" + index);
-            imgObj.classList.add("imgs");
-            
-            //產生藏type的input
-            var typeObj = document.createElement("input");
-            typeObj.setAttribute("name", "insert");
-            typeObj.setAttribute("type", "hidden");
-            
-            //產生藏description的input
-            var descriptionObj = document.createElement("input");
-            descriptionObj.setAttribute("name", "imgdescription" + index);
-            descriptionObj.setAttribute("id", "inpimg" + index);
-            descriptionObj.setAttribute("type", "hidden");
-            
-            //產生藏roomTypeId的input
-            var roomTypeIdObj = document.createElement("input");
-            roomTypeIdObj.setAttribute("name", "imgroomTypeId" + index);
-            roomTypeIdObj.setAttribute("id", "roomTypeIdimg" + index++);
-            roomTypeIdObj.setAttribute("value", "無");
-            roomTypeIdObj.setAttribute("type", "hidden");
-            
-            //產生li
-            var liObj = document.createElement("li");
-            liObj.appendChild(imgObj);
-            liObj.appendChild(typeObj);
-            liObj.appendChild(descriptionObj);
-            liObj.appendChild(roomTypeIdObj);
-            
-            //將li放到list內
-            document.getElementById("list").appendChild(liObj);
-            page++;
-            console.log('page= '+page);
-        }
+        //產生img標籤
+        //將img貼到div
+        
+        reader.onload = (function(theFile){
+            var fileName = theFile.name;
+            return function(e){
+            	 var fileContent = e.target.result;
+                 console.log(e.target.name);
+                 
+                 //得到img src
+                 
+                 //產生img
+                 var imgObj = document.createElement("img");  //<img>
+                 imgObj.setAttribute("src", fileContent);  //<img src=...
+                 imgObj.setAttribute("id", "img" + index);
+                 imgObj.classList.add("imgs");
+                 
+                 //產生藏type的input
+                 var typeObj = document.createElement("input");
+                 typeObj.setAttribute("name", "insert");
+                 typeObj.setAttribute("type", "hidden");
+                 
+                 //產生藏description的input
+                 var descriptionObj = document.createElement("input");
+                 descriptionObj.setAttribute("name", "imgdescription" + index);
+                 descriptionObj.setAttribute("id", "inpimg" + index);
+                 descriptionObj.setAttribute("type", "hidden");
+                 
+                 //產生藏roomTypeId的input
+                 var roomTypeIdObj = document.createElement("input");
+                 roomTypeIdObj.setAttribute("name", "imgroomTypeId" + index);
+                 roomTypeIdObj.setAttribute("id", "roomTypeIdimg" + index++);
+                 roomTypeIdObj.setAttribute("value", "無");
+                 roomTypeIdObj.setAttribute("type", "hidden");
+                 
+                 //產生li
+                 var liObj = document.createElement("li");
+                 liObj.appendChild(imgObj);
+                 liObj.appendChild(typeObj);
+                 liObj.appendChild(descriptionObj);
+                 liObj.appendChild(roomTypeIdObj);
+                 
+                 //將li放到list內
+                 document.getElementById("list").appendChild(liObj);
+                 page++;
+                 console.log('page= '+page);
+            };
+        })(theFiles[i]);   
+        
+        
+        
+//        reader.onload = function (e) {         
+//            var fileContent = e.target.result;
+//            
+//            //得到img src
+//            
+//
+//            //產生img
+//            var imgObj = document.createElement("img");  //<img>
+//            imgObj.setAttribute("src", fileContent);  //<img src=...
+//            imgObj.setAttribute("id", "img" + index);
+//            imgObj.classList.add("imgs");
+//            
+//            //產生藏type的input
+//            var typeObj = document.createElement("input");
+//            typeObj.setAttribute("name", "insert");
+//            typeObj.setAttribute("type", "hidden");
+//            
+//            //產生藏description的input
+//            var descriptionObj = document.createElement("input");
+//            descriptionObj.setAttribute("name", "imgdescription" + index);
+//            descriptionObj.setAttribute("id", "inpimg" + index);
+//            descriptionObj.setAttribute("type", "hidden");
+//            
+//            //產生藏roomTypeId的input
+//            var roomTypeIdObj = document.createElement("input");
+//            roomTypeIdObj.setAttribute("name", "imgroomTypeId" + index);
+//            roomTypeIdObj.setAttribute("id", "roomTypeIdimg" + index++);
+//            roomTypeIdObj.setAttribute("value", "無");
+//            roomTypeIdObj.setAttribute("type", "hidden");
+//            
+//            //產生li
+//            var liObj = document.createElement("li");
+//            liObj.appendChild(imgObj);
+//            liObj.appendChild(typeObj);
+//            liObj.appendChild(descriptionObj);
+//            liObj.appendChild(roomTypeIdObj);
+//            
+//            //將li放到list內
+//            document.getElementById("list").appendChild(liObj);
+//            page++;
+//            console.log('page= '+page);
+//        }
     }
 }
 
