@@ -29,6 +29,9 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 			"UPDATE Members set email=?, pw=?, name=?, gender=?, bdate=?, addr=?, tel=?, personId=?, country=?, passport=? where memberId = ?";
 	private static final String LOGIN = 
 			"SELECT * FROM Members WHERE email = ? AND pw = ?";
+	private static final String LINELOGIN =
+			"SELECT * FROM Members WHERE name = ? AND pw = ?";
+	
 	
 	
 //  新增會員
@@ -392,6 +395,65 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 		}
 		return membersVO;
 	}
+
+
+@Override
+public MembersVO lineLogin(String name, String pw) {
+	
+	MembersVO membersVO = null;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	try {
+
+		Class.forName(driver);
+		con = DriverManager.getConnection(url, userid, passwd);
+		pstmt = con.prepareStatement(LINELOGIN);
+
+		pstmt.setString(1, name);
+		pstmt.setString(2, pw);
+		rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			membersVO = new MembersVO();
+			membersVO.setMemberId(rs.getInt("memberId"));
+			membersVO.setPw(rs.getString("pw"));
+			membersVO.setName(rs.getString("name"));
+		
+	
+		}
+
+	} catch (ClassNotFoundException e) {
+		throw new RuntimeException("Couldn't load database driver. "
+				+ e.getMessage());
+	} catch (SQLException se) {
+		throw new RuntimeException("A database error occured. "
+				+ se.getMessage());
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	return membersVO;
+}
 
 
 //	@Override
