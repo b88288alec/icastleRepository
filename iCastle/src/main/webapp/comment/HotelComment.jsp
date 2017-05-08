@@ -8,19 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
 
 <p>平均評分 : </p>${comment.avgScore}<br>
 <p>服務評分 : </p>${comment.serviceScore}<br>
 <p>品質評分 : </p>${comment.qualityScore}<br>
 <p>風景評分 : </p>${comment.sceneScore}<br>
 <p>按讚人數 : </p>${comment.good}<br>
-<p>上傳圖片: 
-</p>
-<c:forEach var="comphoto" items="${comtphotos}">
-<img alt="我是圖片" src="http://localhost:8081/iCastle/comment/CommentServlet?commentId=1">
-	
-</c:forEach>
-<br>
+<p>上傳圖片: </p>
+
+<img id="photo" alt="我是圖片" src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${ShowPhoto}"><br>	
 <p>評論內容 : </p>${comment.comment}<br>
 
 

@@ -23,6 +23,7 @@ public class CommentPhotosJDBCDAO implements CommentPhotosDAO_interface{
 	private final String INS_PHOTO = "INSERT INTO CommentPhotos(commentId,photo) VALUES (?,?)";
 	private final String SHOW_PHOTO = "SELECT commentId,photo FROM CommentPhotos WHERE commentId=?";
 	private final String DEL_PHOTO = "DELETE CommentPhotos WHERE commentId = ?";
+	private final String SEL_ID = "SELECT photo from CommentPhotos WHERE id = ?";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
 	private String user = "sa";
@@ -136,10 +137,42 @@ public class CommentPhotosJDBCDAO implements CommentPhotosDAO_interface{
 
 
 	@Override
-	public CommentPhotosVO findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public CommentPhotosVO findById(int id){
+		
+		Blob b;
+		byte[] data;
+		comtPhoto = new CommentPhotosVO();
+		
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			stmt = conn.prepareStatement(SEL_ID);
+			stmt.setInt(1,id);
+			rs = stmt.executeQuery();
+            rs.next();
+            
+            b = rs.getBlob("photo");
+            data = b.getBytes(1,(int)b.length());
+            comtPhoto.setPhoto(data);
+            
+            
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return comtPhoto;
+		
 	}
-	
 
 }

@@ -41,7 +41,7 @@ public class HotelPhotosService {
 	}
 	
 	//刪除圖片
-	public int deletePhoto(Integer id){
+	public int deletePhoto(List<Integer> id){
 		return dao.deletePhoto(id);
 	}
 	

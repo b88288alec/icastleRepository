@@ -16,5 +16,5 @@ public interface HotelPhotos_Interface {
 	//查到某種房型所有照片
 	public List<HotelPhotosVO> findByRoomTypeId(Integer roomTypeId);
 	//刪除一張照片
-	public int deletePhoto(Integer id);
+	public int deletePhoto(List<Integer> ids);
 }
