@@ -41,7 +41,7 @@ public class ShowHotelPhotoServlet extends HttpServlet {
 		request.setAttribute("roomTypeVOs", roomTypeVOs);
 		System.out.println("roomTypeVOs.size= " + roomTypeVOs.size());
 		
-		RequestDispatcher rd = request.getRequestDispatcher("hotelphoto.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("../hotelcenter/hotelphoto.jsp");
 		rd.forward(request, response);
 		return;
 	}
