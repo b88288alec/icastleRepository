@@ -33,7 +33,7 @@
 	<div class="container"
 		style="background-color: white; padding-bottom: 100px;">
 		<h1>修改密碼</h1>
-		<form method="post" action="UpdateHotelPw.do">
+		<form method="post" action="../hotelcenter/UpdateHotelPw.do">
 			<table>
 			<tbody>
 				<tr>
