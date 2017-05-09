@@ -109,7 +109,7 @@
                                     <input id="Name" name="Name" type="text" class="form-control" placeholder="輸入密碼" />
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                         
                         											
 					</div>
