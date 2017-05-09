@@ -1528,5 +1528,82 @@ public class OrdersJDBC implements OrdersDAO_interface{
 		}		
 		return result;
 	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId(Integer hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year(Integer hotelId, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month(Integer hotelId, Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId(Integer hotelId, Integer roomTypeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId(Integer hotelId, Integer roomTypeId, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId(Integer hotelId, Integer roomTypeId,
+			Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_orderstate(Integer hotelId, Boolean state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_orderstate(Integer hotelId, Boolean state, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state, Integer year,
+			Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state, Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

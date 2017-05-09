@@ -27,5 +27,18 @@ public interface OrdersDAO_interface {
 	public List<OrdersVO> select_by_hotelId_day_roomTypeId_orderstate(Integer hotelId, Integer roomTypeId, Integer year, Integer month, Integer day, Boolean state);
 //	寫心酸的
 	public List<OrdersVO> select_all();
-
+//	業者搜尋訂單圖表
+	public List<OrdersVO> chart_select_by_hotelId(Integer hotelId);
+	public List<OrdersVO> chart_select_by_hotelId_year(Integer hotelId, Integer year);
+	public List<OrdersVO> chart_select_by_hotelId_year_month(Integer hotelId, Integer year, Integer month);
+	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId(Integer hotelId, Integer roomTypeId);
+	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId(Integer hotelId, Integer roomTypeId, Integer year);
+	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId(Integer hotelId, Integer roomTypeId, Integer year, Integer month);
+	public List<OrdersVO> chart_select_by_hotelId_orderstate(Integer hotelId, Boolean state);
+	public List<OrdersVO> chart_select_by_hotelId_year_orderstate(Integer hotelId, Boolean state, Integer year);
+	public List<OrdersVO> chart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state, Integer year, Integer month);
+	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId, Boolean state);
+	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId, Boolean state, Integer year);
+	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId, Boolean state, Integer year, Integer month);
+	
 }

@@ -26,6 +26,19 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) and orderstate=:orderstate and roomtypeid=:roomTypeId order by checkinDay";
 	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>:checkoutDay and orderstate=:orderstate and roomtypeid=:roomTypeId order by checkinDay";
 	
+	private static final String CHART_SELECT_BY_HOTELID = "select year(checkinDay),count(*) from OrdersVO where hotelId=:hotelId group by year(checkinDay) order by year(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_YEAR = "select month(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) group by month(checkinDay) order by month(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_MONTH = "select day(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) group by day(checkinDay) order by day(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_ROOMTYPEID = "select year(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and roomtypeid=:roomTypeId group by year(checkinDay) order by year(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_YEAR_ROOMTYPEID = "select month(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and roomtypeid=:roomTypeId group by month(checkinDay) order by month(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_MONTH_ROOMTYPEID = "select day(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) and roomtypeid=:roomTypeId group by day(checkinDay) order by day(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_ORDERSTATE = "select year(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and orderstate=:orderstate group by year(checkinDay) order by year(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_YEAR_ORDERSTATE = "select month(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate group by month(checkinDay) order by month(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_MONTH_ORDERSTATE = "select day(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) and orderstate=:orderstate group by day(checkinDay) order by day(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_ROOMTYPEID_ORDERSTATE = "select year(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and orderstate=:orderstate and roomtypeid=:roomTypeId group by year(checkinDay) order by year(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE = "select month(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate and roomtypeid=:roomTypeId group by month(checkinDay) order by month(checkinDay)";
+	private static final String CHART_SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE = "select day(checkinDay),count(*) from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) and orderstate=:orderstate and roomtypeid=:roomTypeId group by day(checkinDay) order by day(checkinDay)";
+	
 	@Override
 	public void insert(OrdersVO ordersVO) {
 
@@ -440,6 +453,169 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 			throw e;
 		}
 		return result;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId(Integer hotelId) {
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID);
+			query.setParameter("hotelId", hotelId);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year(Integer hotelId, Integer year) {
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_YEAR);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month(Integer hotelId, Integer year, Integer month) {
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			
+			String in = year + "/" + month + "/" + "1";
+			String inout = year + "/" + month + "/" + "2";
+			String out =  year + "/" + (month+1) + "/" + "0";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			java.sql.Date monthin = null;
+			java.sql.Date monthinout = null;
+			java.sql.Date monthout = null;
+			try {
+				monthin = new java.sql.Date(sdf.parse(in).getTime());
+				monthinout = new java.sql.Date(sdf.parse(inout).getTime());
+				monthout = new java.sql.Date(sdf.parse(out).getTime());
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+			
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_MONTH);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("Imonthin", monthin);
+			query.setParameter("Imonthout", monthout);
+			query.setParameter("Omonthin", monthinout);
+			query.setParameter("Omonthout", monthout);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId(Integer hotelId, Integer roomTypeId) {
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_ROOMTYPEID);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("roomTypeId", roomTypeId);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId(Integer hotelId, Integer roomTypeId, Integer year) {
+
+		List<OrdersVO> result = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_YEAR_ROOMTYPEID);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("roomTypeId", roomTypeId);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId(Integer hotelId, Integer roomTypeId,
+			Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_orderstate(Integer hotelId, Boolean state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_orderstate(Integer hotelId, Boolean state, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state, Integer year,
+			Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state, Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

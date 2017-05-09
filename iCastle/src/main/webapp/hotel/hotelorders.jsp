@@ -72,6 +72,9 @@
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/calendar.js"></script>
+
+<script src="${pageContext.servletContext.contextPath}/js/chartist.min.js"></script>
+
 <script>
 	$(function(){
 		
@@ -83,6 +86,11 @@
 		$('#idSelectDate').on("change", orders);
 		
 // 		觸發的方法
+
+		function barChart(){
+			
+		}
+
 		function orders(){
 			$.ajax({
 				type : 'GET',
