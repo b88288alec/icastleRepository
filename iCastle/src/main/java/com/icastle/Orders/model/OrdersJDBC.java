@@ -14,9 +14,14 @@ public class OrdersJDBC implements OrdersDAO_interface{
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
 //	azure
-	String url = "jdbc:sqlserver://starbooksdb12.database.windows.net:1433;database=iCastle";
-	String userid = "starbooksuser@starbooksdb12";
-	String passwd = "Bb0192837465";
+//	String url = "jdbc:sqlserver://starbooksdb12.database.windows.net:1433;database=iCastle";
+//	String userid = "starbooksuser@starbooksdb12";
+//	String passwd = "Bb0192837465";
+
+//	azure-培楨
+	String url = "jdbc:sqlserver://eeit93icastle.database.windows.net:1433;database=iCastle";
+	String userid = "icastlemanager@eeit93icastle";
+	String passwd = "Taiwanno1";
 
 //	localhost
 //	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";

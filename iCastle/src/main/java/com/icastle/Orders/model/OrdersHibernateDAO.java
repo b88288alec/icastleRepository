@@ -12,19 +12,19 @@ import hibernate.util.HibernateUtil;
 
 public class OrdersHibernateDAO implements OrdersDAO_interface{
 	
-	private static final String SELECT_BY_MEMBERID = "from OrdersVO where memberId = :memberId";
-	private static final String SELECT_BY_HOTELID_YEAR = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout)";
-	private static final String SELECT_BY_HOTELID_MONTH = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout)";
-	private static final String SELECT_BY_HOTELID_DAY = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay";
-	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and roomtypeid=:roomTypeId";
-	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout) and roomtypeid=:roomTypeId";
-	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay and roomtypeid=:roomTypeId";
-	private static final String SELECT_BY_HOTELID_YEAR_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate";
-	private static final String SELECT_BY_HOTELID_MONTH_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout) and orderstate=:orderstate";
-	private static final String SELECT_BY_HOTELID_DAY_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay and orderstate=:orderstate";
-	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate and roomtypeid=:roomTypeId";
-	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and (month(checkinDay)<=:monthin and month(checkoutDay)>=:monthout) and orderstate=:orderstate and roomtypeid=:roomTypeId";
-	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>=:checkoutDay and orderstate=:orderstate and roomtypeid=:roomTypeId";
+	private static final String SELECT_BY_MEMBERID = "from OrdersVO where memberId = :memberId order by checkinDay";
+	private static final String SELECT_BY_HOTELID_YEAR = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) order by checkinDay";
+	private static final String SELECT_BY_HOTELID_MONTH = "from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) order by checkinDay";
+	private static final String SELECT_BY_HOTELID_DAY = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>:checkoutDay order by checkinDay";
+	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and roomtypeid=:roomTypeId order by checkinDay";
+	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) and roomtypeid=:roomTypeId order by checkinDay";
+	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>:checkoutDay and roomtypeid=:roomTypeId order by checkinDay";
+	private static final String SELECT_BY_HOTELID_YEAR_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate order by checkinDay";
+	private static final String SELECT_BY_HOTELID_MONTH_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and ((checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout)) and orderstate=:orderstate order by checkinDay";
+	private static final String SELECT_BY_HOTELID_DAY_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>:checkoutDay and orderstate=:orderstate order by checkinDay";
+	private static final String SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) and orderstate=:orderstate and roomtypeid=:roomTypeId order by checkinDay";
+	private static final String SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) and orderstate=:orderstate and roomtypeid=:roomTypeId order by checkinDay";
+	private static final String SELECT_BY_HOTELID_DAY_ROOMTYPEID_ORDERSTATE = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>:checkoutDay and orderstate=:orderstate and roomtypeid=:roomTypeId order by checkinDay";
 	
 	@Override
 	public void insert(OrdersVO ordersVO) {
@@ -117,12 +117,28 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
+			
+			String in = year + "/" + month + "/" + "1";
+			String inout = year + "/" + month + "/" + "2";
+			String out =  year + "/" + (month+1) + "/" + "0";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			java.sql.Date monthin = null;
+			java.sql.Date monthinout = null;
+			java.sql.Date monthout = null;
+			try {
+				monthin = new java.sql.Date(sdf.parse(in).getTime());
+				monthinout = new java.sql.Date(sdf.parse(inout).getTime());
+				monthout = new java.sql.Date(sdf.parse(out).getTime());
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+			
 			Query query = session.createQuery(SELECT_BY_HOTELID_MONTH);
 			query.setParameter("hotelId", hotelId);
-			query.setParameter("yearin", year);
-			query.setParameter("yearout", year);
-			query.setParameter("monthin", month);
-			query.setParameter("monthout", month);
+			query.setParameter("Imonthin", monthin);
+			query.setParameter("Imonthout", monthout);
+			query.setParameter("Omonthin", monthinout);
+			query.setParameter("Omonthout", monthout);
 			result = query.list();
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
@@ -182,12 +198,28 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
+			
+			String in = year + "/" + month + "/" + "1";
+			String inout = year + "/" + month + "/" + "2";
+			String out =  year + "/" + (month+1) + "/" + "0";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			java.sql.Date monthin = null;
+			java.sql.Date monthinout = null;
+			java.sql.Date monthout = null;
+			try {
+				monthin = new java.sql.Date(sdf.parse(in).getTime());
+				monthinout = new java.sql.Date(sdf.parse(inout).getTime());
+				monthout = new java.sql.Date(sdf.parse(out).getTime());
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+			
 			Query query = session.createQuery(SELECT_BY_HOTELID_MONTH_ROOMTYPEID);
 			query.setParameter("hotelId", hotelId);
-			query.setParameter("yearin", year);
-			query.setParameter("yearout", year);
-			query.setParameter("monthin", month);
-			query.setParameter("monthout", month);
+			query.setParameter("Imonthin", monthin);
+			query.setParameter("Imonthout", monthout);
+			query.setParameter("Omonthin", monthinout);
+			query.setParameter("Omonthout", monthout);
 			query.setParameter("roomTypeId", roomTypeId);
 			result = query.list();
 			session.getTransaction().commit();
@@ -250,12 +282,28 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
+			
+			String in = year + "/" + month + "/" + "1";
+			String inout = year + "/" + month + "/" + "2";
+			String out =  year + "/" + (month+1) + "/" + "0";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			java.sql.Date monthin = null;
+			java.sql.Date monthinout = null;
+			java.sql.Date monthout = null;
+			try {
+				monthin = new java.sql.Date(sdf.parse(in).getTime());
+				monthinout = new java.sql.Date(sdf.parse(inout).getTime());
+				monthout = new java.sql.Date(sdf.parse(out).getTime());
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+			
 			Query query = session.createQuery(SELECT_BY_HOTELID_MONTH_ORDERSTATE);
 			query.setParameter("hotelId", hotelId);
-			query.setParameter("yearin", year);
-			query.setParameter("yearout", year);
-			query.setParameter("monthin", month);
-			query.setParameter("monthout", month);
+			query.setParameter("Imonthin", monthin);
+			query.setParameter("Imonthout", monthout);
+			query.setParameter("Omonthin", monthinout);
+			query.setParameter("Omonthout", monthout);
 			query.setParameter("orderstate", state);
 			result = query.list();
 			session.getTransaction().commit();
@@ -320,12 +368,28 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
+			
+			String in = year + "/" + month + "/" + "1";
+			String inout = year + "/" + month + "/" + "2";
+			String out =  year + "/" + (month+1) + "/" + "0";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			java.sql.Date monthin = null;
+			java.sql.Date monthinout = null;
+			java.sql.Date monthout = null;
+			try {
+				monthin = new java.sql.Date(sdf.parse(in).getTime());
+				monthinout = new java.sql.Date(sdf.parse(inout).getTime());
+				monthout = new java.sql.Date(sdf.parse(out).getTime());
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+			
 			Query query = session.createQuery(SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE);
 			query.setParameter("hotelId", hotelId);
-			query.setParameter("yearin", year);
-			query.setParameter("yearout", year);
-			query.setParameter("monthin", month);
-			query.setParameter("monthout", month);
+			query.setParameter("Imonthin", monthin);
+			query.setParameter("Imonthout", monthout);
+			query.setParameter("Omonthin", monthinout);
+			query.setParameter("Omonthout", monthout);
 			query.setParameter("roomTypeId", roomTypeId);
 			query.setParameter("orderstate", state);
 			result = query.list();

@@ -110,12 +110,7 @@ public class FakeDatas extends HttpServlet {
 					}
 					
 //					房間偏好
-					double popular = 0.0;
-					if(j == 3 || j == 4){
-						popular = 2.0;
-					}else{
-						popular = 0.5;
-					}
+					double popular = (j == 3 || j == 4)? 2.0 : 0.5;
 					
 					List<RoomsVO> rooms = rs.getRoomsByMonth(1, j, start, end);
 //					System.out.println(rooms.size());
