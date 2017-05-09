@@ -33,7 +33,7 @@
     <div class="container"
 		style="background-color: white; padding-bottom: 100px;">
 			<h1>飯店會員中心</h1>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotel.jsp">修改飯店資訊</a>
+			<a href="${pageContext.servletContext.contextPath}/hotelcenter/UpdateHotelInfo.do">修改飯店資訊</a>
 			<a href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelPw.jsp">修改密碼</a>
 			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelPhoto.do">編輯圖片</a>
 			<a href="${pageContext.servletContext.contextPath}/roomtype/setRoomType.jsp">新增房型</a>
