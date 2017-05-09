@@ -23,7 +23,7 @@ import com.icastle.hotels.model.HotelVO;
 /**
  * Servlet implementation class OrdersListServlet
  */
-@WebServlet("orders/OrdersListServlet")
+@WebServlet("/hotelcenter/OrdersListServlet")
 public class OrdersListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

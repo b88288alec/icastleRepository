@@ -15,7 +15,7 @@ import com.icastle.hotels.model.HotelVO;
 import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
-@WebServlet("/orders/ToHotelOrders")
+@WebServlet("/hotelcenter/ToHotelOrders")
 public class ToHotelOrders extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class ToHotelOrders extends HttpServlet {
 			
 			req.setAttribute("roomTypeList", rtVO);
 			
-			RequestDispatcher rd = req.getRequestDispatcher("../hotel/hotelorders.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("hotelorders.jsp");
 			rd.forward(req, res);
 			return;
 		}catch(Exception e){

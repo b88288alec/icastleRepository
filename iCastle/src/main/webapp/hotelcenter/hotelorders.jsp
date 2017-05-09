@@ -94,7 +94,7 @@
 		function orders(){
 			$.ajax({
 				type : 'GET',
-				url : '${pageContext.servletContext.contextPath}/orders/OrdersListServlet',
+				url : '${pageContext.servletContext.contextPath}/hotelcenter/OrdersListServlet',
 				data : {
 					hotelId : "1",
 					year : $('#idSelectYear').val(),
