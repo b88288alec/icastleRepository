@@ -42,7 +42,7 @@
 			
 			<tr>
 				<td><input type="submit" value="確定"></td>
-				<td><input id="onekey" type="submit" value="一鍵輸入"></td>
+				<td><input id="onekey1" type="submit" value="eeit93一鍵輸入"><input id="onekey2" type="submit" value="德立莊一鍵輸入"></td>
 				<td><a href="createrandompw.jsp">忘記密碼</a></td>
 			</tr>
 			</tbody>
@@ -70,9 +70,15 @@
 <script src="../js/material-kit.js"></script>
 <script>
 	$(function(){
-		$('#onekey').click(function() {
+		$('#onekey1').click(function() {
 			event.preventDefault();
 			$('input[name = "email"]').val("eeit93no1@gmail.com");
+			$('input[name = "pw"]').val("123456");
+		
+		});
+		$('#onekey2').click(function() {
+			event.preventDefault();
+			$('input[name = "email"]').val("midtown@richardson.com");
 			$('input[name = "pw"]').val("123456");
 		
 		});

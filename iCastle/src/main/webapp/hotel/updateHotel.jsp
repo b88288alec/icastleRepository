@@ -20,7 +20,7 @@
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="fragment/nav.jsp"/>
+		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
     <!--開始本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
@@ -28,7 +28,7 @@
     <!--結束本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     
     <!--開始footer-->
-		<jsp:include page="fragment/footer.jsp"/>
+		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>

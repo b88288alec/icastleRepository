@@ -35,10 +35,12 @@ public class SetRoomPrice extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		HotelVO hotelvo = (HotelVO)session.getAttribute("HotelLoginOK");
+		//判斷是否有登入
 		if(hotelvo == null){
-			response.sendRedirect("/iCastle/hotel/loginhotel.jsp");
+			response.sendRedirect(getServletContext().getContextPath()+"/hotel/loginhotel.jsp");
 			return;
 		}
+		//取得房型資料
 		RoomTypeService rots = new RoomTypeService();
 		List<RoomTypeVO> roomTypeList = rots.findRoomTypeByHotelId(hotelvo.getHotelId());
 		
@@ -64,21 +66,25 @@ public class SetRoomPrice extends HttpServlet {
 			}
 		}
 		
-		
+		//創立json轉換物件
 		JSONParser jsonpar = new JSONParser();
 		Object obj = null;
 		try {
+			//將jsonData轉換為java物件，回傳為Object多型
 			obj = jsonpar.parse(jsonData);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		//將轉換出的Object轉型為JSONArray
 		JSONArray jsonArray = (JSONArray)obj;
 		
+		//使用迴圈取出JSONArray裡的一個一個的JSONObject
 		for(Object mataobj : jsonArray){
 			JSONObject jsonObj = (JSONObject)mataobj;
 			
+			//使用get("key")方法取出對應的value，key為json資料中的其中一個屬性
 			Integer roomId = null;
 			String roomIdstr = (String)jsonObj.get("roomId");
 			if(roomIdstr != null){
@@ -93,6 +99,7 @@ public class SetRoomPrice extends HttpServlet {
 				e.printStackTrace();
 			}
 			
+			//取出json內的資料後，將資料包裝為vo物件
 			RoomsVO vo = new RoomsVO();
 			if(roomId != null){
 				vo.setRoomId(roomId);
@@ -115,6 +122,7 @@ public class SetRoomPrice extends HttpServlet {
 			System.out.println(jsonObj);
 		}
 		
+		//將list裡的vo照日期排序
 		Collections.sort(roomslist,new Comparator<RoomsVO>(){
 			public int compare(RoomsVO vo1, RoomsVO vo2){
 				Long vo1date = vo1.getRoomDate().getTime();
@@ -123,6 +131,7 @@ public class SetRoomPrice extends HttpServlet {
 			}
 		});
 		
+		//執行新增或修改
 		RoomsService roms = new RoomsService();
 		roms.insertRooms(roomslist);
 		

@@ -83,8 +83,10 @@ public class MembersService {
 		dao.update(membersVO);
 		return newpw;
 	}
-	   
+//  驗證line登入
+   public  MembersVO lineLogin(String name, String pw){
+          return dao.lineLogin(name, pw);
 
-   
+   }
 	
 }
