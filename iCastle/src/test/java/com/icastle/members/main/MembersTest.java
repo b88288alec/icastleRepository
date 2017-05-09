@@ -12,10 +12,10 @@ public class MembersTest {
 		// TODO Auto-generated method stub
 //		新增
 		MembersJDBCDAO mjo = new MembersJDBCDAO();
-//		MembersVO mvo = new MembersVO();
+	MembersVO mvo = new MembersVO();
 //		mvo.setEmail("qwe@yahoo.com.tw");
-//		mvo.setPw("456");
-//		mvo.setName("TAKA");
+		mvo.setPw("456");
+		mvo.setName("TAKA");
 //		mvo.setGender("女");
 //		mvo.setBdate(java.sql.Date.valueOf("2017-04-15"));
 //		mvo.setAddr("台北市");
@@ -24,9 +24,9 @@ public class MembersTest {
 //		mvo.setCountry("台灣");
 //		mvo.setPassport("789632145");
 //
-//		mjo.insert(mvo);
-//		
-//		System.out.println("新增成功");
+		mjo.insert(mvo);
+		
+		System.out.println("新增成功");
 		
 		
 //		修改
@@ -84,20 +84,20 @@ public class MembersTest {
 	
 //  登入
 		
-		MembersVO mem4 = mjo.login("qwe@yahoo.com.tw","456");
-		
-		System.out.println(mem4.getMemberId() + ",");
-		System.out.println(mem4.getEmail() + ",");
-		System.out.println(mem4.getPw() + ",");
-		System.out.println(mem4.getName() + ",");
-		System.out.println(mem4.getGender() + ",");
-		System.out.println(mem4.getBdate() + ",");
-		System.out.println(mem4.getAddr()+ ",");
-		System.out.println(mem4.getTel()+ ",");
-		System.out.println(mem4.getPersonId()+ ",");
-		System.out.println(mem4.getCountry()+ ",");
-		System.out.println(mem4.getPassport());
-		System.out.println("---------------------");
+//		MembersVO mem4 = mjo.login("qwe@yahoo.com.tw","456");
+//		
+//		System.out.println(mem4.getMemberId() + ",");
+//		System.out.println(mem4.getEmail() + ",");
+//		System.out.println(mem4.getPw() + ",");
+//		System.out.println(mem4.getName() + ",");
+//		System.out.println(mem4.getGender() + ",");
+//		System.out.println(mem4.getBdate() + ",");
+//		System.out.println(mem4.getAddr()+ ",");
+//		System.out.println(mem4.getTel()+ ",");
+//		System.out.println(mem4.getPersonId()+ ",");
+//		System.out.println(mem4.getCountry()+ ",");
+//		System.out.println(mem4.getPassport());
+//		System.out.println("---------------------");
 		
 		
 		

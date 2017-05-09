@@ -19,9 +19,9 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
-<link href="css/material-kit.css" rel="stylesheet" />
-<link href="css/template.css" rel="stylesheet" />
-<link href="css/index.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/index.css" rel="stylesheet" />
 
 <title>愛客宿-iCastle</title>
 </head>
@@ -111,7 +111,7 @@
 			</div>
 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
 				<div class="card" style="width: 300px;">
-					<img src="/iCastle/img/201242_16042216170041722027.jpg"
+					<img src="${pageContext.servletContext.contextPath}/img/201242_16042216170041722027.jpg"
 						style="width: 100%;" />
 					<div class="cardContext">
 						<h4>蘭城晶英酒店</h4>
@@ -121,7 +121,7 @@
 			</div>
 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
 				<div class="card" style="width: 300px;">
-					<img src="/iCastle/img/104996_110408145504225.jpg"
+					<img src="${pageContext.servletContext.contextPath}/img/104996_110408145504225.jpg"
 						style="width: 100%;" />
 					<div class="cardContext">
 						<h4>礁溪老爺酒店</h4>
@@ -138,18 +138,18 @@
 	<!--結束footer-->
 
 	<!--<script src="js/jquery.min.js"></script>-->
-	<script src="js/jquery-3.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/material.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
 
-	<script src="js/nouislider.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/nouislider.min.js"></script>
 
-	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.zh-TW.min.js"></script>
 
-	<script src="js/material-kit.js"></script>
-	<script src="js/index.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/index.js"></script>
 	<script>
 		$(function() {
 			$('#onekey').click(function() {
