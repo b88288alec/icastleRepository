@@ -67,7 +67,7 @@
 <tr><td><span>護照:${membersVO.passport}</span></td><td><br></td></tr>
 
 </table>
-<input type="button" value="回首頁" onclick="location.href='http://localhost:8081/iCastle/index.jsp'">
+<input type="button" value="回首頁" onclick="location.href='../index.jsp'">
 </div>
 
     

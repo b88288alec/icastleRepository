@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,28 +18,21 @@
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
-	<style>
-		.container {
-		    width: 1300px;
-		    margin-top: 100px;
-		}
-	</style>
 </head>
 <body>
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
+		${comment.orderId}
+		${comment.email}
+		${comment.comment}
+		${comment.avgScore}
+		${comment.serviceScore}
+		${comment.qualityScore}
+		${comment.sceneScore}
+		${comment.commentTime}
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container"
-		style="background-color: white; padding-bottom: 100px;">
-			<h1>飯店會員中心</h1>
-			<a href="#">修改飯店資訊</a>
-			<a href="updateHotelPw.jsp">修改密碼</a>
-			<a href="ShowHotelPhoto.do">編輯圖片</a>
-			<a href="${pageContext.servletContext.contextPath}/roomtype/setRoomType.jsp">新增房型</a>
-			<a href="${pageContext.servletContext.contextPath}/rooms/SetRoomPrice">新增房價</a>
-	</div>
     
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
@@ -53,5 +47,6 @@
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+
 
 </html>

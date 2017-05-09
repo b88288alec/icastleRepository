@@ -89,8 +89,8 @@
             var URL = 'https://access.line.me/dialog/oauth/weblogin?';
             URL += 'response_type=code';
             URL += '&client_id=1514098572';
-            URL += '&redirect_uri=http://localhost:8081/iCastle/index.jsp';
-            URL += '&state=abcde';
+            URL += '&redirect_uri=http://localhost:8081/iCastle/members/LineLogin.do';
+//             URL += '&state=abcde';
             window.location.href = URL;
         }
     </script>
