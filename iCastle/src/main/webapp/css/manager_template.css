@@ -4,7 +4,7 @@
     border-color: #f5e345;
     border-radius: 0;
     width: 100%;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 0px 0px 0 ,0 0px 0px 0 ;
     z-index: 3;
     padding:0px;
     color:gray;
@@ -46,14 +46,24 @@ body {
 /*網頁字體及底色結束*/
 
 /*網頁footer*/
-.footer {
-    height: 100px;
+.manager_footer {
+/*     height: 120px; */
     background-color: #f5e345;
     margin-top: 100px;
     text-align: center;
+    padding-top: 0px;
+	padding-bottom: 0px;
 }
 
-    .footer img {
+    .manager_footer img {
         margin-top: 20px;
     }
+    
+
+.footer nav ul li {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0px;
+    line-height: 20px;
+    text-align: center;
 /*網頁footer結束*/
