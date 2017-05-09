@@ -58,14 +58,20 @@ public class CommentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-//		String orderId = request.getParameter("orderId");
-//		String hotelId = request.getParameter("hotelId");
+		String orderId = request.getParameter("orderId");
+		String hotelId = request.getParameter("hotelId");
 		String service = request.getParameter("service");
 		String quality = request.getParameter("quality");
 		String scene = request.getParameter("scene");
 		String comment = request.getParameter("comment");
 		
-		Part photo=request.getPart("uploadphoto");
+		Collection<Part> p=request.getParts();
+//		Part photo = request.getPart("uploadphoto");
+//		Part photo;
+		
+//		photo.containsAll(photo);
+//		System.out.println(photo);
+
 //		Collection<Part> photos=request.getParts();
 		
 //		int orderIdInt = Integer.parseInt(orderId);
@@ -106,7 +112,7 @@ public class CommentServlet extends HttpServlet {
 		
 				
 		comt = new CommentVO();
-		comt.setOrderId(3);
+		comt.setOrderId(2);
 		comt.setHotelId(1);
 		comt.setEmail("def@gmail.com");
 		comt.setServiceScore(serviceInt);
@@ -117,22 +123,37 @@ public class CommentServlet extends HttpServlet {
 		comtService.comtIns(comt);	
 		
 		comt = comtService.findByOrderId(comt.getOrderId());
-		System.out.println(comt.getCommentId());
-			
-		if(photo!=null){
-			List<CommentPhotosVO> comtphotos = new ArrayList<CommentPhotosVO>();
-			CommentPhotosVO comtphotoVO = new CommentPhotosVO();
-//			File f = new File()
-//			FileOutputStream fos = new FileOutputStream();
-			InputStream ips = photo.getInputStream();
-			Integer lenInt = new Integer(ips.available());
-			long lenLong = photo.getSize();
-			CommentPhotosService comtPhotoService = new CommentPhotosService();
-			System.out.println(comt.getCommentId());
-			comtPhotoService.uploadCommentPhoto(comt.getCommentId(),ips,lenLong);
-							   			
-		}
 
+//		    List<CommentPhotosVO> comtphotos = new ArrayList<CommentPhotosVO>();
+		    CommentPhotosService comtPhotoService = new CommentPhotosService();
+		
+			
+			for(Part part : p){
+//				System.out.println(part);
+//				System.out.println(part.getName());
+//				System.out.println(part.getHeader(part.getName()));
+				
+				if(part.getName().equals("uploadphoto")){
+					
+//					CommentPhotosVO comtphotoVO = new CommentPhotosVO();				
+		
+					InputStream ips = part.getInputStream();
+//					Integer lenInt = new Integer(ips.available());
+					long lenLong = part.getSize();
+					
+					comtPhotoService.uploadCommentPhoto(comt.getCommentId(),ips,lenLong);
+					
+					
+					
+				}
+				
+
+				
+			}
+				
+			
+			
+		
 		request.setAttribute("comment", comt);
 		RequestDispatcher rd = request.getRequestDispatcher("HotelComment.jsp");
 		rd.forward(request,response);

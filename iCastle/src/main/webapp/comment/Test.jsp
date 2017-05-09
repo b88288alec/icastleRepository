@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +21,21 @@
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="fragment/nav.jsp"/>
-
-	<!--結束導覽列--
+		<jsp:include page="../fragment/nav.jsp"/>
+	<!--結束導覽列-->
+		${comment.orderId}
+		${comment.email}
+		${comment.comment}
+		${comment.avgScore}
+		${comment.serviceScore}
+		${comment.qualityScore}
+		${comment.sceneScore}
+		${comment.commentTime}
+	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
+    
     <!--開始footer-->
-		<jsp:include page="fragment/footer.jsp"/>
+		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
@@ -37,5 +47,6 @@
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+
 
 </html>

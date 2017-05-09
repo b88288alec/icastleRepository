@@ -53,6 +53,7 @@ public class HostComment extends HttpServlet {
 				memberVO = memService.findByPrimaryKey(c.getEmail());
 				NET.setName(memberVO.getName());
 				NET.setEmail(c.getEmail());
+				NET.setCommentId(c.getCommentId());
 				NET.setCommentTime(c.getCommentTime());
 				NET.setId(i);
 				NETList.add(NET);

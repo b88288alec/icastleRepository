@@ -8,7 +8,7 @@ public class CommentPhotosService {
 	CommentPhotosDAO_interface comtphotoDAO = new CommentPhotosDAO();
 	
 	public String uploadCommentPhoto(int commentId,InputStream x,long len){
-		return comtphotoDAO.uploadCommentPhoto(commentId, x, len);
+		return comtphotoDAO.uploadCommentPhoto(commentId,x,len);
 		
 	}
 	
@@ -25,6 +25,10 @@ public class CommentPhotosService {
 	public CommentPhotosVO findById(int id){
 		return comtphotoDAO.findById(id);
 		
+	}
+	
+	public List<Integer> findByIds(int commentId){
+		return comtphotoDAO.findByIds(commentId);
 	}
 	
 	

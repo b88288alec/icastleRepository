@@ -41,6 +41,11 @@ public class CommentService {
 		return d;
 	}
 	
+	public CommentVO findByCommentId(Integer commentId){
+		return comtDAO.findByCommentId(commentId);
+		
+	}
+	
 	
 	
 

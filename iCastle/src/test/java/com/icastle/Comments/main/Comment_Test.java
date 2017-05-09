@@ -14,16 +14,16 @@ public class Comment_Test {
 		CommentVO comt = new CommentVO();
 		
 		
-		java.sql.Date d = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-		comt.setOrderId(1);
-		comt.setHotelId(1);
-		comt.setEmail("abc@gmail.com");
-		comt.setServiceScore(5);
-		comt.setQualityScore(1);
-		comt.setSceneScore(5);
-		comt.setComment("飯店還可以，品質再加油");
-		comt.setCommentTime(d);
-		comm.comtIns(comt);			
+//		java.sql.Date d = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+//		comt.setOrderId(1);
+//		comt.setHotelId(1);
+//		comt.setEmail("abc@gmail.com");
+//		comt.setServiceScore(5);
+//		comt.setQualityScore(1);
+//		comt.setSceneScore(5);
+//		comt.setComment("飯店還可以，品質再加油");
+//		comt.setCommentTime(d);
+//		comm.comtIns(comt);			
 		
 //		List<CommentVO> listCom =comm.hotelComtSearch(1);
 //		for(int i=0;i<listCom.size();i++){

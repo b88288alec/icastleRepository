@@ -2,6 +2,7 @@ package com.icastle.commentphotos.model;
 
 public class CommentPhotosVO {
 	
+	private Integer id;
 	private byte[] photo;
 	private Integer commentId;
 	
@@ -16,6 +17,12 @@ public class CommentPhotosVO {
 	}
 	public void setCommentId(Integer commentId) {
 		this.commentId = commentId;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }
