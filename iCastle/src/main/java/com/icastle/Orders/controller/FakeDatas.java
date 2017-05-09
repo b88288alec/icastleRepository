@@ -110,12 +110,7 @@ public class FakeDatas extends HttpServlet {
 					}
 					
 //					房間偏好
-					double popular = 0.0;
-					if(j == 3 || j == 4){
-						popular = 2.0;
-					}else{
-						popular = 0.5;
-					}
+					double popular = (j == 3 || j == 4)? 2.0 : 0.5;
 					
 					List<RoomsVO> rooms = rs.getRoomsByMonth(1, j, start, end);
 //					System.out.println(rooms.size());
@@ -201,8 +196,8 @@ public class FakeDatas extends HttpServlet {
 								result.append("'" + new java.sql.Timestamp(checkin.getTime() - (long)(Math.random()*31536000000.0)) + "'" + ",");
 								int memberId = 0;
 								do{
-									memberId = (int)(Math.random()*12.0);
-								}while(memberId < 2);
+									memberId = (int)(Math.random()*16.0);
+								}while(memberId <= 5);
 								result.append("'" + memberId + "'" + ",");
 								result.append(rdsb1);
 								result.append("'" + checkin + "'" + ",");
