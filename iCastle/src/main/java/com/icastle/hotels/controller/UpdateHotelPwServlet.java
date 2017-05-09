@@ -67,9 +67,6 @@ public class UpdateHotelPwServlet extends HttpServlet {
 		//修改密碼
 		HotelService hotelServ = new HotelService();
 		hotelServ.changePw(hotelvo.getHotelId(), oldpw, newpw);
-		
-		
-		
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
