@@ -33,7 +33,7 @@ public class AdvanceServlet extends HttpServlet {
 		
 		Map<String, String> errorMsgs = new HashMap<String, String>();
 		request.setAttribute("errorMsgs", errorMsgs);
-		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 				
 		//接收參數
