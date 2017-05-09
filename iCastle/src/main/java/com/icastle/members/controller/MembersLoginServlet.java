@@ -37,6 +37,8 @@ public class MembersLoginServlet extends HttpServlet {
 		
 		String email = req.getParameter("email");
 		String pw = req.getParameter("pw");
+		String requestURI = (String)session.getAttribute("requestURI");
+		String queryString = (String)session.getAttribute("queryString");
 		
 		//檢查是否所有欄位都有輸入
 		if (email==null || email=="")
@@ -89,7 +91,13 @@ public class MembersLoginServlet extends HttpServlet {
 			System.out.println(membersvo.getPassport());
 		
 
-			res.sendRedirect("../index.jsp");
+			if(requestURI == null){
+				res.sendRedirect(contextPath + "/index.jsp");
+				return;
+			}else{
+				res.sendRedirect(requestURI + "?" + queryString);
+				return;
+			}
 			
 			
 		}

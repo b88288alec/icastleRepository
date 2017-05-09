@@ -1,4 +1,4 @@
-ï»¿/*bootstarp navbarå°è¦½åˆ—è¤‡å¯«*/
+/*bootstarp navbar¾ÉÄı¦C½Æ¼g*/
 .navbar, .navbar.navbar-default {
     background-color: #f5e345;
     border-color: #f5e345;
@@ -36,16 +36,16 @@
     margin: 0px;
     padding: 12px 12px;
 }
-/*bootstarp navbarå°è¦½åˆ—è¤‡å¯«çµæŸ*/
+/*bootstarp navbar¾ÉÄı¦C½Æ¼gµ²§ô*/
 
-/*ç¶²é å­—é«”åŠåº•è‰²*/
+/*ºô­¶¦rÅé¤Î©³¦â*/
 body {
     background-color: #FAFAFA;
     font-family: 'Microsoft JhengHei';
 }
-/*ç¶²é å­—é«”åŠåº•è‰²çµæŸ*/
+/*ºô­¶¦rÅé¤Î©³¦âµ²§ô*/
 
-/*ç¶²é footer*/
+/*ºô­¶footer*/
 .footer {
     height: 100px;
     background-color: #f5e345;
@@ -56,4 +56,4 @@ body {
     .footer img {
         margin-top: 20px;
     }
-/*ç¶²é footerçµæŸ*/
+/*ºô­¶footerµ²§ô*/

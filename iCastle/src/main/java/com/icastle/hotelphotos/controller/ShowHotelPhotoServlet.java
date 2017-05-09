@@ -16,7 +16,7 @@ import com.icastle.hotelphotos.model.HotelPhotosVO;
 import com.icastle.hotels.model.HotelVO;
 import com.icastle.roomtype.model.*;
 
-@WebServlet("/hotel/ShowHotelPhoto.do")
+@WebServlet("/hotelcenter/ShowHotelPhoto.do")
 public class ShowHotelPhotoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public ShowHotelPhotoServlet() {

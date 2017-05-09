@@ -12,9 +12,21 @@ import java.util.List;
 public class OrdersJDBC implements OrdersDAO_interface{
 	
 	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
-	String userid = "sa";
-	String passwd = "sa123456";
+
+//	azure
+//	String url = "jdbc:sqlserver://starbooksdb12.database.windows.net:1433;database=iCastle";
+//	String userid = "starbooksuser@starbooksdb12";
+//	String passwd = "Bb0192837465";
+
+//	azure-培楨
+	String url = "jdbc:sqlserver://eeit93icastle.database.windows.net:1433;database=iCastle";
+	String userid = "icastlemanager@eeit93icastle";
+	String passwd = "Taiwanno1";
+
+//	localhost
+//	String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
+//	String userid = "sa";
+//	String passwd = "sa123456";
 	
 	private static final String INSERT_STMT = "insert into orders(orderedDate,memberId,roomId,hotelId,hotelName,roomTypeId,roomTypeName,checkinDay,checkoutDay,roomCount,peopleNum,breakfast,dinner,afternoonTea,price,reservationer,bdate,tel,email,addr,personId,country,passport,bedAdding,pricePerPerson,customerRemark,hotelRemark,orderState) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE_STMT = "update orders set orderState=? , memo=? , cancelDate=? where orderid=?";
@@ -1515,6 +1527,83 @@ public class OrdersJDBC implements OrdersDAO_interface{
 			}
 		}		
 		return result;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId(Integer hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year(Integer hotelId, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month(Integer hotelId, Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId(Integer hotelId, Integer roomTypeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId(Integer hotelId, Integer roomTypeId, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId(Integer hotelId, Integer roomTypeId,
+			Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_orderstate(Integer hotelId, Boolean state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_orderstate(Integer hotelId, Boolean state, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state, Integer year,
+			Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+			Boolean state, Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

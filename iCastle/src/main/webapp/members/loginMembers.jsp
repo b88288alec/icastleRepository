@@ -20,12 +20,20 @@
     <title>愛客宿-iCastle</title>
 </head>
 <body>
+
+
+
+
+
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
     <!--content start!!!!!!!!!!!!~~~~~~~~~~-->
 	<div class="container">
 	<h1>會員登入</h1>
+    
+    
+    
     
     
     <form action="Login.do" method="post">
@@ -58,8 +66,16 @@
 		</form>
     
     
-    
+    <button onclick="Auth();">點選這裡連結到Line Login</button>
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
     <!--content end!!!!!!!!!!!!~~~~~~~~~~-->
     
     <!--開始footer-->
@@ -67,6 +83,20 @@
 	<!--結束footer-->
 	
 </body>
+
+<script>
+        function Auth() {
+            var URL = 'https://access.line.me/dialog/oauth/weblogin?';
+            URL += 'response_type=code';
+            URL += '&client_id=1514098572';
+            URL += '&redirect_uri=http://localhost:8081/iCastle/index.jsp';
+            URL += '&state=abcde';
+            window.location.href = URL;
+        }
+    </script>
+
+
+
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/material.min.js"></script>

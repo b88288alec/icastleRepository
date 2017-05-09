@@ -2,6 +2,7 @@ package com.icastle.Orders.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,11 +18,12 @@ import org.json.simple.JSONValue;
 
 import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
+import com.icastle.hotels.model.HotelVO;
 
 /**
  * Servlet implementation class OrdersListServlet
  */
-@WebServlet("/OrdersListServlet")
+@WebServlet("/hotelcenter/OrdersListServlet")
 public class OrdersListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,29 +34,42 @@ public class OrdersListServlet extends HttpServlet {
 		res.setHeader("content-type", "application/json;charset=UTF-8");
 		PrintWriter out = res.getWriter();
 		HttpSession session = req.getSession();
+		HotelVO hotel = (HotelVO)session.getAttribute("HotelLoginOK");
 		List<OrdersVO> result = null;
 		
 		try{
-			Integer hotelId = new Integer(req.getParameter("hotelId"));
+			Integer hotelId = hotel.getHotelId();
 			Integer year = new Integer(req.getParameter("year"));
 			String rti = req.getParameter("roomTypeId");
 			String m = req.getParameter("month");
 			String d = req.getParameter("day");
 			String s = req.getParameter("state");
 			
-			Integer roomTypeId = (rti != null)?new Integer(rti) : null;
-			Integer month = (m != null)?new Integer(m) : null;
-			Integer day = (d != null)?new Integer(d) : null;
-			Boolean state = (s != null)?new Boolean(s) : null;
+			Integer roomTypeId = (!"null".equals(rti))?new Integer(rti) : null;
+			Integer month = (!"null".equals(m))?new Integer(m) : null;
+			Integer day = (!"null".equals(d))?new Integer(d) : null;
+			Boolean state = (!"null".equals(s))?new Boolean(s) : null;
 			
 			OrdersService os = new OrdersService();
 			result = os.search_By_HotelId(hotelId, roomTypeId, year, month, day, state);
 			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+			String bedAdd = null;
+			String orderedState = null;
+			String customer = null;
+			String mymemo = null;
+			
 			JSONArray ja = new JSONArray();
 			for(OrdersVO order: result){
+				
+				bedAdd = (order.getBedAdding())?"加一床":"X";
+				orderedState = (order.getOrderState())?"訂單完成":"已取消";
+				customer = (order.getCustomerRemark() == null)?"":order.getCustomerRemark();
+				mymemo = (order.getMemo() == null)?"":order.getMemo();
+				
 				JSONObject jo = new JSONObject();
 				jo.put("orderId", String.valueOf(order.getOrderId()));
-				jo.put("orderedDate", String.valueOf(order.getOrderedDate()));
+				jo.put("orderedDate", sdf.format(order.getOrderedDate()));
 				jo.put("memberId", String.valueOf(order.getMemberId()));
 				jo.put("roomId", String.valueOf(order.getRoomId()));
 				jo.put("hotelId", String.valueOf(order.getHotelId()));
@@ -78,12 +93,12 @@ public class OrdersListServlet extends HttpServlet {
 				jo.put("personId", String.valueOf(order.getPersonId()));
 				jo.put("country", String.valueOf(order.getCountry()));
 				jo.put("passport", String.valueOf(order.getPassport()));
-				jo.put("bedAdding", String.valueOf(order.getBedAdding()));
+				jo.put("bedAdding", bedAdd);
 				jo.put("pricePerPerson", String.valueOf(order.getPricePerPerson()));
-				jo.put("customerRemark", String.valueOf(order.getCustomerRemark()));
+				jo.put("customerRemark", customer);
 				jo.put("hotelRemark", String.valueOf(order.getHotelRemark()));
-				jo.put("memo", String.valueOf(order.getMemo()));
-				jo.put("orderState", String.valueOf(order.getOrderState()));
+				jo.put("memo", mymemo);
+				jo.put("orderState", orderedState);
 				jo.put("cancelDate", String.valueOf(order.getCancelDate()));
 				
 				ja.add(jo);

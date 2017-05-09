@@ -21,7 +21,7 @@ import com.icastle.members.model.MembersVO;
 
 
 
-@WebServlet("/MemberInformationCentre.do")
+@WebServlet("/members/MemberInformationCentre.do")
 public class MemberInformationCentre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -46,11 +46,17 @@ public class MemberInformationCentre extends HttpServlet {
  */		
 	//----------------顯示訂單歷史資料------------------
 		OrdersService ordersService = new OrdersService();
-		List<OrdersVO> VO = ordersService.search_By_MemberId(1);//membersvo.getmemberId()
-		request.setAttribute("ordersKey", VO);
-		
+		List<OrdersVO> list = ordersService.search_By_MemberId(1);//membersvo.getmemberId()
+		request.setAttribute("ordersKey", list);
+	
 		RequestDispatcher rd = request.getRequestDispatcher("members/MemberCentre.jsp");
 		rd.forward(request, response);
+		
+
+			
+		
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,6 +77,8 @@ public class MemberInformationCentre extends HttpServlet {
 		String addr = request.getParameter("addr");
 		System.out.println(gender);
 		Date dt = null;
+		
+		//將bdate轉型態
 		try {
 			SimpleDateFormat sdf =new SimpleDateFormat("yyyy/MM/dd");
 			long dtlong = sdf.parse(bdate).getTime();

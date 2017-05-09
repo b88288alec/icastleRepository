@@ -68,6 +68,9 @@
 		<div id="checkbox">
 		</div>
 		<div class="checkbox">
+					<label> <input type="checkbox" name="weekday" value="0">
+						星期日
+					</label>
 					<label> <input type="checkbox" name="weekday"
 						value="1"> 星期一
 					</label> <label> <input type="checkbox" name="weekday"
@@ -84,9 +87,6 @@
 					<label> <input type="checkbox" name="weekday" value="6">
 						星期六
 					</label>
-					<label> <input type="checkbox" name="weekday" value="0">
-						星期日
-					</label>
 				</div>
 		<button class="btn btn-info" id="plus">+</button>
 		<button class="btn btn-info" id="showJson">showJson</button>
@@ -97,14 +97,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel"></h4>
       </div>
       <div class="modal-body">
-        <p></p>
+      	<h3>請選擇價錢</h3>
+        <div id="price-select"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-info btn-simple">Save</button>
+        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-info btn-simple" id="submit-single">修改</button>
       </div>
     </div>
   </div>
@@ -133,18 +134,17 @@
 <script src="${pageContext.servletContext.contextPath}/js/moment.min.js"></script>
 <script
 	src="${pageContext.servletContext.contextPath}/js/fullcalendar.js"></script>
-<script
-	src="${pageContext.servletContext.contextPath}/js/jquery-ui.custom.min.js"></script>
+
 	
 <script
 	src="${pageContext.servletContext.contextPath}/js/sweetalert2.min.js"></script>
 
 <script>
 	$(function() {
-		//選擇房型後更新日曆，並生成價錢選擇
+		//選擇房型後更新日曆
 		$('select').change(function() {
 			var events = {
-				url : '/iCastle/rooms/MonthRoomsToJson',
+				url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
 				data : {
 					hotelId : '${HotelLoginOK.hotelId}',
 					roomTypeId : $('select').val(),
@@ -156,47 +156,51 @@
 			$('#calendar').fullCalendar('addEventSource', events);
 			$('#calendar').fullCalendar('refetchEvents');
 			
+			genPriceSelect('#checkbox','price');
+			json.length = 0;
 			
-			$.getJSON("/iCastle/roomtype/RoomTypePriceToJson",{"roomTypeId" : $('select').val()},
+		})
+		
+		//生成價錢選擇器
+		function genPriceSelect(selector, inputName){
+			$.getJSON("${pageContext.servletContext.contextPath}/roomtype/RoomTypePriceToJson",{"roomTypeId" : $('select').val()},
 					function(data){
-						var checkbox_div = $('#checkbox');
+						var checkbox_div = $(selector);
 						checkbox_div.empty();
 						$.each(data, function(i, price){
 							var label_weekdaysPrice = $('<label></label>');
-							var input_weekdaysPrice = $('<input/>').attr({type : "radio", value : price.weekdaysPrice, name : "price"});
+							var input_weekdaysPrice = $('<input/>').attr({type : "radio", value : price.weekdaysPrice, name : inputName});
 							label_weekdaysPrice.append(input_weekdaysPrice);
 							label_weekdaysPrice.append("平日價");
 							
 							var label_holidayPrice = $('<label></label');
-							var input_holidayPrice = $('<input/>').attr({type : "radio", value : price.holidayPrice, name : "price"});
+							var input_holidayPrice = $('<input/>').attr({type : "radio", value : price.holidayPrice, name : inputName});
 							label_holidayPrice.append(input_holidayPrice);
 							label_holidayPrice.append("假日價");
 							
 							var label_seasonPrice = $('<label></label');
-							var input_seasonPrice = $('<input/>').attr({type : "radio", value : price.seasonPrice, name : "price"});
+							var input_seasonPrice = $('<input/>').attr({type : "radio", value : price.seasonPrice, name : inputName});
 							label_seasonPrice.append(input_seasonPrice);
 							label_seasonPrice.append("旺季價");
 							
 							var label_customizedPrice = $('<label></label');
-							var input_customizedPrice = $('<input/>').attr({type : "radio", value : price.customizedPrice, name : "price"});
+							var input_customizedPrice = $('<input/>').attr({type : "radio", value : price.customizedPrice, name : inputName});
 							label_customizedPrice.append(input_customizedPrice);
 							label_customizedPrice.append(price.customizedName);
 							checkbox_div.append([label_weekdaysPrice, label_holidayPrice, label_seasonPrice, label_customizedPrice]);
 						})
 				
 			})
-			
-			json.length = 0;
-			
-		})
+		}
 
+		//初始化fullCalendar，並註冊dayClick及eventClick事件
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'title',
 				right: 'prev,next today'
 			},
 			eventSources : [ {
-				url : '/iCastle/rooms/MonthRoomsToJson',
+				url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
 				data : {
 					hotelId : '${HotelLoginOK.hotelId}',
 					roomTypeId : $('select').val(),
@@ -209,14 +213,14 @@
 				}
 			} ],
 			dayClick: function(date, jsEvent, view){
+				$('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
+				genPriceSelect('#price-select', 'priceBySingle');
 				$('#myModal').modal('show');
 			},
 			eventClick: function(calEvent, jsEvent, view){
-				$('.modal-body p').text("roomId = " + calEvent.roomId);
+				$('#myModalLabel').text(calEvent.start._i);
+				genPriceSelect('#price-select', 'priceBySingle');
 				$('#myModal').modal('show');
-				console.log(calEvent.id);
-				console.log(calEvent.start._i);
-				console.log(calEvent);
 			}
 		})
 
@@ -224,14 +228,23 @@
 			add()
 		})
 
+		//存放使用者勾選的星期
 		var weekdaycheck = [];
+		//存放新增或修改價錢的json資料
 		var json = [];
 		
+		//註冊勾選星期事件
 		$('input[name=weekday]').click(function(){
-			var weekdayNum = $(this).val();
-			if(weekdaycheck.length > 0){
+			var weekdayNum = ($(this).prop("checked"))? $(this).val() : null;
+			if(weekdaycheck.length > 0 && weekdayNum != null){
 				for(var i = 0; i < weekdaycheck.length; i++){
 					if(weekdaycheck[i] == parseInt(weekdayNum)){
+						delete weekdaycheck[i];
+					}
+				}
+			}else if(weekdayNum == null){
+				for(var i = 0; i < weekdaycheck.length; i++){
+					if(weekdaycheck[i] == parseInt($(this).val())){
 						delete weekdaycheck[i];
 					}
 				}
@@ -243,6 +256,7 @@
 			alert(JSON.stringify(json))
 		})
 
+		//新增日期事件
 		function add() {
 			$('#calendar')
 					.fullCalendar(
@@ -254,12 +268,17 @@
 								var end = endd.getTime();
 								var price = $('input[name=price]:checked').val();
 								
+								//判斷是否有勾選星期及價錢
 								if(weekdaycheck.length > 0 && !(price == null)){
+									//根據目前月分跑每日迴圈
 									for (var loop = startd.getTime(); loop <= end; loop += (24 * 60 * 60 * 1000)) {
 										var date = new Date(loop);
 										var eventoObj = $("#calendar").fullCalendar( 'clientEvents', moment(date).format('YYYY-MM-DD'))[0];
+										//抓取weekdaycheck陣列的值
 										for(var i = 0; i < weekdaycheck.length; i++){
+											//判斷現在日期星期是否與使用捨勾選的相同及該日期是否有已存在的價錢
 											if (date.getDay() == weekdaycheck[i] && eventoObj == null) {
+												//新增事件
 												events.push({
 													id : moment(date).format('YYYY-MM-DD'),
 													title : price,
@@ -268,10 +287,12 @@
 													allDay : 'true',
 													className : 'success',
 												});
+												//將新增事件的資料儲存至json準備新增
 												json.push({
 													date : moment(date).format('YYYY-MM-DD'),
 													price : $('input[name=price]:checked').val(),
 												});
+											//如果該日期是已有存在的價錢，則更新原有價錢
 											}else if(date.getDay() == weekdaycheck[i]){
 												eventoObj.title = price;
 												eventoObj.color = 'lightgreen';
@@ -296,10 +317,49 @@
 							})
 		}
 		
+		//註冊單一更改價錢事件
+		$('#submit-single').click(function(){
+			var date = $('#myModalLabel').text();
+			var price = $('input[name=priceBySingle]:checked').val()
+			var eventoObj = $("#calendar").fullCalendar( 'clientEvents', date)[0];
+			if(eventoObj != null){
+				eventoObj.title = price;
+				eventoObj.color = 'lightgreen';
+				$('#myModal').modal('hide');
+				$('#calendar').fullCalendar('updateEvent', eventoObj);
+				json.push({
+					roomId : eventoObj.roomId,
+					date : date,
+					price : price,
+				});
+			}else{
+				$("#calendar").fullCalendar('addEventSource',
+						function(start, end, timezone, callback){
+					var events = [];
+					events.push({
+						id : $('#myModalLabel').text(),
+						title : price,
+						start : moment(date).format('YYYY-MM-DD'),
+						color : 'lightgreen',
+						allDay : 'true',
+					});
+					//將新增事件的資料儲存至json準備新增
+					json.push({
+						date : moment(date).format('YYYY-MM-DD'),
+						price : price,
+					});
+					$('#myModal').modal('hide');
+					callback(events);
+				})
+			}
+			
+		});
+		
+		//將暫存於json內的資料傳送至server新增到資料庫，並重新整理頁面
 		$('#submit').click(function(){
 			$.ajax({
 				type : 'POST',
-				url : '/iCastle/rooms/SetRoomPrice',
+				url : '${pageContext.servletContext.contextPath}/rooms/SetRoomPrice',
 				data : {
 					jsonData : JSON.stringify(json),
 					roomTypeId : $('select').val(),
@@ -313,7 +373,7 @@
 			})
 			json.length = 0;
 			var events = {
-					url : '/iCastle/rooms/MonthRoomsToJson',
+					url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
 					data : {
 						hotelId : '${HotelLoginOK.hotelId}',
 						roomTypeId : $('select').val(),

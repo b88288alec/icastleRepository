@@ -21,9 +21,11 @@
 <body>
     <!--開始導覽列-->
 		<jsp:include page="fragment/nav.jsp"/>
-
-	<!--結束導覽列--
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
+ 	<!--結束導覽列--
+ 	
+    <!--開始本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
+    
+    <!--結束本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     <!--開始footer-->
 		<jsp:include page="fragment/footer.jsp"/>
 	<!--結束footer-->
