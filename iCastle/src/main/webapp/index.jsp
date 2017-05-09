@@ -42,7 +42,7 @@
 			<form action="Query.do" method="get">
 				<div class="col-md-2 col-xs-12 col-sm-4" style="margin: 15px;">
 					<div class="input-group input-group-sm">
-						<p>查詢型態</p>
+						<p>關鍵字</p>
 						<input type="text" class="form-control" placeholder="輸入區域或飯店名稱"
 							name="type" />
 					</div>
