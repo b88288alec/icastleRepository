@@ -21,7 +21,7 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=? where commentId = ?";
 	private static final String GOOD_COMT = "UPDATE Comments SET good = ? WHERE commentId = ?";
 	private static final String SHOW_GOOD = "SELECT good FROM Comments WHERE commentId = ?";
-	
+	private static final String SEL_COMTID = "SELECT orderId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime FROM Comments WHERE commentId = ?";
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs; 
@@ -245,6 +245,39 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 
 		return com;
 		
+	}
+	@Override
+	public CommentVO findByCommentId(Integer commentId) {
+		try {
+		
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SEL_COMTID);
+			stmt.setInt(1,commentId);
+			rs = stmt.executeQuery();			
+			rs.next();
+			
+			com = new CommentVO();
+			com.setOrderId(rs.getInt("orderId"));
+			com.setEmail(rs.getString("email"));
+			com.setAvgScore(rs.getDouble("avgScore"));
+			com.setServiceScore(rs.getInt("serviceScore"));
+			com.setQualityScore(rs.getInt("qualityScore"));
+			com.setSceneScore(rs.getInt("sceneScore"));
+			com.setComment(rs.getString("comment"));
+			com.setCommentTime(rs.getDate("commentTime"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		// TODO Auto-generated method stub
+		return com;
 	}
 } 
 

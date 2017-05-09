@@ -103,9 +103,15 @@ public class CommentPhotos_Test {
 //		System.out.println(message);
 		
 		
+//		CommentPhotosJDBCDAO dao = new CommentPhotosJDBCDAO();
+//		CommentPhotosVO vo = dao.findById(1);
+//		System.out.println(vo);
+		
 		CommentPhotosJDBCDAO dao = new CommentPhotosJDBCDAO();
-		CommentPhotosVO vo = dao.findById(1);
-		System.out.println(vo);
+		List<Integer> idList = dao.findByIds(1);
+		for(int id:idList){
+			System.out.println(id);
+		}
 		
 	}
 	

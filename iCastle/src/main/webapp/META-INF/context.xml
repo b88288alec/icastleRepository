@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?> 
+<Context displayName="iCastleRESTful" docBase="iCastleRESTful" path="/iCastleRESTful" reloadable="true">
+
+  <!--                  Azure_SQLServer                      -->
+<!--   <Resource name="jdbc/iCastleDB" type="javax.sql.DataSource" -->
+<!--       username="starbooksuser@starbooksdb12" password="Bb0192837465" -->
+<!--       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
+<!--       url="jdbc:sqlserver://starbooksdb12.database.windows.net:1433;database=iCastle"     -->
+<!--       maxActive="8" -->
+<!--       maxIdle="4" -->
+<!--       maxWait="5000" -->
+<!--   />    -->
+
+<!-- SQLServer -->
+<Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/iCastleDB" password="sa123456" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;DatabaseName=iCastle" username="sa"/>
+</Context>

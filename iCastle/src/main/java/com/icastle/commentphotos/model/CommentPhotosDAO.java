@@ -29,6 +29,8 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 	private final String SHOW_PHOTO = "SELECT commentId,photo FROM CommentPhotos WHERE commentId=?";
 	private final String DEL_PHOTO = "DELETE CommentPhotos WHERE commentId = ?";
 	private final String SEL_ID = "SELECT photo from CommentPhotos WHERE id = ?";
+	private final String SEL_COMTID = "SELECT id FROM CommentPhotos WHERE commentId = ?";
+	
 	
 	
 	Connection conn;
@@ -36,6 +38,7 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 	ResultSet rs;
 	List<CommentPhotosVO> listPhoto;
 	CommentPhotosVO comtPhoto;
+	List<Integer> idList;
 	
 	private static DataSource ds = null;
 	static{
@@ -162,6 +165,39 @@ public class CommentPhotosDAO implements CommentPhotosDAO_interface{
 		return comtPhoto;
 		
 	}
+
+
+	@Override
+	public List<Integer> findByIds(int commentId) {
+		
+		idList = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		try {
+			
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SEL_COMTID);
+			stmt.setInt(1,commentId);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				
+				idList.add(rs.getInt("id"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return idList;
+	}
+	
 
 	
 	

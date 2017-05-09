@@ -17,7 +17,7 @@
 <p>按讚人數 : </p>${comment.good}<br>
 <p>上傳圖片: </p>
 
-<img id="photo" alt="我是圖片" src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${ShowPhoto}"><br>	
+
 <p>評論內容 : </p>${comment.comment}<br>
 
 

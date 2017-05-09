@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.icastle.hotels.model.*;
 
-@WebServlet("/hotel/UpdateHotelPw.do")
+@WebServlet("/hotelcenter/UpdateHotelPw.do")
 public class UpdateHotelPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public UpdateHotelPwServlet() {
@@ -67,9 +67,6 @@ public class UpdateHotelPwServlet extends HttpServlet {
 		//修改密碼
 		HotelService hotelServ = new HotelService();
 		hotelServ.changePw(hotelvo.getHotelId(), oldpw, newpw);
-		
-		
-		
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

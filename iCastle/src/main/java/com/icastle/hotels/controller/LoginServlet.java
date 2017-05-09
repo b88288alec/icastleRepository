@@ -29,6 +29,8 @@ public class LoginServlet extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
+		String requestURI = (String)session.getAttribute("requestURI");
+		String queryString = (String)session.getAttribute("queryString");
 		
 		//檢查是否所有欄位都有輸入
 		if (email==null || email=="")
@@ -70,8 +72,14 @@ public class LoginServlet extends HttpServlet {
 			System.out.println(hotelvo.getHotelState());
 			System.out.println(hotelvo.getRegisterId());
 			
-			response.sendRedirect(contextPath + "/index.jsp");
-			return;
+			if(requestURI == null){
+				response.sendRedirect(contextPath + "/index.jsp");
+				return;
+			}else{
+				response.sendRedirect(requestURI + "?" + queryString);
+				return;
+			}
+			
 		}
 	}
 

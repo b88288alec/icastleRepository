@@ -78,10 +78,10 @@
 					<c:forEach var="i" varStatus="varsts" begin="1" end="5">
 						<c:choose>
 							<c:when test="${i<=hotel.star}">
-								<img src="/iCastle/img/star.png" width="20px" />
+								<img src="${pageContext.servletContext.contextPath}/img/star.png" width="20px" />
 							</c:when>
 							<c:otherwise>
-								<img src="/iCastle/img/unstar.png" width="20px" />
+								<img src="${pageContext.servletContext.contextPath}/img/unstar.png" width="20px" />
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -243,7 +243,7 @@
 										style="font-size: 18px">${room.roomTypeName}</strong>
 										<div style="margin: 20px;">
 											<img
-												src="/iCastle/img/hotelphoto/106.jpg"
+												src="${pageContext.servletContext.contextPath}/img/hotelphoto/106.jpg"
 												width="180" height="90" />
 										</div></td>
 									<!--結束房型照片-->
@@ -440,15 +440,15 @@
 		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 
-	<script src="/iCastle/js/jquery.min.js"></script>
-	<script src="/iCastle/js/bootstrap.min.js"></script>
-	<script src="/iCastle/js/material.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
 
-	<script src="/iCastle/js/nouislider.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/nouislider.min.js"></script>
 
-	<script src="/iCastle/js/bootstrap-datepicker.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
-	<script src="/iCastle/js/material-kit.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 	
 	<script src="../js/magnific-popup.js"></script>
 	<script src="../js/lightbox.min.js"></script>

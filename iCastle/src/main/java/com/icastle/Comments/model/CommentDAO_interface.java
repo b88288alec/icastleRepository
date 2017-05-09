@@ -10,5 +10,6 @@ public interface CommentDAO_interface {
 	public String comUpdate(CommentVO comt); 
 	public CommentVO pressGood(Integer commentId,Integer good);
 	public CommentVO findByOrderId(Integer orderId);
+	public CommentVO findByCommentId(Integer commentId);
 
 }
