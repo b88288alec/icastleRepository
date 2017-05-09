@@ -32,8 +32,8 @@
 
 	<!--header背景-->
 	<div clsaa="container-fluid" style="position: relative;">
-		<img src="/iCastle/img/header.jpg" class="header-bg" /> <img
-			src="/iCastle/img/overlay.png" class="logoheader img-responsive" />
+		<img src="${pageContext.servletContext.contextPath}/img/header.jpg" class="header-bg" /> <img
+			src="${pageContext.servletContext.contextPath}/img/overlay.png" class="logoheader img-responsive" />
 		<div class="header-overlay"></div>
 		<!--結束header背景-->
 
@@ -91,7 +91,7 @@
 		<div class="row">
 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
 				<div class="card" style="width: 300px;">
-					<img src="/iCastle/img/60395_16042612080041805392.jpg"
+					<img src="${pageContext.servletContext.contextPath}/img/60395_16042612080041805392.jpg"
 						style="width: 100%;" />
 					<div class="cardContext">
 						<h4>麗尊酒店</h4>
@@ -101,7 +101,7 @@
 			</div>
 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
 				<div class="card" style="width: 300px;">
-					<img src="/iCastle/img/3843_15070211000031541467.jpg"
+					<img src="${pageContext.servletContext.contextPath}/img/3843_15070211000031541467.jpg"
 						style="width: 100%;" />
 					<div class="cardContext">
 						<h4>漢來大飯店</h4>
