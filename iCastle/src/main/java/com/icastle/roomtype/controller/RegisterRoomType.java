@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
-@WebServlet("/roomtype/RegisterRoomType.do")
+@WebServlet("/hotelcenter/roomtype/RegisterRoomType.do")
 public class RegisterRoomType extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
