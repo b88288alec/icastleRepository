@@ -100,7 +100,7 @@
     					</c:when>
     					<c:when test="${not empty HotelLoginOK}">
 							<!--飯店標頭使用區塊 -->
-							<li><a href="${pageContext.servletContext.contextPath}/hotel/hotelcenter.jsp"><span class="glyphicon glyphicon-user"></span>${HotelLoginOK.email}</a></li>
+							<li><a href="${pageContext.servletContext.contextPath}/hotelcenter/hotelcenter.jsp"><span class="glyphicon glyphicon-user"></span>${HotelLoginOK.email}</a></li>
     					</c:when>
     					<c:when test="${not empty ManagerLoginOK}">
 							<!--管理員標頭使用區塊 -->
