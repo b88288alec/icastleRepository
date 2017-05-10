@@ -1,4 +1,4 @@
-package com.icastle.hotelInfo.main;
+package com.icastle.hotelInfo.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,28 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.icastle.hotelInfo.modle.InfoJDBCDAO;
+import com.icastle.hotelInfo.modle.InfoService;
 import com.icastle.hotelInfo.modle.InfoVO;
 
-/**
- * Servlet implementation class HotelInfoJNDITest
- */
+
 @WebServlet("/HotelInfoJNDITest")
 public class HotelInfoJNDITest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public HotelInfoJNDITest() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		/* ------------飯店頁面時查詢--------------- */
 //		InfoJDBCDAO dao = new InfoJDBCDAO();
 //
@@ -86,10 +75,9 @@ public class HotelInfoJNDITest extends HttpServlet {
 //		 dao.insert(infoVO);
 /* ------------飯店頁面更新--------------- */		
 		
-		InfoJDBCDAO dao = new InfoJDBCDAO();
+		InfoService dao = new InfoService();
 		InfoVO infoVO = new InfoVO();
-
-		infoVO.setHotelId(2);
+		infoVO.setHotelId(1);
 		infoVO.setRegisterName("傑尼尼");
 		infoVO.setTel("02-2222-3333");
 		infoVO.setTransport("行駛時間尖峰約35分鐘，離峰約25分鐘。(單程票價$34)");
@@ -111,7 +99,8 @@ public class HotelInfoJNDITest extends HttpServlet {
 		infoVO.setSpa(false);
 		infoVO.setSwimPool(false);
 
-		dao.updateHotelInfo(infoVO);
+		System.out.println("修改");
+		dao.update(infoVO);;
 	}
 
 	/**
