@@ -62,7 +62,6 @@ public class OrdersChartServlet extends HttpServlet {
 			JSONArray jalabels = new JSONArray();
 			JSONArray jaseries = new JSONArray();
 			
-//			int i = 0;
 //			從DB取出的資料塞到JSON裡
 			for(OrdersChartVO oc : result){
 				
@@ -70,6 +69,10 @@ public class OrdersChartServlet extends HttpServlet {
 				
 				jalabels.add(oc.getValue());
 				jaseries.add(value);
+			}
+			
+			for(Object test : jaseries){
+				System.out.println(test);
 			}
 			
 			jo.put("labels", jalabels);

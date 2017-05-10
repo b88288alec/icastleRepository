@@ -15,7 +15,7 @@
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
     <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
-    <link href="${pageContext.servletContext.contextPath}/css/chartist.css" rel="stylesheet" />
+    <link href="${pageContext.servletContext.contextPath}/css/chartist.min.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
