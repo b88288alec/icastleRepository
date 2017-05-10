@@ -18,16 +18,16 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<!--<link href="../css/bootstrap.min.css" rel="stylesheet" />-->
-<link href="../css/material-kit.css" rel="stylesheet" />
-<link href="../css/template.css" rel="stylesheet" />
+<!--<link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet" />-->
+<link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
 <!--以下請加入各自頁面的css-->
 
 <title>愛客宿-iCastle</title>
 </head>
 <body>
 	<!--開始導覽列-->
-		<jsp:include page="../fragment/nav.jsp"/>
+		<jsp:include page="../../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	<!--content here!!!!!!!!!!!!~~~~~~~~~~-->
 	<div class="container" style="margin-top: 56px">
@@ -35,7 +35,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2"><img src="../img/creditCard/visa.png" height="80" width="120" style="margin:0px 20px"><img src="../img/creditCard/mastercard.png" height="80" width="120" style="margin:0px 20px"><img src="../img/creditCard/jcb.jpg" height="100" width="150" style="margin:0px 20px"></th>
+					<th colspan="2"><img src="${pageContext.servletContext.contextPath}img/creditCard/visa.png" height="80" width="120" style="margin:0px 20px"><img src="${pageContext.servletContext.contextPath}img/creditCard/mastercard.png" height="80" width="120" style="margin:0px 20px"><img src="${pageContext.servletContext.contextPath}img/creditCard/jcb.jpg" height="100" width="150" style="margin:0px 20px"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,18 +53,18 @@
 		</form>
 	</div>
     <!--開始footer-->
-		<jsp:include page="../fragment/footer.jsp"/>
+		<jsp:include page="../../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/material.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
 
-<script src="../js/nouislider.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/nouislider.min.js"></script>
 
-<script src="../js/bootstrap-datepicker.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
-<script src="../js/material-kit.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 <script>
 		$(function() {
 			$('#onekey').click(function() {

@@ -27,7 +27,7 @@ import com.icastle.rooms.model.RoomsService;
 
 import globalservice.CheckId;
 
-@WebServlet("/orders/OrdersServlet.do")
+@WebServlet("/members/orders/OrdersServlet.do")
 public class OrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
