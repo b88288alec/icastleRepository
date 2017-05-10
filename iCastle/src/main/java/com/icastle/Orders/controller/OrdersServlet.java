@@ -27,7 +27,7 @@ import com.icastle.rooms.model.RoomsService;
 
 import globalservice.CheckId;
 
-@WebServlet("/orders/OrdersServlet.do")
+@WebServlet("/members/orders/OrdersServlet.do")
 public class OrdersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -209,7 +209,9 @@ public class OrdersServlet extends HttpServlet {
 				Enumeration en = session.getAttributeNames();
 				while(en.hasMoreElements()){
 					String name = (String)en.nextElement();
-					session.removeAttribute(name);
+					if(!name.equalsIgnoreCase("MemberLoginOK")){
+						session.removeAttribute(name);
+					}
 				}
 
 				res.sendRedirect("success.jsp");

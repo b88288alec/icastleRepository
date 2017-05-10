@@ -20,7 +20,7 @@ import com.icastle.rooms.model.RoomsService;
 
 
 
-@WebServlet("/rooms/Rooms.do")
+@WebServlet("/members/rooms/Rooms.do")
 public class RoomsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

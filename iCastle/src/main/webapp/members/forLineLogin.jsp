@@ -47,7 +47,7 @@ $(function(){
 		     client_id:"1514098572",
 		     client_secret:'75358cffd533e94be20e515004d34c97',
 		     code:'${param.code}',
-		     redirect_uri:'http://localhost:8081/iCastle/members/LineLogin.do'
+		     redirect_uri:'http://localhost:8081/iCastle/general/members/LineLogin.do'
 	
 	 }
 	  
