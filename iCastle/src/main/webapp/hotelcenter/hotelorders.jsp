@@ -14,8 +14,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
     <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
+<!-- <link -->
+<%-- 	href="${pageContext.servletContext.contextPath}/css/paper-dashboard.css" --%>
+<!-- 	rel="stylesheet" /> -->
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
-    <link href="${pageContext.servletContext.contextPath}/css/chartist.min.css" rel="stylesheet" />
+    <link href="${pageContext.servletContext.contextPath}/css/chartist.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
@@ -47,7 +50,7 @@
     		<td><input id='idButton' type="button" value="圖表" /></td>
     	</tr>
     </table>
-    <div id="showData" class="ct-chart ct-perfect-fourth">
+    <div id="showData" class="ct-chart ct-golden-section">
 	    <table class="table">
     		<thead>
     			<tr>
@@ -142,7 +145,7 @@
 						state : $('#idSelectOrderState').val()
 					},
 					success : function(data){
-						new Chartist.Bar('.ct-chart', data, {distributeSeries: true});
+						new Chartist.Bar('.ct-chart', data ,{distributeSeries: true});
 					}
 				})
 			}
