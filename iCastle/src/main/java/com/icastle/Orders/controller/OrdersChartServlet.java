@@ -19,7 +19,7 @@ import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
 import com.icastle.hotels.model.HotelVO;
 
-@WebServlet("/OrdersChartServlet")
+@WebServlet("/hotelcenter/OrdersChartServlet")
 public class OrdersChartServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -33,12 +33,14 @@ public class OrdersChartServlet extends HttpServlet {
 		List<OrdersChartVO> result = null;
 		
 		try{
+//			從前端取值
 			Integer hotelId = hotel.getHotelId();
 			String y = req.getParameter("year");
 			String rti = req.getParameter("roomTypeId");
 			String m = req.getParameter("month");
 			String s = req.getParameter("state");
 			
+//			對取到的參數做處理
 			Integer roomTypeId = (!"null".equals(rti))?new Integer(rti) : null;
 			Boolean state = (!"null".equals(s))?new Boolean(s) : null;
 			Integer year = (!"null".equals(y))?new Integer(y) : null;
@@ -51,18 +53,30 @@ public class OrdersChartServlet extends HttpServlet {
 //			Integer year = (y != null)?new Integer(y) : null;
 //			Integer month = (m != null)?new Integer(m) : null;
 			
+//			查DB
 			OrdersService os = new OrdersService();
 			result = os.search_Chart(hotelId, roomTypeId, year, month, state);
 			
-			JSONArray ja = new JSONArray();
+//			準備JSON格式
+			JSONObject jo = new JSONObject();
+			JSONArray jalabels = new JSONArray();
+			JSONArray jaseries = new JSONArray();
+			
+//			int i = 0;
+//			從DB取出的資料塞到JSON裡
 			for(OrdersChartVO oc : result){
-				JSONObject jo = new JSONObject();
-				jo.put("name", oc.getValue());
-				jo.put("values", String.valueOf(oc.getCount()));
 				
-				ja.add(jo);
+				Integer value = (int)oc.getCount();
+				
+				jalabels.add(oc.getValue());
+				jaseries.add(value);
 			}
-			out.println(ja);
+			
+			jo.put("labels", jalabels);
+			jo.put("series", jaseries);
+			
+//			拋出前端
+			out.println(jo);
 			
 		}catch(Exception e){
 			e.printStackTrace();

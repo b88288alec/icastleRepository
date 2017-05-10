@@ -15,6 +15,7 @@
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
     <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
+    <link href="${pageContext.servletContext.contextPath}/css/chartist.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
@@ -46,16 +47,18 @@
     		<td><input id='idButton' type="button" value="圖表" /></td>
     	</tr>
     </table>
-    <table class="table">
-    	<thead>
-    		<tr>
-    			<th>訂單編號</th><th>下訂日期</th><th>房型名稱</th><th>入住日期</th><th>退房日期</th><th>訂房數量</th><th>入住人數</th><th>入住人姓名</th><th>加床</th><th>總金額</th><th>旅客備註</th><th>備忘錄</th><th>訂單狀態</th>
-    		</tr>
-        </thead>
-    	<tbody id='idtbody'>
+    <div id="showData" class="ct-chart ct-perfect-fourth">
+	    <table class="table">
+    		<thead>
+    			<tr>
+    				<th>訂單編號</th><th>下訂日期</th><th>房型名稱</th><th>入住日期</th><th>退房日期</th><th>訂房數量</th><th>入住人數</th><th>入住人姓名</th><th>加床</th><th>總金額</th><th>旅客備註</th><th>備忘錄</th><th>訂單狀態</th>
+  		  		</tr>
+        	</thead>
+    		<tbody id='idtbody'>
     		
-    	</tbody>
-    </table>
+    		</tbody>
+    	</table>
+    </div>
     </div>
     
     <!--開始footer-->
@@ -80,24 +83,21 @@
 	$(function(){
 		
 // 		事件觸發
-// 		$('#idSelectYear').on("change", orders);
-// 		$('#idSelectRoomTypeName').on("change", orders);
-// 		$('#idSelectOrderState').on("change", orders);
-// 		$('#idSelectMonth').on("change", orders);
-// 		$('#idSelectDate').on("change", orders);
+		$('#idSelectYear').on("change", orders);
+		$('#idSelectRoomTypeName').on("change", orders);
+		$('#idSelectOrderState').on("change", orders);
+		$('#idSelectMonth').on("change", orders);
+		$('#idSelectDate').on("change", orders);
 		
 // 		觸發的方法
 
-		function barChart(){
-			
-		}
-
 		function orders(){
+			if($('#idButton').val() == '圖表'){
 			$.ajax({
 				type : 'GET',
 				url : '${pageContext.servletContext.contextPath}/hotelcenter/OrdersListServlet',
 				data : {
-					hotelId : "1",
+					hotelId : ${HotelLoginOK.hotelId},
 					year : $('#idSelectYear').val(),
 					roomTypeId : $('#idSelectRoomTypeName').val(),
 					month : $('#idSelectMonth').val(),
@@ -128,6 +128,24 @@
 					})
 				}
 			})
+			}else{
+				var x = [];
+				var y = [];
+				$.ajax({
+					type : 'GET',
+					url : '${pageContext.servletContext.contextPath}/hotelcenter/OrdersChartServlet',
+					data : {
+						hotelId : "1",
+						year : $('#idSelectYear').val(),
+						roomTypeId : $('#idSelectRoomTypeName').val(),
+						month : $('#idSelectMonth').val(),
+						state : $('#idSelectOrderState').val()
+					},
+					success : function(data){
+						new Chartist.Bar('.ct-chart', data, {distributeSeries: true});
+					}
+				})
+			}
 		}
 		
 	});

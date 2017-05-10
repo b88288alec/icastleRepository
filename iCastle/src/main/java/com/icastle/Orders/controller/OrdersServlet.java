@@ -209,7 +209,9 @@ public class OrdersServlet extends HttpServlet {
 				Enumeration en = session.getAttributeNames();
 				while(en.hasMoreElements()){
 					String name = (String)en.nextElement();
-					session.removeAttribute(name);
+					if(!name.equalsIgnoreCase("MemberLoginOK")){
+						session.removeAttribute(name);
+					}
 				}
 
 				res.sendRedirect("success.jsp");

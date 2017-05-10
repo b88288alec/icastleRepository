@@ -35,7 +35,7 @@
 		<table>
 			<thead>
 				<tr>
-					<th colspan="2"><img src="${pageContext.servletContext.contextPath}img/creditCard/visa.png" height="80" width="120" style="margin:0px 20px"><img src="${pageContext.servletContext.contextPath}img/creditCard/mastercard.png" height="80" width="120" style="margin:0px 20px"><img src="${pageContext.servletContext.contextPath}img/creditCard/jcb.jpg" height="100" width="150" style="margin:0px 20px"></th>
+					<th colspan="2"><img src="${pageContext.servletContext.contextPath}/img/creditCard/visa.png" height="80" width="120" style="margin:0px 20px"><img src="${pageContext.servletContext.contextPath}/img/creditCard/mastercard.png" height="80" width="120" style="margin:0px 20px"><img src="${pageContext.servletContext.contextPath}/img/creditCard/jcb.jpg" height="100" width="150" style="margin:0px 20px"></th>
 				</tr>
 			</thead>
 			<tbody>
