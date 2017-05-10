@@ -55,7 +55,11 @@ $(function(){
 		}else{
 			
 //			更改選擇器項目
-			$('#idSelectMonth>option[value="null"]').prop("selected",true);
+//			$('#idSelectMonth>option[value="null"]').prop("selected",true);
+			$('#idSelectMonth').empty().append("<option value='null'>--</option>");
+			for(i = 1; i <= 12; i++){
+				$('#idSelectMonth').append("<option value='" + i + "'>" + i +"</option>");
+			}
 			$('#idSelectYear').empty();
 			for(i = 2017; i >= 2010; i--){
 				$('#idSelectYear').append("<option value='" + i + "'>" + i +"</option>");
