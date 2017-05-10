@@ -28,14 +28,14 @@
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="../fragment/nav.jsp"/>
+		<jsp:include page="../../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container">
     	<h1>是否忘記密碼?</h1>
     	
-    	<form action="CreatePw.do" method="post">
+    	<form action="${pageContext.servletContext.contextPath}/general/members/CreatePw.do" method="post">
 		<table class="">
 			<tbody>
 			<tr>
@@ -52,7 +52,7 @@
     </div>
     
     <!--開始footer-->
-		<jsp:include page="../fragment/footer.jsp"/>
+		<jsp:include page="../../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>

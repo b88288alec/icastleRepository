@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.icastle.hotels.model.*;
 
-@WebServlet("/hotel/UpdateHotelPw.do")
+@WebServlet("/hotelcenter/UpdateHotelPw.do")
 public class UpdateHotelPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public UpdateHotelPwServlet() {

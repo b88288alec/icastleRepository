@@ -233,7 +233,7 @@ window.onload = function(){
 <div class="photodiv">
 </div>
 上傳照片:
-<input type="file" name="uploadphoto"><br>
+<input type="file" name="uploadphoto" multiple><br>
 
 
 會員評論<textarea name = "comment" value="${error.comment}"></textarea><span style="color:red">${error.commentKey}</span><br>

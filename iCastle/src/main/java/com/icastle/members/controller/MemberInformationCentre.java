@@ -21,7 +21,7 @@ import com.icastle.members.model.MembersVO;
 
 
 
-@WebServlet("/MemberInformationCentre.do")
+@WebServlet("/members/MemberInformationCentre.do")
 public class MemberInformationCentre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -51,11 +51,6 @@ public class MemberInformationCentre extends HttpServlet {
 	
 		RequestDispatcher rd = request.getRequestDispatcher("members/MemberCentre.jsp");
 		rd.forward(request, response);
-		
-
-			
-		
-		
 		
 	}
 

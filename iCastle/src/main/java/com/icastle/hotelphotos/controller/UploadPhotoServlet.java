@@ -18,7 +18,7 @@ import org.apache.commons.codec.binary.*;
 import com.icastle.hotelphotos.model.*;
 import com.icastle.hotels.model.HotelVO;
 
-@WebServlet("/hotel/UploadPhoto.do")
+@WebServlet("/hotelcenter/UploadPhoto.do")
 @MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 500, maxRequestSize = 1024 * 1024 * 500 * 5)
 public class UploadPhotoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

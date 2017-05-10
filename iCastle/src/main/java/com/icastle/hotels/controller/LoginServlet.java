@@ -29,6 +29,10 @@ public class LoginServlet extends HttpServlet {
 		
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
+		String servletPath = request.getServletPath();
+		request.setAttribute("loginPath", servletPath);
+		String requestURI = (String)session.getAttribute("requestURI");
+		String queryString = (String)session.getAttribute("queryString");
 		
 		//檢查是否所有欄位都有輸入
 		if (email==null || email=="")
@@ -39,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 		
 		//如果有任何欄位沒有輸入
 		if (!errMap.isEmpty()){
-			RequestDispatcher rd = request.getRequestDispatcher("loginhotel.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("../general/login.jsp");
 			rd.forward(request, response);
 			return;
 		}
@@ -51,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 		if (hotelvo == null){
 			//帳號或密碼錯誤
 			errMap.put("accountErr", "帳號或密碼錯誤");
-			RequestDispatcher rd = request.getRequestDispatcher("loginhotel.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("../general/login.jsp");
 			rd.forward(request, response);
 			return;
 		}else{
@@ -70,8 +74,14 @@ public class LoginServlet extends HttpServlet {
 			System.out.println(hotelvo.getHotelState());
 			System.out.println(hotelvo.getRegisterId());
 			
-			response.sendRedirect(contextPath + "/index.jsp");
-			return;
+			if(requestURI == null){
+				response.sendRedirect(contextPath + "/index.jsp");
+				return;
+			}else{
+				response.sendRedirect(requestURI + "?" + queryString);
+				return;
+			}
+			
 		}
 	}
 

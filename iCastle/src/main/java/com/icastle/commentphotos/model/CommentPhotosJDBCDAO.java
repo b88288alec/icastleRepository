@@ -1,5 +1,4 @@
 package com.icastle.commentphotos.model;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -25,6 +24,7 @@ public class CommentPhotosJDBCDAO implements CommentPhotosDAO_interface{
 	private final String SHOW_PHOTO = "SELECT commentId,photo FROM CommentPhotos WHERE commentId=?";
 	private final String DEL_PHOTO = "DELETE CommentPhotos WHERE commentId = ?";
 	private final String SEL_ID = "SELECT photo from CommentPhotos WHERE id = ?";
+	private final String SEL_COMTID = "SELECT id FROM CommentPhotos WHERE commentId = ?";
 	private String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private String url = "jdbc:sqlserver://localhost:1433;DatabaseName=iCastle";
 	private String user = "sa";
@@ -35,13 +35,16 @@ public class CommentPhotosJDBCDAO implements CommentPhotosDAO_interface{
 	ResultSet rs;
 	CommentPhotosVO comtPhoto;
 	List<CommentPhotosVO> listPhoto;
+	List<Integer> idList;
 
 
 	
 	
 	public String uploadCommentPhoto(int commentId,InputStream x,long len){
-		
+		    
+		     
 		try {
+			
 
 			Class.forName(driver);
 		    conn = DriverManager.getConnection(url, user, password);
@@ -174,6 +177,41 @@ public class CommentPhotosJDBCDAO implements CommentPhotosDAO_interface{
 		
 		return comtPhoto;
 		
+	}
+
+
+	@Override
+	public List<Integer> findByIds(int commentId) {
+		
+		idList = new ArrayList<Integer>();
+		// TODO Auto-generated method stub
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			stmt = conn.prepareStatement(SEL_COMTID);
+			stmt.setInt(1,commentId);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()){
+				
+				idList.add(rs.getInt("id"));
+				
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return idList;
 	}
 
 }

@@ -123,10 +123,10 @@
 						<!-- 沒有登入 -->
 							<c:choose>
 								<c:when test="${servletPath == '/hotel/login.jsp' || servletPath == '/hotel/loginhotel.jsp'}">
-									<li class="active"><a href="${pageContext.servletContext.contextPath}/hotel/login.jsp"><span class="glyphicon glyphicon-user"></span> 登入</a></li>	
+									<li class="active"><a href="${pageContext.servletContext.contextPath}/general/login.jsp"><span class="glyphicon glyphicon-user"></span> 登入</a></li>	
 								</c:when>
 								<c:otherwise>
-									<li><a href="${pageContext.servletContext.contextPath}/hotel/login.jsp"><span class="glyphicon glyphicon-user"></span> 登入</a></li>
+									<li><a href="${pageContext.servletContext.contextPath}/general/login.jsp"><span class="glyphicon glyphicon-user"></span> 登入</a></li>
 								</c:otherwise>
 			   				</c:choose>	
 						</c:when>

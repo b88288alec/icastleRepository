@@ -7,6 +7,8 @@ public class NameEmailTime {
 	private String email;
 	private Date commentTime;
 	private Integer id;
+	private Integer commentId;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -30,6 +32,12 @@ public class NameEmailTime {
 	}
 	public void setCommentTime(Date commentTime) {
 		this.commentTime = commentTime;
+	}
+	public Integer getCommentId() {
+		return commentId;
+	}
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package com.icastle.commentphotos.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +36,26 @@ public class CommentPhotosServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		System.out.println(id);
+
 		int idInt = Integer.parseInt(id);
-		System.out.println(idInt);
-		
+	
 		CommentPhotosService comtPhotoService = new CommentPhotosService();
 	    CommentPhotosVO photo;
+	    
 	    photo = comtPhotoService.findById(idInt);
 		byte[] photoByte = photo.getPhoto();
 		ServletOutputStream sops =response.getOutputStream();
 		sops.write(photoByte);
 		
-		request.setAttribute("ShowPhoto",id);
-		RequestDispatcher rd = request.getRequestDispatcher("HotelComment.jsp");
-		rd.forward(request,response);
+//		request.setAttribute("ShowPhoto",id);
+		
+
+
+	
+//		RequestDispatcher rd = request.getRequestDispatcher("HotelComment.jsp");
+//		rd.forward(request,response);
+//		PrintWriter out = response.getWriter();
+//		out.print();
 		
 		
 	}

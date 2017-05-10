@@ -43,11 +43,11 @@
  
          <c:forEach var="comment" items="${commentData}">
          <tr>       
-            <td class="text-center">
+            <td name="firstId" class="text-center">
             ${comment.id}
             </td>
                      
-            <td>
+            <td  id="memberName${comment.commentId}">
             ${comment.name}
             </td>
    
@@ -58,16 +58,21 @@
             <td>
             ${comment.commentTime}
             </td>
+            
             <td class="td-actions text-right">
-                <button type="button" rel="tooltip" title="View Profile" class="btn btn-info btn-simple btn-xs">
+                       	
+            	<button type="button"  class="btn btn-info btn-simple btn-xs" id="${comment.commentId}" value="${comment.commentId}" name="ButtonCheck">
+                	<i class="fa fa-user"></i>
+                </button>
+                             
+            </td>
+            <td class="td-actions text-right">
+            
+            	<button type="button"  class="btn btn-info btn-simple btn-xs" name="ButtonResponse" Value="${comment.commentId}">
                     <i class="fa fa-user"></i>
-                </button>
-                <button type="button" rel="tooltip" title="Edit Profile" class="btn btn-success btn-simple btn-xs">
-                    <i class="fa fa-edit"></i>
-                </button>
-                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                    <i class="fa fa-times"></i>
-                </button>
+                </button>	
+            
+            
             </td>
             </tr>
        </c:forEach> 
@@ -76,6 +81,27 @@
 </div>
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
+    <!-- Modal Core -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">
+        
+        
+        </h4>
+      </div>
+      <div class="modal-body" id="myDiv">
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info btn-simple">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
     
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
@@ -90,5 +116,140 @@
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+ <script>
+ $(document).ready(
+		 function(){
+			 
+			 $('button[name="ButtonCheck"]').click(function(){
+				 
+				 $("#myDiv").empty();
+				 $("#myModalLabel").empty();
+				
+				 var commentId =  $(this).val();
+				 $.getJSON("CommentCheck",{"ButtonCheck":commentId},function(data){
+					 
+					 console.log(data);
+					
+
+			
+					 $.each(data, function(i,value){
+
+
+					     var len = data[i].ids.length;
+           
+						 var div = $("#myDiv");
+						 div.empty();
+						 div.append($("<h2></h2>").text());
+						 div.append($("<h5>訂單編號</h5>"));
+						 div.append($("<p></p>").text(data[i].orderId)); 
+						 div.append($("<h5>平均評分</h5>"));
+						 genimg(data[i].avgScore);
+                         div.append($("<h5>服務評分</h5>"));
+                         genimg(data[i].serviceScore);
+                         div.append($("<h5>品質評分</h5>"));
+                         genimg(data[i].qualityScore);
+                         div.append($("<h5>風景評分</h5>"));
+                         genimg(data[i].sceneScore);
+                         div.append($("<h5>評論內容</h5>"));
+                         div.append($("<p></p>").text(data[i].comment));
+                         for(var j=0; j<len; j++){
+                        	 div.append($("<img>").attr("src","http://localhost:8081/iCastle/comment/CommentPhotosServlet?id="+data[i].ids[j]));
+                        	 
+                         }
+
+                         $('#myModalLabel').text($("#memberName"+commentId).text()+"的評論");
+                       
+						 					 
+
+					 })
+					 $("#myModal").modal('show');
+					 
+				 })
+			 });
+			 			 
+			 function genimg(score){
+				 
+				 var img1 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+				 var img2 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+				 var img3 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+				 var img4 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+				 var img5 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+				 var div = $("#myDiv");
+				 
+				 if(score == 1){
+					 
+					 img1 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img2 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 img3 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 img4 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 img5 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 
+				 }else if(score == 2){
+					 
+					 img1 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img2 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img3 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 img4 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 img5 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 
+					 
+				 }else if(score == 3){
+					 
+					 img1 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img2 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img3 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img4 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 img5 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 
+					 
+				 }else if(score == 4){
+					 
+					 img1 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img2 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img3 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img4 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img5 = $("<img>").attr({src : "../img/unstar.png",width : "5%"});
+					 
+					 
+				 }else{
+					 
+					 img1 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img2 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img3 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img4 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 img5 = $("<img>").attr({src : "../img/star.png",width : "5%"});
+					 
+					 
+				 }
+
+				
+				 div.append([img1, img2, img3, img4, img5]);
+				 
+			 }
+			 
+			 $('button[name="ButtonResponse"]').click(function(){
+				 $("#myDiv").empty();
+				 $("#myModalLabel").empty();		 
+				 $("#myModal").modal('show');
+				 
+				 
+				 var form = $("<form></form>").attr("action","Response").attr("method","GET");
+				 var textarea = $("<textarea></textarea>").css("width","550").css("height","550").css("max-width","550").css("max-height","550");
+				 
+				 
+				 $("#myDiv").append(form).append(textarea);
+				
+				 
+// 				 $.getJSON('',)
+				
+				 
+				 
+			 });
+			 
+			
+			 
+		 });
+</script>
+
 
 </html>

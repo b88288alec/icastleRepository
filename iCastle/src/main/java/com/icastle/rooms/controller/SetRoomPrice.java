@@ -27,7 +27,7 @@ import com.icastle.rooms.model.RoomsVO;
 import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
-@WebServlet("/rooms/SetRoomPrice")
+@WebServlet("/hotelcenter/rooms/SetRoomPrice.do")
 public class SetRoomPrice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,16 +36,16 @@ public class SetRoomPrice extends HttpServlet {
 		
 		HotelVO hotelvo = (HotelVO)session.getAttribute("HotelLoginOK");
 		//判斷是否有登入
-		if(hotelvo == null){
-			response.sendRedirect(getServletContext().getContextPath()+"/hotel/loginhotel.jsp");
-			return;
-		}
+//		if(hotelvo == null){
+//			response.sendRedirect(getServletContext().getContextPath()+"/hotel/loginhotel.jsp");
+//			return;
+//		}
 		//取得房型資料
 		RoomTypeService rots = new RoomTypeService();
 		List<RoomTypeVO> roomTypeList = rots.findRoomTypeByHotelId(hotelvo.getHotelId());
 		
 		session.setAttribute("roomTypeList", roomTypeList);
-		RequestDispatcher rd = request.getRequestDispatcher("calendar.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("../setroomprice.jsp");
 		rd.forward(request, response);
 	}
 

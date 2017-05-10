@@ -19,7 +19,7 @@ import globalservice.GlobalService;
 /**
  * Servlet implementation class CreatePwServlet
  */
-@WebServlet("/members/CreatePw.do")
+@WebServlet("/general/members/CreatePw.do")
 public class CreatePwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    

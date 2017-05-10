@@ -126,7 +126,7 @@
                 <!--飯店列表-->
                 <c:forEach var="hotel" items="${hotels}">
                 <a href="hotel/ShowHotel.do?hotelId=${hotel.hotelId}&type=${param.type}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
-                    <div class="card">
+                    <div class="card hotelcard">
                         <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${hotel.hotelId}&type=hotelid" style="width:300px;" />
                         <div class="cardContext">
                             <h4>${hotel.hotelName}</h4>
@@ -272,6 +272,7 @@
                     for (var i = 1; i <= hotelLevle; i++) {
                         $('#hs' + i).attr("src", "img/star.png");
                         hotelLevleStatus.text(hotelLevle + '星級');
+                        console.log("hotelLevle="+ hotelLevle);
                     }
                 });
             //結束飯店星等
@@ -307,6 +308,7 @@
                     for (var i = 1; i <= hotelPoint; i++) {
                         $('#hp' + i).attr("src", "img/star.png");
                         hotelPointStatus.text(hotelPoint + '顆星');
+                        console.log("hotelPoint="+ hotelPoint);
                     }
                 });
             //結束飯店評分

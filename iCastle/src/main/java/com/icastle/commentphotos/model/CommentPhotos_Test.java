@@ -42,24 +42,24 @@ public class CommentPhotos_Test {
 	
 		
 		
-		try {
-			CommentPhotosVO vo = new CommentPhotosVO();
-			CommentPhotosDAO dao = new CommentPhotosDAO();
-			
-			File f = new File("C:\\Users\\Student\\Desktop\\123.jpg");
-			InputStream fis = new FileInputStream(f);
-			int data = fis.available();
-			
-			dao.uploadCommentPhoto(1,fis,data);
-			
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			CommentPhotosVO vo = new CommentPhotosVO();
+//			CommentPhotosDAO dao = new CommentPhotosDAO();
+//			
+//			File f = new File("C:\\Users\\Student\\Desktop\\123.jpg");
+//			InputStream fis = new FileInputStream(f);
+//			int data = fis.available();
+//			
+//			dao.uploadCommentPhoto(1,fis,data);
+//			
+//
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		 
 		
 		

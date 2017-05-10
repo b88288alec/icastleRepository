@@ -39,7 +39,7 @@
 
 	<div class="container" style="margin-top: 100px;">
 		<form
-			action="${pageContext.servletContext.contextPath}/roomtype/RegisterRoomType.do"
+			action="${pageContext.servletContext.contextPath}/hotelcenter/roomtype/RegisterRoomType.do"
 			method="GET">
 			<div class="form">
 				<p>飯店ID</p>
