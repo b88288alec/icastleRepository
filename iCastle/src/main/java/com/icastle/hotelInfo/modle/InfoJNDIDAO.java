@@ -99,11 +99,11 @@ public class InfoJNDIDAO implements InfoDAO_interface{
 			pstmt.setString(2, infoVO.getTel());
 			pstmt.setString(3, infoVO.getTransport());
 			pstmt.setString(4, infoVO.getWebsite());
-			pstmt.setString(5, infoVO.getCheckin());
-			pstmt.setString(6, infoVO.getCheckout());
-			pstmt.setString(7, infoVO.getGuestPolicies());
-			pstmt.setString(8, infoVO.getCancelPolicies());
-			pstmt.setString(9, infoVO.getCancelPolicies() );
+			pstmt.setString(5, infoVO.getHotelProfile());
+			pstmt.setString(6, infoVO.getCheckin());
+			pstmt.setString(7, infoVO.getCheckout());
+			pstmt.setString(8, infoVO.getGuestPolicies());
+			pstmt.setString(9, infoVO.getCancelPolicies());
 			pstmt.setBoolean(10, infoVO.isRoomWifi());
 			pstmt.setBoolean(11, infoVO.isHallWifi() );
 			pstmt.setBoolean(12, infoVO.isInternet() );
