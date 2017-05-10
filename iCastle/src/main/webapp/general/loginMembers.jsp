@@ -50,7 +50,7 @@
 		<tr>
 		<td>請輸入驗證碼</td>
 		
-		<td> <img border=0 src="ImageMaskServlet.do"  id ="imageMask"/></td>
+		<td> <img border=0 src="${pageContext.servletContext.contextPath}/general/ImageMaskServlet.do"  id ="imageMask"/></td>
 <!-- <img border=0 src="DynamicImage.do" width="80" height="80" id ="imageMask"/><br/> -->
  <td>    <a href = "#" style = "font-size: 13px;margin-left: 5px;" onclick = "myReload()">換一張</a></td>
     <td> <input type="text" name="value">${errMap.cdErr}</input> </td></tr>
@@ -89,8 +89,8 @@
             var URL = 'https://access.line.me/dialog/oauth/weblogin?';
             URL += 'response_type=code';
             URL += '&client_id=1514098572';
-            URL += '&redirect_uri=http://localhost:8081/iCastle/index.jsp';
-            URL += '&state=abcde';
+            URL += '&redirect_uri=http://localhost:8081/iCastle/members/LineLogin.do';
+//             URL += '&state=abcde';
             window.location.href = URL;
         }
     </script>

@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
 
-@WebServlet("/rooms/MonthRoomsToJson")
+@WebServlet("/json/rooms/MonthRoomsToJson")
 public class MonthRoomsToJson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

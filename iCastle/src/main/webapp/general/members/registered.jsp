@@ -53,7 +53,7 @@
     <!--結束導覽列-->
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
 <div class="member" style="margin-top:56px">
-<form METHOD="post" ACTION="Member.do">
+<form METHOD="post" ACTION="../Member.do">
 <h1>會員註冊</h1>
 <table>
 <tr><td><span>帳號:</span></td><td><input type="text" name="email" value="${param.email}">${errorMsgs.emailErr}<br></td></tr>

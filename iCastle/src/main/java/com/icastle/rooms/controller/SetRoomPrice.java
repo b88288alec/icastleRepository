@@ -27,7 +27,7 @@ import com.icastle.rooms.model.RoomsVO;
 import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
-@WebServlet("/rooms/SetRoomPrice")
+@WebServlet("/hotelcenter/rooms/SetRoomPrice.do")
 public class SetRoomPrice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,7 +45,7 @@ public class SetRoomPrice extends HttpServlet {
 		List<RoomTypeVO> roomTypeList = rots.findRoomTypeByHotelId(hotelvo.getHotelId());
 		
 		session.setAttribute("roomTypeList", roomTypeList);
-		RequestDispatcher rd = request.getRequestDispatcher("calendar.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("../setroomprice.jsp");
 		rd.forward(request, response);
 	}
 

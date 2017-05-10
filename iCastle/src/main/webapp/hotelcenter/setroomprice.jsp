@@ -144,7 +144,7 @@
 		//選擇房型後更新日曆
 		$('select').change(function() {
 			var events = {
-				url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
+				url : '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
 				data : {
 					hotelId : '${HotelLoginOK.hotelId}',
 					roomTypeId : $('select').val(),
@@ -163,7 +163,7 @@
 		
 		//生成價錢選擇器
 		function genPriceSelect(selector, inputName){
-			$.getJSON("${pageContext.servletContext.contextPath}/roomtype/RoomTypePriceToJson",{"roomTypeId" : $('select').val()},
+			$.getJSON("${pageContext.servletContext.contextPath}/json/roomtype/RoomTypePriceToJson",{"roomTypeId" : $('select').val()},
 					function(data){
 						var checkbox_div = $(selector);
 						checkbox_div.empty();
@@ -200,7 +200,7 @@
 				right: 'prev,next today'
 			},
 			eventSources : [ {
-				url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
+				url : '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
 				data : {
 					hotelId : '${HotelLoginOK.hotelId}',
 					roomTypeId : $('select').val(),
@@ -359,7 +359,7 @@
 		$('#submit').click(function(){
 			$.ajax({
 				type : 'POST',
-				url : '${pageContext.servletContext.contextPath}/rooms/SetRoomPrice',
+				url : '${pageContext.servletContext.contextPath}/json/rooms/SetRoomPrice',
 				data : {
 					jsonData : JSON.stringify(json),
 					roomTypeId : $('select').val(),
@@ -373,7 +373,7 @@
 			})
 			json.length = 0;
 			var events = {
-					url : '${pageContext.servletContext.contextPath}/rooms/MonthRoomsToJson',
+					url : '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
 					data : {
 						hotelId : '${HotelLoginOK.hotelId}',
 						roomTypeId : $('select').val(),

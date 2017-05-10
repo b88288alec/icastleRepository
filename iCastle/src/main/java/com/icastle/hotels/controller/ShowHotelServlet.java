@@ -13,14 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.icastle.hotelInfo.modle.*;
 import com.icastle.hotelphotos.model.HotelPhotosService;
 import com.icastle.hotelphotos.model.HotelPhotosVO;
 import com.icastle.hotels.model.*;
-import com.icastle.rooms.model.RoomsDAO_interface;
-import com.icastle.rooms.model.RoomsJDBCDAO;
-import com.icastle.rooms.model.RoomsJNDIDAO;
-import com.icastle.rooms.model.RoomsService;
-import com.icastle.rooms.model.RoomsVO;
+import com.icastle.rooms.model.*;
 
 @WebServlet("/hotel/ShowHotel.do")
 public class ShowHotelServlet extends HttpServlet {
@@ -64,6 +61,9 @@ public class ShowHotelServlet extends HttpServlet {
 		request.setAttribute("hotel", hotel);
 		
 		//查詢hotel info
+		InfoService infoServ = new InfoService();
+		InfoVO hotelInfo = infoServ.findByHotelId(hotelId);
+		request.setAttribute("hotelInfo", hotelInfo);
 		
 		//查詢hotel photo
 		HotelPhotosService photoserv = new HotelPhotosService();

@@ -18,7 +18,7 @@ import com.icastle.members.model.MembersVO;
 /**
  * Servlet implementation class MembersLoginServlet
  */
-@WebServlet("/members/Login.do")
+@WebServlet("/general/members/Login.do")
 public class MembersLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,6 +37,8 @@ public class MembersLoginServlet extends HttpServlet {
 		
 		String email = req.getParameter("email");
 		String pw = req.getParameter("pw");
+		String servletPath = req.getServletPath();
+		req.setAttribute("loginPath", servletPath);
 		String requestURI = (String)session.getAttribute("requestURI");
 		String queryString = (String)session.getAttribute("queryString");
 		
@@ -56,7 +58,7 @@ public class MembersLoginServlet extends HttpServlet {
 		
 		//如果有任何欄位沒有輸入
 		if (!errMap.isEmpty()){
-			RequestDispatcher rd = req.getRequestDispatcher("loginMembers.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("../login.jsp");
 			rd.forward(req, res);
 			return;
 		}
@@ -68,7 +70,7 @@ public class MembersLoginServlet extends HttpServlet {
 		if (membersvo == null){
 			//帳號或密碼錯誤
 			errMap.put("accountErr", "帳號或密碼錯誤");
-			RequestDispatcher rd = req.getRequestDispatcher("loginMembers.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("../login.jsp");
 			rd.forward(req, res);
 			return;
 		}else{

@@ -19,19 +19,25 @@
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
 <!--<link href="../css/bootstrap.min.css" rel="stylesheet" />-->
-<link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
-<link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
+<link
+	href="${pageContext.servletContext.contextPath}/css/material-kit.css"
+	rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/template.css"
+	rel="stylesheet" />
 <!--以下請加入各自頁面的css-->
-<link href="${pageContext.servletContext.contextPath}/css/hotel.css" rel="stylesheet" />
-<link href="${pageContext.servletContext.contextPath}/css/lightbox.min.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/hotel.css"
+	rel="stylesheet" />
+<link
+	href="${pageContext.servletContext.contextPath}/css/lightbox.min.css"
+	rel="stylesheet" />
 
 <title>愛客宿-iCastle</title>
 </head>
 <body>
-    <!--開始導覽列-->
-		<jsp:include page="../fragment/nav.jsp"/>
+	<!--開始導覽列-->
+	<jsp:include page="../fragment/nav.jsp" />
 	<!--結束導覽列-->
-	
+
 	<!--上方搜尋列-->
 	<div class="container-fluid search-row">
 		<div class="row" style="background-color: #607D8B; width: 100%">
@@ -78,10 +84,14 @@
 					<c:forEach var="i" varStatus="varsts" begin="1" end="5">
 						<c:choose>
 							<c:when test="${i<=hotel.star}">
-								<img src="${pageContext.servletContext.contextPath}/img/star.png" width="20px" />
+								<img
+									src="${pageContext.servletContext.contextPath}/img/star.png"
+									width="20px" />
 							</c:when>
 							<c:otherwise>
-								<img src="${pageContext.servletContext.contextPath}/img/unstar.png" width="20px" />
+								<img
+									src="${pageContext.servletContext.contextPath}/img/unstar.png"
+									width="20px" />
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -99,58 +109,87 @@
 			<!--飯店圖片-->
 			<div class="col-md-12">
 				<div class="gallery">
-					
+
 					<!--秀出飯店圖片 -->
 					<c:forEach var="photo" items="${photos}" varStatus="loop">
-						
+
 						<c:if test="${loop.index == 0}">
 							<div class="frist-img">
-		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="700" height="389" />
-		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs" data-title="飯店大門">
-		                            <div class="overlay">
-		                                <h3 style="color:white;position:absolute;bottom:10px;left:10px;">飯店大門</h3>
-		                            </div>
-		                        </a>
-		                    </div>
-	                    </c:if>
-	                    
-	                    <c:if test="${loop.index == 1}">
-		                    <div class="second-img">
-		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="550" height="189" />
-		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs">
-		                            <div class="overlay"></div>
-		                        </a>
-		                    </div>
-	                    </c:if>
-	                    
-	                    <c:if test="${loop.index == 2}">
-		                    <div class="thrid-img">
-		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="268" height="189" />
-		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs">
-		                            <div class="overlay"></div>
-		                        </a>
-		                    </div>
-	                    </c:if>
-	                    
-	                    <c:if test="${loop.index == 3}">
-		                    <div class="fourth-img">
-		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" width="268" height="189" />
-		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs">
-		                            <div class="overlay"></div>
-		                        </a>
-		                    </div>
+								<img
+									src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									width="700" height="389" /> <a
+									href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									data-lightbox="hotel-imgs"
+									data-title="${photo.pohtoDescription}">
+									<div class="overlay">
+										<h3
+											style="color: white; position: absolute; bottom: 10px; left: 10px;">${photo.pohtoDescription}</h3>
+									</div>
+								</a>
+							</div>
+						</c:if>
+
+						<c:if test="${loop.index == 1}">
+							<div class="second-img">
+								<img
+									src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									width="550" height="189" /> <a
+									href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									data-lightbox="hotel-imgs"
+									data-title="${photo.pohtoDescription}">
+									<div class="overlay">
+										<h3
+											style="color: white; position: absolute; bottom: 10px; left: 10px;">${photo.pohtoDescription}</h3>
+									</div>
+								</a>
+							</div>
+						</c:if>
+
+						<c:if test="${loop.index == 2}">
+							<div class="thrid-img">
+								<img
+									src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									width="268" height="189" /> <a
+									href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									data-lightbox="hotel-imgs"
+									data-title="${photo.pohtoDescription}">
+									<div class="overlay">
+										<h3
+											style="color: white; position: absolute; bottom: 10px; left: 10px;">${photo.pohtoDescription}</h3>
+									</div>
+								</a>
+							</div>
+						</c:if>
+
+						<c:if test="${loop.index == 3}">
+							<div class="fourth-img">
+								<img
+									src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									width="268" height="189" /> <a
+									href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									data-lightbox="hotel-imgs"
+									data-title="${photo.pohtoDescription}">
+									<div class="overlay">
+										<h3
+											style="color: white; position: absolute; bottom: 10px; left: 10px;">${photo.pohtoDescription}</h3>
+									</div>
+								</a>
+							</div>
 						</c:if>
 
 						<c:if test="${loop.index > 3}">
 							<!-- 第5張以後的圖片 -->
-		                    <div style="display:none">
-		                        <a href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" data-lightbox="hotel-imgs">
-		                        <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" /></a>
+							<div style="display: none">
+								<a
+									href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
+									data-lightbox="hotel-imgs"
+									data-title="${photo.pohtoDescription}"> <img
+									src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" /></a>
 							</div>
 						</c:if>
-						
+
 					</c:forEach>
-									
+
 
 					<div style="clear: both"></div>
 				</div>
@@ -163,7 +202,7 @@
 				</div>
 				<div class="col-md-2">
 					<i class="material-icons green200">call</i>
-					<p>02 2375 7777</p>
+					<p>${hotelInfo.tel}</p>
 				</div>
 				<div class="col-md-2">
 					<i class="material-icons green200">mail</i>
@@ -171,37 +210,54 @@
 				</div>
 				<div class="col-md-2">
 					<i class="material-icons green200">access_time</i>
-					<p>PM 3:00</p>
+					<p>${hotelInfo.checkin}</p>
 				</div>
 				<div class="col-md-2">
 					<i class="material-icons green200">access_time</i>
-					<p>PM 12:00</p>
+					<p>${hotelInfo.checkout}</p>
 				</div>
 			</div>
 			<div class="col-md-12 facility-service">
 				<div class="col-md-4">
 					<p style="font-size: 20px;">熱門設施&服務</p>
 				</div>
-				<div class="col-md-2">
-					<i class="material-icons green200">casino</i>
-					<p>遊樂場</p>
-				</div>
-				<div class="col-md-2">
-					<i class="material-icons green200">fitness_center</i>
-					<p>健身房</p>
-				</div>
-				<div class="col-md-2">
-					<i class="material-icons green200">pool</i>
-					<p>游泳池</p>
-				</div>
-				<div class="col-md-2">
-					<i class="material-icons green200">spa</i>
-					<p>spa</p>
-				</div>
-				<!--<div class="col-md-2">
-                    <i class="material-icons green200">wifi</i>
-                    <p>無線網路</p>
-                </div>-->
+
+				<c:if test="${hotelInfo.roomWifi}">
+					<div class="col-md-2">
+						<i class="material-icons green200">wifi</i>
+						<p>室內wifi</p>
+					</div> 
+				</c:if>
+
+				<c:if test="${hotelInfo.gameRoom}">
+					<div class="col-md-2">
+						<i class="material-icons green200">casino</i>
+						<p>遊戲室</p>
+					</div>
+				</c:if>
+
+				<c:if test="${hotelInfo.gym}">
+					<div class="col-md-2">
+						<i class="material-icons green200">fitness_center</i>
+						<p>健身房</p>
+					</div>
+				</c:if>
+
+				<c:if test="${hotelInfo.gym}">
+					<div class="col-md-2">
+						<i class="material-icons green200">pool</i>
+						<p>游泳池</p>
+					</div>
+				</c:if>
+
+
+
+				<!-- 				<div class="col-md-2"> -->
+				<!-- 					<i class="material-icons green200">spa</i> -->
+				<!-- 					<p>spa</p> -->
+				<!-- 				</div> -->
+
+
 				<!--<div class="col-md-2">
                     <i class="material-icons green200">hot_tub</i>
                     <p>溫泉</p>
@@ -235,7 +291,7 @@
 					<tbody>
 						<!-- 一筆又一筆的房間 -->
 						<c:forEach var="room" items="${rooms}">
-							<form action="../rooms/Rooms.do" name="form">
+							<form action="${pageContext.servletContext.contextPath}/members/rooms/Rooms.do" name="form">
 								<!-- 					<form action="Test2Servlet" name="form"> -->
 								<tr>
 									<!--房型照片-->
@@ -376,17 +432,11 @@
 				<div class="page-header">
 					<h3>關於德立莊酒店</h3>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-2"> 
 					<h4>簡介</h4>
 				</div>
 				<div class="col-md-10">
-					<p>如果您想尋找一家交通方便的台北市住宿，那沒有比德立莊酒店更合適的選擇了。
-						在這裡，旅客可輕鬆前往市區內各大旅遊、購物、餐飲地點。 住宿位置優越讓旅客前往市區內的熱門景點變得方便快捷。
-						德立莊酒店一直致力於為您提供最尊貴的服務與一流的設施，確保您下榻期間愉快、愜意。 入住期間，客人可享受所有房型皆附免費WiFi,
-						便利商店, 24小時前台服務, 可寄放行李, 公共區域WiFi。
-						您將能真切地感受到德立莊酒店的特有的氛圍，它體現在每一間精心規劃的客房中。完善的貼心設施與服務隨處可見，如：平面電視, 地毯,
-						免費即溶咖啡, 免費茶包, 寢具用品， 除此之外，住宿的各種娛樂設施一定會讓您在留宿期間享受更多樂趣。
-						德立莊酒店地理位置優越，設施先進，是最熱門的飯店之一。</p>
+					<p>${hotelInfo.hotelProfile}</p>
 				</div>
 			</div>
 			<div class="col-md-12"
@@ -428,54 +478,74 @@
 					<h4>交通方式</h4>
 				</div>
 				<div class="col-md-10">
-					<p>1.酒店提供付費接機服務，預約諮詢 information@richardson.com.tw</p>
-					<p>2.搭乘國光客運1819號直達台北車站，轉乘台北捷運藍線至西門站4號出口， 即可抵達酒店。</p>
-					<p>3.搭乘高鐵從桃園站到台北車站，轉乘台北捷運藍線至西門站4號出口， 即可抵達酒店。</p>
+					${hotelInfo.transport}
+				</div>
+			</div>
+			<div class="col-md-12"
+				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
+				<div class="col-md-2">
+					<h4>入住須知</h4>
+				</div>
+				<div class="col-md-10">
+					${hotelInfo.guestPolicies}
 				</div>
 			</div>
 		</div>
 	</div>
 
-    <!--開始footer-->
-		<jsp:include page="../fragment/footer.jsp"/>
+	<!--開始footer-->
+	<jsp:include page="../fragment/footer.jsp" />
 	<!--結束footer-->
 
-	<script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
-	<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-	<script src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
 
-	<script src="${pageContext.servletContext.contextPath}/js/nouislider.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/js/nouislider.min.js"></script>
 
-	<script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
-	<script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
-	
+	<script
+		src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+
 	<script src="../js/magnific-popup.js"></script>
 	<script src="../js/lightbox.min.js"></script>
-	
+
 	<script>
-	$(document).ready(function() {
-		$('.popup-gallery').magnificPopup({
-			delegate: 'a',
-			type: 'image',
-			tLoading: 'Loading image #%curr%...',
-			mainClass: 'mfp-img-mobile',
-			gallery: {
-				enabled: true,
-				navigateByImgClick: true,
-				preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-			},
-			image: {
-				tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-				titleSrc: function(item) {
-					return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
-				}
-			}
-		});
-		lightbox.option({
-            'wrapAround': true
-        })
-	});
+		$(document)
+				.ready(
+						function() {
+							$('.popup-gallery')
+									.magnificPopup(
+											{
+												delegate : 'a',
+												type : 'image',
+												tLoading : 'Loading image #%curr%...',
+												mainClass : 'mfp-img-mobile',
+												gallery : {
+													enabled : true,
+													navigateByImgClick : true,
+													preload : [ 0, 1 ]
+												// Will preload 0 - before current, and 1 after the current image
+												},
+												image : {
+													tError : '<a href="%url%">The image #%curr%</a> could not be loaded.',
+													titleSrc : function(item) {
+														return item.el
+																.attr('title')
+																+ '<small>by Marsel Van Oosten</small>';
+													}
+												}
+											});
+							lightbox.option({
+								'wrapAround' : true
+							})
+						});
 	</script>
 </body>
 </html>

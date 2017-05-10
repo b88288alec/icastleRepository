@@ -15,7 +15,7 @@ import org.json.simple.JSONObject;
 
 import com.icastle.roomtype.model.RoomTypeService;
 
-@WebServlet("/roomtype/RoomTypePriceToJson")
+@WebServlet("/json/roomtype/RoomTypePriceToJson")
 public class RoomTypePriceToJson extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

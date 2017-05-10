@@ -17,32 +17,42 @@
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
-	<style>
+    <style>
 		.container {
 		    width: 1300px;
 		    margin-top: 100px;
+		    background-color: white; 
+		    padding-bottom: 100px;
 		}
-	</style>
+    </style>
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="../fragment/nav.jsp"/>
+		<jsp:include page="../../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container"
-		style="background-color: white; padding-bottom: 100px;">
-			<h1>飯店會員中心</h1>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelInfo.do">修改飯店資訊</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelPw.jsp">修改密碼</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelPhoto.do">編輯圖片</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/setRoomType.jsp">新增房型</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do">新增房價</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ToHotelOrders">訂單</a>
-	</div>
+    <div class="container">
+    	<h1>是否忘記密碼?</h1>
+    	
+    	<form action="${pageContext.servletContext.contextPath}/general/members/CreatePw.do" method="post">
+		<table class="">
+			<tbody>
+			<tr>
+				<td>請輸入您的Email</td>
+				<td><input type="text" name="email" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2}</td>
+			</tr>			
+			<tr>
+				<td><input type="submit" value="確定"></td>
+				<td><input id="onekey" type="submit" value="一鍵輸入"></td>
+			</tr>
+			</tbody>
+		</table>
+		</form>
+    </div>
     
     <!--開始footer-->
-		<jsp:include page="../fragment/footer.jsp"/>
+		<jsp:include page="../../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
@@ -54,5 +64,12 @@
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
-
+<script>
+	$(function(){
+		$('#onekey').click(function() {
+			event.preventDefault();
+			$('input[name = "email"]').val("eeit93no1@gmail.com");		
+		});
+	})
+</script>
 </html>

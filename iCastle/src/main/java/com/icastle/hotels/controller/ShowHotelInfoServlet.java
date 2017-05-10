@@ -13,10 +13,10 @@ import javax.servlet.http.HttpSession;
 import com.icastle.hotelInfo.modle.*;
 import com.icastle.hotels.model.*;
 
-@WebServlet("/hotelcenter/UpdateHotelInfo.do")
-public class UpdateHotelInfoServlet extends HttpServlet {
+@WebServlet("/hotelcenter/ShowHotelInfo.do")
+public class ShowHotelInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public UpdateHotelInfoServlet() {
+    public ShowHotelInfoServlet() {
         super();
     }
 
@@ -27,10 +27,10 @@ public class UpdateHotelInfoServlet extends HttpServlet {
 		//查詢飯店info
 		InfoService infoServ = new InfoService();
 		InfoVO hotelInfo = infoServ.findByHotelId(hotelvo.getHotelId());
-		request.setAttribute("hotelInfo", "hotelInfo");
+		session.setAttribute("HotelInfo", hotelInfo); 
 		
 		//轉交到view
-		RequestDispatcher rd = request.getRequestDispatcher("hotel/updateHotelInfo.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("updateHotelInfo.jsp");
 		rd.forward(request, response);
 		return;
 	}
