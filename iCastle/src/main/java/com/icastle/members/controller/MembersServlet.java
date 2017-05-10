@@ -19,7 +19,7 @@ import com.icastle.members.model.MembersVO;
 
 import globalservice.CheckId;
 
-@WebServlet("/Member.do")
+@WebServlet("/general/Member.do")
 public class MembersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  

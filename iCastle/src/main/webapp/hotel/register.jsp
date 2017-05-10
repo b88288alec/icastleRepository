@@ -19,9 +19,31 @@
     <title>愛客宿-iCastle</title>
     <style>
 .container {
-    width: 1300px;
-    margin-top: 150px;
-}   
+	width: 1300px;
+	margin-top: 150px;
+}
+
+/* Rules for sizing the icon. */
+.material-icons.md-170 {
+	font-size: 170px;
+}
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark {
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.material-icons.md-dark.md-inactive {
+	color: rgba(0, 0, 0, 0.26);
+}
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light {
+	color: rgba(255, 255, 255, 1);
+}
+
+.material-icons.md-light.md-inactive {
+	color: rgba(255, 255, 255, 0.3);
+}
     </style>
 </head>
 <body>
@@ -31,15 +53,24 @@
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container">
-    <div class="row">
-    	<div class="col-md-6">
-		    <a href="${pageContext.servletContext.contextPath}/hotel/registerhotel.jsp">業者註冊</a>
-		</div>   
-		<div class="col-md-6">
-		    <a href="${pageContext.servletContext.contextPath}/members/registered.jsp">會員註冊</a>
-		</div>   
+		<div class="row col-md-offset-2">
+			<div class="col-md-6">
+				<!--按钮触发模态框  data-toggle="modal" data-target="#myModal"-->
+				<a href="${pageContext.servletContext.contextPath}/hotel/registerhotel.jsp">
+					<button type="button" class="btn btn-primary btn-round btn-info" style="width: 250px; height: 250px" data-toggle="modal" data-target="#hotel">
+						<i class="material-icons md-170">account_balance</i>
+						<p style="font-size: 20px">業 者 註 冊</p>
+					</button></a>
+			</div>
+			<div class="col-md-6">
+				<a href="${pageContext.servletContext.contextPath}/general/members/registered.jsp">
+					<button type="button" class="btn btn-primary btn-round btn-info"" style="width: 250px; height: 250px" data-toggle="modal" data-target="#member">
+					<i class="material-icons md-170">person</i>
+					<p style="font-size: 20px">會 員 註 冊</p>
+				</button></a>
+			</div>
+		</div>
 	</div>
-	
 	
 	
 						<!-- 	原本code 尚未美化     -->
