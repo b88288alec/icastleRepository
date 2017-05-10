@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
+<<<<<<< HEAD
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -260,15 +261,14 @@
 <script
 	src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 
-
 <script>
 	$(function(){
 		$('#onekey').click(function() {
 			event.preventDefault();
 			$('input[name = "email"]').val("andy@yahoo.com.tw");
 			$('input[name = "pw"]').val("123");
+			$('input[name = "pwcheck"]').val("123");
 			$('input[name = "name"]').val("劉德華");
-			$('input[name = "pw"]').val("123");
 			$(':radio:eq(0)').prop("checked", "true");
 // 			$(':radio:eq(1)').prop("checked", "true");  <-----女生 上面是男生
 			$('input[name = "bdate"]').val("1990/11/11");

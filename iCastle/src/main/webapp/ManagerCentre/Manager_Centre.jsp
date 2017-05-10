@@ -63,19 +63,19 @@ margin:10px;
 							<p>Dashboard</p>
 					</a></li>
 					<li><a href="user.html"> <i class="ti-user"></i>
-							<p>User Profile</p>
+							<p>修改飯店資料</p>
 					</a></li>
 					<li><a href="table.html"> <i class="ti-view-list-alt"></i>
-							<p>Table List</p>
+							<p>編輯圖片</p>
 					</a></li>
 					<li><a href="typography.html"> <i class="ti-text"></i>
-							<p>Typography</p>
+							<p>新增房型</p>
 					</a></li>
 					<li><a href="icons.html"> <i class="ti-pencil-alt2"></i>
-							<p>Icons</p>
+							<p>新增每日房價</p>
 					</a></li>
 					<li><a href="maps.html"> <i class="ti-map"></i>
-							<p>Maps</p>
+							<p>訂單查詢</p>
 					</a></li>
 					<li><a href="notifications.html"> <i class="ti-bell"></i>
 							<p>Notifications</p>

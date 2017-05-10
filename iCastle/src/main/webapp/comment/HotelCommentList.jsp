@@ -22,7 +22,16 @@
      .myStyle{
         border:3px solid black;
      }
+     
+     textarea{
+    	width:550px;
+    	height:400px;
+    	max-width:550px;
+    	max-height:400px;  	
+    }
     </style>
+    
+
 </head>
 <body>
     <!--開始導覽列-->
@@ -36,12 +45,14 @@
             <th>會員姓名</th>
             <th>會員信箱</th>
             <th>會員評論時間</th>
-            <th class="text-right">Actions</th>
+            <th class="text-right">查看評論</th>
+            <th class="text-right">回覆評論</th>
         </tr>
     </thead>
     <tbody>
  
          <c:forEach var="comment" items="${commentData}">
+         <c:if test="${comment.response == null }">
          <tr>       
             <td name="firstId" class="text-center">
             ${comment.id}
@@ -68,14 +79,15 @@
             </td>
             <td class="td-actions text-right">
             
-            	<button type="button"  class="btn btn-info btn-simple btn-xs" name="ButtonResponse" Value="${comment.commentId}">
+            	<button type="button"  class="btn btn-info btn-simple btn-xs" name="ButtonResponse" value="${comment.commentId}">
                     <i class="fa fa-user"></i>
                 </button>	
             
             
             </td>
             </tr>
-       </c:forEach> 
+            </c:if>
+            </c:forEach> 
     </tbody>
 </table>
 </div>
@@ -99,6 +111,35 @@
         <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-info btn-simple">Save</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel2">
+        
+        
+        </h4>
+      </div>
+      <form id="myform" action="Response" method="post">
+      <div class="modal-body" id="myDiv2">
+        <input type="hidden" name="hiddeninput">
+      	<textarea name="textareavalue">
+      	
+      	
+      	
+      	
+      	</textarea>             
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-info btn-simple" value="回覆" id="mysubmit">
+        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>  
+      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -227,22 +268,44 @@
 				 
 			 }
 			 
+
+			 
 			 $('button[name="ButtonResponse"]').click(function(){
-				 $("#myDiv").empty();
-				 $("#myModalLabel").empty();		 
-				 $("#myModal").modal('show');
+// 				 $("#myDiv").empty();
+// 				 $("#myModalLabel").empty();	
+// 				 $("#myModalLabel2").empty();
+                 //清掉
+				 $("textarea[name='textareavalue']").val(null);
+				 $("#myModal2").modal('show');
+
+				 
+			 
+				 var commentId= $(this).attr("value");
+				 //設定隱藏input標籤的value值
+				 $("input[name='hiddeninput']").val(commentId);				 
+				
+				
+				 //抓到名字
+				 var z = $("#memberName"+commentId).text();
+				 
+			     //在<h4>裡產生文字
+				 $("#myModalLabel2").text("回應 "+z+" 的評論");
+				 		 
+			 });
+			 
+			 
+			 $('#mysubmit').click(function(){
+				 
+
 				 
 				 
-				 var form = $("<form></form>").attr("action","Response").attr("method","GET");
-				 var textarea = $("<textarea></textarea>").css("width","550").css("height","550").css("max-width","550").css("max-height","550");
 				 
-				 
-				 $("#myDiv").append(form).append(textarea);
 				
 				 
-// 				 $.getJSON('',)
-				
+
 				 
+
+                 
 				 
 			 });
 			 

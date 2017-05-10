@@ -117,6 +117,7 @@ public class InfoJNDIDAO implements InfoDAO_interface{
 			pstmt.setBoolean(20, infoVO.isSwimPool() );
 			pstmt.setInt(21, infoVO.getHotelId());
 			
+			pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());

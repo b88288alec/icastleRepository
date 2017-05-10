@@ -291,7 +291,7 @@
 					<tbody>
 						<!-- 一筆又一筆的房間 -->
 						<c:forEach var="room" items="${rooms}">
-							<form action="../rooms/Rooms.do" name="form">
+							<form action="${pageContext.servletContext.contextPath}/members/rooms/Rooms.do" name="form">
 								<!-- 					<form action="Test2Servlet" name="form"> -->
 								<tr>
 									<!--房型照片-->

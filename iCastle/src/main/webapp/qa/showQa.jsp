@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ page import="java.util.*"%>
+<%@ page import="com.icastle.qa.model.*"%>
+    
+<%
+    QaJDBCDAO dao = new QaJDBCDAO();
+    List<QaVO> list = dao.getAll();
+    pageContext.setAttribute("list",list);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,30 +27,53 @@
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
-	<style>
-		.container {
-		    width: 1300px;
-		    margin-top: 100px;
-		}
-	</style>
 </head>
 <body>
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
-	<!--結束導覽列-->
-	
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container"
-		style="background-color: white; padding-bottom: 100px;">
-			<h1>飯店會員中心</h1>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelInfo.do">修改飯店資訊</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelPw.jsp">修改密碼</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelPhoto.do">編輯圖片</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/setRoomType.jsp">新增房型</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do">新增房價</a>
-			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ToHotelOrders">訂單</a>
-	</div>
+ 	<!--結束導覽列--
+ 	
+    <!--開始本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     
+   
+ 
+    <br>
+    <br>
+    <h1>飯店Q&A</h1>
+    <table border='2' bordercolor='#CCCCFF' width='900' height='800'>
+	<tr>
+	<td>問題</td>
+	<td>答案</td>
+		
+	</tr>
+	
+	<c:forEach var="QaVO" items="${list}">
+		<tr align='center' valign='middle'}>
+			<td>${QaVO.question}</td>
+			<td>${QaVO.answer}</td>
+			
+		</tr>
+	</c:forEach>
+</table>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--結束本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
