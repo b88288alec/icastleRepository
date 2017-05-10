@@ -25,7 +25,7 @@ public class ImageMaskServlet extends HttpServlet {
         response.setHeader("Cache-Control", "no-cache");  
         response.setDateHeader("Expires", 0);  
   
-        int width = 60, height = 20;  
+        int width = 60, height = 30;  
         //创建图象   
         BufferedImage image = new BufferedImage(width, height,BufferedImage.TYPE_INT_RGB);  
         //获取图形上下文   
@@ -37,7 +37,7 @@ public class ImageMaskServlet extends HttpServlet {
         //验证码大小  
         graphics.fillRect(0, 0, width, height);  
         //设置字体  
-        graphics.setFont(new Font("Times New Roman", Font.PLAIN, 18));  
+        graphics.setFont(new Font("Times New Roman", Font.PLAIN, 25));  
         //graphics.setColor(getRandColor(160, 200));  
         //随机产生155条干扰线，使图象中的认证码不易被其它程序探测到  
         for (int i = 0; i < 155; i++) {  
