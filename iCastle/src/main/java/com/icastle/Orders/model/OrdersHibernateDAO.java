@@ -2,6 +2,7 @@ package com.icastle.Orders.model;
 
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.taglibs.standard.lang.jstl.parser.ParseException;
@@ -455,16 +456,26 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 		return result;
 	}
 
+//	圖表用方法
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId(Integer hotelId) {
+	public List<OrdersChartVO> chart_select_by_hotelId(Integer hotelId) {
 
-		List<OrdersVO> result = null;
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(CHART_SELECT_BY_HOTELID);
 			query.setParameter("hotelId", hotelId);
-			result = query.list();
+			middle = query.list();			
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
@@ -474,9 +485,10 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_year(Integer hotelId, Integer year) {
+	public List chart_select_by_hotelId_year(Integer hotelId, Integer year) {
 
-		List<OrdersVO> result = null;
+		List result = new LinkedList<OrdersChartVO>();
+		List middle = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
@@ -484,7 +496,15 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 			query.setParameter("hotelId", hotelId);
 			query.setParameter("yearin", year);
 			query.setParameter("yearout", year);
-			result = query.list();
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
@@ -494,9 +514,10 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_year_month(Integer hotelId, Integer year, Integer month) {
+	public List<OrdersChartVO> chart_select_by_hotelId_year_month(Integer hotelId, Integer year, Integer month) {
 
-		List<OrdersVO> result = null;
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
@@ -522,7 +543,15 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 			query.setParameter("Imonthout", monthout);
 			query.setParameter("Omonthin", monthinout);
 			query.setParameter("Omonthout", monthout);
-			result = query.list();
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
@@ -532,16 +561,25 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId(Integer hotelId, Integer roomTypeId) {
+	public List<OrdersChartVO> chart_select_by_hotelId_roomtpyeId(Integer hotelId, Integer roomTypeId) {
 
-		List<OrdersVO> result = null;
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_ROOMTYPEID);
 			query.setParameter("hotelId", hotelId);
 			query.setParameter("roomTypeId", roomTypeId);
-			result = query.list();
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
@@ -551,9 +589,10 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId(Integer hotelId, Integer roomTypeId, Integer year) {
+	public List<OrdersChartVO> chart_select_by_hotelId_year_roomtpyeId(Integer hotelId, Integer roomTypeId, Integer year) {
 
-		List<OrdersVO> result = null;
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
@@ -562,7 +601,15 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 			query.setParameter("yearin", year);
 			query.setParameter("yearout", year);
 			query.setParameter("roomTypeId", roomTypeId);
-			result = query.list();
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
@@ -572,50 +619,271 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId(Integer hotelId, Integer roomTypeId,
+	public List<OrdersChartVO> chart_select_by_hotelId_year_month_roomtpyeId(Integer hotelId, Integer roomTypeId,
 			Integer year, Integer month) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			
+			String in = year + "/" + month + "/" + "1";
+			String inout = year + "/" + month + "/" + "2";
+			String out =  year + "/" + (month+1) + "/" + "0";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			java.sql.Date monthin = null;
+			java.sql.Date monthinout = null;
+			java.sql.Date monthout = null;
+			try {
+				monthin = new java.sql.Date(sdf.parse(in).getTime());
+				monthinout = new java.sql.Date(sdf.parse(inout).getTime());
+				monthout = new java.sql.Date(sdf.parse(out).getTime());
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+			
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_MONTH_ROOMTYPEID);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("Imonthin", monthin);
+			query.setParameter("Imonthout", monthout);
+			query.setParameter("Omonthin", monthinout);
+			query.setParameter("Omonthout", monthout);
+			query.setParameter("roomTypeId", roomTypeId);
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_orderstate(Integer hotelId, Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OrdersChartVO> chart_select_by_hotelId_orderstate(Integer hotelId, Boolean state) {
+
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("orderstate", state);
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_year_orderstate(Integer hotelId, Boolean state, Integer year) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OrdersChartVO> chart_select_by_hotelId_year_orderstate(Integer hotelId, Boolean state, Integer year) {
+
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_YEAR_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("orderstate", state);
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state, Integer year,
+	public List<OrdersChartVO> chart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state, Integer year,
 			Integer month) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			
+			String in = year + "/" + month + "/" + "1";
+			String inout = year + "/" + month + "/" + "2";
+			String out =  year + "/" + (month+1) + "/" + "0";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			java.sql.Date monthin = null;
+			java.sql.Date monthinout = null;
+			java.sql.Date monthout = null;
+			try {
+				monthin = new java.sql.Date(sdf.parse(in).getTime());
+				monthinout = new java.sql.Date(sdf.parse(inout).getTime());
+				monthout = new java.sql.Date(sdf.parse(out).getTime());
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+			
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_MONTH_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("Imonthin", monthin);
+			query.setParameter("Imonthout", monthout);
+			query.setParameter("Omonthin", monthinout);
+			query.setParameter("Omonthout", monthout);
+			query.setParameter("orderstate", state);
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+	public List<OrdersChartVO> chart_select_by_hotelId_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
 			Boolean state) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_ROOMTYPEID_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("roomTypeId", roomTypeId);
+			query.setParameter("orderstate", state);
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_year_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+	public List<OrdersChartVO> chart_select_by_hotelId_year_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
 			Boolean state, Integer year) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_YEAR_ROOMTYPEID_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("yearin", year);
+			query.setParameter("yearout", year);
+			query.setParameter("roomTypeId", roomTypeId);
+			query.setParameter("orderstate", state);
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 	@Override
-	public List<OrdersVO> chart_select_by_hotelId_year_month_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
+	public List<OrdersChartVO> chart_select_by_hotelId_year_month_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId,
 			Boolean state, Integer year, Integer month) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersChartVO> result = new LinkedList<OrdersChartVO>();
+		List middle = null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			
+			String in = year + "/" + month + "/" + "1";
+			String inout = year + "/" + month + "/" + "2";
+			String out =  year + "/" + (month+1) + "/" + "0";
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			java.sql.Date monthin = null;
+			java.sql.Date monthinout = null;
+			java.sql.Date monthout = null;
+			try {
+				monthin = new java.sql.Date(sdf.parse(in).getTime());
+				monthinout = new java.sql.Date(sdf.parse(inout).getTime());
+				monthout = new java.sql.Date(sdf.parse(out).getTime());
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
+			
+			Query query = session.createQuery(CHART_SELECT_BY_HOTELID_MONTH_ROOMTYPEID_ORDERSTATE);
+			query.setParameter("hotelId", hotelId);
+			query.setParameter("Imonthin", monthin);
+			query.setParameter("Imonthout", monthout);
+			query.setParameter("Omonthin", monthinout);
+			query.setParameter("Omonthout", monthout);
+			query.setParameter("roomTypeId", roomTypeId);
+			query.setParameter("orderstate", state);
+			middle = query.list();
+			for(int i = 0; i < middle.size(); i++){
+				OrdersChartVO oc = new OrdersChartVO();
+				Object[] ob = (Object[])middle.get(i);
+				oc.setValue(String.valueOf((Integer)ob[0]));
+				oc.setCount((long)ob[1]);
+				
+				result.add(oc);
+			}
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		return result;
 	}
 
 }

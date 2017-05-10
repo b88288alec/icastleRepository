@@ -43,6 +43,7 @@
     		<td><select id='idSelectYear'></select><span>年</span></td>
     		<td><select id='idSelectMonth'></select><span>月</span></td>
     		<td><select id='idSelectDate'></select><span>日</span></td>
+    		<td><input id='idButton' type="button" value="圖表" /></td>
     	</tr>
     </table>
     <table class="table">
@@ -79,11 +80,11 @@
 	$(function(){
 		
 // 		事件觸發
-		$('#idSelectYear').on("change", orders);
-		$('#idSelectRoomTypeName').on("change", orders);
-		$('#idSelectOrderState').on("change", orders);
-		$('#idSelectMonth').on("change", orders);
-		$('#idSelectDate').on("change", orders);
+// 		$('#idSelectYear').on("change", orders);
+// 		$('#idSelectRoomTypeName').on("change", orders);
+// 		$('#idSelectOrderState').on("change", orders);
+// 		$('#idSelectMonth').on("change", orders);
+// 		$('#idSelectDate').on("change", orders);
 		
 // 		觸發的方法
 

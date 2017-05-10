@@ -19,11 +19,44 @@ $(function(){
 	$('#idSelectYear').on("change", function(){
 //		$('#idSelectMonth:selected').prop("selected",false);
 		$('#idSelectMonth>option[value="null"]').prop("selected",true);
-		monthchange();
+		if(control == 1){
+			monthchange();
+		}
 	})
 	
+//	button控制器
+	var control = 1;
+
 //	改變月份改變日期
-	$('#idSelectMonth').on("change", monthchange);
+	if(control == 1){
+		$('#idSelectMonth').on("change", monthchange);
+	}
+	
+//	點按鈕切換圖表列表模式
+	$('#idButton').on("click", allchange);
+	
+	function allchange(){
+		if(control == 1){
+			$('#idSelectDate').empty().append("<option value='null'>--</option>");
+			$('#idSelectMonth>option[value="null"]').prop("selected",true);
+			$('#idSelectYear').empty().append("<option value='null'>--</option>");
+			for(i = 2017; i >= 2010; i--){
+				$('#idSelectYear').append("<option value='" + i + "'>" + i +"</option>");
+			}
+			$('#idButton').val('列表');
+			
+			control = 0;
+		}else{
+			$('#idSelectMonth>option[value="null"]').prop("selected",true);
+			$('#idSelectYear').empty();
+			for(i = 2017; i >= 2010; i--){
+				$('#idSelectYear').append("<option value='" + i + "'>" + i +"</option>");
+			}
+			$('#idButton').val('圖表');
+			
+			control = 1;
+		}
+	}
 	
 	function monthchange(){
 		$('#idSelectDate').empty().append("<option value='null'>--</option>");

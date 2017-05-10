@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
 
+import com.icastle.Orders.model.OrdersChartVO;
 import com.icastle.Orders.model.OrdersDAO_interface;
 import com.icastle.Orders.model.OrdersHibernateDAO;
 import com.icastle.Orders.model.OrdersJDBC;
@@ -20,17 +21,17 @@ public class OrdersTest {
 
 		// 查詢-orderId
 //		OrdersDAO_interface dao = new OrdersJDBC();
-		OrdersVO result = dao.select_by_orderId(64);
-		System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
-				+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
-				+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
-				+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
-				+ result.getAfternoonTea() + " " + result.getPrice() + " " + result.getReservationer() + " "
-				+ result.getBdate() + " " + result.getTel() + " " + result.getEmail() + " " + result.getAddr() + " "
-				+ result.getPersonId() + " " + result.getCountry() + " " + result.getPassport() + " "
-				+ result.getBedAdding() + " " + result.getPricePerPerson() + " " + result.getCustomerRemark() + " "
-				+ result.getHotelRemark() + " " + result.getMemo() + " " + result.getOrderState());
-		System.out.println("---------------------------------------------");
+//		OrdersVO result = dao.select_by_orderId(64);
+//		System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//				+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
+//				+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
+//				+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
+//				+ result.getAfternoonTea() + " " + result.getPrice() + " " + result.getReservationer() + " "
+//				+ result.getBdate() + " " + result.getTel() + " " + result.getEmail() + " " + result.getAddr() + " "
+//				+ result.getPersonId() + " " + result.getCountry() + " " + result.getPassport() + " "
+//				+ result.getBedAdding() + " " + result.getPricePerPerson() + " " + result.getCustomerRemark() + " "
+//				+ result.getHotelRemark() + " " + result.getMemo() + " " + result.getOrderState());
+//		System.out.println("---------------------------------------------");
 
 		// 查詢-memberId
 //		OrdersDAO_interface dao = new OrdersJDBC();
@@ -329,10 +330,18 @@ public class OrdersTest {
 //			e.printStackTrace();
 //		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+//		
+//		System.out.println(result.getOrderedDate());
+//		System.out.println(sdf.format(result.getOrderedDate()));
 		
-		System.out.println(result.getOrderedDate());
-		System.out.println(sdf.format(result.getOrderedDate()));
+//		OrdersHibernateDAO oh = new OrdersHibernateDAO();
+//		List<OrdersChartVO> test = oh.chart_select_by_hotelId(1);
+//		
+//		for(OrdersChartVO rs : test){
+//			System.out.println(rs.getCount());
+//			System.out.println(rs.getValue());
+//		}
 		
 	}
 
