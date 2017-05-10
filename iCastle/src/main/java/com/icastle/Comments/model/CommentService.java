@@ -17,7 +17,7 @@ public class CommentService {
 		return comtDAO.hotelComtSearch(hotelId);	
 	}
 	
-	public CommentVO response(Integer commentId,java.sql.Date responseTime,String response){
+	public String response(Integer commentId,java.sql.Date responseTime,String response){
 		return comtDAO.response(commentId,responseTime,response);	
 	}
 	

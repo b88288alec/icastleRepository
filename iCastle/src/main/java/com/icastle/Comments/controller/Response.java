@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +34,20 @@ public class Response extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		int commentId = Integer.parseInt(request.getParameter("ButtonResponse"));
-		String hostResponse = request.getParameter("Response");
+
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int commentId = Integer.parseInt(request.getParameter("hiddeninput"));
+		String hostResponse = request.getParameter("textareavalue");
+		
+//		System.out.println(commentId);
+//		System.out.println(hostResponse);
 		
 	    Map<String,String> ErrorMessage = new HashMap<String,String>();
 		
@@ -49,14 +62,9 @@ public class Response extends HttpServlet {
 		comtService.response(commentId,d,hostResponse);
 		
 		request.setAttribute("error",ErrorMessage);
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+        RequestDispatcher rd = request.getRequestDispatcher("HostComment");
+        rd.forward(request, response);
+		
 
 	}
 

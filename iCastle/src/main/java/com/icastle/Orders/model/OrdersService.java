@@ -159,4 +159,57 @@ public class OrdersService {
 		return dao.select_all();
 	}
 	
+//	業者搜尋訂單圖表
+	public List<OrdersChartVO> search_Chart(Integer hotelId, Integer roomTypeId, Integer year, Integer month, Boolean state){
+		
+		if(year == null){
+			if(roomTypeId == null){
+				if(state == null){
+					if(month == null){
+						return dao.chart_select_by_hotelId(hotelId);
+					}
+				}else{
+					return dao.chart_select_by_hotelId_orderstate(hotelId, state);
+				}
+			}else{
+				if(state == null){
+					return dao.chart_select_by_hotelId_roomtpyeId(hotelId, roomTypeId);
+				}else{
+					return dao.chart_select_by_hotelId_roomtpyeId_orderstate(hotelId, roomTypeId, state);
+				}
+			}
+		}else{
+			if(roomTypeId == null){
+				if(state == null){
+					if(month == null){
+						return dao.chart_select_by_hotelId_year(hotelId, year);
+					}else{
+						return dao.chart_select_by_hotelId_year_month(hotelId, year, month);
+					}
+				}else{
+					if(month == null){
+						return dao.chart_select_by_hotelId_year_orderstate(hotelId, state, year);
+					}else{
+						return dao.chart_select_by_hotelId_year_month_orderstate(hotelId, state, year, month);
+					}
+				}
+			}else{
+				if(state == null){
+					if(month == null){
+						return dao.chart_select_by_hotelId_year_roomtpyeId(hotelId, roomTypeId, year);
+					}else{
+						return dao.chart_select_by_hotelId_year_month_roomtpyeId(hotelId, roomTypeId, year, month);
+					}
+				}else{
+					if(month == null){
+						return dao.chart_select_by_hotelId_year_roomtpyeId_orderstate(hotelId, roomTypeId, state, year);
+					}else{
+						return dao.chart_select_by_hotelId_year_month_roomtpyeId_orderstate(hotelId, roomTypeId, state, year, month);
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
 }
