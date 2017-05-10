@@ -112,9 +112,9 @@ public class CommentServlet extends HttpServlet {
 		
 				
 		comt = new CommentVO();
-		comt.setOrderId(2);
-		comt.setHotelId(1);
-		comt.setEmail("def@gmail.com");
+		comt.setOrderId(5);
+		comt.setHotelId(2);
+		comt.setEmail("mno@gmail.com");
 		comt.setServiceScore(serviceInt);
 		comt.setSceneScore(sceneInt);
 		comt.setQualityScore(qualityInt);
