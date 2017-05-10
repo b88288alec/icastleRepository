@@ -19,7 +19,7 @@ import com.icastle.members.model.MembersVO;
 
 import globalservice.CheckId;
 
-@WebServlet("/general/Member.do")
+@WebServlet("/general/members/Member.do")
 public class MembersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
@@ -42,6 +42,7 @@ public class MembersServlet extends HttpServlet {
 //      接收使用者輸入資料		       
 		String email = req.getParameter("email");
 		String pw = req.getParameter("pw");
+		String pwcheck = req.getParameter("pwcheck");
 		String name = req.getParameter("name");
 		String gender = req.getParameter("gender");
 		String bdate = req.getParameter("bdate");
@@ -73,6 +74,11 @@ public class MembersServlet extends HttpServlet {
 		if (pw=="" || pw==null)
 			errorMsgs.put("pwErr", "請輸入密碼");
 		
+		if (pwcheck=="" || pwcheck==null)
+			errorMsgs.put("pwcheckErr", "請輸入密碼");
+		
+		if (!pw.equals(pwcheck))
+			errorMsgs.put("pwcheckErr", "確認密碼錯誤");
 		
 		
 		if (name != "") {
@@ -116,7 +122,7 @@ public class MembersServlet extends HttpServlet {
 			errorMsgs.put("personIdErr", "身分證字號輸入錯誤");
 		}
 			
-		
+	
 		
 		
 		MembersService ms = new MembersService();
@@ -146,7 +152,7 @@ public class MembersServlet extends HttpServlet {
 		
 		session.setAttribute("MemberLoginOK", membersvo);
 
-		RequestDispatcher rd = req.getRequestDispatcher("../members/registeredOk.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("../../members/registeredOk.jsp");
 		rd.forward(req, res);
 		return;
 		

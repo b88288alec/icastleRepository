@@ -53,11 +53,12 @@
     <!--結束導覽列-->
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
 <div class="member" style="margin-top:56px">
-<form METHOD="post" ACTION="../Member.do">
+<form METHOD="post" ACTION="Member.do">
 <h1>會員註冊</h1>
 <table>
 <tr><td><span>帳號:</span></td><td><input type="text" name="email" value="${param.email}">${errorMsgs.emailErr}<br></td></tr>
 <tr><td><span>密碼:</span></td><td><input type="text" name="pw" value="${param.pw}">${errorMsgs.pwErr}<br></td></tr>
+<tr><td><span>確認密碼:</span></td><td><input type="text" name="pwcheck" value="${param.pwcheck}">${errorMsgs.pwcheckErr}<br></td></tr>
 <tr><td><span>姓名:</span></td><td><input type="text" name="name" value="${param.name}">${errorMsgs.nameErr}<br></td></tr>
 
 <tr><td><span>請選擇性別:</span></td><td><input type="radio" name="gender" value="男" 
@@ -109,8 +110,8 @@ checked
 			event.preventDefault();
 			$('input[name = "email"]').val("andy@yahoo.com.tw");
 			$('input[name = "pw"]').val("123");
+			$('input[name = "pwcheck"]').val("123");
 			$('input[name = "name"]').val("劉德華");
-			$('input[name = "pw"]').val("123");
 			$(':radio:eq(0)').prop("checked", "true");
 // 			$(':radio:eq(1)').prop("checked", "true");  <-----女生 上面是男生
 			$('input[name = "bdate"]').val("1990/11/11");
