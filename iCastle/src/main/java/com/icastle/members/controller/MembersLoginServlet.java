@@ -58,7 +58,7 @@ public class MembersLoginServlet extends HttpServlet {
 		
 		//如果有任何欄位沒有輸入
 		if (!errMap.isEmpty()){
-			RequestDispatcher rd = req.getRequestDispatcher("../general/login.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("../login.jsp");
 			rd.forward(req, res);
 			return;
 		}
@@ -70,7 +70,7 @@ public class MembersLoginServlet extends HttpServlet {
 		if (membersvo == null){
 			//帳號或密碼錯誤
 			errMap.put("accountErr", "帳號或密碼錯誤");
-			RequestDispatcher rd = req.getRequestDispatcher("../general/login.jsp");
+			RequestDispatcher rd = req.getRequestDispatcher("../login.jsp");
 			rd.forward(req, res);
 			return;
 		}else{

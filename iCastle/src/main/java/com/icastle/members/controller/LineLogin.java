@@ -16,7 +16,7 @@ import com.icastle.members.model.MembersVO;
 /**
  * Servlet implementation class LineLogin
  */
-@WebServlet("/members/LineLogin.do")
+@WebServlet("/general/members/LineLogin.do")
 public class LineLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +35,7 @@ public class LineLogin extends HttpServlet {
 		MembersVO membersvo = new MembersVO();
 		
 		session.setAttribute("MemberLoginOK",membersvo);
-     	res.sendRedirect("../index.jsp");
+     	res.sendRedirect("../../index.jsp");
 		
 		
 	}
