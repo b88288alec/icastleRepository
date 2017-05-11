@@ -185,8 +185,10 @@ window.onload = function(){
 
 
 
-<%-- 訂單編號:<input type = "text" name="orderId"><span style="color:red">${error.orderIdKey}</span><br> --%>
-<%-- 飯店編號:<input type = "text" name = "hotelId"><span style="color:red">${error.hotelIdKey}</span><br> --%>
+
+<input type="hidden" value="${param.hotelId}" name="hotelId">
+<input type="hidden" value="${param.orderId}" name="orderId">
+<input type="hidden" value="${param.email}" name="email">
 服務評分:
 <img src="../img/unstar.png" width="50" id="star1">
 <img src="../img/unstar.png" width="50" id="star2">

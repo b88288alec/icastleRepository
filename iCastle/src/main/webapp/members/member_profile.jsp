@@ -148,7 +148,7 @@
 								<tr>
 									<td>${myData.hotelName}</td>
 									<td>${myData.roomCount}</td>
-									<td>${myData.price}</td>
+									<td>${myData.price}</td>					
 									<td><c:choose>
 											<%--orderState布林值判斷改顯示字串--%>
 											<c:when test="${myData.bedAdding == true}">有</c:when>
@@ -176,10 +176,14 @@
 
 									<!--評論 -->
 									<td class="td-actions text-right">
+									<form>
+										<a href="../comment/Comment.jsp?hotelId=${myData.hotelId}&orderId=${myData.orderId}&email=${myData.email}">
 										<button type="button" rel="tooltip" title="評論"
-											class="btn btn-success btn-simple btn-xs">
+											class="btn btn-success btn-simple btn-xs">																				
 											<i class="fa fa-edit"></i>
 										</button>
+										</a>
+									</form>
 									</td>
 								</tr>
 							</tbody>

@@ -60,13 +60,16 @@ public class CommentServlet extends HttpServlet {
 		
 		String orderId = request.getParameter("orderId");
 		String hotelId = request.getParameter("hotelId");
+		String email = request.getParameter("email");
 		String service = request.getParameter("service");
 		String quality = request.getParameter("quality");
 		String scene = request.getParameter("scene");
 		String comment = request.getParameter("comment");
+		System.out.println(email);
 		
 		Collection<Part> p=request.getParts();
-
+        int orderIdInt = Integer.parseInt(orderId);
+        int hotelIdInt = Integer.parseInt(hotelId);
 		int serviceInt = Integer.parseInt(service);
 		int qualityInt = Integer.parseInt(quality);
 		int sceneInt = Integer.parseInt(scene);
@@ -103,9 +106,9 @@ public class CommentServlet extends HttpServlet {
 		
 				
 		comt = new CommentVO();
-		comt.setOrderId(5);
-		comt.setHotelId(2);
-		comt.setEmail("mno@gmail.com");
+		comt.setOrderId(orderIdInt);
+		comt.setHotelId(hotelIdInt);
+		comt.setEmail(email);
 		comt.setServiceScore(serviceInt);
 		comt.setSceneScore(sceneInt);
 		comt.setQualityScore(qualityInt);
@@ -145,10 +148,10 @@ public class CommentServlet extends HttpServlet {
 			
 			
 		
-//		request.setAttribute("comment", comt);
-//		RequestDispatcher rd = request.getRequestDispatcher("HotelComment.jsp");
-//		rd.forward(request,response);
-//		return;
+		request.setAttribute("comment", comt);
+		RequestDispatcher rd = request.getRequestDispatcher("../members/MemberInformationCentre.do");
+		rd.forward(request,response);
+		return;
 	}
 
 }
