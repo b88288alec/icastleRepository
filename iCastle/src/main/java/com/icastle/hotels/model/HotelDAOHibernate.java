@@ -191,21 +191,57 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 	}
 
 	@Override
-	public List<HotelVO> getUncheckedHotel() {
+	public List<HotelandInfoVO> getHotelAndInfo() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		List<HotelVO> hotels = null;
+		List<HotelandInfoVO> hotelAndInfos = new ArrayList<HotelandInfoVO>();
 		
 		try {
 			session.beginTransaction();
 			
-			Query query = session.createSQLQuery("{call getUncheckedHotel()}");
-			query.list();
+			Query query = session.createSQLQuery("{call getHotelandInfo()}");
+			query.setTimeout(90);
+			List<Object[]> objects = query.list();
+			for (Object[] object : objects){
+				HotelandInfoVO hotelandInfo = new HotelandInfoVO();
+				hotelandInfo.setHotelId((Integer)object[0]);
+				hotelandInfo.setHotelName((String)object[1]);
+				hotelandInfo.setEmail((String)object[2]);
+				hotelandInfo.setPw((String)object[3]);
+				hotelandInfo.setAddr((String)object[4]);
+				hotelandInfo.setZone((String)object[5]);
+				hotelandInfo.setPoint((Double)object[6]);
+				hotelandInfo.setHot((Integer)object[7]);
+				hotelandInfo.setStar((Integer)object[8]);
+				hotelandInfo.setHotelState((Integer)object[9]);
+				hotelandInfo.setRegisterId((String)object[10]);
+				hotelandInfo.setRegisterName((String)object[11]);
+				hotelandInfo.setTel((String)object[12]);
+				hotelandInfo.setTransport((String)object[13]);
+				hotelandInfo.setWebsite((String)object[14]);
+				hotelandInfo.setHotelProfile((String)object[15]);
+				hotelandInfo.setCheckin((String)object[16]);
+				hotelandInfo.setCheckout((String)object[17]);
+				hotelandInfo.setGuestPolicies((String)object[18]);
+				hotelandInfo.setCancelPolicies((String)object[19]);
+				hotelandInfo.setRoomWifi((Boolean)object[20]);
+				hotelandInfo.setHallWifi((Boolean)object[21]);
+				hotelandInfo.setInternet((Boolean)object[22]);
+				hotelandInfo.setMineralWater((Boolean)object[23]);
+				hotelandInfo.setToiletUtensils((Boolean)object[24]);
+				hotelandInfo.setHairDryer((Boolean)object[25]);
+				hotelandInfo.setTv((Boolean)object[26]);
+				hotelandInfo.setGameRoom((Boolean)object[27]);
+				hotelandInfo.setGym((Boolean)object[28]);
+				hotelandInfo.setSpa((Boolean)object[29]);
+				hotelandInfo.setSwimPool((Boolean)object[30]);
+				hotelAndInfos.add(hotelandInfo);
+			}
 			
 			session.getTransaction().commit();
 		} catch (RuntimeException ex) {
 			session.getTransaction().rollback();
 			throw ex;
 		}
-		return null;
+		return hotelAndInfos;
 	}
 }

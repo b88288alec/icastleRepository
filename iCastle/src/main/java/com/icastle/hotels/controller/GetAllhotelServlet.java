@@ -13,24 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.icastle.hotelInfo.modle.InfoService;
 import com.icastle.hotels.model.*;
 
-@WebServlet("/manager/Checkhotel.do")
-public class CheckhotelServlet extends HttpServlet {
+@WebServlet("/manager/GetAllhotel.do")
+public class GetAllhotelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public CheckhotelServlet() {
+    public GetAllhotelServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//取得未通過審核的飯店
+		//取得所有飯店及飯店資料
 		HotelService hotelServ = new HotelService();
-		List<HotelVO> hotels = hotelServ.getUncheckedHotel();
-		request.setAttribute("hotels", hotels);
-		
-//		//取得未通過審核的飯店的資訊
-//		InfoService infoServ = new InfoService();
-//		infoServ.findByHotelId(hotelId);
+		List<HotelandInfoVO> hotelandInfos = hotelServ.getHotelAndInfo();
+		request.setAttribute("hotelandInfos", hotelandInfos);
 		
 		//轉交到審核飯店的畫面
 		RequestDispatcher rd = request.getRequestDispatcher("checkhotels.jsp");

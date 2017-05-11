@@ -94,8 +94,8 @@ public class HotelService {
 	}
 	
 	//查詢未通過審核的飯店以及飯店資料
-	public List<HotelVO> getUncheckedHotel(){
-		return dao.getUncheckedHotel();
+	public List<HotelandInfoVO> getHotelAndInfo(){
+		return dao.getHotelAndInfo();
 	}
 	
 	//查詢全部的飯店
