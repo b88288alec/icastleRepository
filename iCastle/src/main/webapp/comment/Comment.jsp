@@ -179,6 +179,9 @@ window.onload = function(){
  
 </head>
 <body>
+<input type="hidden" value="${param.hotelId}" name="hotelId">
+<input type="hidden" value="${param.orderId}" name="orderId">
+<input type="hidden" value="${param.email}" name="email">
 <H2>飯店評論</H2>
 <!-- enctype="multipart/form-data" -->
 <form action = "CommentServlet" method = "POST" enctype="multipart/form-data">
