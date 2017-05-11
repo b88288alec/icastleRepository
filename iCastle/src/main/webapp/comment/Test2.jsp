@@ -23,14 +23,9 @@
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
-		${comment.orderId}
-		${comment.email}
-		${comment.comment}
-		${comment.avgScore}
-		${comment.serviceScore}
-		${comment.qualityScore}
-		${comment.sceneScore}
-		${comment.commentTime}
+    <forEach var="comment" items="${commentList}">
+    <h5></h5>
+    </forEach>
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     

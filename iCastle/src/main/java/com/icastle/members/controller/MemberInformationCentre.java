@@ -76,8 +76,8 @@ public class MemberInformationCentre extends HttpServlet {
 		String pw = request.getParameter("pw");
 		String country = request.getParameter("country");
 		String addr = request.getParameter("addr");
-		String memberid = request.getParameter("member_Id");
-		int memberIdInt = Integer.parseInt(memberid);
+//		String memberid = request.getParameter("member_Id");
+//		int memberIdInt = Integer.parseInt(memberid);
 		System.out.println(gender);
 		Date dt = null;
 		
@@ -99,7 +99,7 @@ public class MemberInformationCentre extends HttpServlet {
 			
 			MembersService membersService = new MembersService();
 //			更新資料庫資料
-			membersService.update(email, pw, name, gender, dt, addr, tel, personId, country, passport, memberIdInt);
+			membersService.update(email, pw, name, gender, dt, addr, tel, personId, country, passport, vo.getMemberId());
 			
 //			把更新後的資料從資料庫取出
 			MembersVO result = membersService.findByPrimaryKey(email);
