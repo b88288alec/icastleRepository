@@ -19,6 +19,8 @@ public interface HotelDAO_Interface {
 	public List<ListVO> indexQuery(String zone, Date startDate, Date endDate, Integer peopleNum);//首頁查詢
 	//進階查詢
 	public List<ListVO> advancedQuery(String zone, Date startDate, Date endDate, Integer peopleNum, String order, Integer lowprice, Integer highprice, double point, Integer star);//進階查詢
+	//查詢未通過審核的飯店
+	public List<HotelandInfoVO> getHotelAndInfo();
 	//取得全部飯店
 	public List<HotelVO> getAll();
 }

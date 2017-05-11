@@ -43,8 +43,6 @@
 	<!--content here!!!!!!!!!!!!~~~~~~~~~~-->
 	<div class="container" style="margin-top: 100px;">
 		<div role="tabpanel">
-
-
 			<div class="tab-content">
 				<form
 					action="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do"

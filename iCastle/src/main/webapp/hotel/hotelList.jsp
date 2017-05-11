@@ -68,17 +68,17 @@
                         <form action="#" method="get">
                             <div>
                                 <p>每晚最低價格</p>
-                                <div id="price-min-bar" class="slider slider-info noUi-connect"></div>
-                                <div style="text-align:right;"><span id="price-min"></span></div>
+                                <div id="priceSlider" class="sliders slider-info noUi-connect"></div>
+                                <div class="row">
+	                                <div class="col-md-4">
+	                                	<span id="lowprice">0</span>
+	                                </div>
+	                                <div class="col-md-4 col-md-offset-4">
+	                                	<span id="highprice">20000</span>
+	                                </div>
+                                </div>
                                 <input type="hidden" id="price-input-min" name="maxPrice" />
                             </div>
-                            <div>
-                                <p>每晚最高價格</p>
-                                <div id="price-max-bar" class="slider slider-info noUi-connect"></div>
-                                <div style="text-align:right;"><span id="price-max"></span></div>
-                                <input type="hidden" id="price-input-max" name="priceMin" />
-                            </div>
-
                             <div>
                                 <p>飯店星等</p>
                                 <div id="hotelLevle">
@@ -115,17 +115,19 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="sort">
-                    <ul>
-                        排序方式:
-                        <li><a href="#">熱門度</a></li>
-                        <li><a href="#">最低價格</a></li>
-                        <li><a href="#">星級排行</a></li>
-                    </ul>
-                </div>
+<!--                 <div class="sort"> -->
+<!--                     <ul> -->
+<!--                         排序方式: -->
+<!--                         <li><a href="#">熱門度</a></li> -->
+<!--                         <li><a href="#">最低價格</a></li> -->
+<!--                         <li><a href="#">星級排行</a></li> -->
+<!--                     </ul> -->
+<!--                 </div> -->
+                
+                
                 <!--飯店列表-->
                 <c:forEach var="hotel" items="${hotels}">
-                <a href="hotel/ShowHotel.do?hotelId=${hotel.hotelId}&type=${param.type}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
+                <a class="ahotel" href="hotel/ShowHotel.do?hotelId=${hotel.hotelId}&type=${param.type}&start=${param.start}&end=${param.end}&peopleNum=${param.peopleNum}">
                     <div class="card hotelcard">
                         <img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${hotel.hotelId}&type=hotelid" style="width:300px;" />
                         <div class="cardContext">
@@ -143,6 +145,7 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
+							<div class="hotelstar" style="display:none">${hotel.star}</div>
 							<!-- 飯店星等結束 -->
                             <br />
                             <c:if test="${hotel.breakfast == true}"> 
@@ -178,7 +181,7 @@
                         </div>
                         <div class="cardContext" style="left:85%">
                             <div class="gradeRound">
-                                <p>${hotel.point}</p>
+                                <p class="point">${hotel.point}</p>
                             </div>
                             <p class="hot">熱門度:${hotel.hot}</p>
                             <div class="price">
@@ -272,8 +275,9 @@
                     for (var i = 1; i <= hotelLevle; i++) {
                         $('#hs' + i).attr("src", "img/star.png");
                         hotelLevleStatus.text(hotelLevle + '星級');
-                        console.log("hotelLevle="+ hotelLevle);
                     }
+                        console.log("hotelLevle="+ hotelLevle);
+                        change();
                 });
             //結束飯店星等
 
@@ -303,90 +307,93 @@
                         }
                     }
                 }).click(function () {
+                //飯店評分被更改了
                     hotelPoint = $(this).attr("id").charAt(2);
                     $('#hotelPoint input').val(hotelPoint);
                     for (var i = 1; i <= hotelPoint; i++) {
                         $('#hp' + i).attr("src", "img/star.png");
                         hotelPointStatus.text(hotelPoint + '顆星');
-                        console.log("hotelPoint="+ hotelPoint);
                     }
+                        console.log("hotelPoint="+ hotelPoint);
+                        change();
                 });
             //結束飯店評分
 
+            
             //進階搜尋伸縮
             $('#adHide').click(function () {
                 $(this).css("transform", "rotate(90deg)")
                 $('#adSearchBlock').toggle(1000);
             })
             //結束進階搜尋伸縮
+            
+            
+			/*價錢篩選開始*/
+            //價錢篩選
+            var lowprice = 0;
+            var highprice = 20000;
+            var priceSlider = document.getElementById('priceSlider');
 
-            //價錢塞選
-            var priceMinBar = document.getElementById('price-min-bar');
-            var priceMaxBar = document.getElementById('price-max-bar');
-
-            noUiSlider.create(priceMinBar, {
-                start: 2500,
+            //初始化價錢bar
+            noUiSlider.create(priceSlider, {
+            	start: [ 4000, 8000 ],
+            	range: {
+            		'min': [  0 ],
+            		'max': [ 20000 ]
+            	},
                 step: 500,
                 connect: true,
-                range: {
-                    min: 2000,
-                    max: 6000
-                },
+
                 format: wNumb({
                     decimals: 0,
-                    thousand: ',',
-                    postfix: '元',
+//                     thousand: ',',
+//                     postfix: '元',
                 })
             });
-
-            noUiSlider.create(priceMaxBar, {
-                start: 6000,
-                step: 500,
-                connect: true,
-                range: {
-                    min: 3000,
-                    max: 8000
-                },
-                format: wNumb({
-                    decimals: 0,
-                    thousand: ',',
-                    postfix: '元',
-                })
+            
+            //調整價錢時
+            priceSlider.noUiSlider.on('update', function(){
+            	console.log("更新");
+            	var price = priceSlider.noUiSlider.get();
+            	//將價錢秀出來
+            	$('#lowprice').text(price[0]+"元");
+            	$('#highprice').text(price[1]+"元");
             });
+            
+            
+            //調整價錢後
+            priceSlider.noUiSlider.on('end', function(){
+            	console.log("更新");
+            	var price = priceSlider.noUiSlider.get();
+            	lowprice = price[0];
+            	highprice = price[1];
 
-            var minValue = document.getElementById("price-min");
-            var maxValue = document.getElementById("price-max");
-            var inputMin = document.getElementById("price-input-min");
-            var inputMax = document.getElementById("price-input-max");
-
-            priceMinBar.noUiSlider.on('update', function (values, handle) {
-                var minPriceStr = priceMinBar.noUiSlider.get().substr(0, 5).split(',');
-                var maxPriceStr = priceMaxBar.noUiSlider.get().substr(0, 5).split(',');
-                var minPrice = minPriceStr[0] + minPriceStr[1];
-                var maxPrice = maxPriceStr[0] + maxPriceStr[1];
-
-                if (minPrice >= maxPrice) {
-                    priceMaxBar.noUiSlider.set(parseInt(minPrice) + 2000);
-                }
-                var price = values[handle];
-                minValue.innerHTML = price;
-                inputMin.setAttribute("value", price);
+            	change();  
             });
+            /*結束價錢篩選*/
+            
+            
+            //進行篩選
+            function change(){
+            	//先將飯店全部顯示出來
+            	$(".ahotel").css("display", "initial");
+            	//將價錢超出範圍的隱藏起來
+            	$('.price>span:nth-child(3)').filter(function(index){
+					return ( parseInt($(this).text()) < lowprice 
+					          || parseInt($(this).text()) > highprice );            		
+            	}).parents(".ahotel").css("display", "none");
+            	//將評分超出範圍的隱藏起來
+            	$('.point').filter(function(index){
+            		console.log( parseInt($(this).text()) );
+					return parseInt($(this).text()) < hotelPoint           		
+          		}).parents(".ahotel").css("display", "none");
+            	//將飯店星級超出範圍的隱藏起來
+            	$('.hotelstar').filter(function(index){
+            		console.log("星級:" + parseInt($(this).text()) );
+					return parseInt($(this).text()) < hotelLevle           		
+          		}).parents(".ahotel").css("display", "none");
+            }
 
-            priceMaxBar.noUiSlider.on('update', function (values, handle) {
-                var minPriceStr = priceMinBar.noUiSlider.get().substr(0, 5).split(',');
-                var maxPriceStr = priceMaxBar.noUiSlider.get().substr(0, 5).split(',');
-                var minPrice = minPriceStr[0] + minPriceStr[1];
-                var maxPrice = maxPriceStr[0] + maxPriceStr[1];
-
-                if (minPrice >= maxPrice) {
-                    priceMinBar.noUiSlider.set(parseInt(maxPrice) - 2000);
-                }
-                var price = values[handle];
-                maxValue.innerHTML = price;
-                inputMax.setAttribute("value", price);
-            });
-            //結束價錢塞選
             
             //一鍵輸入
             $('#onekey').click(function() {
@@ -397,6 +404,7 @@
     			$('input[name = "peopleNum"]').val(4);
     		});
             //一鍵輸入結束
+            
         });
 
        
