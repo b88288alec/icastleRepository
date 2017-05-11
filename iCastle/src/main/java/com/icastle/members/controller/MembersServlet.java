@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.icastle.hotels.model.HotelService;
 import com.icastle.members.model.MembersService;
 import com.icastle.members.model.MembersVO;
 
@@ -71,6 +72,10 @@ public class MembersServlet extends HttpServlet {
 		if (email=="" || email==null)
 			errorMsgs.put("emailErr", "請輸入E-mail");
 		
+		MembersService ms = new MembersService();
+		if (ms.findByEmail(email) != null)
+			errorMsgs.put("emailErr", "此email已經註冊");
+		
 		if (pw=="" || pw==null)
 			errorMsgs.put("pwErr", "請輸入密碼");
 		
@@ -122,10 +127,12 @@ public class MembersServlet extends HttpServlet {
 			errorMsgs.put("personIdErr", "身分證字號輸入錯誤");
 		}
 			
-	
+
 		
+//		MembersService ms = new MembersService();
+//		if (ms.findByEmail(email) != null)
+//			errorMsgs.put("emailErr", "此email已經註冊");
 		
-		MembersService ms = new MembersService();
 		
 //		ms.insert(email, pw, name, gender, bDate, addr, tel, personId, country, passport);
 		

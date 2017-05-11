@@ -68,9 +68,7 @@
 							<p>姓名:</p>
 							<input class="form-control" placeholder="輸入姓名" name="nameId"
 								value="${MemberLoginOK.name}" />
-							<p>性別:</p>
-							<div class="radio">
-							
+								
 							<p>性別:</p>
 							<div class="radio">
 							<c:choose>
