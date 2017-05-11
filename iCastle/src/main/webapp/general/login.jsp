@@ -92,8 +92,7 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">×</button>
-						<p class="modal-title" id="myModalLabel" style="font-size: 20px">業
-							者 登 入</p>
+						<p class="modal-title" id="myModalLabel" style="font-size: 20px">業  者 登 入</p>
 					</div>
 					<div class="row modal-body">
 						<form
@@ -101,8 +100,7 @@
 							method="POST">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-2" style="font-size: 16px;">Email
-										:</label>
+									<label class="control-label col-md-2" style="font-size: 16px;">Email:</label>
 									<div class="col-md-8">
 										<input name="email" type="text" class="form-control"
 											placeholder="輸入Email" value="${param.email}" /><span
@@ -112,8 +110,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-2" style="font-size: 16px;">密
-										碼 :</label>
+									<label class="control-label col-md-2" style="font-size: 16px;">密  碼 :</label>
 									<div class="col-md-8">
 										<input name="pw" type="password" class="form-control"
 											placeholder="輸入密碼" /><span style="color: red">${errMap.pwErr}</span>
@@ -150,17 +147,13 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
 							aria-hidden="true">×</button>
-						<p class="modal-title" id="myModalLabel" style="font-size: 20px">會
-							員 登 入</p>
+						<p class="modal-title" id="myModalLabel" style="font-size: 20px">會 員 登 入</p>
 					</div>
 					<div class="row modal-body">
-						<form
-							action="${pageContext.servletContext.contextPath}/general/members/Login.do"
-							method="POST">
+						<form action="${pageContext.servletContext.contextPath}/general/members/Login.do" method="POST">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-2" style="font-size: 16px;">Email
-										:</label>
+									<label class="control-label col-md-2" style="font-size: 16px;">Email:</label>
 									<div class="col-md-8">
 										<input name="email" type="text" class="form-control"
 											placeholder="輸入Email" value="${param.email}" /><span
@@ -170,8 +163,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label class="control-label col-md-2" style="font-size: 16px;">密
-										碼 :</label>
+									<label class="control-label col-md-2" style="font-size: 16px;">密碼 :</label>
 									<div class="col-md-8">
 										<input name="pw" type="password" class="form-control"
 											placeholder="輸入密碼" /><span style="color: red">${errMap.pwErr}</span>
@@ -199,8 +191,7 @@
 							<button type="button" class="btn btn-primary btn-simple" style="margin-left:13%;" onclick="Auth();">點選這裡連結到Line Login</button>
 							<button type="button" id="member-onekey"
 								class="btn btn-primary btn-simple">一鍵輸入</button>
-							<button type="button" class="btn btn-default "
-								data-dismiss="modal">取消</button>
+							<button type="button" class="btn btn-default " data-dismiss="modal">取消</button>
 							<input type="submit" class="btn btn-primary" value="登入"
 								style="float: right">
 						</form>
@@ -254,7 +245,7 @@
 		});
 		
 		
-
+		/*在JSTL裡包裝JS，過濾器判斷*/
 		<c:if test="${loginPath  == '/hotel/Login.do'}">
 		$('#hotel').modal('show');
 		</c:if>
