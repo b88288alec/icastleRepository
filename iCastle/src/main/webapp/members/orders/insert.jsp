@@ -12,20 +12,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!--<link href="../css/bootstrap.min.css" rel="stylesheet" />-->
-    <link href="../css/material-kit.css" rel="stylesheet" />
-    <link href="../css/template.css" rel="stylesheet" />
+    <!--<link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
+    <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="../fragment/nav.jsp"/>
+		<jsp:include page="../../fragment/nav.jsp"/>
 	<!--結束導覽列-->
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container" style="margin-top:56px">
-    <form action="../orders/OrdersServlet.do" method="post">
+    <form action="${pageContext.servletContext.contextPath}/members/orders/OrdersServlet.do" method="post">
 		<table>
 			<tr><td><span>飯店名稱:</span></td><td><span>${orderMap.hotelName }</span><br></td></tr>
 			<tr><td><span>房型名稱:</span></td><td><span>${orderMap.roomTypeName }</span><br></td></tr>
@@ -79,17 +79,17 @@
 	</form>
 	</div>
     <!--開始footer-->
-		<jsp:include page="../fragment/footer.jsp"/>
+		<jsp:include page="../../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/material.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
 
-<script src="../js/nouislider.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/nouislider.min.js"></script>
 
-<script src="../js/bootstrap-datepicker.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
-<script src="../js/material-kit.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 
 </html>

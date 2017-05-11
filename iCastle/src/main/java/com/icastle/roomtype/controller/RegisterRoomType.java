@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.icastle.hotels.model.HotelVO;
 import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
@@ -22,8 +23,10 @@ public class RegisterRoomType extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
 		
-		String hotelId[] = request.getParameterValues("hotelId");
+		HotelVO hotelvo = (HotelVO)session.getAttribute("HotelLoginOK");
+		Integer hotelId = hotelvo.getHotelId();
 		String roomTypeName[] = request.getParameterValues("roomTypeName");
 		String peopleNum[] = request.getParameterValues("peopleNum");
 		String roomNumber[] = request.getParameterValues("roomNumber");
@@ -57,7 +60,7 @@ public class RegisterRoomType extends HttpServlet {
 		
 		for(int i = 0; i <= times; i++){
 			RoomTypeVO vo = new RoomTypeVO();
-			vo.setHotelId(Integer.parseInt(hotelId[i]));
+			vo.setHotelId(hotelId);
 			vo.setRoomTypeName(roomTypeName[i]);
 			vo.setPeopleNum(Integer.parseInt(peopleNum[i]));
 			vo.setRoomNumber(Integer.parseInt(roomNumber[i]));
@@ -99,7 +102,7 @@ public class RegisterRoomType extends HttpServlet {
 				vo.setDinner(false);
 			
 			vo.setBedAddable(Boolean.valueOf(bedAddablesList.get(i)));
-			vo.setPricePerPerson(Integer.parseInt(pricePerPerson[i]));
+			vo.setPricePerPerson(Integer.parseInt((pricePerPerson[i].equals(""))? "0" : pricePerPerson[i]));
 			vo.setRemark(remark[i]);
 			list.add(vo);
 		}
@@ -107,11 +110,9 @@ public class RegisterRoomType extends HttpServlet {
 		RoomTypeService rots = new RoomTypeService();
 		Integer count = rots.addOrUpdateRoomType(list);
 		
-		HttpSession session = request.getSession();
-		
 		session.setAttribute("RoomTypeVOList", list);
-//		RequestDispatcher rd = request.getRequestDispatcher("../rooms/FakeDataGen.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("../rooms/SetRoomPrice");
+		RequestDispatcher rd = request.getRequestDispatcher("../FakeDataGen.jsp");
+//		RequestDispatcher rd = request.getRequestDispatcher("../rooms/SetRoomPrice");
 		rd.forward(request, response);
 	}
 

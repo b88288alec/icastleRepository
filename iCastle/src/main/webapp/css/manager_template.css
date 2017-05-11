@@ -8,6 +8,7 @@
     z-index: 3;
     padding:0px;
     color:gray;
+    border-bottom: 1px solid rgba(102, 97, 91, 0.3);
 }
 
     .navbar-default .navbar-nav > li > a {

@@ -64,7 +64,7 @@ public class FakeDatas extends HttpServlet {
 			RoomsService rs = new RoomsService();
 			
 //			房型編號取出不同房型
-			for(int j = 2; j <= 5; j++){
+			for(int j = 1; j <= 4; j++){
 				
 //				一年12個月，照淡旺季準備輸入訂單
 				for(int i = 0; i < 12; i++){
@@ -110,7 +110,7 @@ public class FakeDatas extends HttpServlet {
 					}
 					
 //					房間偏好
-					double popular = (j == 3 || j == 4)? 2.0 : 0.5;
+					double popular = (j == 2 || j == 3)? 2.0 : 0.5;
 					
 					List<RoomsVO> rooms = rs.getRoomsByMonth(1, j, start, end);
 //					System.out.println(rooms.size());

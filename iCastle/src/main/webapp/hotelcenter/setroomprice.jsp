@@ -359,7 +359,7 @@
 		$('#submit').click(function(){
 			$.ajax({
 				type : 'POST',
-				url : '${pageContext.servletContext.contextPath}/json/rooms/SetRoomPrice',
+				url : '${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do',
 				data : {
 					jsonData : JSON.stringify(json),
 					roomTypeId : $('select').val(),

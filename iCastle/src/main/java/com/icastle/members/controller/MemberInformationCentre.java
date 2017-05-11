@@ -26,30 +26,36 @@ public class MemberInformationCentre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MembersService membersService = new MembersService();
-		MembersVO membersvo =membersService.findByPrimaryKey("Sally@gmail.com");
-		HttpSession session = request.getSession();
-		session.setAttribute("membersKey", membersvo);
-		
-/*動態寫法 先暫時註解
- 		HttpSession session = request.getSession();
+	
+		HttpSession session = request.getSession();	//使用HttpSession介面，取得物件
+		/*取出MembersLoginServlet的登入後物件*/
 		
 		//拿到LoginOK物件
-		MembersVO membervo = (MembersVO)session.getAttribute("LoginOK");
-		
-		if (membervo == null)
-			System.out.println("尚未登入");
-		
-		MembersService membersService = new MembersService();
-//		MembersVO membersvo =membersService.findByPrimaryKey(membersvo.getEmail());
-		session.setAttribute("membersKey", membervo);
- */		
+		MembersVO membersvo = (MembersVO)session.getAttribute("MemberLoginOK");
+		System.out.println("MemberInformationCentre.do");
+ 	
 	//----------------顯示訂單歷史資料------------------
 		OrdersService ordersService = new OrdersService();
-		List<OrdersVO> list = ordersService.search_By_MemberId(1);//membersvo.getmemberId()
+		List<OrdersVO> list = ordersService.search_By_MemberId(membersvo.getMemberId());
 		request.setAttribute("ordersKey", list);
-	
-		RequestDispatcher rd = request.getRequestDispatcher("members/MemberCentre.jsp");
+		
+	/*下方是測試在java程式上有無撈出資料*/
+//		for (OrdersVO result : list) {
+//			System.out.println(result.getHotelId() + " " + result.getMemberId() + " " + result.getRoomId() + " "
+//					+ result.getHotelId() + " " + result.getRoomTypeId() + " " + result.getRoomTypeName() + " "
+//					+ result.getCheckinDay() + " " + result.getCheckoutDay() + " " + result.getRoomCount() + " "
+//					+ result.getPeopleNum() + " " + result.getBreakfast() + " " + result.getDinner() + " "
+//					+ result.getAfternoonTea() + " " + result.getPrice() + " " + result.getReservationer() + " "
+//					+ result.getBdate() + " " + result.getTel() + " " + result.getEmail() + " " + result.getAddr() + " "
+//					+ result.getPersonId() + " " + result.getCountry() + " " + result.getPassport() + " "
+//					+ result.getBedAdding() + " " + result.getPricePerPerson() + " " + result.getCustomerRemark() + " "
+//					+ result.getHotelRemark() + " " + result.getMemo() + " " + result.getOrderState());
+//			System.out.println("---------------------------------------------");
+//		}
+		
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/members/member_profile.jsp");//!!!!
 		rd.forward(request, response);
 		
 	}
@@ -58,7 +64,7 @@ public class MemberInformationCentre extends HttpServlet {
 		request.setCharacterEncoding("UTF-8"); //編碼
 		
 		HttpSession session = request.getSession();
-		MembersVO vo = (MembersVO)session.getAttribute("membersKey");
+		MembersVO vo = (MembersVO)session.getAttribute("MemberLoginOK");
 		
 		String name = request.getParameter("nameId");
 		String gender = request.getParameter("gender");

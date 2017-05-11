@@ -40,7 +40,7 @@ public class HostComment extends HttpServlet {
 		// TODO Auto-generated method stub
 	
 			CommentService comtService = new CommentService(); 			
-			List<CommentVO> comtList= comtService.hotelComtSearch(1);
+			List<CommentVO> comtList= comtService.hotelComtSearch(2);
 			MembersService memService = new MembersService();
 			MembersVO memberVO = new MembersVO();	
 			List<NameEmailTime> NETList = new ArrayList<NameEmailTime>();
@@ -55,11 +55,15 @@ public class HostComment extends HttpServlet {
 				NET.setEmail(c.getEmail());
 				NET.setCommentId(c.getCommentId());
 				NET.setCommentTime(c.getCommentTime());
+				NET.setResponse(c.getResponse());
+				System.out.println(c.getResponse());
 				NET.setId(i);
 				NETList.add(NET);
+				
 				i++;
 
 			}
+			
 
 				
 			request.setAttribute("commentData",NETList);			

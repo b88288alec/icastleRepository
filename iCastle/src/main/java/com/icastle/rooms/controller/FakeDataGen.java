@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.icastle.hotels.model.HotelVO;
 import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
+import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
 @WebServlet("/rooms/FakeDataGen.do")
@@ -27,7 +29,9 @@ public class FakeDataGen extends HttpServlet {
 		String year = request.getParameter("year");
 		String month = request.getParameter("month");
 		HttpSession session = request.getSession();
-		List<RoomTypeVO> list = (List<RoomTypeVO>) session.getAttribute("RoomTypeVOList");
+		HotelVO hotelvo = (HotelVO)session.getAttribute("HotelLoginOK");
+		RoomTypeService rots = new RoomTypeService();
+		List<RoomTypeVO> list = rots.findRoomTypeByHotelId(hotelvo.getHotelId());
 		List<RoomsVO> listForInsert = new ArrayList<RoomsVO>();
 		List<StringBuffer> listStringBuffer = new ArrayList<StringBuffer>();
 
@@ -37,7 +41,7 @@ public class FakeDataGen extends HttpServlet {
 		for (RoomTypeVO typeVO : list) {
 
 			for (int i = 1; i <= cal.getActualMaximum(cal.DATE); i++) {
-				String insert = "insert into Rooms(roomTypeId, hotelId, roomDate, RoomTypeName, peopleNum, bookedNum, roomNumber, price, breakfast, dinner, afternoonTea, bedAddable, pricePerPerson, remark) values(";
+				String insert = "insert into Rooms(roomTypeId, hotelId, roomDate, RoomTypeName, peopleNum, roomNumber, bookedNum, price, breakfast, dinner, afternoonTea, bedAddable, pricePerPerson, remark) values(";
 				StringBuffer sbuf = new StringBuffer(insert);
 				RoomsVO vo = new RoomsVO();
 				vo.setRoomTypeId(typeVO.getRoomTypeId());
