@@ -1,6 +1,7 @@
 package com.icastle.hotels.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,9 +22,16 @@ public class LogoutServlet extends HttpServlet {
 		
 		String contextPath = request.getContextPath();
 		HttpSession session = request.getSession();
-		session.removeAttribute("HotelLoginOK");
-		session.removeAttribute("MemberLoginOK");
-		session.removeAttribute("ManagerLoginOK");
+		
+//		取出所有的Attr名，清除session
+		Enumeration e = session.getAttributeNames();
+		while(e.hasMoreElements()){
+			String name = (String)e.nextElement();
+			session.removeAttribute(name);
+		}
+//		session.removeAttribute("HotelLoginOK");
+//		session.removeAttribute("MemberLoginOK");
+//		session.removeAttribute("ManagerLoginOK");
 		
 		//轉交到index.jsp
 		response.sendRedirect(contextPath + "/index.jsp");

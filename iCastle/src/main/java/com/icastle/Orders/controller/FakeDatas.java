@@ -93,16 +93,16 @@ public class FakeDatas extends HttpServlet {
 						case 0:
 						case 1:
 						case 11:
-							vacation = 3.0;
+							vacation = 2.0;
 							break;
 						case 6:
 						case 7:
-							vacation = 4.0;
+							vacation = 2.0;
 							break;
 						case 3:
 						case 4:
 						case 10:
-							vacation = 2.0;
+							vacation = 1.0;
 							break;
 						default:
 							vacation = 1.0;
@@ -139,20 +139,111 @@ public class FakeDatas extends HttpServlet {
 //					rdsb2.append("null" + ",");
 					
 //					訂單備註
-					StringBuffer endsb = new StringBuffer();
-//					endsb.append("'" + roomData.getPricePerPerson() + "'" + ",");
-					endsb.append("null" + ",");
-					endsb.append("N'" + roomData.getRemark() + "'" + ",");
-					endsb.append("null" + ",");
-					endsb.append("'" + "true" + "'" + ",");
-					endsb.append("null");
+//					成立訂單
+//					StringBuffer endsb = new StringBuffer();
+//					endsb.append("null" + ",");
+//					endsb.append("N'" + roomData.getRemark() + "'" + ",");
+//					endsb.append("null" + ",");
+//					endsb.append("'" + "true" + "'" + ",");
+//					endsb.append("null");
 //					endsb.append("'" +  + "'" + ",");
-					
-					
+
 					for(RoomsVO room: rooms){
 						
 //						取得入住退房日
 						java.sql.Date checkin = room.getRoomDate();
+						java.sql.Timestamp ordered = new java.sql.Timestamp(checkin.getTime() - (long)(Math.random()*31536000000.0));
+						
+//						取消訂單
+						StringBuffer endsb = new StringBuffer();
+						endsb.append("null" + ",");
+						endsb.append("N'" + roomData.getRemark() + "'" + ",");
+						endsb.append("null" + ",");
+						endsb.append("'" + "false" + "'" + ",");
+						
+//						計算取消日期
+						java.sql.Timestamp cancel = new java.sql.Timestamp(checkin.getTime() - (long)(Math.random()*31536000000.0));
+						endsb.append("'" + cancel + "'");
+//						endsb.append("'" +  + "'" + ",");
+						
+//						2016連假機率增加
+						double lv = 1.0;
+						switch(String.valueOf(checkin)){
+							case "2016-01-01":
+							case "2016-01-02":
+							case "2016-01-03":
+							case "2016-02-06":
+							case "2016-02-07":
+							case "2016-02-08":
+							case "2016-02-09":
+							case "2016-02-10":
+							case "2016-02-11":
+							case "2016-02-27":
+							case "2016-02-28":
+							case "2016-02-29":
+							case "2016-04-02":
+							case "2016-04-03":
+							case "2016-04-04":
+							case "2016-04-05":
+							case "2016-06-09":
+							case "2016-06-10":
+							case "2016-06-11":
+							case "2016-06-12":
+							case "2016-09-15":
+							case "2016-09-16":
+							case "2016-09-17":
+							case "2016-09-18":
+							case "2016-10-08":
+							case "2016-10-09":
+							case "2016-10-10":
+							case "2016-12-31":
+								lv = 6.0;
+								break;
+							case "2016-09-10":
+								lv = 0.25;
+								break;
+						}
+						
+//						2017連假機率增加
+//						double lv = 1.0;
+//						switch(String.valueOf(checkin)){
+//							case "2016-12-31":
+//							case "2017-01-01":
+//							case "2017-01-02":
+//							case "2017-01-27":
+//							case "2017-01-28":
+//							case "2017-01-29":
+//							case "2017-01-30":
+//							case "2017-01-31":
+//							case "2017-02-01":
+//							case "2017-02-25":
+//							case "2017-02-26":
+//							case "2017-02-27":
+//							case "2017-02-28":
+//							case "2017-04-01":
+//							case "2017-04-02":
+//							case "2017-04-03":
+//							case "2017-04-04":
+//							case "2017-04-29":
+//							case "2017-04-30":
+//							case "2017-05-01":
+//							case "2017-05-27":
+//							case "2017-05-28":
+//							case "2017-05-29":
+//							case "2017-05-30":
+//							case "2017-10-04":
+//							case "2017-10-07":
+//							case "2017-10-08":
+//							case "2017-10-09":
+//							case "2017-10-10":
+//								lv = 6.0;
+//								break;
+//							case "2017-02-18":
+//							case "2017-06-03":
+//							case "2017-06-30":
+//								lv = 0.25;
+//								break;
+//						}
 
 //						週末機率增加
 						double week = 0.5;
@@ -163,7 +254,7 @@ public class FakeDatas extends HttpServlet {
 						
 //						印出指令
 						for(int k = 1; k <= room.getRoomNumber(); k++){
-							if(Math.random()*10.0*week*popular*vacation >= 5.0){
+							if(Math.random()*10.0*week*popular*vacation*lv >= 25.0){
 								
 //								計算退房日
 								long stayNight = 0;
@@ -193,7 +284,7 @@ public class FakeDatas extends HttpServlet {
 //								串接指令
 								StringBuffer result = new StringBuffer();
 								result.append("insert into orders values(");
-								result.append("'" + new java.sql.Timestamp(checkin.getTime() - (long)(Math.random()*31536000000.0)) + "'" + ",");
+								result.append("'" + ordered + "'" + ",");
 								int memberId = 0;
 								do{
 									memberId = (int)(Math.random()*16.0);
