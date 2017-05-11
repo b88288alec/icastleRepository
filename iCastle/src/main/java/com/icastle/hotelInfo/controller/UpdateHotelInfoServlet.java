@@ -52,7 +52,6 @@ public class UpdateHotelInfoServlet extends HttpServlet {
 		String spaStr = request.getParameter("spa");
 		String swimPoolStr = request.getParameter("swimPool");
 		
-		System.out.println(tel);
 		//不能空白
 		if (tel == null || tel.trim().length() == 0) 
 			errMap.put("telErr", "請輸入連絡電話");
@@ -81,19 +80,20 @@ public class UpdateHotelInfoServlet extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		}
-			
+		System.out.println("roomWifiStr="+roomWifiStr);
+		System.out.println("hallWifiStr="+hallWifiStr);
 		//取得設施
-		Boolean roomWifi = (roomWifiStr=="") ? false : true;
-		Boolean hallWifi = (hallWifiStr=="") ? false : true;
-		Boolean internet = (internetStr=="") ? false : true;
-		Boolean mineralWater = (mineralWaterStr=="") ? false : true;
-		Boolean toiletUtensils = (toiletUtensilsStr=="") ? false : true;
-		Boolean hairDryer = (hairDryerStr=="") ? false : true;
-		Boolean tv = (tvStr=="") ? false : true;
-		Boolean gameRoom = (gameRoomStr=="") ? false : true;
-		Boolean gym = (gymStr=="") ? false : true;
-		Boolean spa = (spaStr=="") ? false : true;
-		Boolean swimPool = (swimPoolStr=="") ? false : true;
+		Boolean roomWifi = (roomWifiStr=="" || roomWifiStr==null) ? false : true;
+		Boolean hallWifi = (hallWifiStr=="" || hallWifiStr==null) ? false : true;
+		Boolean internet = (internetStr=="" || internetStr==null) ? false : true;
+		Boolean mineralWater = (mineralWaterStr=="" || mineralWaterStr==null) ? false : true;
+		Boolean toiletUtensils = (toiletUtensilsStr=="" || toiletUtensilsStr==null) ? false : true;
+		Boolean hairDryer = (hairDryerStr=="" || hairDryerStr==null) ? false : true;
+		Boolean tv = (tvStr=="" || tvStr==null) ? false : true;
+		Boolean gameRoom = (gameRoomStr=="" || gameRoomStr==null) ? false : true;
+		Boolean gym = (gymStr=="" || gymStr==null) ? false : true;
+		Boolean spa = (spaStr=="" || spaStr==null) ? false : true;
+		Boolean swimPool = (swimPoolStr=="" || swimPoolStr==null) ? false : true;
 
 		//呼叫HotelInfoDAO
 		InfoService infoServ = new InfoService();

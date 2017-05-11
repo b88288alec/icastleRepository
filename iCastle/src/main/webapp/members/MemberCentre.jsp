@@ -33,8 +33,8 @@
     <div class="container"
 		style="background-color: white; padding-bottom: 100px;">
 			<h1>會員中心</h1>
-			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">修改會員資料及歷史訂單查詢</a>
-<%-- 			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">歷史訂單</a> --%>
+			<a href="${pageContext.servletContext.contextPath}/members/member_profile.jsp">修改會員資料</a>
+			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">歷史訂單查詢</a>
 			<a href="${pageContext.servletContext.contextPath}/members/-----------">評論</a>
 	</div>
     
