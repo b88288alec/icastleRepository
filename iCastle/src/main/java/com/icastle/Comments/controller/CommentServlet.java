@@ -66,16 +66,7 @@ public class CommentServlet extends HttpServlet {
 		String comment = request.getParameter("comment");
 		
 		Collection<Part> p=request.getParts();
-//		Part photo = request.getPart("uploadphoto");
-//		Part photo;
-		
-//		photo.containsAll(photo);
-//		System.out.println(photo);
 
-//		Collection<Part> photos=request.getParts();
-		
-//		int orderIdInt = Integer.parseInt(orderId);
-//		int hotelIdInt = Integer.parseInt(hotelId);
 		int serviceInt = Integer.parseInt(service);
 		int qualityInt = Integer.parseInt(quality);
 		int sceneInt = Integer.parseInt(scene);
@@ -154,10 +145,10 @@ public class CommentServlet extends HttpServlet {
 			
 			
 		
-		request.setAttribute("comment", comt);
-		RequestDispatcher rd = request.getRequestDispatcher("HotelComment.jsp");
-		rd.forward(request,response);
-		return;
+//		request.setAttribute("comment", comt);
+//		RequestDispatcher rd = request.getRequestDispatcher("HotelComment.jsp");
+//		rd.forward(request,response);
+//		return;
 	}
 
 }

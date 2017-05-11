@@ -40,7 +40,7 @@ public class HostComment extends HttpServlet {
 		// TODO Auto-generated method stub
 	
 			CommentService comtService = new CommentService(); 			
-			List<CommentVO> comtList= comtService.hotelComtSearch(2);
+			List<CommentVO> comtList= comtService.hotelComtSearch(1);
 			MembersService memService = new MembersService();
 			MembersVO memberVO = new MembersVO();	
 			List<NameEmailTime> NETList = new ArrayList<NameEmailTime>();

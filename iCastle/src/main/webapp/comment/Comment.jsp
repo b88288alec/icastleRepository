@@ -171,24 +171,7 @@ window.onload = function(){
 		
 	}
 	
-// 	document.getElementById("star1").onclick = function(){
-// 		if(x==0){
-// 			document.getElementById("star1").onmouseout = function(){
-// 				document.getElementById("star1").src="unstar.png";
-// 				document.getElementById("star2").src="unstar.png";
-// 				document.getElementById("star3").src="unstar.png";
-// 				document.getElementById("star4").src="unstar.png";
-// 				document.getElementById("star5").src="unstar.png";
-// 			}
-			
-// 		}else{
-			
-// 		}
-		
-// 	}
-  
-  
-	
+  	
 }
 
 
