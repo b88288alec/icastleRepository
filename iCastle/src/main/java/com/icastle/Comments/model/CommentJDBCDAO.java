@@ -15,9 +15,8 @@ import javax.sql.DataSource;
 public class CommentJDBCDAO implements CommentDAO_interface {
 	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment) VALUES(?,?,?,?,?,?,?,?)";
 	private static final String SHOW_COMT = "SELECT commentId,orderId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE orderId = ?";
-	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE hotelId = ?";
-	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ? WHERE commentId = ?";
-	private static final String SHOW_RESPONSE = "SELECT response FROM Comments WHERE commentId = ?";
+	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime,response FROM Comments WHERE hotelId = ?";
+	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ?,responseTime = ? WHERE commentId = ?";
 	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=? where commentId = ?";
 	private static final String GOOD_COMT = "UPDATE Comments SET good = ? WHERE commentId = ?";
 	private static final String SHOW_GOOD = "SELECT good FROM Comments WHERE commentId = ?";
@@ -89,6 +88,7 @@ public class CommentJDBCDAO implements CommentDAO_interface {
 			com.setSceneScore(rs.getInt("sceneScore"));
 			com.setGood(rs.getInt("good"));
 			com.setComment(rs.getString("comment"));
+			com.setResponse(rs.getString("response"));
 			com.setCommentTime(rs.getDate("commentTime"));
 			comtList.add(com);
 			}
@@ -113,7 +113,7 @@ public class CommentJDBCDAO implements CommentDAO_interface {
 			
 	}
 	
-	public CommentVO response(Integer commentId,java.sql.Date responseTime,String response){
+	public String response(Integer commentId,java.sql.Date responseTime,String response){
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,user,password);
@@ -123,15 +123,6 @@ public class CommentJDBCDAO implements CommentDAO_interface {
 			stmt.setInt(3, commentId);
 			stmt.executeUpdate();
 			
-			stmt = conn.prepareStatement(SHOW_RESPONSE);
-			stmt.setInt(1,commentId);
-			rs = stmt.executeQuery();
-			rs.next();
-			
-			com = new CommentVO();
-			com.setResponse(rs.getString(1));
-			com.setResponseTime(rs.getDate(2));
-
 				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -148,7 +139,7 @@ public class CommentJDBCDAO implements CommentDAO_interface {
 			}
 		}
 
-		return com;
+		return "回覆成功!";
 		
 	}
 	
