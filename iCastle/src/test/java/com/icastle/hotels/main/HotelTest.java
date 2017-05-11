@@ -171,5 +171,9 @@ public class HotelTest {
 //			System.out.println(hotelvo.getRegisterId());
 //			System.out.println("-----------------------");
 //		}
+		
+		//查詢未通過審核的飯店
+		HotelDAOHibernate dao = new HotelDAOHibernate();
+		dao.getUncheckedHotel();
 	}
 }
