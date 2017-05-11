@@ -8,6 +8,7 @@ public class NameEmailTime {
 	private Date commentTime;
 	private Integer id;
 	private Integer commentId;
+	private String response;
 	
 	public Integer getId() {
 		return id;
@@ -38,6 +39,12 @@ public class NameEmailTime {
 	}
 	public void setCommentId(Integer commentId) {
 		this.commentId = commentId;
+	}
+	public String getResponse() {
+		return response;
+	}
+	public void setResponse(String response) {
+		this.response = response;
 	}
 	
 	

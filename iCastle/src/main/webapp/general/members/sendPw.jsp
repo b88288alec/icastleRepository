@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv=refresh content="5;url=../../index.jsp">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
@@ -17,29 +18,28 @@
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
-	<style>
+    <style>
 		.container {
 		    width: 1300px;
 		    margin-top: 100px;
+		    background-color: white; 
+		    padding-bottom: 100px;
 		}
-	</style>
+    </style>
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="../fragment/nav.jsp"/>
+		<jsp:include page="../../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container"
-		style="background-color: white; padding-bottom: 100px;">
-			<h1>會員中心</h1>
-			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">修改會員資料及歷史訂單查詢</a>
-<%-- 			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">歷史訂單</a> --%>
-			<a href="${pageContext.servletContext.contextPath}/members/-----------">評論</a>
-	</div>
+    <div class="container">
+    
+    <h1>已寄出新密碼到您的電子信箱，5秒後轉到首頁</h1>
+    </div>
     
     <!--開始footer-->
-		<jsp:include page="../fragment/footer.jsp"/>
+		<jsp:include page="../../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>

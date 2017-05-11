@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ page import="java.util.*"%>
+<%@ page import="com.icastle.qa.model.*"%>
+    
+<%
+    QaJDBCDAO dao = new QaJDBCDAO();
+    List<QaVO> list = dao.getAll();
+    pageContext.setAttribute("list",list);
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv=refresh content="5;url=../index.jsp">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
@@ -18,26 +27,53 @@
     <!--以下請加入各自頁面的css-->
 
     <title>愛客宿-iCastle</title>
-    <style>
-		.container {
-		    width: 1300px;
-		    margin-top: 100px;
-		    background-color: white; 
-		    padding-bottom: 100px;
-		}
-    </style>
 </head>
 <body>
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
-	<!--結束導覽列-->
+ 	<!--結束導覽列--
+ 	
+    <!--開始本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
+    
+   
+ 
+    <br>
+    <br>
+    <h1>飯店Q&A</h1>
+    <table border='2' bordercolor='#CCCCFF' width='900' height='800'>
+	<tr>
+	<td>問題</td>
+	<td>答案</td>
+		
+	</tr>
 	
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container">
+	<c:forEach var="QaVO" items="${list}">
+		<tr align='center' valign='middle'}>
+			<td>${QaVO.question}</td>
+			<td>${QaVO.answer}</td>
+			
+		</tr>
+	</c:forEach>
+</table>
+
     
-    <h1>已寄出新密碼到您的電子信箱，5秒後轉到首頁</h1>
-    </div>
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--結束本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
