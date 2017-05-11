@@ -70,8 +70,21 @@
 								value="${MemberLoginOK.name}" />
 							<p>性別:</p>
 							<div class="radio">
-								<label><input type="radio" name="gender" value="男">男生</label>
-								<label><input type="radio" name="gender" value="女">女生</label>
+							
+							<p>性別:</p>
+							<div class="radio">
+							<c:choose>
+								<c:when test="${MemberLoginOK.gender == '男'}">
+									<label><input type="radio" name="gender" value="男" checked>男生</label>
+									<label><input type="radio" name="gender" value="女">女生</label>
+								</c:when>
+								<c:otherwise>
+									<label><input type="radio" name="gender" value="男">男生</label>
+									<label><input type="radio" name="gender" value="女" checked>女生</label>
+								</c:otherwise>
+							</c:choose>
+<!-- 								<label><input type="radio" name="gender" value="男">男生</label> -->
+<!-- 								<label><input type="radio" name="gender" value="女">女生</label> -->
 							</div>
 							<p>生日:</p>
 							<input class="form-control" placeholder="輸入生日" name="bdateId"

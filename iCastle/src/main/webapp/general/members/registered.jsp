@@ -86,8 +86,17 @@
 								<div class="form-group">
 									<label class="control-label col-md-2" style="font-size: 16px;">密  碼 :</label>
 									<div class="col-md-8">
-										<input name="email" type="pw" class="form-control"
+										<input name="pw" type="password" class="form-control"
 											placeholder="輸入密碼" value="${param.pw}"/>${errorMsgs.pwErr}
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-2" style="font-size: 16px;">確認密碼:</label>
+									<div class="col-md-8">
+										<input name="pwcheck" type="password" class="form-control"
+											placeholder="輸入密碼" value="${param.pwcheck}"/>${errorMsgs.pwcheckErr}
 									</div>
 								</div>
 							</div>
