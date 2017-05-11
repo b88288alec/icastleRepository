@@ -93,6 +93,11 @@ public class HotelService {
 		return dao.advancedQuery(zone, startDate, endDate, peopleNum, order, lowprice, highprice, point, star);
 	}
 	
+	//查詢未通過審核的飯店以及飯店資料
+	public List<HotelVO> getUncheckedHotel(){
+		return dao.getUncheckedHotel();
+	}
+	
 	//查詢全部的飯店
 	public List<HotelVO> getAll() {
 		return dao.getAll();

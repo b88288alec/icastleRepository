@@ -189,4 +189,23 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 		}
 		return hotels;
 	}
+
+	@Override
+	public List<HotelVO> getUncheckedHotel() {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<HotelVO> hotels = null;
+		
+		try {
+			session.beginTransaction();
+			
+			Query query = session.createSQLQuery("{call getUncheckedHotel()}");
+			query.list();
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return null;
+	}
 }
