@@ -169,11 +169,9 @@
 										<input name="passport" type="text" class="form-control" value="${param.passport}" placeholder="輸入護照"/></div>
 								</div>
 							</div>
-<!--========解決======================================================================= -->								
-							<input type="submit" class="btn btn-danger" value="註冊" style="float: right ; width: 250px">
-							<button type="button" class="btn btn-default " data-dismiss="modal">取消</button>
-<!--=============================================================================== -->								
-							<button type="button" id="onekey" class="btn btn-primary btn-simple" style="float: right">一鍵輸入</button>																						
+							
+							<input type="submit" class="btn btn-danger" value="註冊" style="float:right; width:250px ;margin-top:50px">
+							<button type="button" id="onekey" class="btn btn-primary btn-simple" style="float: right; margin-top:50px">一鍵輸入</button>																						
 					</div>			
 				</form>
 			</div>
