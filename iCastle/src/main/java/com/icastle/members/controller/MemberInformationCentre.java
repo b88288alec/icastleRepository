@@ -55,7 +55,7 @@ public class MemberInformationCentre extends HttpServlet {
 //		}
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/members/member_historical_order.jsp");//!!!!
+		RequestDispatcher rd = request.getRequestDispatcher("../comment/CommentServlet");//!!!!
 		rd.forward(request, response);
 		
 	}

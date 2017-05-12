@@ -22,6 +22,7 @@ import javax.servlet.http.Part;
 import com.icastle.Comments.model.CommentDAO;
 import com.icastle.Comments.model.CommentService;
 import com.icastle.Comments.model.CommentVO;
+import com.icastle.Comments.model.OrderAndResponse;
 import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
 import com.icastle.commentphotos.model.CommentPhotosService;
@@ -38,25 +39,26 @@ import com.icastle.members.model.MembersVO;
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class CommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CommentServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		CommentService comtService = new CommentService();
+		HttpSession session = request.getSession();
+		MembersVO membersvo = (MembersVO)session.getAttribute("MemberLoginOK");
+		List<CommentVO> comtList=comtService.findByEmail(membersvo.getEmail());
+		System.out.println("test" + comtList);
+		request.setAttribute("ordersKey", request.getAttribute("ordersKey"));
+		if(comtList.size() == 0){
+			request.setAttribute("nocomment", false);
+		}else{
+			request.setAttribute("nocomment", true);
+			request.setAttribute("alreadycomment", comtList);
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("../members/member_historical_order.jsp");
+		rd.forward(request, response);
+		return;
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
@@ -64,12 +66,11 @@ public class CommentServlet extends HttpServlet {
 		
 		String orderId = request.getParameter("orderId");
 		String hotelId = request.getParameter("hotelId");
-		String email = request.getParameter("email");
 		String service = request.getParameter("service");
 		String quality = request.getParameter("quality");
 		String scene = request.getParameter("scene");
 		String comment = request.getParameter("comment");
-		System.out.println(email);
+
 		
 		Collection<Part> p=request.getParts();
         int orderIdInt = Integer.parseInt(orderId);
@@ -112,7 +113,7 @@ public class CommentServlet extends HttpServlet {
 		comt = new CommentVO();
 		comt.setOrderId(orderIdInt);
 		comt.setHotelId(hotelIdInt);
-		comt.setEmail(email);
+		comt.setEmail(membersvo.getEmail());
 		comt.setServiceScore(serviceInt);
 		comt.setSceneScore(sceneInt);
 		comt.setQualityScore(qualityInt);
@@ -122,40 +123,85 @@ public class CommentServlet extends HttpServlet {
 		
 		comt = comtService.findByOrderId(comt.getOrderId());
 
-//		    List<CommentPhotosVO> comtphotos = new ArrayList<CommentPhotosVO>();
 		    CommentPhotosService comtPhotoService = new CommentPhotosService();
 		
 			
 			for(Part part : p){
-//				System.out.println(part);
-//				System.out.println(part.getName());
-//				System.out.println(part.getHeader(part.getName()));
+
 				
 				if(part.getName().equals("uploadphoto")){
 					
-//					CommentPhotosVO comtphotoVO = new CommentPhotosVO();				
-		
+					
 					InputStream ips = part.getInputStream();
-//					Integer lenInt = new Integer(ips.available());
+
 					long lenLong = part.getSize();
 					
 					comtPhotoService.uploadCommentPhoto(comt.getCommentId(),ips,lenLong);
-					
-					
+									
 					
 				}
-				
-
-				
+			
 			}
 			
+//			CommentService cs = new CommentService();
 			OrdersService ordersService = new OrdersService();
 			List<OrdersVO> list = ordersService.search_By_MemberId(membersvo.getMemberId());
+			
+			for(OrdersVO order:list){
+				order.getOrderId();
+//				System.out.println("所有訂單"+order.getOrderId());
+			}
+			
+			
+//			CommentVO vo = new CommentVO();
+//			List<OrderAndResponse> oarList = new ArrayList<OrderAndResponse>();
+			
+	
+			
+//			for(OrdersVO result:list){
+//				OrderAndResponse oar = new OrderAndResponse();
+//				oar.setOrderId(result.getOrderId());
+//				oar.setHotelId(result.getHotelId());
+//				oar.setMemberId(result.getMemberId()); 
+//				oar.setRoomId(result.getRoomId());
+//			    oar.setHotelId(result.getHotelId()); 
+//			    oar.setRoomTypeId(result.getRoomTypeId());
+//			    oar.setRoomTypeName(result.getRoomTypeName());
+//				oar.setCheckinDay(result.getCheckinDay());
+//				oar.setCheckoutDay(result.getCheckoutDay());
+//				oar.setRoomCount(result.getRoomCount());
+//				oar.setPeopleNum(result.getPeopleNum());
+//				oar.setBreakfast(result.getBreakfast());
+//				oar.setDinner(result.getDinner());
+//				oar.setAfternoonTea(result.getAfternoonTea());
+//				oar.setPrice(result.getPrice()); 
+//				oar.setReservationer(result.getReservationer());
+//				oar.setBdate(result.getBdate());
+//				oar.setTel(result.getTel());
+//				oar.setEmail(result.getEmail());
+//				oar.setAddr(result.getAddr());
+//				oar.setPersonId(result.getPersonId());
+//				oar.setCountry(result.getCountry());
+//				oar.setPassport(result.getPassport());
+//				oar.setBedAdding(result.getBedAdding());
+//				oar.setPricePerPerson(result.getPricePerPerson());
+//				oar.setCustomerRemark(result.getCustomerRemark());
+//				oar.setHotelRemark(result.getHotelRemark());
+//				oar.setMemo(result.getMemo());
+//				oar.setOrderState(result.getOrderState());
+//				vo = comtService.findResponseByOrderId(result.getOrderId());
+//				oar.setResponse(vo.getResponse());
+//				oarList.add(oar);
+//							
+//				
+//			}
+			
 			request.setAttribute("ordersKey", list);
+			doGet(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("/members/member_historical_order.jsp");//!!!!
+//			rd.forward(request, response);
 			
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/members/member_historical_order.jsp");//!!!!
-			rd.forward(request, response);
 				
 			
 			
