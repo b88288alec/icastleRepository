@@ -305,6 +305,8 @@ public class RegisterhotelServlet extends HttpServlet {
 		photos.add(photovo);
 		photoServ.addPhoto(photos);
 		
+		System.out.println("transport:" + transport);
+		
 		//轉交到展示層
 		RequestDispatcher rd = request.getRequestDispatcher("registerOK.jsp");
 		rd.forward(request, response);
