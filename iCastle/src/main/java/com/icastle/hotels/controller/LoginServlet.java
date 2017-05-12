@@ -41,6 +41,10 @@ public class LoginServlet extends HttpServlet {
 		if (pw==null || pw=="")
 			errMap.put("pwErr", "請輸入密碼");
 		
+//		if( !request.getParameter("value").equals(session.getAttribute("imageMask")) ){
+//	    	errMap.put("cdErr","驗證碼錯誤");
+//	    }
+		
 		//如果有任何欄位沒有輸入
 		if (!errMap.isEmpty()){
 			RequestDispatcher rd = request.getRequestDispatcher("../general/login.jsp");
@@ -61,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 		}else{
 			//登入成功!
 			session.setAttribute("HotelLoginOK", hotelvo);
-			
+			session.removeAttribute("imageMask");
 			System.out.println(hotelvo.getHotelId());
 			System.out.println(hotelvo.getHotelName());
 			System.out.println(hotelvo.getEmail());
