@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+	pageEncoding="utf-8" import="javax.servlet.http.HttpSession" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -88,50 +88,64 @@
 		<div class="page-header">
 			<h1>精選飯店</h1>
 		</div>
-		<div class="row">
-			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
-				<div class="card" style="width: 300px;">
-					<img src="${pageContext.servletContext.contextPath}/img/60395_16042612080041805392.jpg"
-						style="width: 100%;" />
-					<div class="cardContext">
-						<h4>麗尊酒店</h4>
-						<p>高雄苓雅區</p>
+		
+			<c:forEach var="hotel" items="${hotels}" varStatus="loop">
+				<c:if test="${loop.index%3==0}">
+					<div class="row">			
+				</c:if>
+			
+				<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
+					<div class="card" style="width: 300px;">
+						<img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${hotel.hotelId}&type=hotelid"
+							style="width: 100%;" />
+						<div class="cardContext">
+							<h4>${hotel.hotelName}</h4>
+							<p>${hotel.zone}</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
-				<div class="card" style="width: 300px;">
-					<img src="${pageContext.servletContext.contextPath}/img/3843_15070211000031541467.jpg"
-						style="width: 100%;" />
-					<div class="cardContext">
-						<h4>漢來大飯店</h4>
-						<p>高雄前金區</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
-				<div class="card" style="width: 300px;">
-					<img src="${pageContext.servletContext.contextPath}/img/201242_16042216170041722027.jpg"
-						style="width: 100%;" />
-					<div class="cardContext">
-						<h4>蘭城晶英酒店</h4>
-						<p>宜蘭市</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
-				<div class="card" style="width: 300px;">
-					<img src="${pageContext.servletContext.contextPath}/img/104996_110408145504225.jpg"
-						style="width: 100%;" />
-					<div class="cardContext">
-						<h4>礁溪老爺酒店</h4>
-						<p>宜蘭縣礁溪鄉</p>
-					</div>
-				</div>
-			</div>
-		</div>
+				
+				<c:if test="${loop.index%3==2 || loop.end}">
+					</div>			
+				</c:if>
+			</c:forEach>
 	</div>
+<!-- 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;"> -->
+<!-- 				<div class="card" style="width: 300px;"> -->
+<%-- 					<img src="${pageContext.servletContext.contextPath}/img/3843_15070211000031541467.jpg" --%>
+<!-- 						style="width: 100%;" /> -->
+<!-- 					<div class="cardContext"> -->
+<!-- 						<h4>漢來大飯店</h4> -->
+<!-- 						<p>高雄前金區</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;"> -->
+<!-- 				<div class="card" style="width: 300px;"> -->
+<%-- 					<img src="${pageContext.servletContext.contextPath}/img/201242_16042216170041722027.jpg" --%>
+<!-- 						style="width: 100%;" /> -->
+<!-- 					<div class="cardContext"> -->
+<!-- 						<h4>蘭城晶英酒店</h4> -->
+<!-- 						<p>宜蘭市</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;"> -->
+<!-- 				<div class="card" style="width: 300px;"> -->
+<%-- 					<img src="${pageContext.servletContext.contextPath}/img/104996_110408145504225.jpg" --%>
+<!-- 						style="width: 100%;" /> -->
+<!-- 					<div class="cardContext"> -->
+<!-- 						<h4>礁溪老爺酒店</h4> -->
+<!-- 						<p>宜蘭縣礁溪鄉</p> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
 	<!--結束精選飯店-->
+<%
+	HttpSession sess = request.getSession();
+	sess.removeAttribute("hotels");
+%>
 
     <!--開始footer-->
 		<jsp:include page="fragment/footer.jsp"/>

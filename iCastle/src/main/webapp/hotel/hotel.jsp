@@ -430,7 +430,7 @@
 			<div class="col-md-12"
 				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
 				<div class="page-header">
-					<h3>關於德立莊酒店</h3>
+					<h3>關於${hotel.hotelName}</h3>
 				</div>
 				<div class="col-md-2"> 
 					<h4>簡介</h4>

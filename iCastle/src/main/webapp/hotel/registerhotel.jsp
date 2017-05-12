@@ -162,7 +162,7 @@
 								<div class="col-md-3">
 									<label class="control-label " style="font-size: 18px;">上傳照片:</label>
 								</div>
-    							<input type="file" name="photo" multiple=""> 
+    							<input type="file" name="photo"> 
    									<div class="input-group col-md-9s"> 
         								<input type="text" readonly="" class="form-control" placeholder="上傳照片">${errMap.photoErr} 
         									<span class="input-group-btn input-group-sm"> 
@@ -171,7 +171,16 @@
              									</button>
         									</span> 
     								</div>
-								</div>										
+								</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-3" style="font-size: 18px;">照片說明:</label>
+									<div class="col-md-9">
+										<input name="photoDescription" type="text" class="form-control" 
+										placeholder="輸入照片說明 " value="${param.photoDescription}" />${errMap.photoDescriptionErr}
+									</div>
+								</div>
+							</div>									
 							<div class="col-md-12">
 								<div class="form-group">
 									<label class="control-label col-md-3" style="font-size: 18px;">飯店介紹:</label>
@@ -442,6 +451,9 @@
 			$('input[name = "zone"]').val('南投縣魚池鄉');
 			$(':input[name = "transport"]').text('搭乘火車到南投火車站接著轉6路公車');
 			$('input[name = "website"]').val('http://www.bilo.com');
+			
+			$('input[name = "photoDescription"]').val('飯店正面照');
+			
 			$(':input[name = "hotelProfile"]').val('位於日月潭湖畔');
 			$('input[name = "checkin"]').val('5:00 PM');
 			$('input[name = "checkout"]').val('9:00 AM');

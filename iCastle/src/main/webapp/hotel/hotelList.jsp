@@ -336,12 +336,12 @@
 
             //初始化價錢bar
             noUiSlider.create(priceSlider, {
-            	start: [ 4000, 8000 ],
+            	start: [ 0, 20000 ],
             	range: {
             		'min': [  0 ],
             		'max': [ 20000 ]
             	},
-                step: 500,
+                step: 5,
                 connect: true,
 
                 format: wNumb({
