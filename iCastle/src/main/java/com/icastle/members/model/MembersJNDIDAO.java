@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.icastle.hotels.model.HotelVO;
+
 public class MembersJNDIDAO implements MembersDAO_interface {
 	
 	private static DataSource ds = null;
@@ -38,7 +40,8 @@ public class MembersJNDIDAO implements MembersDAO_interface {
 			"SELECT * FROM Members WHERE email = ? AND pw = ?";
 	private static final String LINELOGIN =
 			"SELECT * FROM Members WHERE name = ? AND pw = ?";
-	
+	private static final String FINDBYEMAIL = 
+			"SELECT email FROM Members where email = ?";
 	
 	@Override
 	public void insert(MembersVO membersVO) {
@@ -441,6 +444,62 @@ public MembersVO lineLogin(String name, String pw) {
 	}
 	return membersVO;
 }
+
+
+
+@Override
+public MembersVO findByEmail(String email) {
+	MembersVO membersVO = null;
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+
+	try {
+
+		con = ds.getConnection();
+		pstmt = con.prepareStatement(FINDBYEMAIL);
+
+		pstmt.setString(1, email);
+
+		rs = pstmt.executeQuery();
+		
+
+		while (rs.next()) {
+			membersVO = new MembersVO();
+			membersVO.setEmail(rs.getString("email"));
+			
+		}
+
+	} catch (SQLException se) {
+		throw new RuntimeException("A database error occured. "
+				+ se.getMessage());
+		// Clean up JDBC resources
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	return membersVO;
+}
+	
 
 
 }

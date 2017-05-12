@@ -33,6 +33,7 @@ public class MemberInformationCentre extends HttpServlet {
 		//拿到LoginOK物件
 		MembersVO membersvo = (MembersVO)session.getAttribute("MemberLoginOK");
 		System.out.println("MemberInformationCentre.do");
+		System.out.println("會員編號:"+membersvo.getMemberId());
  	
 	//----------------顯示訂單歷史資料------------------
 		OrdersService ordersService = new OrdersService();
@@ -54,8 +55,7 @@ public class MemberInformationCentre extends HttpServlet {
 //		}
 		
 		
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/members/member_profile.jsp");//!!!!
+		RequestDispatcher rd = request.getRequestDispatcher("/members/member_historical_order.jsp");//!!!!
 		rd.forward(request, response);
 		
 	}
@@ -76,25 +76,47 @@ public class MemberInformationCentre extends HttpServlet {
 		String pw = request.getParameter("pw");
 		String country = request.getParameter("country");
 		String addr = request.getParameter("addr");
+//		String memberid = request.getParameter("member_Id");
+//		int memberIdInt = Integer.parseInt(memberid);
 		System.out.println(gender);
 		Date dt = null;
 		
+		
+		
+		
 		//將bdate轉型態
 		try {
-			SimpleDateFormat sdf =new SimpleDateFormat("yyyy/MM/dd");
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd");
 			long dtlong = sdf.parse(bdate).getTime();
 			dt = new Date(dtlong);
+			System.out.println(dt);
 			
 			/*相同於上面寫法*/
 //			java.util.Date log =sdf.parse(bdate);
 //			long ss= log.getTime();
 //			Date sqldate = new Date(dtlong);
 			
+			
+			MembersService membersService = new MembersService();
+//			更新資料庫資料
+			membersService.update(email, pw, name, gender, dt, addr, tel, personId, country, passport, vo.getMemberId());
+			
+//			把更新後的資料從資料庫取出
+			MembersVO result = membersService.findByPrimaryKey(email);
+			
+//			把更新後的資料存入session備用
+			session.setAttribute("MemberLoginOK", result);
+			
+			/*update資料重新載入頁面*/
+//			傳回前端
+			RequestDispatcher rd = request.getRequestDispatcher("member_profile.jsp");
+			rd.forward(request, response);
+			return;
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		MembersService membersService = new MembersService();
-		membersService.update(email, pw, name, gender, dt, addr, tel, personId, country, passport, vo.getMemberId());
+		
 	}
 
 }

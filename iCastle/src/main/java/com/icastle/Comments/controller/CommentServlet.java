@@ -16,11 +16,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.icastle.Comments.model.CommentDAO;
 import com.icastle.Comments.model.CommentService;
 import com.icastle.Comments.model.CommentVO;
+import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
 import com.icastle.commentphotos.model.CommentPhotosService;
 import com.icastle.commentphotos.model.CommentPhotosVO;
@@ -57,25 +59,21 @@ public class CommentServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		MembersVO membersvo = (MembersVO)session.getAttribute("MemberLoginOK");
 		
 		String orderId = request.getParameter("orderId");
 		String hotelId = request.getParameter("hotelId");
+		String email = request.getParameter("email");
 		String service = request.getParameter("service");
 		String quality = request.getParameter("quality");
 		String scene = request.getParameter("scene");
 		String comment = request.getParameter("comment");
+		System.out.println(email);
 		
 		Collection<Part> p=request.getParts();
-//		Part photo = request.getPart("uploadphoto");
-//		Part photo;
-		
-//		photo.containsAll(photo);
-//		System.out.println(photo);
-
-//		Collection<Part> photos=request.getParts();
-		
-//		int orderIdInt = Integer.parseInt(orderId);
-//		int hotelIdInt = Integer.parseInt(hotelId);
+        int orderIdInt = Integer.parseInt(orderId);
+        int hotelIdInt = Integer.parseInt(hotelId);
 		int serviceInt = Integer.parseInt(service);
 		int qualityInt = Integer.parseInt(quality);
 		int sceneInt = Integer.parseInt(scene);
@@ -112,9 +110,9 @@ public class CommentServlet extends HttpServlet {
 		
 				
 		comt = new CommentVO();
-		comt.setOrderId(5);
-		comt.setHotelId(2);
-		comt.setEmail("mno@gmail.com");
+		comt.setOrderId(orderIdInt);
+		comt.setHotelId(hotelIdInt);
+		comt.setEmail(email);
 		comt.setServiceScore(serviceInt);
 		comt.setSceneScore(sceneInt);
 		comt.setQualityScore(qualityInt);
@@ -150,14 +148,22 @@ public class CommentServlet extends HttpServlet {
 
 				
 			}
+			
+			OrdersService ordersService = new OrdersService();
+			List<OrdersVO> list = ordersService.search_By_MemberId(membersvo.getMemberId());
+			request.setAttribute("ordersKey", list);
+			
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/members/member_historical_order.jsp");//!!!!
+			rd.forward(request, response);
 				
 			
 			
 		
-		request.setAttribute("comment", comt);
-		RequestDispatcher rd = request.getRequestDispatcher("HotelComment.jsp");
-		rd.forward(request,response);
-		return;
+//		request.setAttribute("comment", comt);
+//		RequestDispatcher rd = request.getRequestDispatcher("../members/MemberInformationCentre.do");
+//		rd.forward(request,response);
+//		return;
 	}
 
 }

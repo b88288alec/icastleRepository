@@ -48,7 +48,12 @@ public class LoginFilter implements Filter {
 			session.setAttribute("requestURI", requestURI);
 			session.setAttribute("queryString", queryString);
 			return;
+		} else if (sub[2].equals("hotelcenter") && !sub[3].equals("hotelcenter.jsp") 
+				&& hotel != null && hotel.getHotelState() == 0){
+			response.sendRedirect(request.getContextPath() + "/hotelcenter/hotelcenter.jsp");
+			return;
 		}
+			
 
 		chain.doFilter(request, response);
 	}

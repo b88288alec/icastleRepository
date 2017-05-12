@@ -33,9 +33,11 @@
     <div class="container"
 		style="background-color: white; padding-bottom: 100px;">
 			<h1>會員中心</h1>
-			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">修改會員資料及歷史訂單查詢</a>
-<%-- 			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">歷史訂單</a> --%>
-			<a href="${pageContext.servletContext.contextPath}/members/-----------">評論</a>
+			<!--如下-- 先進到member_profile.jsp頁面，當修改資料(送出表單時候)直接呼叫sevlet程式-->
+			<a href="${pageContext.servletContext.contextPath}/members/member_profile.jsp">修改會員資料</a>
+			<!--如下--直接呼叫sevlet將資料丟到member_historical_order.jsp顯示-->
+			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">歷史訂單查詢</a>
+			<a href="${pageContext.servletContext.contextPath}/members/#">評論</a>
 	</div>
     
     <!--開始footer-->
