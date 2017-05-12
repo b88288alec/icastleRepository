@@ -59,7 +59,11 @@
     		<td><select id='idSelectYear' name="year"></select><span>年</span></td>
     		<td><select id='idSelectMonth' name="month"></select><span>月</span></td>
     		<td><select id='idSelectDate' name="day"></select><span>日</span></td>
-    		<td><input id='idButton' name="buttonType" type="button" value="圖表" /></td>
+    		<td><select id='idButton' name="buttonType">
+    			<option value="0">列表</option>
+    			<option value="1">長條圖</option>
+    			<option value="2">折線圖</option>
+    		</select></td>
     	</tr>
     </table>
     <div id="showData" class="ct-chart ct-golden-section">
@@ -98,22 +102,6 @@
 <script>
 	$(function(){
 		
-// 		判斷是否更新
-		<c:if test="${update}">
-			var RTN = 'idSelectRoomTypeName option[value="${roomTypeName}"]';
-			var OS = 'idSelectOrderState option[value="${OrderState}"]';
-			var YY = 'idSelectYear option[value="${year}"]';
-			var MM = 'idSelectMonth option[value="${month}"]';
-			var DD = 'idSelectDate option[value="${day}"]';
-			
-			$('idButton').val('${buttonType}');
-			$(RTN).prop("selected",true);
-			$(OS).prop("selected",true);
-			$(YY).prop("selected",true);
-			$(MM).prop("selected",true);
-			$(DD).prop("selected",true);
-		</c:if>
-		
 // 		事件觸發
 		$('#idSelectYear').on("change", orders);
 		$('#idSelectRoomTypeName').on("change", orders);
@@ -147,7 +135,7 @@
 		}
 
 		function orders(){
-			if($('#idButton').val() == '圖表'){
+			if($('#idButton').val() == '0'){
 			$.ajax({
 				type : 'GET',
 				url : '${pageContext.servletContext.contextPath}/hotelcenter/OrdersListServlet',
@@ -198,7 +186,7 @@
 					})
 				}
 			})
-			}else{
+			}else if($('#idButton').val() == '1'){
 				$.ajax({
 					type : 'GET',
 					url : '${pageContext.servletContext.contextPath}/hotelcenter/OrdersChartServlet',
@@ -213,6 +201,22 @@
 						new Chartist.Bar('.ct-chart', data ,{distributeSeries: true});
 					}
 				})
+			}else if($('#idButton').val() == '2'){
+				$.ajax({
+					type : 'GET',
+					url : '${pageContext.servletContext.contextPath}/hotelcenter/OrdersLineChartServlet',
+					data : {
+						hotelId : ${HotelLoginOK.hotelId},
+						roomTypeId : $('#idSelectRoomTypeName').val(),
+						month : $('#idSelectMonth').val(),
+						state : $('#idSelectOrderState').val()
+					},
+					success : function(data){
+						new Chartist.Bar('.ct-chart', data ,{fullWidth: true, chartPadding: {right: 40}});
+					}
+				})
+			}else{
+				
 			}
 		}
 		
