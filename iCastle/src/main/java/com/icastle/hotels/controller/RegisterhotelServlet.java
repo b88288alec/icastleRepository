@@ -45,6 +45,7 @@ public class RegisterhotelServlet extends HttpServlet {
 		String zone = "";
 		String transport = "";
 		String website = "";
+		String photoDescription = "";
 		String hotelProfile = "";
 		String checkinStr = "";
 		String checkoutStr = "";
@@ -130,8 +131,13 @@ public class RegisterhotelServlet extends HttpServlet {
 							transport = value;
 							if (transport == null || transport.trim().length() == 0) {
 								errMap.put("transportErr", "請輸入交通方式");
-							} 
-						}  else if (fldName.equals("website")) {
+							}
+						} else if (fldName.equals("photoDescription")) {
+							photoDescription = value;
+							if (photoDescription == null || photoDescription.trim().length() == 0) {
+								errMap.put("photoDescriptionErr", "請輸入照片說明");
+							}
+						} else if (fldName.equals("website")) {
 							website = value;
 						} else if (fldName.equals("hotelProfile")) {
 							hotelProfile = value;
@@ -300,10 +306,12 @@ public class RegisterhotelServlet extends HttpServlet {
 		photovo.setPhotoOrder(1);
 		photovo.setPhoto(photobyte);
 		photovo.setRoomTypeId(null);
-		photovo.setPohtoDescription("飯店的一樓入口圖");
+		photovo.setPohtoDescription(photoDescription);
 		List<HotelPhotosVO> photos = new ArrayList<HotelPhotosVO>();
 		photos.add(photovo);
 		photoServ.addPhoto(photos);
+		
+		System.out.println("transport:" + transport);
 		
 		//轉交到展示層
 		RequestDispatcher rd = request.getRequestDispatcher("registerOK.jsp");
