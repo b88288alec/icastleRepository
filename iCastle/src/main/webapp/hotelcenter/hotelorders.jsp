@@ -118,9 +118,6 @@
 			var myMemoId = ('#w' + orderid);
 			var myMemo = $(myMemoId).val();
 			
-			console.log(tdid);
-			console.log(myMemo);
-			
 			$.ajax({
 				type : 'POST',
 				url : '${pageContext.servletContext.contextPath}/hotelcenter/OrdersListServlet',

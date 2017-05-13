@@ -1,7 +1,10 @@
 package com.icastle.Orders.model;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -29,23 +32,29 @@ public class OrdersService {
 	}
 	
 //	客戶修改訂單狀態
-	public void customerUpdate(Integer orderId, Boolean orderState){
+	public String customerUpdate(Integer orderId){
 		OrdersVO order = dao.select_by_orderId(orderId);
 		
+//		更改時區變成台灣時間
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Taipei"));
-		
 		java.sql.Timestamp day = new java.sql.Timestamp(new GregorianCalendar().getTimeInMillis());
 		
-		order.setOrderState(orderState);
+		order.setOrderState(false);
 		order.setCancelDate(day);
 		
 		dao.update(order);
+		
+//		轉換時間格式
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+		
+//		回傳取消時間
+		return sdf.format(day);
 	}
 	
 //	客戶搜尋所有訂單
 	public List<OrdersVO> search_By_MemberId(Integer memberId){
 		List<OrdersVO> result = dao.select_by_memberId(memberId);
-		
+
 		return result;
 	}
 	

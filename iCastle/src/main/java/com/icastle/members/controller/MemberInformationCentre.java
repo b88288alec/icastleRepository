@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,6 +43,13 @@ public class MemberInformationCentre extends HttpServlet {
 		OrdersService ordersService = new OrdersService();
 		List<OrdersVO> list = ordersService.search_By_MemberId(membersvo.getMemberId());
 		request.setAttribute("ordersKey", list);
+		
+//		取得當前時間來比較日期大小
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Taipei"));
+		
+		long commentTime = ((new java.sql.Date(new GregorianCalendar().getTimeInMillis()).getTime())-((long)24*60*60*1000*90));	
+		request.setAttribute("currentTime", new java.sql.Date(new GregorianCalendar().getTimeInMillis()).getTime());
+		request.setAttribute("commentTime", commentTime);
 		
 	/*下方是測試在java程式上有無撈出資料*/
 //		for (OrdersVO result : list) {

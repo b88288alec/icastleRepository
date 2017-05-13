@@ -342,6 +342,17 @@ public class OrdersTest {
 //			System.out.println(rs.getCount());
 //			System.out.println(rs.getValue());
 //		}
+		long begin = new java.sql.Date(new GregorianCalendar().getTimeInMillis()).getTime();
+		long commentTime = begin+(24*60*60*1000*90);
+//		System.out.println(begin);
+		System.out.println((long)24*60*60*1000*90);
+//		System.out.println(commentTime);
+//		System.out.println(new java.sql.Date(new GregorianCalendar(2017,2,1).getTimeInMillis()).getTime());
+//		System.out.println(new java.sql.Date(new GregorianCalendar(2017,2,1).getTimeInMillis()));
+//		System.out.println(new java.sql.Date(new GregorianCalendar().getTimeInMillis()).getTime());
+//		System.out.println(new java.sql.Date(new GregorianCalendar().getTimeInMillis()));
+//		System.out.println(commentTime);
+//		System.out.println(new java.sql.Date(commentTime));
 		
 	}
 
