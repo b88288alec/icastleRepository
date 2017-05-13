@@ -5,10 +5,16 @@ import java.sql.Date;
 public class NameEmailTime {
 	private String name;
 	private String email;
-	private Date commentTime;
 	private Integer id;
 	private Integer commentId;
+	private Double avgScore;
+	private Integer serviceScore;
+	private Integer qualityScore;
+	private Integer sceneScore;
+	private String comment;
+	private Date commentTime;
 	private String response;
+	private Date responseTime;
 	
 	public Integer getId() {
 		return id;
@@ -45,6 +51,42 @@ public class NameEmailTime {
 	}
 	public void setResponse(String response) {
 		this.response = response;
+	}
+	public Double getAvgScore() {
+		return avgScore;
+	}
+	public void setAvgScore(Double avgScore) {
+		this.avgScore = avgScore;
+	}
+	public Integer getServiceScore() {
+		return serviceScore;
+	}
+	public void setServiceScore(Integer serviceScore) {
+		this.serviceScore = serviceScore;
+	}
+	public Integer getQualityScore() {
+		return qualityScore;
+	}
+	public void setQualityScore(Integer qualityScore) {
+		this.qualityScore = qualityScore;
+	}
+	public Integer getSceneScore() {
+		return sceneScore;
+	}
+	public void setSceneScore(Integer sceneScore) {
+		this.sceneScore = sceneScore;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public Date getResponseTime() {
+		return responseTime;
+	}
+	public void setResponseTime(Date responseTime) {
+		this.responseTime = responseTime;
 	}
 	
 	

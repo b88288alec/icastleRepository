@@ -53,7 +53,6 @@
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container">
-<<<<<<< HEAD
 		<div class="row col-md-offset-2">
 			<div class="col-md-6">
 				<!--按钮触发模态框  data-toggle="modal" data-target="#myModal"-->
@@ -71,15 +70,6 @@
 				</button></a>
 			</div>
 		</div>
-=======
-    <div class="row">
-    	<div class="col-md-6">
-		    <a href="${pageContext.servletContext.contextPath}/hotel/registerhotel.jsp">業者註冊</a>
-		</div>   
-		<div class="col-md-6">
-		    <a href="${pageContext.servletContext.contextPath}/general/members/registered.jsp">會員註冊</a>
-		</div>   
->>>>>>> branch 'master' of https://github.com/eeitteam01/icastleRepository.git
 	</div>
 	
 	

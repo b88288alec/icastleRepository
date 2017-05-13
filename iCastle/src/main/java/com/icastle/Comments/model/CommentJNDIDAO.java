@@ -271,6 +271,14 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 		// TODO Auto-generated method stub
 		return com;
 	}
+
+
+
+	@Override
+	public List<CommentVO> findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 } 
 
 

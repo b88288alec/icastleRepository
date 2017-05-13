@@ -49,12 +49,11 @@ public class MembersLoginServlet extends HttpServlet {
 		if (pw==null || pw=="")
 			errMap.put("pwErr", "請輸入密碼");
 		
-		
-		 if( req.getParameter("value").equals(session.getAttribute("imageMask")) ){
+		if( req.getParameter("value").equals(session.getAttribute("imageMask")) ){
 		       
-		    }else{
-		    	errMap.put("cdErr","驗證碼錯誤");
-		    }
+		}else{
+			errMap.put("cdErr","驗證碼錯誤");
+		}
 		
 		//如果有任何欄位沒有輸入
 		if (!errMap.isEmpty()){
@@ -75,6 +74,7 @@ public class MembersLoginServlet extends HttpServlet {
 			return;
 		}else{
 			//登入成功!
+			session.removeAttribute("imageMask");
 			if(membersvo.isManager()){
 				session.setAttribute("ManagerLoginOK", membersvo);
 			}else{

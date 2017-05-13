@@ -6,6 +6,7 @@ import java.util.Random;
 import com.icastle.hotels.model.HotelDAOHibernate;
 import com.icastle.hotels.model.HotelService;
 import com.icastle.hotels.model.HotelVO;
+import com.icastle.hotels.model.HotelandInfoVO;
 import com.icastle.hotels.model.ListVO;
 
 //hibernate版的test
@@ -171,5 +172,11 @@ public class HotelTest {
 //			System.out.println(hotelvo.getRegisterId());
 //			System.out.println("-----------------------");
 //		}
+		
+		//查詢未通過審核的飯店
+		HotelDAOHibernate dao = new HotelDAOHibernate();
+		List<HotelandInfoVO> hotelAndInfos = dao.getHotelAndInfo();
+		for (HotelandInfoVO hotelAndInfo : hotelAndInfos)
+			System.out.println(hotelAndInfo.getEmail());
 	}
 }

@@ -11,5 +11,6 @@ public interface CommentDAO_interface {
 	public CommentVO pressGood(Integer commentId,Integer good);
 	public CommentVO findByOrderId(Integer orderId);
 	public CommentVO findByCommentId(Integer commentId);
+	public List<CommentVO> findByEmail(String email);
 
 }

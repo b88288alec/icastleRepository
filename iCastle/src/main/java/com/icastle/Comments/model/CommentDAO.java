@@ -17,11 +17,12 @@ public class CommentDAO implements CommentDAO_interface {
 	private static final String SHOW_COMT = "SELECT commentId,orderId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE orderId = ?";
 	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime,response FROM Comments WHERE hotelId = ?";
 	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ?,responseTime = ? WHERE commentId = ?";
-	private static final String SHOW_RESPONSE = "SELECT response FROM Comments WHERE commentId = ?";
+//	private static final String SEL_ORDERID = "SELECT response FROM Comments WHERE orderId = ?";
 	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=? where commentId = ?";
 	private static final String GOOD_COMT = "UPDATE Comments SET good = ? WHERE commentId = ?";
 	private static final String SHOW_GOOD = "SELECT good FROM Comments WHERE commentId = ?";
 	private static final String SEL_COMTID = "SELECT orderId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime FROM Comments WHERE commentId = ?";
+	private static final String SEL_EMAIL = "SELECT orderId FROM Comments WHERE email = ?";
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs; 
@@ -168,14 +169,13 @@ public class CommentDAO implements CommentDAO_interface {
 		
 	}
 	
-	public CommentVO pressGood(Integer commentId,Integer good){
+	public CommentVO findResponseByCommentId(Integer commentId){
 		
 
 		try {
 			conn = ds.getConnection();
 			stmt = conn.prepareStatement(GOOD_COMT);
-			stmt.setInt(1, good);
-			stmt.setInt(2, commentId);
+			stmt.setInt(1, commentId);
 			stmt.executeUpdate();
 			
 			stmt = conn.prepareStatement(SHOW_GOOD);
@@ -272,6 +272,103 @@ public class CommentDAO implements CommentDAO_interface {
 		// TODO Auto-generated method stub
 		return com;
 	}
+	
+	public CommentVO pressGood(Integer commentId,Integer good){
+		
+
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(GOOD_COMT);
+			stmt.setInt(1, good);
+			stmt.setInt(2, commentId);
+			stmt.executeUpdate();
+			
+			stmt = conn.prepareStatement(SHOW_GOOD);
+			stmt.setInt(1,commentId);
+			rs = stmt.executeQuery();
+			rs.next();
+			
+			com = new CommentVO();
+			com.setGood(rs.getInt("good"));
+				
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return com;
+			
+	}
+	
+//	public CommentVO findResponseByOrderId(Integer orderId){
+//		
+//		try {
+//			
+//			conn = ds.getConnection();
+//			stmt = conn.prepareStatement(SEL_ORDERID);
+//			stmt.setInt(1,orderId);
+//			rs = stmt.executeQuery();			
+//			rs.next();
+//			
+//			com = new CommentVO();
+//			com.setOrderId(rs.getInt("orderId"));
+//			com.setResponse(rs.getString("response"));
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}finally{
+//			try {
+//				conn.close();
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		// TODO Auto-generated method stub
+//		return com;
+//		
+//		
+//	}
+	
+	public List<CommentVO> findByEmail(String email){
+
+		try {
+			conn = ds.getConnection();	
+			stmt = conn.prepareStatement(SEL_EMAIL);
+			stmt.setString(1,email);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()){
+			com = new CommentVO();
+			com.setOrderId(rs.getInt("orderId"));
+			comtList.add(com);
+							
+			}
+						
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return comtList;
+	}
+
+
 } 
 
 

@@ -31,6 +31,8 @@ public class MembersJDBCDAO implements MembersDAO_interface{
 			"SELECT * FROM Members WHERE email = ? AND pw = ?";
 	private static final String LINELOGIN =
 			"SELECT * FROM Members WHERE name = ? AND pw = ?";
+	private static final String FINDBYEMAIL = 
+			"SELECT email FROM Members where email = ?";
 	
 	
 	
@@ -456,11 +458,62 @@ public MembersVO lineLogin(String name, String pw) {
 }
 
 
-//	@Override
-//	public MembersVO findByEmail(String email) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}	
+	@Override
+	public MembersVO findByEmail(String email) {
+		
+		MembersVO membersVO = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(FINDBYEMAIL);
+
+			pstmt.setString(1, email);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				membersVO = new MembersVO();
+
+				membersVO.setEmail(rs.getString("email"));
+			
+			}
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return membersVO;
+	}	
 
 
 	

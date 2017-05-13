@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,6 +59,14 @@ public class OrdersListServlet extends HttpServlet {
 			String orderedState = null;
 			String customer = null;
 			String mymemo = null;
+			String breakfast = null;
+			String dinner = null;
+			String afternoonTea = null;
+			String passport = null;
+			String cancelDate = null;
+			String country = null;
+			String personId = null;
+			String addr = null;
 			
 			JSONArray ja = new JSONArray();
 			for(OrdersVO order: result){
@@ -66,6 +75,14 @@ public class OrdersListServlet extends HttpServlet {
 				orderedState = (order.getOrderState())?"訂單完成":"已取消";
 				customer = (order.getCustomerRemark() == null)?"":order.getCustomerRemark();
 				mymemo = (order.getMemo() == null)?"":order.getMemo();
+				breakfast = (order.getBreakfast())?"●":"○";
+				dinner = (order.getDinner())?"●":"○";
+				afternoonTea = (order.getAfternoonTea())?"●":"○";
+				passport = (order.getPassport() == null)?"":order.getPassport();
+				cancelDate = (order.getCancelDate() == null)?"":sdf.format(order.getCancelDate());
+				country = (order.getCountry() == null)?"":order.getCountry();
+				personId = (order.getPersonId() == null)?"":order.getPersonId();
+				addr = (order.getAddr() == null)?"":order.getAddr();
 				
 				JSONObject jo = new JSONObject();
 				jo.put("orderId", String.valueOf(order.getOrderId()));
@@ -80,26 +97,26 @@ public class OrdersListServlet extends HttpServlet {
 				jo.put("checkoutDay", String.valueOf(order.getCheckoutDay()));
 				jo.put("roomCount", String.valueOf(order.getRoomCount()));
 				jo.put("peopleNum", String.valueOf(order.getPeopleNum()));
-				jo.put("breakfast", String.valueOf(order.getBreakfast()));
-				jo.put("dinner", String.valueOf(order.getDinner()));
-				jo.put("afternoonTea", String.valueOf(order.getAfternoonTea()));
+				jo.put("breakfast", breakfast);
+				jo.put("dinner", dinner);
+				jo.put("afternoonTea", afternoonTea);
 				jo.put("price", String.valueOf(order.getPrice()));
 				jo.put("roomNo", String.valueOf(order.getRoomNo()));
 				jo.put("reservationer", String.valueOf(order.getReservationer()));
 				jo.put("bdate", String.valueOf(order.getBdate()));
 				jo.put("tel", String.valueOf(order.getTel()));
 				jo.put("email", String.valueOf(order.getEmail()));
-				jo.put("addr", String.valueOf(order.getAddr()));
-				jo.put("personId", String.valueOf(order.getPersonId()));
-				jo.put("country", String.valueOf(order.getCountry()));
-				jo.put("passport", String.valueOf(order.getPassport()));
+				jo.put("addr", addr);
+				jo.put("personId", personId);
+				jo.put("country", country);
+				jo.put("passport", passport);
 				jo.put("bedAdding", bedAdd);
 				jo.put("pricePerPerson", String.valueOf(order.getPricePerPerson()));
 				jo.put("customerRemark", customer);
 				jo.put("hotelRemark", String.valueOf(order.getHotelRemark()));
 				jo.put("memo", mymemo);
 				jo.put("orderState", orderedState);
-				jo.put("cancelDate", String.valueOf(order.getCancelDate()));
+				jo.put("cancelDate", cancelDate);
 				
 				ja.add(jo);
 			}
@@ -112,7 +129,34 @@ public class OrdersListServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req, res);
+
+		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("utf-8");
+		res.setHeader("content-type", "application/json;charset=UTF-8");
+		PrintWriter out = res.getWriter();
+		HttpSession session = req.getSession();
+		HotelVO hotel = (HotelVO)session.getAttribute("HotelLoginOK");
+		
+		try{
+//			取得參數更改資料庫
+			String orderId = req.getParameter("orderId");
+			String memo = req.getParameter("memo");
+			
+//			更新訂單memo
+			OrdersService os = new OrdersService();
+			os.industryUpdate(new Integer(orderId), memo);
+			
+//			存成JSON
+			JSONObject jo = new JSONObject();
+			jo.put("memo", memo);
+			
+//			送回前頁
+			out.println(jo);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 
 }

@@ -1,9 +1,8 @@
 package com.icastle.hotels.controller;
 
 import java.io.IOException;
-import java.util.Enumeration;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,35 +10,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/hote/Logout.do")
-public class LogoutServlet extends HttpServlet {
+import com.icastle.hotels.model.HotelService;
+import com.icastle.hotels.model.HotelVO;
+
+@WebServlet("/Index.do")
+public class IndexSerlvet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public LogoutServlet() {
+    public IndexSerlvet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String contextPath = request.getContextPath();
 		HttpSession session = request.getSession();
 		
-//		取出所有的Attr名，清除session
-		Enumeration e = session.getAttributeNames();
-		while(e.hasMoreElements()){
-			String name = (String)e.nextElement();
-			session.removeAttribute(name);
-		}
-//		session.removeAttribute("HotelLoginOK");
-//		session.removeAttribute("MemberLoginOK");
-//		session.removeAttribute("ManagerLoginOK");
+		//查詢所有飯店
+		HotelService hotelServ = new HotelService();
+		List<HotelVO> hotels = hotelServ.getAll();
+		session.setAttribute("hotels", hotels);
+		System.out.println(hotels.size());
 		
 		//轉交到index.jsp
-		response.sendRedirect(contextPath + "/index.jsp");
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 		return;
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
