@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.icastle.Comments.model.CommentService;
 import com.icastle.Comments.model.CommentVO;
@@ -39,7 +40,9 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int hotelId = Integer.parseInt(request.getParameter("hotelId"));
+		HttpSession session = request.getSession();
+		Integer hotelId = (Integer)session.getAttribute("hotelId");
+//		int hotelId = Integer.parseInt(request.getParameter("hotelId"));
 		
 		CommentService comtService = new CommentService();
 		List<CommentVO> comtList = comtService.hotelComtSearch(hotelId);
@@ -49,11 +52,13 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 		CommentPhotosVO comtPhotoVO = new CommentPhotosVO();
 		List<Integer> ids = new ArrayList<Integer>();
 		NameEmailTime NET;
+		List<NameEmailTime> NETList = new  ArrayList<NameEmailTime>();
 		
 		for(CommentVO comt:comtList){
 			NET = new NameEmailTime();
 			
 			membersVO = memberService.findByPrimaryKey(comt.getEmail());
+			System.out.println(membersVO.getName());
 			NET.setName(membersVO.getName());
 			NET.setEmail(comt.getEmail());
 			NET.setAvgScore(comt.getAvgScore());
@@ -66,20 +71,31 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 			NET.setResponse(comt.getResponse());
 			NET.setResponseTime(comt.getResponseTime());
 			ids = comtPhotoService.findByIds(comt.getCommentId());
-//			NET.set
+//            for(Integer i :ids){
+//            	comtPhotoService.findById(i);
+//            	
+//            }
+			NET.setIds(ids);
+			NETList.add(NET);
 			
 		}
 		
+		System.out.println(NETList.size());
 		
-		
-		
-		
-		
-		
-		request.setAttribute("commentList",comtList);
-		RequestDispatcher rd = request.getRequestDispatcher("Test2.jsp");
+		request.setAttribute("NETList",NETList);
+		RequestDispatcher rd = request.getRequestDispatcher("../hotel/hotel.jsp");
 		rd.forward(request, response);
 		
+		
+		
+		
+		
+		
+		
+//		request.setAttribute("commentList",comtList);
+//		RequestDispatcher rd = request.getRequestDispatcher("Test2.jsp");
+//		rd.forward(request, response);
+//		
 		
 		
                

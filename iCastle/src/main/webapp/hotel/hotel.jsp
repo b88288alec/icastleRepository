@@ -492,6 +492,17 @@
 			</div>
 		</div>
 	</div>
+	<div>
+	   <c:forEach var="comment" items="${NETList}">
+    <h5>${comment.name}</h5>
+    <h5>${comment.email}</h5>
+    <h5>${comment.comment}</h5>
+    	<c:forEach var="photo" items="${comment.ids}">
+    	<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}">
+    	</c:forEach>
+    
+    </c:forEach>
+	</div>
 
 	<!--開始footer-->
 	<jsp:include page="../fragment/footer.jsp" />
