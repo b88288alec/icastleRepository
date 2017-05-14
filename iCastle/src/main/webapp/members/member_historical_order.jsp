@@ -169,7 +169,7 @@
 								<c:choose>
 									<c:when test="${myData.cancelDate == null && myData.checkinDay.time > currentTime}">
 									<div id="td${myData.orderId}">
-										<button class="btn btn-primary" data-toggle="modal" data-target="#cancelModal" type="button" name="cancelOrder" id="" value="cancel">訂單取消</button>
+										<button class="btn btn-primary" data-toggle="modal" data-target="#cancelModal" type="button" name="cancelOrder" id="" value="cancel">取消訂單</button>
 									</div>
 										<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   											<div class="modal-dialog">
@@ -197,7 +197,7 @@
       														<li><p>旅客於入住後始縮減原入住天數者，旅客需提出飯店業者所開具不收費證明之證明文件（需蓋有飯店戳章）交予本網服務人員，本網將酌收每間房NTD150元之作業處理費，其餘未住宿天數之費用本網將全數退還。惟須提 醒，縮減入住天數而未提供飯店之不收費證明文件，或不收費證明文件未蓋飯店戳章，或逾期申請者，恕本網不予受理退費。</p></li>
 	      												</ol>
       												</ul>
-      												<input type="checkbox" id="checkcancel" name="checkcancel" value="confirm">本人已詳閱並同意上述取消規定，並願意支付因取消時所產生的費用。
+      												<input type="checkbox" id="checkcancel" name="checkcancel" value="confirm"><label for="checkcancel">本人已詳閱並同意上述取消規定，並願意支付因取消時所產生的費用。</label>
       												</div>
       												<div class="modal-footer">
         												<input type="hidden" name="myOrderId" value="${myData.orderId}">
@@ -229,7 +229,7 @@
 										<td></td>
 										<c:set value="true" var="iscomment" />
 									</c:when>
-									<c:when test="${loop.last && myData.orderId!=orderId.orderId  && myData.checkoutDay.time > commentTime}">
+									<c:when test="${loop.last && myData.orderId!=orderId.orderId  && myData.checkoutDay.time > commentTime && myData.checkinDay.time < currentTime}">
 										<td class="td-actions text-right" id="comment${myData.orderId}">
 												<button type="button" rel="tooltip" title="評論" value="${myData.orderId}" name="comment" id="${myData.orderId}"
 													class="btn btn-success btn-simple btn-xs">
@@ -253,7 +253,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:choose>
-								<c:when test="${myData.checkoutDay.time > commentTime}">
+								<c:when test="${myData.checkoutDay.time > commentTime && myData.checkinDay.time < currentTime}">
 								<td class="td-actions text-right" id="comment${myData.orderId}">
 <!-- 								多一行超連結沒刪，導致部分功能還是會導到新的頁面 -->
 <%-- 								<a href="../comment/Comment.jsp?hotelId=${myData.hotelId}&orderId=${myData.orderId}&email=${myData.email}"> --%>

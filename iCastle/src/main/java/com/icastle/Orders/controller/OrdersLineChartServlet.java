@@ -35,8 +35,6 @@ public class OrdersLineChartServlet extends HttpServlet {
 		try{
 //			從前端取值
 			Integer hotelId = hotel.getHotelId();
-			String y1 = "2016";
-			String y2 = "2017";
 			String rti = req.getParameter("roomTypeId");
 			String m = req.getParameter("month");
 			String s = req.getParameter("state");
@@ -44,69 +42,194 @@ public class OrdersLineChartServlet extends HttpServlet {
 //			對取到的參數做處理
 			Integer roomTypeId = (!"null".equals(rti))?new Integer(rti) : null;
 			Boolean state = (!"null".equals(s))?new Boolean(s) : null;
-			Integer year1 = new Integer(y1);
-			Integer year2 = new Integer(y2);
+			Integer year1 = new Integer(2016);
+			Integer year2 = new Integer(2017);
 			Integer month = (!"null".equals(m))?new Integer(m) : null;
-			
-//			查DB
-			OrdersService os = new OrdersService();
-			result1 = os.search_Line_Chart(hotelId, roomTypeId, year1, month, state);
-			result2 = os.search_Line_Chart(hotelId, roomTypeId, year2, month, state);
 			
 //			準備JSON格式
 			JSONObject jo = new JSONObject();
 			JSONArray jalabels = new JSONArray();
 			JSONArray jaseries = new JSONArray();
 			
+//			查DB
+			OrdersService os = new OrdersService();
+			result1 = os.search_Line_Chart(hotelId, year1, roomTypeId, month, state);
+			result2 = os.search_Line_Chart(hotelId, year2, roomTypeId, month, state);
+			
 //			準備陣列做資料對應
-			String[] fullMonthOrDay = new String[result1.size()];
-			String[] monthOrDay = new String[result2.size()];
-			Integer[] originvalue = new Integer[result2.size()];
-			Integer[] resultvalue = new Integer[result1.size()];
-			Integer[] fullresultvalue = new Integer[result1.size()];
-			
-//			從DB取出的資料塞到JSON裡
-			int count1 = 0;
-			for(OrdersChartVO oc : result1){
-				
-//				放入陣列
-				fullMonthOrDay[count1] = oc.getValue();
-				fullresultvalue[count1] = (int)oc.getCount();
-				count1++;
+			JSONObject jo1 = new JSONObject();
+			JSONObject jo2 = new JSONObject();
+			JSONArray originvalue = new JSONArray();
+			JSONArray resultvalue = new JSONArray();
+			JSONArray fullresultvalue = new JSONArray();
+			int num1 = result1.size();
+			int num2 = result2.size();
 
-//				X軸放入JSON
-				jalabels.add(oc.getValue());
-			}
-			
-//			塞入第二份資料
-			int count2 = 0;
-			for(OrdersChartVO oc : result2){
-				
-//				放入陣列
-				monthOrDay[count2] = oc.getValue();
-				
-//				放入最初的Integer陣列
-				originvalue[count2] = (int)oc.getCount();
-				count2++;
-			}
-			
-//			比較資料存入數字
-			for(int x = 0; x < result1.size(); x++){
-				if(fullMonthOrDay[x].equals(monthOrDay[x])){
-					resultvalue[x] = originvalue[x];
+//			判斷是否有查到資料
+			if(num1 != 0 || num2 != 0){
+//				判斷兩個參數數目是否相等
+				if(num1 == num2){
+//					取得陣列名稱
+					String[] fullMonthOrDay = new String[num1];
+					String[] monthOrDay = new String[num2];
+					
+//					從DB取出的資料塞到JSON裡
+					int count1 = 0;
+					for(OrdersChartVO oc : result1){
+//						放入陣列
+						fullMonthOrDay[count1] = oc.getValue();
+						fullresultvalue.add((int)oc.getCount());
+						count1++;
+						
+//						X軸放入JSON
+						jalabels.add(oc.getValue());
+					}
+					
+//					塞入第二份資料
+					for(OrdersChartVO oc : result2){
+//						放入最後的Integer陣列
+						resultvalue.add((int)oc.getCount());
+					}
+					
+//					兩份資料塞成物件
+					jo1.put("name", String.valueOf(year1));
+					jo1.put("data", fullresultvalue);
+					jo2.put("name", String.valueOf(year2));
+					jo2.put("data", resultvalue);
+					
 				}else{
-					resultvalue[x] = 0;
+					if(num1 > num2){
+//						取得陣列名稱
+						String[] fullMonthOrDay = new String[num1];
+						String[] monthOrDay = new String[num2];
+						
+//						從DB取出的資料塞到JSON裡
+						int count1 = 0;
+						for(OrdersChartVO oc : result1){
+//							放入陣列
+							fullMonthOrDay[count1] = oc.getValue();
+							fullresultvalue.add((int)oc.getCount());
+							count1++;
+							
+//							X軸放入JSON
+							jalabels.add(oc.getValue());
+							
+						}
+						
+//						判斷弟二份資料是否有值
+						if(num2 != 0){
+//							塞入第二份資料
+							int count2 = 0;
+							for(OrdersChartVO oc : result2){
+//								放入陣列
+								monthOrDay[count2] = oc.getValue();
+									
+//								放入最初的Integer陣列
+								originvalue.add((int)oc.getCount());
+								count2++;
+							}
+								
+//							比較資料存入數字
+							int y = 0;
+							for(int x = 0; x < num1; x++){
+								if(y < num2 && fullMonthOrDay[x].equals(monthOrDay[y])){
+									resultvalue.add(originvalue.get(y));
+									y++;
+								}else{
+									resultvalue.add(0);
+								}
+							}
+						}else{
+							for(int x = 0; x < num1; x++){
+								resultvalue.add(0);
+							}
+						}
+						
+//						兩份資料塞成物件
+						jo1.put("name", String.valueOf(year1));
+						jo1.put("data", fullresultvalue);
+						jo2.put("name", String.valueOf(year2));
+						jo2.put("data", resultvalue);
+						
+					}else{
+//						取得陣列名稱
+						String[] fullMonthOrDay = new String[num2];
+						String[] monthOrDay = new String[num1];
+						
+//						從DB取出的資料塞到JSON裡
+						int count1 = 0;
+						for(OrdersChartVO oc : result2){
+							
+//							放入陣列
+							fullMonthOrDay[count1] = oc.getValue();
+							fullresultvalue.add((int)oc.getCount());
+							count1++;
+							
+//							X軸放入JSON
+							jalabels.add(oc.getValue());
+						}
+						
+//						判斷第二份資料是否有值
+						if(num1 != 0){
+//							塞入第二份資料
+							int count2 = 0;
+							for(OrdersChartVO oc : result1){
+//								放入陣列
+								monthOrDay[count2] = oc.getValue();
+								
+//								放入最初的Integer陣列
+								originvalue.add((int)oc.getCount());
+								count2++;
+							}
+							
+//							比較資料存入數字
+							int y = 0;
+							for(int x = 0; x < num2; x++){
+								if(y < num1 && fullMonthOrDay[x].equals(monthOrDay[y])){
+									resultvalue.add(originvalue.get(y));
+									y++;
+								}else{
+									resultvalue.add(0);
+								}
+							}
+						}else{
+							for(int x = 0; x < num2; x++){
+								resultvalue.add(0);
+							}
+						}
+						
+//						兩份資料塞成物件
+						jo1.put("name", String.valueOf(year2));
+						jo1.put("data", fullresultvalue);
+						jo2.put("name", String.valueOf(year1));
+						jo2.put("data", resultvalue);
+						
+					}
+					
 				}
+				
+			}else{
+				jalabels.add("");
+				resultvalue.add(0);
+				fullresultvalue.add(0);
+				
+//				兩份資料塞成物件
+				jo1.put("name", String.valueOf(year1));
+				jo1.put("data", fullresultvalue);
+				jo2.put("name", String.valueOf(year2));
+				jo2.put("data", resultvalue);
+				
 			}
 			
 //			放成JSON物件
-			jaseries.add(fullresultvalue);
-			jaseries.add(resultvalue);
+			jaseries.add(jo1);
+			jaseries.add(jo2);
 			jo.put("labels", jalabels);
 			jo.put("series", jaseries);
 			
 //			拋出前端
 			out.println(jo);
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}

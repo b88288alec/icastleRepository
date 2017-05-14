@@ -216,7 +216,36 @@ public class OrdersService {
 				}
 			}
 		}
-		
+		return null;
+	}
+	
+//	業者搜尋訂單圓餅圖
+	public List<OrdersChartVO> search_Pie_Chart(Integer hotelId, Integer year, Integer month, Boolean state){
+		if(year == null){
+			if(state == null){
+				if(month == null){
+					return dao.piechart_select_by_hotelId(hotelId);
+				}
+			}else{
+				if(month == null){
+					return dao.piechart_select_by_hotelId_orderstate(hotelId, state);
+				}
+			}
+		}else{
+			if(state == null){
+				if(month == null){
+					return dao.piechart_select_by_hotelId_year(hotelId, year);
+				}else{
+					return dao.piechart_select_by_hotelId_year_month(hotelId, year, month);
+				}
+			}else{
+				if(month == null){
+					return dao.piechart_select_by_hotelId_year_orderstate(hotelId, state, year);
+				}else{
+					return dao.piechart_select_by_hotelId_year_month_orderstate(hotelId, state, year, month);
+				}
+			}
+		}
 		return null;
 	}
 	
