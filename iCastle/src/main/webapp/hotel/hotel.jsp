@@ -32,6 +32,15 @@
 	rel="stylesheet" />
 
 <title>愛客宿-iCastle</title>
+<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 400px;
+        width: 700px;
+      }
+      /* Optional: Makes the sample page fill the window. */
+</style>
 </head>
 <body>
 	<!--開始導覽列-->
@@ -195,6 +204,9 @@
 				</div>
 			</div>
 			<!--結束飯店圖片-->
+			
+			<div id="map"></div>
+			
 			<!--聯絡與設施-->
 			<div class="col-md-12 connect-checkin">
 				<div class="col-md-4">
@@ -264,10 +276,8 @@
                 </div>-->
 			</div>
 			<!--結束聯絡與設施-->
-
-
-
-		</div>
+ 
+		</div> 
 
 		<div class="row" style="margin-bottom: 50px;">
 
@@ -492,7 +502,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<!--開始footer-->
 	<jsp:include page="../fragment/footer.jsp" />
 	<!--結束footer-->
@@ -515,6 +525,8 @@
 
 	<script src="../js/magnific-popup.js"></script>
 	<script src="../js/lightbox.min.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn7jC3DDQXAbDR9-IDsCnNL79Hsuz-55k&callback=initMap"
+  type="text/javascript"></script>
 
 	<script>
 		$(document)
@@ -546,6 +558,66 @@
 								'wrapAround' : true
 							})
 						});
+	//取得地址陣列
+	var address = [
+	<c:forEach var="addr" items="${address}" varStatus="loop">
+		'${addr}'
+		
+		<c:choose>
+			<c:when test="${loop.last}">
+				];
+			</c:when>
+			<c:otherwise>
+				,
+			</c:otherwise>
+		</c:choose>
+		
+	</c:forEach>
+	
+	//初始化地圖
+	function initMap(){
+		var map = new google.maps.Map(document.getElementById("map"), {
+			center: {
+	                   "lat" : 25.042787,
+	                   "lng" : 121.509309
+	                },
+			zoom:14
+		});
+		var geocoder  = new google.maps.Geocoder();
+		geocodeAddress(geocoder, map);
+	} 
+	
+	//將地址轉換成坐標
+	function geocodeAddress(geocoder, map){
+		console.log(address[0]);
+		//設定center
+		geocoder.geocode( {"address" : address[0]}, function(results, status){
+			if (status == google.maps.GeocoderStatus.OK) {
+				console.log("成功轉換" + results[0].geometry.location);
+				//設定新的center
+				map.setCenter(results[0].geometry.location);
+			} else 
+				console.log("無法轉換..."+ status);
+		})
+
+		//設定marker
+		for (var i=0 ; i<address.length ; i++){
+			geocoder.geocode( {"address" : address[i]}, function(results, status){
+				if (status == google.maps.GeocoderStatus.OK) {
+					console.log("成功轉換" + results[0].geometry.location);
+					//設定新的center
+					if (i==0)
+						map.setCenter(results[0].geometry.location);
+					//設定marker
+					var marker = new google.maps.Marker({
+						map : map,
+						position : results[0].geometry.location
+					});
+				} else 
+					console.log("無法轉換..."+ status);
+			})
+		}
+	}
 	</script>
 </body>
 </html>

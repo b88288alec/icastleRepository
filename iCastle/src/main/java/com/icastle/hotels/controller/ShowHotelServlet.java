@@ -56,8 +56,8 @@ public class ShowHotelServlet extends HttpServlet {
 		System.out.println("抓到"+roomsvo.size()+"筆符合條件的房間");
 		
 		//查詢hotel的資料
-		HotelService hotelserv = new HotelService();
-		HotelVO hotel = hotelserv.findByPrimaryKey(hotelId);
+		HotelService hotelServ = new HotelService();
+		HotelVO hotel = hotelServ.findByPrimaryKey(hotelId);
 		request.setAttribute("hotel", hotel);
 		
 		//查詢hotel info
@@ -69,6 +69,20 @@ public class ShowHotelServlet extends HttpServlet {
 		HotelPhotosService photoserv = new HotelPhotosService();
 		List<HotelPhotosVO> photos = photoserv.findByHotelId(hotel.getHotelId());
 		request.setAttribute("photos", photos);
+		
+		//查詢所有飯店的地址包成陣列 (centerHotel放在第一個)
+		List<HotelVO> hotels = hotelServ.getAll();		
+		List<String> list = new ArrayList<String>();
+		for (HotelVO h : hotels){
+			if (h.getHotelId() == hotel.getHotelId())
+				list.add(0, h.getAddr());
+			else
+				list.add(h.getAddr());
+		} 
+		request.setAttribute("address", list);
+		
+//		for (String s : list)
+//			System.out.println(s);
 		
 		//轉交給hotel.jsp
 		RequestDispatcher rd = request.getRequestDispatcher("hotel.jsp");
