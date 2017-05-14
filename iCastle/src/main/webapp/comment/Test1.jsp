@@ -8,6 +8,7 @@
 </head>
 <body>
 <form method="get" action="HotelCommentUnderHotelInf">
+<input type="hidden" value="1" name="hotelId" >
 <input value="hotel1" type="submit" >
 </form>
 
