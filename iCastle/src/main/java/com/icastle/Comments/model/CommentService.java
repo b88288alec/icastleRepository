@@ -46,6 +46,10 @@ public class CommentService {
 		
 	}
 	
+	public List<CommentVO> findByEmail(String email){
+		return comtDAO.findByEmail(email);
+	}
+	
 	
 	
 

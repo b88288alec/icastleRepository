@@ -12,7 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.icastle.Comments.model.CommentService;
 import com.icastle.hotelInfo.modle.*;
 import com.icastle.hotelphotos.model.HotelPhotosService;
 import com.icastle.hotelphotos.model.HotelPhotosVO;
@@ -30,7 +32,9 @@ public class ShowHotelServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//接收參數
+		HttpSession session= request.getSession();
 		Integer hotelId = Integer.parseInt(request.getParameter("hotelId"));
+		session.setAttribute("hotelId", hotelId);
 		String startStr = request.getParameter("start");
 		String endStr = request.getParameter("end");
 		Integer peopleNum = Integer.parseInt(request.getParameter("peopleNum"));
@@ -52,26 +56,40 @@ public class ShowHotelServlet extends HttpServlet {
 		//查詢這間飯店可以住的房間
 		RoomsService roomsdao = new RoomsService();
 		List<RoomsVO> roomsvo =  roomsdao.findRooms(hotelId, peopleNum, start, end);
-		request.setAttribute("rooms", roomsvo);
+		session.setAttribute("rooms", roomsvo);
 		System.out.println("抓到"+roomsvo.size()+"筆符合條件的房間");
 		
 		//查詢hotel的資料
-		HotelService hotelserv = new HotelService();
-		HotelVO hotel = hotelserv.findByPrimaryKey(hotelId);
+		HotelService hotelServ = new HotelService();
+		HotelVO hotel = hotelServ.findByPrimaryKey(hotelId);
 		request.setAttribute("hotel", hotel);
 		
 		//查詢hotel info
 		InfoService infoServ = new InfoService();
 		InfoVO hotelInfo = infoServ.findByHotelId(hotelId);
-		request.setAttribute("hotelInfo", hotelInfo);
+		session.setAttribute("hotelInfo", hotelInfo);
 		
 		//查詢hotel photo
 		HotelPhotosService photoserv = new HotelPhotosService();
 		List<HotelPhotosVO> photos = photoserv.findByHotelId(hotel.getHotelId());
-		request.setAttribute("photos", photos);
+		session.setAttribute("photos", photos);
+		
+		//查詢所有飯店的地址包成陣列 (centerHotel放在第一個)
+		List<HotelVO> hotels = hotelServ.getAll();		
+		List<String> list = new ArrayList<String>();
+		for (HotelVO h : hotels){
+			if (h.getHotelId() == hotel.getHotelId())
+				list.add(0, h.getAddr());
+			else
+				list.add(h.getAddr());
+		} 
+		request.setAttribute("address", list);
+		
+//		for (String s : list)
+//			System.out.println(s);
 		
 		//轉交給hotel.jsp
-		RequestDispatcher rd = request.getRequestDispatcher("hotel.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("../comment/HotelCommentUnderHotelInf");
 		rd.forward(request, response);
 		return;
 	}

@@ -108,19 +108,18 @@
     					<c:otherwise>
     					</c:otherwise>
     				</c:choose>
-    				
-                    <c:choose>
-						<c:when test="${servletPath  == '/hotel/register.jsp' || servletPath == '/hotel/registerhotel.jsp'}">
-							<li class="active"><a href="${pageContext.servletContext.contextPath}/hotel/register.jsp"><span class="glyphicon glyphicon-registration-mark"></span> 註冊</a></li>	
-						</c:when>
-						<c:otherwise>
-							<li><a href="${pageContext.servletContext.contextPath}/hotel/register.jsp"><span class="glyphicon glyphicon-registration-mark"></span> 註冊</a></li>	
-						</c:otherwise>
-    				</c:choose> 
-                    
+
                     <c:choose>
 						<c:when test="${empty HotelLoginOK && empty MemberLoginOK && empty ManagerLoginOK}">
 						<!-- 沒有登入 -->
+							<c:choose>
+								<c:when test="${servletPath  == '/hotel/register.jsp' || servletPath == '/hotel/registerhotel.jsp'}">
+									<li class="active"><a href="${pageContext.servletContext.contextPath}/hotel/register.jsp"><span class="glyphicon glyphicon-registration-mark"></span> 註冊</a></li>	
+								</c:when>
+								<c:otherwise>
+									<li><a href="${pageContext.servletContext.contextPath}/hotel/register.jsp"><span class="glyphicon glyphicon-registration-mark"></span> 註冊</a></li>	
+								</c:otherwise>
+		    				</c:choose>
 							<c:choose>
 								<c:when test="${servletPath == '/hotel/login.jsp' || servletPath == '/hotel/loginhotel.jsp'}">
 									<li class="active"><a href="${pageContext.servletContext.contextPath}/general/login.jsp"><span class="glyphicon glyphicon-user"></span> 登入</a></li>	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +33,7 @@
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <div class="container"
 		style="background-color: white; padding-bottom: 100px;">
+		<div>
 			<h1>飯店會員中心</h1>
 			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelInfo.do">修改飯店資訊</a>
 			<a href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelPw.jsp">修改密碼</a>
@@ -39,6 +41,12 @@
 			<a href="${pageContext.servletContext.contextPath}/hotelcenter/setRoomType.jsp">新增房型</a>
 			<a href="${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do">新增房價</a>
 			<a href="${pageContext.servletContext.contextPath}/hotelcenter/ToHotelOrders">訂單</a>
+		</div>
+		<c:if test="${HotelLoginOK.hotelState == 0}">
+			<div>
+				您的帳號尚未通過審核，無法使用任何功能，請耐心等候審核
+			</div>
+		</c:if>
 	</div>
     
     <!--開始footer-->

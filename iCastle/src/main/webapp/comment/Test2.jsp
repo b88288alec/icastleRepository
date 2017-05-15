@@ -23,14 +23,15 @@
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
-		${comment.orderId}
-		${comment.email}
-		${comment.comment}
-		${comment.avgScore}
-		${comment.serviceScore}
-		${comment.qualityScore}
-		${comment.sceneScore}
-		${comment.commentTime}
+    <c:forEach var="comment" items="${NETList}">
+    <h5>${comment.name}</h5>
+    <h5>${comment.email}</h5>
+    <h5>${comment.comment}</h5>
+    	<c:forEach var="photo" items="${comment.ids}">
+    	<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}">
+    	</c:forEach>
+    
+    </c:forEach>
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     

@@ -117,6 +117,23 @@
 									</div>
 								</div>
 							</div>
+							
+							<!-- 開始驗證碼 -->
+							<div class="col-md-12">
+								<div class="form-group">
+								<label class="control-label col-md-2" style="font-size: 16px;"><img 
+										src="${pageContext.servletContext.contextPath}/general/ImageMaskServlet.do"
+										id="imageMask" />
+										<a href = "#" style = "font-size: 13px;margin-left: 5px;" onclick = "myReload()">換一張</a>
+										</label>
+									<div class="col-md-8">
+										<input type="text" name="value" class="form-control"
+											placeholder="輸入驗證碼" style="width: 200px" /><span style="color: red">${errMap.cdErr}</span>
+									</div>
+								</div>
+							</div>
+							<!-- 結束驗證碼 -->
+							
 							<div class="col-md-12">
 								<a
 									href="${pageContext.servletContext.contextPath}/hotel/createrandompw.jsp"
@@ -170,11 +187,13 @@
 									</div>
 								</div>
 							</div>
+							
+							<!-- 開始驗證碼 -->
 							<div class="col-md-12">
 								<div class="form-group">
 								<label class="control-label col-md-2" style="font-size: 16px;"><img 
-										src="${pageContext.servletContext.contextPath}/general/ImageMaskServlet.do"
-										id="imageMask" />
+										src=""
+										id="imageMask2" />
 										<a href = "#" style = "font-size: 13px;margin-left: 5px;" onclick = "myReload()">換一張</a>
 										</label>
 									<div class="col-md-8">
@@ -183,6 +202,8 @@
 									</div>
 								</div>
 							</div>
+							<!-- 結束驗證碼 -->
+							
 							<div class="col-md-12">
 								<a
 									href="${pageContext.servletContext.contextPath}/general/members/createPw.jsp"
@@ -239,8 +260,8 @@
 		});
 		$('#member-onekey').click(function() {
 			event.preventDefault();
-			$('input[name = "email"]').val("andy@yahoo.com.tw");
-			$('input[name = "pw"]').val("123");
+			$('input[name = "email"]').val("sally@gmail.com");
+			$('input[name = "pw"]').val("sally123");
 		
 		});
 		
@@ -255,8 +276,13 @@
 	})
 </script>
 <script>
+
+document.getElementById("imageMask2").src = document.getElementById("imageMask").src;
+
 function myReload(){    
-    document.getElementById("imageMask").src=document.getElementById("imageMask").src+"?nocache="+new Date().getTime();    
+    var newVifiCode = document.getElementById("imageMask").src+"?nocache="+new Date().getTime();
+    document.getElementById("imageMask").src = newVifiCode; 
+    document.getElementById("imageMask2").src = newVifiCode;
 }    
 
 function Auth() {

@@ -171,24 +171,7 @@ window.onload = function(){
 		
 	}
 	
-// 	document.getElementById("star1").onclick = function(){
-// 		if(x==0){
-// 			document.getElementById("star1").onmouseout = function(){
-// 				document.getElementById("star1").src="unstar.png";
-// 				document.getElementById("star2").src="unstar.png";
-// 				document.getElementById("star3").src="unstar.png";
-// 				document.getElementById("star4").src="unstar.png";
-// 				document.getElementById("star5").src="unstar.png";
-// 			}
-			
-// 		}else{
-			
-// 		}
-		
-// 	}
-  
-  
-	
+  	
 }
 
 
@@ -196,14 +179,19 @@ window.onload = function(){
  
 </head>
 <body>
+<input type="hidden" value="${param.hotelId}" name="hotelId">
+<input type="hidden" value="${param.orderId}" name="orderId">
+<input type="hidden" value="${param.email}" name="email">
 <H2>飯店評論</H2>
 <!-- enctype="multipart/form-data" -->
 <form action = "CommentServlet" method = "POST" enctype="multipart/form-data">
 
 
 
-<%-- 訂單編號:<input type = "text" name="orderId"><span style="color:red">${error.orderIdKey}</span><br> --%>
-<%-- 飯店編號:<input type = "text" name = "hotelId"><span style="color:red">${error.hotelIdKey}</span><br> --%>
+
+<input type="hidden" value="${param.hotelId}" name="hotelId">
+<input type="hidden" value="${param.orderId}" name="orderId">
+<input type="hidden" value="${param.email}" name="email">
 服務評分:
 <img src="../img/unstar.png" width="50" id="star1">
 <img src="../img/unstar.png" width="50" id="star2">

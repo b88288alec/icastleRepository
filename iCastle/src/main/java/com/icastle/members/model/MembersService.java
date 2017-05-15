@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Random;
 
+import com.icastle.hotels.model.HotelVO;
+
 
 
 public class MembersService {
@@ -88,5 +90,9 @@ public class MembersService {
           return dao.lineLogin(name, pw);
 
    }
+//  檢查帳號是否重複   
+   public MembersVO findByEmail(String email){
+		return dao.findByEmail(email);
+	}
 	
 }

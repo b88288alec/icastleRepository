@@ -75,10 +75,12 @@
 					<div class="row modal-body " >
 							<div class="col-md-12">
 								<div class="form-group">
-										<label class="control-label col-md-2" style="font-size: 16px;">帳  號 :</label>
+										<label for="email" class="control-label col-md-2" style="font-size: 16px;">帳  號 :</label>
 										<div class="col-md-8">
-											<input name="email" type="text" class="form-control"
+											<input name="email" type="text" class="form-control" id="email" onchange="onech()"
 												placeholder="輸入Email" value="${param.email}" />${errorMsgs.emailErr}
+												  <div id="span1" class="input-group-addon"><span id="sp2" class="glyphicon glyphicon-question-sign"></span></div>
+												   <div id="message"></div>
 										</div>
 								</div>
 							</div>
@@ -86,8 +88,17 @@
 								<div class="form-group">
 									<label class="control-label col-md-2" style="font-size: 16px;">密  碼 :</label>
 									<div class="col-md-8">
-										<input name="email" type="pw" class="form-control"
+										<input name="pw" type="password" class="form-control"
 											placeholder="輸入密碼" value="${param.pw}"/>${errorMsgs.pwErr}
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label col-md-2" style="font-size: 16px;">確認密碼:</label>
+									<div class="col-md-8">
+										<input name="pwcheck" type="password" class="form-control"
+											placeholder="輸入密碼" value="${param.pwcheck}"/>${errorMsgs.pwcheckErr}
 									</div>
 								</div>
 							</div>
@@ -160,11 +171,9 @@
 										<input name="passport" type="text" class="form-control" value="${param.passport}" placeholder="輸入護照"/></div>
 								</div>
 							</div>
-<!--========解決======================================================================= -->								
-							<input type="submit" class="btn btn-danger" value="註冊" style="float: right ; width: 250px">
-							<button type="button" class="btn btn-default " data-dismiss="modal">取消</button>
-<!--=============================================================================== -->								
-							<button type="button" id="onekey" class="btn btn-primary btn-simple" style="float: right">一鍵輸入</button>																						
+							
+							<input type="submit" class="btn btn-danger" value="註冊" style="float:right; width:250px ;margin-top:50px">
+							<button type="button" id="onekey" class="btn btn-primary btn-simple" style="float: right; margin-top:50px">一鍵輸入</button>																						
 					</div>			
 				</form>
 			</div>
@@ -259,6 +268,8 @@
 
 <script
 	src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+	
+		<script src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
 
 <script>
 	$(function(){
@@ -280,6 +291,36 @@
 	})
 </script>
 
+
+	<script>
+	    var XHR = null;
+	    
+	    
+	     function onech() { 
+	    var email = document.getElementById("email").value;
+	        XHR= new XMLHttpRequest();
+	        XHR.addEventListener("readystatechange",twoch);
+	        XHR.open("GET","${pageContext.servletContext.contextPath}/AccountCheck?email="+ email);
+	        XHR.send();
+	       
+	   // alert(name);
+	    }
+	    
+	    function twoch() {
+	    	   if (XHR.readyState==4){
+	    	
+	    	
+		        var data = XHR.responseText;
+		        var div3 = document.getElementById("message");
+		        div3.innerHTML = data;
+		        var pic = document.getElementById("sp2");
+		        if (data == "帳號不存在")
+		       pic.className="glyphicon glyphicon-ok";
+		        else  pic.className="glyphicon glyphicon-remove";
+	    	   }
+		}
+
+	</script>
 
 
 </html>
