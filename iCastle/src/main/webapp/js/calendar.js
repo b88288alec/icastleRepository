@@ -42,9 +42,32 @@ $(function(){
 			$('#idSelectDate').empty().append("<option value='null'>--</option>");
 //			$('#idSelectMonth>option[value="null"]').prop("selected",true);
 			$('#idSelectMonth').empty().append("<option value='null'>--</option>");
-			$('#idSelectYear').empty().append("<option value='null'>--</option>");
-			for(i = 2017; i >= 2010; i--){
-				$('#idSelectYear').append("<option value='" + i + "'>" + i +"</option>");
+			$('#idSelectRoomTypeName').prop("disabled", false);
+			$('div.row').remove();
+			
+//			根據長條圖、折線圖、圓餅圖來改變"年份"和"月份"
+			if($('#idButton').val() == '1'){
+				$('#idSelectYear').empty().append("<option value='null'>--</option>");
+				for(i = 2017; i >= 2010; i--){
+					$('#idSelectYear').append("<option value='" + i + "'>" + i +"</option>");
+				}
+			}else{
+				if($('#idButton').val() == '2'){
+					$('#idSelectYear').empty().append("<option value='null'>--</option>");
+					for(i = 1; i <= 12; i++){
+						$('#idSelectMonth').append("<option value='" + i + "'>" + i +"</option>");
+					}
+				}else{
+					$('#idSelectYear').empty().append("<option value='null'>--</option>");
+					for(i = 2017; i >= 2010; i--){
+						$('#idSelectYear').append("<option value='" + i + "'>" + i +"</option>");
+					}
+					for(i = 1; i <= 12; i++){
+						$('#idSelectMonth').append("<option value='" + i + "'>" + i +"</option>");
+					}
+					$('#idSelectRoomTypeName>option[value="null"]').prop("selected",true);
+					$('#idSelectRoomTypeName').prop("disabled", true);
+				}
 			}
 			
 //			把表格換成長條圖模式
