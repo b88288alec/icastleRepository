@@ -110,18 +110,19 @@
 				<!--標題列 -->
 				<thead>
 					<tr>
+						<th>訂單號碼</th>
 						<th>飯店名稱</th>
+						<th>房型名稱</th>
+						<th>入住日期</th>
+						<th>退房日期</th>
 						<th>房間數</th>
-						<th>價錢</th>
 						<th>加床</th>
-						<th>加床價格</th>
-						<th>房型</th>
-						<th>訂購人</th>
-						<th>電話</th>
-						<th>地址</th>
+						<th>價錢</th>
+						<th>入住人姓名</th>
+						<th>旅客備註</th>
 						<th>下單日期</th>
 						<th>訂單狀態</th>
-						<th>取消訂單時間</th>
+						<th>取消訂單</th>
 						<th class="text-right">Actions</th>
 						<!--評論 -->
 					</tr>
@@ -142,19 +143,20 @@
 						    
 
 						    
+							<td>${myData.orderId}</td>
 							<td>${myData.hotelName}</td>
+							<td>${myData.roomTypeName}</td>
+							<td>${myData.checkinDay}</td>
+							<td>${myData.checkoutDay}</td>
 							<td>${myData.roomCount}</td>
-							<td>${myData.price}</td>
 							<td><c:choose>
 									<%--orderState布林值判斷改顯示字串--%>
-									<c:when test="${myData.bedAdding == true}">有</c:when>
+									<c:when test="${myData.bedAdding == true}">加一床</c:when>
 									<c:otherwise>無</c:otherwise>
 								</c:choose></td>
-							<td>${myData.pricePerPerson}</td>
-							<td>${myData.roomTypeName}</td>
+							<td>${myData.price}</td>
 							<td>${myData.reservationer}</td>
-							<td>${myData.tel}</td>
-							<td>${myData.addr}</td>
+							<td>${myData.customerRemark}</td>
 							<td><c:choose>
 									<%--判斷下單日期--%>
 									<c:when test="${myData.orderedDate == null}"> - </c:when>

@@ -52,12 +52,20 @@ public class OrdersPieChartServlet extends HttpServlet {
 			JSONArray jalabels = new JSONArray();
 			JSONArray jaseries = new JSONArray();
 			
+//			取出資料計算總數
+			long totalcount = 0;
+			for(OrdersChartVO oc : result){
+				totalcount = totalcount + oc.getCount();
+			}
+			
+			System.out.println(totalcount);
+			
 //			從DB取出的資料塞到JSON裡
 			for(OrdersChartVO oc : result){
 				
 				Integer value = (int)oc.getCount();
 				
-				jalabels.add(oc.getValue());
+				jalabels.add((oc.getValue() + Math.round(((double)oc.getCount() / (double)totalcount) * 100.0) + "%"));
 				jaseries.add(value);
 			}
 			

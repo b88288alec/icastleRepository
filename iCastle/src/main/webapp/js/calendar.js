@@ -43,6 +43,7 @@ $(function(){
 //			$('#idSelectMonth>option[value="null"]').prop("selected",true);
 			$('#idSelectMonth').empty().append("<option value='null'>--</option>");
 			$('#idSelectRoomTypeName').prop("disabled", false);
+			$('div.row').remove();
 			
 //			根據長條圖、折線圖、圓餅圖來改變"年份"和"月份"
 			if($('#idButton').val() == '1'){
