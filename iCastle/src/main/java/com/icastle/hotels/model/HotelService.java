@@ -102,4 +102,9 @@ public class HotelService {
 	public List<HotelVO> getAll() {
 		return dao.getAll();
 	}
+	
+	//輸入關鍵字查詢地區
+	public List<String> getZoneByKeyword(String keyword){
+		return dao.getZoneByKeyword(keyword);
+	}
 }

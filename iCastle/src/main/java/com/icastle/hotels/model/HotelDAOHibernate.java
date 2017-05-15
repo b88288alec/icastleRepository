@@ -244,4 +244,24 @@ public class HotelDAOHibernate implements HotelDAO_Interface {
 		}
 		return hotelAndInfos;
 	}
+
+	@Override
+	public List<String> getZoneByKeyword(String keyword) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<String> zones = new ArrayList<String>();
+		try {
+			session.beginTransaction();
+
+//			Query query = session.createQuery("select zone from HotelVO");
+			Query query = session.createQuery("select zone from HotelVO where zone like '%' + ? + '%'");
+			query.setParameter(0, keyword);
+			zones = query.list();
+			
+			session.getTransaction().commit();
+		} catch (RuntimeException ex) {
+			session.getTransaction().rollback();
+			throw ex;
+		}
+		return zones;
+	}
 }
