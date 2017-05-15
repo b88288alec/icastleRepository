@@ -4,15 +4,19 @@
 <!DOCTYPE>
 
 <body>
-<footer class="footer manager_footer">
-			<div class="container-fluid">
-				<nav class="pull-left">
-				</nav>
-				<div class="copyright pull-center">
-					<img src="${pageContext.servletContext.contextPath}/img/logo.png" width="100" />
-        			<h6>版權所有©2005 – 2017, iCastle Company Pte. Ltd.保留所有權利</h6>
-        			<h6>iCastle.com隸屬於Priceline集團—線上旅遊業及相關服務的全球領導品牌。</h6>
-				</div>
-			</div>
-			</footer>
+<!--footer-->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <p class="copyright pull-right">
+                        <small>版權所有©2005 – 2017, iCastle Company Pte. Ltd.保留所有權利</small>
+                        <a href="http://www.creative-tim.com">
+                            <img alt="Brand" width="130" src="${pageContext.servletContext.contextPath}/img/logo.png" />
+                        </a>
+                    </p>
+                </div>
+            </footer>
+            <!--footer-->
+        </div>
+        <!--右側大畫布-->
+    </div>
 </body>
