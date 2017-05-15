@@ -15,6 +15,10 @@
     <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
+<link href="${pageContext.servletContext.contextPath}/css/normalize.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/vicons-font.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/buttons.css" rel="stylesheet" />
+
 
     <title>愛客宿-iCastle</title>
     <style>
@@ -30,25 +34,45 @@
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
-	
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container">
-    	<h1>是否忘記密碼?</h1>
+	<div class="container">
+		
+		<div class="hero-unit row col-md-offset-4" style="padding:50px 0px 0px 0px">
+
+		<h1 style="font-size:30pt">是否忘記密碼?</h1>
+		<form action="${pageContext.servletContext.contextPath}/general/members/CreatePw.do" method="post">
+			<div class="col-sm-6">
+				<div class="form-group label-floating">
+					<label class="control-label">請輸入您的Email</label> 
+					<input type="text" name="email" class="form-control" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2}
+				</div>
+				<section class="content">
+					<div class="box bg-1">
+						<button type="submit" id="onekey" class="button button--ujarak button--border-thin button--text-thick">一鍵輸入</button>
+						<button type="submit"  class="button button--ujarak button--border-thin ">確定</button>
+					</div>
+				</section>
+			</div>
+			</form>
+		</div>
+<!-- ==============原始code============================= -->		
+<!--     <div class="container"> -->
+<!--     	<h1>是否忘記密碼?</h1> -->
     	
-    	<form action="CreateRandomPw.do" method="post">
-		<table class="">
-			<tbody>
-			<tr>
-				<td>請輸入您的Email</td>
-				<td><input type="text" name="email" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2}</td>
-			</tr>			
-			<tr>
-				<td><input type="submit" value="確定"></td>
-				<td><input id="onekey" type="submit" value="一鍵輸入"></td>
-			</tr>
-			</tbody>
-		</table>
-		</form>
+<!--     	<form action="CreateRandomPw.do" method="post"> -->
+<!-- 		<table class=""> -->
+<!-- 			<tbody> -->
+<!-- 			<tr> -->
+<!-- 				<td>請輸入您的Email</td> -->
+<%-- 				<td><input type="text" name="email" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2}</td> --%>
+<!-- 			</tr>			 -->
+<!-- 			<tr> -->
+<!-- 				<td><input type="submit" value="確定"></td> -->
+<!-- 				<td><input id="onekey" type="submit" value="一鍵輸入"></td> -->
+<!-- 			</tr> -->
+<!-- 			</tbody> -->
+<!-- 		</table> -->
+<!-- 		</form> -->
+<!-- ==============原始code============================= -->	
     </div>
     
     <!--開始footer-->
