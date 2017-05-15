@@ -22,13 +22,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelInfo.jsp">
+                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelInfo.do">
                             <i class="material-icons">location_city</i>
                             <p>飯店資料</p>
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/hotelphoto.jsp">
+                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelPhoto.do">
                             <i class="material-icons">picture_in_picture_alt</i>
                             <p>編輯飯店圖片</p>
                         </a>
@@ -40,13 +40,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/setroomprice.jsp">
+                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do">
                             <i class="material-icons">attach_money</i>
                             <p>設定每日房型價錢</p>
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/hotelorders.jsp">
+                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/ToHotelOrders">
                             <i class="material-icons">bookmark_border</i>
                             <p>查詢訂單紀錄</p>
                         </a>
