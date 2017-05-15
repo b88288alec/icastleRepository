@@ -51,6 +51,9 @@ public class RoomsServlet extends HttpServlet {
 			String pricePerPerson = request.getParameter("pricePerPerson");
 			String remark = request.getParameter("remark");
 			String avgPrice = request.getParameter("price");
+			String guestPolicies = request.getParameter("guestPolicies");
+			String cancelPolicies = request.getParameter("cancelPolicies");
+			
 			
 			RoomsService roomS = new RoomsService();
 			Integer stayDayNum = roomS.getstayDayNum(checkinDay, checkoutDay);
@@ -75,6 +78,8 @@ public class RoomsServlet extends HttpServlet {
 			orderMap.put("pricePerPerson", pricePerPerson);
 			orderMap.put("remark", remark);
 			orderMap.put("avgPrice", avgPrice);
+			orderMap.put("guestPolicies", guestPolicies);
+			orderMap.put("cancelPolicies", cancelPolicies);
 			
 			//放入request
 			session.setAttribute("orderMap", orderMap);
@@ -83,7 +88,7 @@ public class RoomsServlet extends HttpServlet {
 			session.setAttribute("totalPrice", totalPrice);
 			
 			//forward
-			rd = request.getRequestDispatcher("../orders/insert.jsp");
+			rd = request.getRequestDispatcher("../orders/order.jsp");
 			rd.forward(request, response);
 		}
 		
