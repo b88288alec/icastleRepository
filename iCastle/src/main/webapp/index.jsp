@@ -43,10 +43,15 @@
 				<div class="col-md-2 col-xs-12 col-sm-4" style="margin: 15px;">
 					<div class="input-group input-group-sm">
 						<p>關鍵字</p>
-						<input type="text" class="form-control" placeholder="輸入區域或飯店名稱"
-							name="type" />
+						<input type="text" class="form-control" placeholder="輸入區域或飯店名稱" id="type"
+							name="type" autocomplete="off"/>
 					</div>
+					<div id="div1"></div>
 				</div>
+				
+
+				
+				
 				<div class="clearfix visible-xs-block"></div>
 				<div class="col-md-2 col-xs-12 col-sm-4" style="margin: 15px;">
 					<div class="input-group input-group-sm">
@@ -169,7 +174,7 @@
 			$('#onekey').click(function() {
 				event.preventDefault();
     			$('input[name = "type"]').val('台北');
-    			$('input[name = "start"]').val('2017/06/02');
+    			$('input[name = "start"]').val('2017/06/02'); 
     			$('input[name = "end"]').val('2017/06/04');
     			$('input[name = "peopleNum"]').val(4);
 			});
@@ -180,7 +185,99 @@
 			$('input[name = "start"]').focus(function() {
 				$('input[name = "end"]').datepicker('hide');
 			})
+			
+			//輸入關鍵字後會自動完成
+// 			$('#type').keyup(function(){
+				
+				
+// 				$.ajax({
+// 				     'type':'get',
+// 				     'url':'AutoCompleteServlet.do',
+// 				     'dataType':'json',
+// 				     'data':{'type':$(this).val()}
+// 				}).done(function(datas){
+// 					console.log(datas);
+// 				});
+
+// 			});
 		});
+		
+		
+		//改呼叫 JsonSimpleDemo servlet 會回傳陣列的資料
+		var ajax = null, show = null, txt = null;
+		window.addEventListener("load", init, false);
+		
+		//載入網頁，進行初始化
+		function init() {
+			txt = document.getElementById("type");
+			txt.addEventListener("keyup", inputData, false);
+			show = document.getElementById("div1");
+		}
+		
+		//輸入資料後
+		function inputData(){
+			ajax = new XMLHttpRequest();
+			if (ajax != null){
+				console.log(txt.value);
+				if (txt.value == "" || txt.value == null){
+					if (show.childNodes.length > 0) {
+						show.removeChild(show.childNodes[0]); 
+					}
+				}
+					
+				ajax.addEventListener("readystatechange", getData);
+				ajax.open("GET", "AutoCompleteServlet.do?keyword="+txt.value, true);
+				ajax.send();
+				
+			}else
+				console.log('您的瀏覽器不支援AJAX');
+		}
+		
+		//servlet回傳資料
+		function getData() {
+			if (ajax.readyState==4){
+				if (ajax.status==200){
+					var datas = JSON.parse(ajax.responseText);
+					
+					if (show.childNodes.length > 0) {
+						show.removeChild(show.childNodes[0]);
+					}
+					
+					//建立List
+					createList(datas);
+					
+				}else
+					console.log(ajax.status+": "+ajax.statusText);
+			}
+		}
+		
+		//建立List
+		function createList(datas){
+			show.style.display = "block";
+			show.style.position = "absolute";
+			var eleDiv = document.createElement("div");
+			eleDiv.className = "list-group";
+			for (var j = 0, max = datas.length; j < max; j++) {
+				var txtBtn = document.createTextNode(datas[j]);
+				var eleBtn = document.createElement("button");
+				eleBtn.className = "list-group-item";
+				eleBtn.setAttribute("type", "button");
+				eleBtn.appendChild(txtBtn);
+
+				eleBtn.addEventListener("blur", function() {
+					show.style.display = "none";
+				}, false)
+					
+				//點擊選項後
+				eleBtn.addEventListener("click", function() {
+					
+					txt.value = this.firstChild.nodeValue;
+					show.style.display = "none";
+				}, false)
+				eleDiv.appendChild(eleBtn);
+			}
+			show.appendChild(eleDiv);
+		}
 	</script>
 </body>
 </html>
