@@ -32,9 +32,22 @@
 	rel="stylesheet" />
 
 <title>愛客宿-iCastle</title>
+<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+	#map {
+        height: 600px;
+        width: 850px;  
+	}
+	#smallImg{
+        -webkit-filter: brightness(70%); /* Safari 6.0 - 9.0 */
+		filter: brightness(70%);
+	}
+
+</style>
 </head>
 <body>
-	<!--開始導覽列-->
+	<!--開始導覽列--> 
 	<jsp:include page="../fragment/nav.jsp" />
 	<!--結束導覽列-->
 
@@ -188,13 +201,41 @@
 							</div>
 						</c:if>
 
-					</c:forEach>
+					</c:forEach> 
 
 
 					<div style="clear: both"></div>
 				</div>
 			</div>
 			<!--結束飯店圖片-->
+			
+			<!-- 地圖預覽 -->
+			<div id="smallImgDiv">
+				<img id="smallImg" src="../img/staticmap.png">
+			</div>
+			
+			<!-- 開始google地圖的Modal -->
+			<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">地圖</h4>
+			      </div>
+			      <div class="modal-body">
+			        
+			        <div id="map"></div>
+			        
+			      </div>
+<!-- 			      <div class="modal-footer"> -->
+<!-- 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+<!-- 			        <button type="button" class="btn btn-primary">Save changes</button> -->
+<!-- 			      </div> -->
+			    </div>
+			  </div>
+			</div>
+			<!-- 結束google地圖的Modal -->
+			
 			<!--聯絡與設施-->
 			<div class="col-md-12 connect-checkin">
 				<div class="col-md-4">
@@ -264,10 +305,8 @@
                 </div>-->
 			</div>
 			<!--結束聯絡與設施-->
-
-
-
-		</div>
+ 
+		</div> 
 
 		<div class="row" style="margin-bottom: 50px;">
 
@@ -408,9 +447,11 @@
 										name="afternoonTea" value="${room.afternoonTea}" /> <input
 										type="hidden" name="price" value="${room.price}" /> <%--                                     <input type="hidden" name="bedAddable" value="${room.bedAddable}" /> --%>
 										<input type="hidden" name="pricePerPerson"
-										value="${room.pricePerPerson}" /> <input type="hidden"
-										name="remark" value="${room.remark}" /> <input type="hidden"
-										name="action" value="getOrder" /></td>
+										value="${room.pricePerPerson}" />
+										<input type="hidden" name="remark" value="${room.remark}" />
+										<input type="hidden" name="action" value="getOrder" /></td>
+										<input type="hidden" name="guestPolicies" value="${hotelInfo.guestPolicies}"/>
+										<input type="hidden" name="cancelPolicies" value="${hotelInfo.cancelPolicies}"/>
 									<!-- 結束預訂按鈕以及傳送資訊 -->
 								</tr>
 							</form>
@@ -472,27 +513,54 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="col-md-12"
 				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
 				<div class="col-md-2">
 					<h4>交通方式</h4>
 				</div>
 				<div class="col-md-10">
-					${hotelInfo.transport}
+					<pre>${hotelInfo.transport}</pre>
 				</div>
 			</div>
+			
 			<div class="col-md-12"
 				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
 				<div class="col-md-2">
 					<h4>入住須知</h4>
 				</div>
 				<div class="col-md-10">
-					${hotelInfo.guestPolicies}
+					<pre>${hotelInfo.guestPolicies}</pre>
 				</div>
 			</div>
+			
+			<div class="col-md-12"
+				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
+				<div class="col-md-2">
+					<h4>取消規定</h4>
+				</div>
+				<div class="col-md-10">
+					<pre>${hotelInfo.cancelPolicies}</pre>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 
+	<!-- 開始飯店評論 -->
+	<div>
+	   <c:forEach var="comment" items="${NETList}">
+    <h5>${comment.name}</h5>
+    <h5>${comment.email}</h5>
+    <h5>${comment.comment}</h5>
+    	<c:forEach var="photo" items="${comment.ids}">
+    	<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}">
+    	</c:forEach>
+    
+    </c:forEach>
+	</div>
+	<!-- 結束飯店評論 -->
+	
 	<!--開始footer-->
 	<jsp:include page="../fragment/footer.jsp" />
 	<!--結束footer-->
@@ -515,37 +583,116 @@
 
 	<script src="../js/magnific-popup.js"></script>
 	<script src="../js/lightbox.min.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn7jC3DDQXAbDR9-IDsCnNL79Hsuz-55k&callback=initMap"
+  type="text/javascript"></script>
 
 	<script>
-		$(document)
-				.ready(
-						function() {
-							$('.popup-gallery')
-									.magnificPopup(
-											{
-												delegate : 'a',
-												type : 'image',
-												tLoading : 'Loading image #%curr%...',
-												mainClass : 'mfp-img-mobile',
-												gallery : {
-													enabled : true,
-													navigateByImgClick : true,
-													preload : [ 0, 1 ]
-												// Will preload 0 - before current, and 1 after the current image
-												},
-												image : {
-													tError : '<a href="%url%">The image #%curr%</a> could not be loaded.',
-													titleSrc : function(item) {
-														return item.el
-																.attr('title')
-																+ '<small>by Marsel Van Oosten</small>';
-													}
-												}
-											});
-							lightbox.option({
-								'wrapAround' : true
-							})
-						});
+		
+	//取得地址陣列
+	var address = [
+	<c:forEach var="addr" items="${address}" varStatus="loop">
+		'${addr}'
+		
+		<c:choose>
+			<c:when test="${loop.last}">
+				];
+			</c:when>
+			<c:otherwise>
+				,
+			</c:otherwise>
+		</c:choose>
+		
+	</c:forEach>
+	
+	//初始化地圖
+	
+	var map = null;
+	var currentCenter = null;
+	
+	function initMap(){
+		map = new google.maps.Map(document.getElementById("map"), {
+			center: {
+	                   "lat" : 25.042787,
+	                   "lng" : 121.509309
+	                },
+			zoom:14
+		});
+		var geocoder  = new google.maps.Geocoder();
+		geocodeAddress(geocoder, map);
+	} 
+	
+	//將地址轉換成坐標
+	function geocodeAddress(geocoder, map){
+		console.log(address[0]);
+		//設定center
+		geocoder.geocode( {"address" : address[0]}, function(results, status){
+			if (status == google.maps.GeocoderStatus.OK) {
+				console.log("成功轉換" + results[0].geometry.location);
+				//設定新的center
+				currentCenter = results[0].geometry.location; 
+				map.setCenter(currentCenter);
+			} else 
+				console.log("無法轉換..."+ status);
+		})
+
+		//設定marker
+		for (var i=0 ; i<address.length ; i++){
+			geocoder.geocode( {"address" : address[i]}, function(results, status){
+				if (status == google.maps.GeocoderStatus.OK) {
+					console.log("成功轉換" + results[0].geometry.location);
+					//設定新的center
+					if (i==0)
+						map.setCenter(results[0].geometry.location);
+					//設定marker
+					var marker = new google.maps.Marker({
+						map : map,
+						position : results[0].geometry.location
+					});
+				} else 
+					console.log("無法轉換..."+ status);
+			})
+		}
+	}
+	
+	$(document)
+	.ready(
+			function() {
+				$('.popup-gallery')
+						.magnificPopup(
+								{
+									delegate : 'a',
+									type : 'image',
+									tLoading : 'Loading image #%curr%...',
+									mainClass : 'mfp-img-mobile',
+									gallery : {
+										enabled : true,
+										navigateByImgClick : true,
+										preload : [ 0, 1 ]
+									// Will preload 0 - before current, and 1 after the current image
+									},
+									image : {
+										tError : '<a href="%url%">The image #%curr%</a> could not be loaded.',
+										titleSrc : function(item) {
+											return item.el
+													.attr('title')
+													+ '<small>by Marsel Van Oosten</small>';
+										}
+									}
+								});
+				lightbox.option({
+					'wrapAround' : true
+				})
+				
+				$('#smallImg').click(function(){
+					$('#myModal').modal('show');
+					
+				})
+				
+				$("#myModal").on("shown.bs.modal", function () {
+				    google.maps.event.trigger(map, "resize");
+					map.setCenter(currentCenter);
+				});
+			});
 	</script>
 </body>
 </html>

@@ -78,7 +78,6 @@
 										<div class="col-md-8">
 											<input name="email" type="text" class="form-control" id="email" onchange="onech()"
 												placeholder="輸入Email" value="${param.email}" />${errorMsgs.emailErr}
-												  <div id="span1" class="input-group-addon"><span id="sp2" class="glyphicon glyphicon-question-sign"></span></div>
 												   <div id="message"></div>
 										</div>
 								</div>

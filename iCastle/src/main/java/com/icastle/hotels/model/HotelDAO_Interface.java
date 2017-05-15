@@ -23,4 +23,6 @@ public interface HotelDAO_Interface {
 	public List<HotelandInfoVO> getHotelAndInfo();
 	//取得全部飯店
 	public List<HotelVO> getAll();
+	//輸入關鍵字查詢地區
+	public List<String> getZoneByKeyword(String keyword);
 }

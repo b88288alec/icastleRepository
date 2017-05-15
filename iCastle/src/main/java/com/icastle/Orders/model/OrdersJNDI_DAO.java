@@ -1502,4 +1502,42 @@ public class OrdersJNDI_DAO implements OrdersDAO_interface {
 		return null;
 	}
 
+	@Override
+	public List<OrdersChartVO> piechart_select_by_hotelId(Integer hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersChartVO> piechart_select_by_hotelId_year(Integer hotelId, Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersChartVO> piechart_select_by_hotelId_year_month(Integer hotelId, Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersChartVO> piechart_select_by_hotelId_orderstate(Integer hotelId, Boolean state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersChartVO> piechart_select_by_hotelId_year_orderstate(Integer hotelId, Boolean state,
+			Integer year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersChartVO> piechart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state,
+			Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -209,7 +209,7 @@
 									href="${pageContext.servletContext.contextPath}/general/members/createPw.jsp"
 									style="float: right">忘記密碼</a>
 							</div>
-							<button type="button" class="btn btn-primary btn-simple" style="margin-left:13%;" onclick="Auth();">點選這裡連結到Line Login</button>
+							<button type="button" class="btn btn-primary btn-simple btn-sm" style="margin-left:13%;" onclick="Auth();">點選這裡連結到Line Login</button>
 							<button type="button" id="member-onekey"
 								class="btn btn-primary btn-simple">一鍵輸入</button>
 							<button type="button" class="btn btn-default " data-dismiss="modal">取消</button>

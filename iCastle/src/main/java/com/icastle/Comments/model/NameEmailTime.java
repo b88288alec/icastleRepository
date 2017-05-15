@@ -1,6 +1,7 @@
 package com.icastle.Comments.model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class NameEmailTime {
 	private String name;
@@ -15,6 +16,7 @@ public class NameEmailTime {
 	private Date commentTime;
 	private String response;
 	private Date responseTime;
+	private List<Integer> ids;
 	
 	public Integer getId() {
 		return id;
@@ -87,6 +89,12 @@ public class NameEmailTime {
 	}
 	public void setResponseTime(Date responseTime) {
 		this.responseTime = responseTime;
+	}
+	public List<Integer> getIds() {
+		return ids;
+	}
+	public void setIds(List<Integer> ids) {
+		this.ids = ids;
 	}
 	
 	

@@ -30,6 +30,26 @@
     		width:600px;
     		overflow:auto;
     	}
+    	text.ct-label{
+    		font-size:32px;
+    	}
+    	.mastype{
+/*     		text-align:center; */
+    	}
+    	.gradeRound1{
+    		border:3px solid #75c2df;
+    		background-color:#75c2df;
+    		width: 0px;
+	    	height: 5px;
+    		margin-top: 6px;
+    	}
+    	.gradeRound2{
+    		border:3px solid #f05b4f;
+    		background-color:#f05b4f;
+    		width: 0px;
+	    	height: 5px;
+    		margin-top: 6px;
+    	}
     </style>
 
     <title>愛客宿-iCastle</title>
@@ -63,6 +83,7 @@
     			<option value="0">列表</option>
     			<option value="1">長條圖</option>
     			<option value="2">折線圖</option>
+    			<option value="3">圓餅圖</option>
     		</select></td>
     	</tr>
     </table>
@@ -195,7 +216,46 @@
 						state : $('#idSelectOrderState').val()
 					},
 					success : function(data){
-						new Chartist.Bar('.ct-chart', data ,{distributeSeries: true});
+						var chart = new Chartist.Bar('.ct-chart', data ,{distributeSeries: true});
+						// Let's put a sequence number aside so we can use it in the event callbacks
+						var seq = 0,
+						  delays = 10,
+						  durations = 200;
+
+						// Once the chart is fully created we reset the sequence
+						chart.on('created', function() {
+						  seq = 0;
+						});
+
+						// On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
+						chart.on('draw', function(data) {
+						  seq++;
+
+						  if(data.type === 'bar') {
+						    // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
+						    data.element.animate({
+						      opacity: {
+						        // The delay when we like to start the animation
+						        begin: seq * delays,
+						        // Duration of the animation
+						        dur: durations,
+						        // The value where the animation should start
+						        from: 0,
+						        // The value where it should end
+						        to: 1
+						      }
+						    });
+						  }
+						});
+
+						// For the sake of the example we update the chart every time it's created with a delay of 10 seconds
+						chart.on('created', function() {
+						  if(window.__exampleAnimateTimeout) {
+						    clearTimeout(window.__exampleAnimateTimeout);
+						    window.__exampleAnimateTimeout = null;
+						  }
+						  window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 600000);
+						});
 					}
 				})
 			}else if($('#idButton').val() == '2'){
@@ -208,12 +268,165 @@
 						month : $('#idSelectMonth').val(),
 						state : $('#idSelectOrderState').val()
 					},
-					success : function(data){
-						new Chartist.Bar('.ct-chart', data ,{fullWidth: true, chartPadding: {right: 40}});
+					success : function(datas){
+						$('div.row').remove();
+						var chart = new Chartist.Line('.ct-chart', datas, {fullWidth:true, chartPadding:{right: 40}, lineSmooth: Chartist.Interpolation.simple({divisor: 99}),showArea: true});
+					
+						// Let's put a sequence number aside so we can use it in the event callbacks
+						var seq = 0,
+						  delay = 10,
+						  delays = 15,
+						  durations = 600;
+
+						// Once the chart is fully created we reset the sequence
+						chart.on('created', function() {
+						  seq = 0;
+						});
+
+						// On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
+						chart.on('draw', function(data) {
+						  seq++;
+
+						  if(data.type === 'line' || data.type === 'area') {
+						    // If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
+						    data.element.animate({
+						      opacity: {
+						        // The delay when we like to start the animation
+						        begin: seq * delays + 1000,
+						        // Duration of the animation
+						        dur: durations,
+						        // The value where the animation should start
+						        from: 0,
+						        // The value where it should end
+						        to: 1
+						      }
+						    });
+						  } else if(data.type === 'label' && data.axis === 'x') {
+						    data.element.animate({
+						      y: {
+						        begin: seq * delay,
+						        dur: durations,
+						        from: data.y + 100,
+						        to: data.y,
+						        // We can specify an easing function from Chartist.Svg.Easing
+						        easing: 'easeOutQuart'
+						      }
+						    });
+						  } else if(data.type === 'label' && data.axis === 'y') {
+						    data.element.animate({
+						      x: {
+						        begin: seq * delay,
+						        dur: durations,
+						        from: data.x - 100,
+						        to: data.x,
+						        easing: 'easeOutQuart'
+						      }
+						    });
+						  } else if(data.type === 'point') {
+						    data.element.animate({
+						      x1: {
+						        begin: seq * delay,
+						        dur: durations,
+						        from: data.x - 10,
+						        to: data.x,
+						        easing: 'easeOutQuart'
+						      },
+						      x2: {
+						        begin: seq * delay,
+						        dur: durations,
+						        from: data.x - 10,
+						        to: data.x,
+						        easing: 'easeOutQuart'
+						      },
+						      opacity: {
+						        begin: seq * delay,
+						        dur: durations,
+						        from: 0,
+						        to: 1,
+						        easing: 'easeOutQuart'
+						      }
+						    });
+						  } else if(data.type === 'grid') {
+						    // Using data.axis we get x or y which we can use to construct our animation definition objects
+						    var pos1Animation = {
+						      begin: seq * delays,
+						      dur: durations,
+						      from: data[data.axis.units.pos + '1'] - 30,
+						      to: data[data.axis.units.pos + '1'],
+						      easing: 'easeOutQuart'
+						    };
+
+						    var pos2Animation = {
+						      begin: seq * delays,
+						      dur: durations,
+						      from: data[data.axis.units.pos + '2'] - 100,
+						      to: data[data.axis.units.pos + '2'],
+						      easing: 'easeOutQuart'
+						    };
+						  }
+						});
+
+						// For the sake of the example we update the chart every time it's created with a delay of 10 seconds
+						chart.on('created', function() {
+						  if(window.__exampleAnimateTimeout) {
+						    clearTimeout(window.__exampleAnimateTimeout);
+						    window.__exampleAnimateTimeout = null;
+						  }
+						  window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 600000);
+						});
+						
+						var dataname1 = datas.series[0].name + "年";
+						var datapic1 = $('<div></div>').addClass('col-md-1 gradeRound1');
+						var datashowname1 = $('<div></div>').addClass('col-md-1').append($('<p></p>').text(dataname1));
+						var dataname2 = datas.series[1].name + "年";
+						var datapic2 = $('<div></div>').addClass('col-md-1 gradeRound2');
+						var datashowname2 = $('<div></div>').addClass('col-md-1').append($('<p></p>').text(dataname2));
+						var dataground = $('<div></div>').addClass('row').append([datapic1,datashowname1,datapic2,datashowname2]);
+						$('#showData').after(dataground);
+						
 					}
 				})
 			}else{
-				
+				$.ajax({
+					type : 'GET',
+					url : '${pageContext.servletContext.contextPath}/hotelcenter/OrdersPieChartServlet',
+					data : {
+						hotelId : ${HotelLoginOK.hotelId},
+						year : $('#idSelectYear').val(),
+						month : $('#idSelectMonth').val(),
+						state : $('#idSelectOrderState').val()
+					},
+					success : function(data){
+						var options = {
+							labelInterpolationFnc: function(value) {
+								return value[0]
+							}
+						};
+
+						var responsiveOptions = [
+							['screen and (min-width: 640px)', {
+								chartPadding: 30,
+								labelOffset: 100,
+								labelDirection: 'explode',
+								labelInterpolationFnc: function(value) {
+									return value;
+								}
+							}],
+							['screen and (min-width: 1024px)', {
+								labelOffset: 10,
+								chartPadding: 20
+							}]
+						];
+
+						new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
+
+						var totalcount = 0;
+						for(i = 0; i < data.labels.length; i++){
+							totalcount = totalcount + data.series[i];
+						}
+						
+					}
+				})
 			}
 		}
 		

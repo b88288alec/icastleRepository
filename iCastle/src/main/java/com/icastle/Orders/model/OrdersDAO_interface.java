@@ -40,5 +40,12 @@ public interface OrdersDAO_interface {
 	public List<OrdersChartVO> chart_select_by_hotelId_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId, Boolean state);
 	public List<OrdersChartVO> chart_select_by_hotelId_year_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId, Boolean state, Integer year);
 	public List<OrdersChartVO> chart_select_by_hotelId_year_month_roomtpyeId_orderstate(Integer hotelId, Integer roomTypeId, Boolean state, Integer year, Integer month);
+//	業者搜尋圓餅圖
+	public List<OrdersChartVO> piechart_select_by_hotelId(Integer hotelId);
+	public List<OrdersChartVO> piechart_select_by_hotelId_year(Integer hotelId, Integer year);
+	public List<OrdersChartVO> piechart_select_by_hotelId_year_month(Integer hotelId, Integer year, Integer month);
+	public List<OrdersChartVO> piechart_select_by_hotelId_orderstate(Integer hotelId, Boolean state);
+	public List<OrdersChartVO> piechart_select_by_hotelId_year_orderstate(Integer hotelId, Boolean state, Integer year);
+	public List<OrdersChartVO> piechart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state, Integer year, Integer month);
 	
 }
