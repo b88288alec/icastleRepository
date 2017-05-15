@@ -1,44 +1,10 @@
-/*bootstarp navbar導覽列複寫*/
-.navbar, .navbar.navbar-default {
-    background-color: #f5e345;
-    border-color: #f5e345;
-    border-radius: 0;
-    width: 100%;
-    box-shadow: 0 0px 0px 0 ,0 0px 0px 0 ;
-    z-index: 3;
-    padding:0px;
-    color:gray;
-    border-bottom: 1px solid rgba(102, 97, 91, 0.3);
+.nav {
+    font-weight:bold;
 }
 
-    .navbar-default .navbar-nav > li > a {
-        font-family: 'Microsoft JhengHei';
-        font-weight: bold;
-        transition: 0.3s;
-    }
-
-        .navbar-default .navbar-nav > li > a:hover {
-            background-color: white;
-            border-bottom: 4px solid #00BCD4;
-            color: black;
-        }
-
-        .navbar-default .navbar-nav > li > a:focus {
-        }
-
-    .navbar-default .navbar-nav > .active > a,
-    .navbar-default .navbar-nav > .active > a:hover,
-    .navbar-default .navbar-nav > .active > a:focus {
-        background-color: white;
-        border-bottom: 4px solid #00BCD4;
-    }
-
-.navbar-brand {
-    margin: 0px;
-    padding: 12px 12px;
+.form-control, .form-group .form-control {
+    background-image:linear-gradient(#FF5722, #FF5722), linear-gradient(#4CAF50, #4CAF50)
 }
-/*bootstarp navbar導覽列複寫結束*/
-
 /*網頁字體及底色*/
 body {
     background-color: #FAFAFA;
@@ -46,25 +12,4 @@ body {
 }
 /*網頁字體及底色結束*/
 
-/*網頁footer*/
-.manager_footer {
-/*     height: 120px; */
-    background-color: #f5e345;
-    margin-top: 100px;
-    text-align: center;
-    padding-top: 0px;
-	padding-bottom: 0px;
-}
 
-    .manager_footer img {
-        margin-top: 20px;
-    }
-    
-
-.footer nav ul li {
-    display: inline-block;
-    padding: 10px 15px;
-    margin: 0px;
-    line-height: 20px;
-    text-align: center;
-/*網頁footer結束*/
