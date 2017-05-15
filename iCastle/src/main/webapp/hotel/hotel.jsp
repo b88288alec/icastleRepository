@@ -418,9 +418,11 @@
 										name="afternoonTea" value="${room.afternoonTea}" /> <input
 										type="hidden" name="price" value="${room.price}" /> <%--                                     <input type="hidden" name="bedAddable" value="${room.bedAddable}" /> --%>
 										<input type="hidden" name="pricePerPerson"
-										value="${room.pricePerPerson}" /> <input type="hidden"
-										name="remark" value="${room.remark}" /> <input type="hidden"
-										name="action" value="getOrder" /></td>
+										value="${room.pricePerPerson}" />
+										<input type="hidden" name="remark" value="${room.remark}" />
+										<input type="hidden" name="action" value="getOrder" /></td>
+										<input type="hidden" name="guestPolicies" value="${hotelInfo.guestPolicies}"/>
+										<input type="hidden" name="cancelPolicies" value="${hotelInfo.cancelPolicies}"/>
 									<!-- 結束預訂按鈕以及傳送資訊 -->
 								</tr>
 							</form>
@@ -482,6 +484,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="col-md-12"
 				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
 				<div class="col-md-2">
@@ -491,15 +494,27 @@
 					${hotelInfo.transport}
 				</div>
 			</div>
+			
 			<div class="col-md-12"
 				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
 				<div class="col-md-2">
 					<h4>入住須知</h4>
 				</div>
 				<div class="col-md-10">
-					${hotelInfo.guestPolicies}
+					<pre>${hotelInfo.guestPolicies}</pre>
 				</div>
 			</div>
+			
+			<div class="col-md-12"
+				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
+				<div class="col-md-2">
+					<h4>取消規定</h4>
+				</div>
+				<div class="col-md-10">
+					<pre>${hotelInfo.cancelPolicies}</pre>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 
