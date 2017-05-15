@@ -31,7 +31,9 @@
 	width: 1300px;
 	margin-top: 100px;
 }
-
+.material-icons.md-40 {
+	font-size: 40px;
+}
 </style>
 </head>
 <body>
@@ -43,33 +45,25 @@
 				<div class="row col-md-offset-5 " style="padding: 0px 50px">
 					<h2>會員中心</h2>
 				</div>
-					<div class="row col-md-offset-1" stdyle="padding: 0px 50px 50px 50px">
-						<div class="col-md-4">
+				
+					<div class="row col-md-offset-3" >
+						<div class="col-md-4" style="margin-top: 100px">
 							<!--如下-- 先進到member_profile.jsp頁面，當修改資料(送出表單時候)直接呼叫sevlet程式-->
 							<a href="${pageContext.servletContext.contextPath}/members/member_profile.jsp">
 								<button type="button" class="btn btn-white"
 									style="width: 250px; height: 250px">
-									<i class="material-icons md-170 ">location_city</i>
+									<i class="material-icons md-40">bubble_chart</i>
 									<p style="font-size: 20px">修改會員資料</p>
 								</button>
 							</a>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-4" style="margin-top: 100px">
 							<!--如下--直接呼叫sevlet將資料丟到member_historical_order.jsp顯示-->
 							<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">
 								<button type="button" class="btn btn-white"
 									style="width: 250px; height: 250px">
-									<i class="material-icons md-170">account_circle</i>
+									<i class="material-icons md-40">filter_none</i>
 									<p style="font-size: 20px">歷史訂單查詢</p>
-								</button>
-							</a>
-						</div>
-						<div class="col-md-4">
-							<a href="${pageContext.servletContext.contextPath}/members/#">
-								<button type="button" class="btn btn-white"
-									style="width: 250px; height: 250px">
-									<i class="material-icons md-170">account_circle</i>
-									<p style="font-size: 20px">評論</p>
 								</button>
 							</a>
 						</div>
@@ -78,22 +72,6 @@
 			</div><!-- <div class="col-md-12"> -->
 	</div><!-- div class="container" -->
 
-
-
-
-
-
-
-	<!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-	<!--     <div class="container" -->
-	<!-- 		style="background-color: white; padding-bottom: 100px;"> -->
-	<!-- 			<h1>會員中心</h1> -->
-	<!--如下-- 先進到member_profile.jsp頁面，當修改資料(送出表單時候)直接呼叫sevlet程式-->
-	<%-- 			<a href="${pageContext.servletContext.contextPath}/members/member_profile.jsp">修改會員資料</a> --%>
-	<!--如下--直接呼叫sevlet將資料丟到member_historical_order.jsp顯示-->
-	<%-- 			<a href="${pageContext.servletContext.contextPath}/members/MemberInformationCentre.do">歷史訂單查詢</a> --%>
-	<%-- 			<a href="${pageContext.servletContext.contextPath}/members/#">評論</a> --%>
-	<!-- 	</div> -->
 
 	<!--開始footer-->
 	<jsp:include page="../fragment/footer.jsp" />

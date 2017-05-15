@@ -211,9 +211,9 @@
 							</div>
 							<button type="button" class="btn btn-primary btn-simple btn-sm" style="margin-left:13%;" onclick="Auth();">點選這裡連結到Line Login</button>
 							<button type="button" id="member-onekey"
-								class="btn btn-primary btn-simple btn-sm">一鍵輸入</button>
-							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">取消</button>
-							<input type="submit" class="btn btn-primary btn-sm" value="登入"
+								class="btn btn-primary btn-simple">一鍵輸入</button>
+							<button type="button" class="btn btn-default " data-dismiss="modal">取消</button>
+							<input type="submit" class="btn btn-primary" value="登入"
 								style="float: right">
 						</form>
 					</div>
