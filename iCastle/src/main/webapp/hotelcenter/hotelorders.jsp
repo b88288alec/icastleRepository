@@ -36,6 +36,20 @@
     	.mastype{
 /*     		text-align:center; */
     	}
+    	.gradeRound1{
+    		border:3px solid #75c2df;
+    		background-color:#75c2df;
+    		width: 0px;
+	    	height: 5px;
+    		margin-top: 6px;
+    	}
+    	.gradeRound2{
+    		border:3px solid #f05b4f;
+    		background-color:#f05b4f;
+    		width: 0px;
+	    	height: 5px;
+    		margin-top: 6px;
+    	}
     </style>
 
     <title>愛客宿-iCastle</title>
@@ -255,6 +269,7 @@
 						state : $('#idSelectOrderState').val()
 					},
 					success : function(datas){
+						$('div.row').remove();
 						var chart = new Chartist.Line('.ct-chart', datas, {fullWidth:true, chartPadding:{right: 40}, lineSmooth: Chartist.Interpolation.simple({divisor: 99}),showArea: true});
 					
 						// Let's put a sequence number aside so we can use it in the event callbacks
@@ -359,7 +374,16 @@
 						  }
 						  window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 600000);
 						});
-
+						
+						var dataname1 = datas.series[0].name + "年";
+						var datapic1 = $('<div></div>').addClass('col-md-1 gradeRound1');
+						var datashowname1 = $('<div></div>').addClass('col-md-1').append($('<p></p>').text(dataname1));
+						var dataname2 = datas.series[1].name + "年";
+						var datapic2 = $('<div></div>').addClass('col-md-1 gradeRound2');
+						var datashowname2 = $('<div></div>').addClass('col-md-1').append($('<p></p>').text(dataname2));
+						var dataground = $('<div></div>').addClass('row').append([datapic1,datashowname1,datapic2,datashowname2]);
+						$('#showData').after(dataground);
+						
 					}
 				})
 			}else{
@@ -395,6 +419,12 @@
 						];
 
 						new Chartist.Pie('.ct-chart', data, options, responsiveOptions);
+
+						var totalcount = 0;
+						for(i = 0; i < data.labels.length; i++){
+							totalcount = totalcount + data.series[i];
+						}
+						
 					}
 				})
 			}
