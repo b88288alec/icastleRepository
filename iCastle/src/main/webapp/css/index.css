@@ -223,5 +223,23 @@
 .cardContext {
     margin: 0;
     padding: 12px 16px;
+    height:113px;
     font-family: 'Microsoft JhengHei';
+}
+
+.crop {
+    width: 300px;
+    height: 225px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 100%;
+    
+    margin: auto;
+}
+
+.arowHotel {
+	margin-bottom:10px;
+	
 }
