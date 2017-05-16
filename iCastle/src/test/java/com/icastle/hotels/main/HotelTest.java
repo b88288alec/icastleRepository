@@ -174,9 +174,16 @@ public class HotelTest {
 //		}
 		
 		//查詢未通過審核的飯店
-		HotelDAOHibernate dao = new HotelDAOHibernate();
-		List<HotelandInfoVO> hotelAndInfos = dao.getHotelAndInfo();
-		for (HotelandInfoVO hotelAndInfo : hotelAndInfos)
-			System.out.println(hotelAndInfo.getEmail());
+//		HotelService dao = new HotelService();
+//		List<HotelandInfoVO> hotelAndInfos = dao.getHotelAndInfo();
+//		for (HotelandInfoVO hotelAndInfo : hotelAndInfos)
+//			System.out.println(hotelAndInfo.getEmail());
+		
+		//輸入關鍵字查詢地區
+//		HotelService dao = new HotelService();
+//		String keyword = "台北";
+//		List<String> zones = dao.getZoneByKeyword(keyword);
+//		for (String s : zones)
+//			System.out.println(s);
 	}
 }

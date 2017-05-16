@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import com.icastle.Orders.model.OrdersService;
 import com.icastle.Orders.model.OrdersVO;
+import com.icastle.members.model.MembersVO;
 import com.icastle.orderfollowers.model.OrderFollowersVO;
 import com.icastle.rooms.model.RoomsService;
 
@@ -44,11 +45,12 @@ public class OrdersServlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		Map<String, String> orderMap = (Map) session.getAttribute("orderMap");
+		MembersVO member = (MembersVO) session.getAttribute("MemberLoginOK");
 		String action = req.getParameter("action");
 
 		if("keyin".equals(action.trim())){
 			try {
-				Integer memberId = new Integer(req.getParameter("memberId"));
+				Integer memberId = new Integer(member.getMemberId());
 				Integer roomId = new Integer(orderMap.get("roomId"));
 				Integer hotelId = new Integer(orderMap.get("hotelId"));
 				String hotelName = orderMap.get("hotelName");
@@ -85,7 +87,7 @@ public class OrdersServlet extends HttpServlet {
 				if (tea != null) {
 					afternoonTea = Boolean.valueOf(tea);
 				}
-				Integer price = new Integer(req.getParameter("price"));
+				Integer price = new Integer((Integer)session.getAttribute("totalPrice"));
 
 				String reservationer = req.getParameter("reservationer");
 				if (reservationer != "") {
@@ -101,9 +103,10 @@ public class OrdersServlet extends HttpServlet {
 					errorMsgs.put("bdate", "請輸入生日");
 				} else {
 					try {
-						bdate = new java.sql.Date(sdf.parse(req.getParameter("bdate")).getTime());
+						SimpleDateFormat sdfbd = new SimpleDateFormat("yyyy-MM-dd");
+						bdate = new java.sql.Date(sdfbd.parse(req.getParameter("bdate")).getTime());
 					} catch (ParseException e) {
-						errorMsgs.put("bdate", "輸入生日格式錯誤，請參照\"yyyy/mm/dd\"");
+						errorMsgs.put("bdate", "輸入生日格式錯誤，請參照\"yyyy-mm-dd\"");
 					}
 				}
 
@@ -150,7 +153,10 @@ public class OrdersServlet extends HttpServlet {
 				Set<OrderFollowersVO> orderFollowersVO = new LinkedHashSet<OrderFollowersVO>();
 
 				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher rd = req.getRequestDispatcher("insert.jsp");
+					for(String s : errorMsgs.keySet()){
+						System.out.println(s);
+					}
+					RequestDispatcher rd = req.getRequestDispatcher("order.jsp");
 					rd.forward(req, res);
 					return;
 				}
@@ -185,26 +191,14 @@ public class OrdersServlet extends HttpServlet {
 				ordersVO.setOrderState(orderState);
 				ordersVO.setOrderFollowersVO(orderFollowersVO);
 				
-				session.setAttribute("OrdersVO", ordersVO);
-
-				RequestDispatcher rd = req.getRequestDispatcher("creditCard.jsp");
-				rd.forward(req, res);
-				return;
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		if("check".equals(action.trim())){
-			try {
+//				下訂
 				RoomsService rs = new RoomsService();
 				rs.getOrderByAuto(Integer.parseInt(orderMap.get("roomId")), Integer.parseInt(orderMap.get("hotelId")), Integer.parseInt(orderMap.get("roomTypeId")), orderMap.get("checkinDay"), orderMap.get("checkoutDay"), (Integer)session.getAttribute("stayDayNum"), Integer.parseInt(orderMap.get("roomCount")));
 //				rs.getOrder(Integer.parseInt(orderMap.get("roomId")), (int) session.getAttribute("stayDayNum"),
 //						Integer.parseInt(orderMap.get("roomCount")));
 
 				OrdersService os = new OrdersService();
-				os.newOrder((OrdersVO)session.getAttribute("OrdersVO"));
+				os.newOrder(ordersVO);
 				
 				Enumeration en = session.getAttributeNames();
 				while(en.hasMoreElements()){
@@ -214,7 +208,7 @@ public class OrdersServlet extends HttpServlet {
 					}
 				}
 
-				res.sendRedirect("success.jsp");
+				res.sendRedirect("creditCard.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

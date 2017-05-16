@@ -27,6 +27,11 @@
 	href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 
 <title>愛客宿-iCastle</title>
+<style>
+#star1 {
+	color: gray;
+}
+</style>
 </head>
 <body>
 	<!--開始導覽列-->
@@ -83,7 +88,7 @@
 									<label class="control-label col-md-3" style="font-size: 18px;">飯店星等:</label>
 									<div class="col-md-9">
 										<select name="star" id="star" class="form-control" >
-											<option value="0">-</option>
+											<option id="star1" value="0">請選擇飯店星等</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -142,7 +147,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3" style="font-size: 18px;">交通方式:</label>
 									<div class="col-md-9">
-										<textarea name="transport"  class="form-control" 
+										<textarea name="transport"  class="form-control" rows="5"
 											placeholder="輸入交通方式"  >${param.transport}</textarea>${errMap.transportErr}
 									</div>
 								</div>
@@ -164,12 +169,12 @@
 								</div>
     							<input type="file" name="photo"> 
    									<div class="input-group col-md-9s"> 
-        								<input type="text" readonly="" class="form-control" placeholder="上傳照片">${errMap.photoErr} 
         									<span class="input-group-btn input-group-sm"> 
             									<button type="button" class="btn btn-just-icon btn-warning"> 
                 									<i class="material-icons">attach_file</i> 
              									</button>
-        									</span> 
+        									</span>
+        									<input type="text" readonly="" class="form-control" placeholder="上傳照片">${errMap.photoErr}
     								</div>
 								</div>
 							<div class="col-md-12">
@@ -185,7 +190,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3" style="font-size: 18px;">飯店介紹:</label>
 									<div class="col-md-9">
-										<textarea name="hotelProfile"  class="form-control" 
+										<textarea name="hotelProfile"  class="form-control" rows="5"
 											placeholder="輸入飯店介紹(基本300個字)"  >${param.hotelProfile}</textarea>${errMap.hotelProfileErr}
 									</div>
 								</div>
@@ -212,7 +217,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3" style="font-size: 18px;">入住須知:</label>
 									<div class="col-md-9">
-										<textarea name="hotelProfile"  class="form-control" rows="5"
+										<textarea name="guestPolicies"  class="form-control" rows="5"
 											placeholder="入住須知介紹(基本300個字)"  >${param.guestPolicies}</textarea>${errMap.guestPoliciesErr}
 									</div>
 								</div>
@@ -232,37 +237,37 @@
 									<div class="col-md-12">
 										<div class="checkbox" >
 											<label style="margin-left:20px">
-												<input type="checkbox" name="roomWifi" checked>室內wifi
+												<input type="checkbox" name="roomWifi" >室內wifi
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="hallWifi" checked>大廳wif
+												<input type="checkbox" name="hallWifi" >大廳wif
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="internet" checked>大廳網際網路
+												<input type="checkbox" name="internet" >大廳網際網路
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="mineralWater" checked>礦泉水
+												<input type="checkbox" name="mineralWater" >礦泉水
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="toiletUtensils" checked>盥洗用具
+												<input type="checkbox" name="toiletUtensils" >盥洗用具
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="hairDryer" checked>吹風機
+												<input type="checkbox" name="hairDryer" >吹風機
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="tv" checked>電視
+												<input type="checkbox" name="tv" >電視
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="gameRoom" checked>遊戲室 
+												<input type="checkbox" name="gameRoom" >遊戲室 
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="gym" checked>健身房
+												<input type="checkbox" name="gym" >健身房
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="spa" checked>溫泉
+												<input type="checkbox" name="spa" >溫泉
 											</label>
 											<label style="margin-left:20px">
-												<input type="checkbox" name="swimPools" checked>游泳池
+												<input type="checkbox" name="swimPools" >游泳池
 											</label>																																																																																																			
 										</div>
 									</div>
@@ -272,7 +277,7 @@
 							<input type="submit" class="btn btn-danger" value="註冊" style="float:right; margin:50px 50px 0px 50px; width:280px ">
 							<input type="reset" class="btn btn-default" value="清除" style="float:left; margin:50px 50px 0px 50px; width:280px ">
 							<button type="button" id="onekey" class="btn btn-primary btn-simple" style="float: right; margin:0px 50px 0px 20px">一鍵輸入</button>
-							<button type="button" id="but" class="btn btn-primary btn-simple" style="float: right; margin:0px 50px 0px 0px">秀value</button>	
+								
 																																																																																																																								
 						</div><!-- <div class="row modal-body "> -->
 					</form>
@@ -439,27 +444,34 @@
 		});
 		$('#onekey').click(function() {
 			event.preventDefault();
-			$('input[name = "hotelName"]').val('涵碧樓酒店');
+			$('input[name = "hotelName"]').val('麗京棧酒店 (Hotel Intrendy)');
 			$('input[name = "email"]').val('eeit93no1@gmail.com');
 			$('input[name = "pw"]').val('123456');
 			$('input[name = "pwcheck"]').val('123456');
-			$('#star').val('5');
+			$('#star').val('4');
 			$('input[name = "registerName"]').val('小智');
-			$('input[name = "registerId"]').val('南投縣第560號');
+			$('input[name = "registerId"]').val('新北市第560號');
 			$('input[name = "tel"]').val('0225694586');
-			$('input[name = "addr"]').val('南投縣魚池鄉中興路142號');
-			$('input[name = "zone"]').val('南投縣魚池鄉');
-			$(':input[name = "transport"]').text('搭乘火車到南投火車站接著轉6路公車');
-			$('input[name = "website"]').val('http://www.bilo.com');
+			$('input[name = "addr"]').val('新北市泰山區新北大道七段36號');
+			$('input[name = "zone"]').val('新北市泰山區');
+			$(':input[name = "transport"]').val('1.酒店提供付費接機服務，預約諮詢 information@richardson.com.tw'+
+					'2.搭乘國光客運1819號直達台北車站，轉乘台北捷運藍線至西門站4號出口， 即可抵達酒店。'+
+					'3.搭乘高鐵從桃園站到台北車站，轉乘台北捷運藍線至西門站4號出口， 即可抵達酒店。');
+			$('input[name = "website"]').val('http://www.intrendy.com');
 			
 			$('input[name = "photoDescription"]').val('飯店正面照');
 			
-			$(':input[name = "hotelProfile"]').val('位於日月潭湖畔');
+			$(':input[name = "hotelProfile"]').val('當您來訪台北市時，麗京棧酒店所提供的優質服務與高品質住宿將帶給您賓至如歸的享受。 在這裡，旅客可輕鬆前往市區內各大旅遊、購物、餐飲地點。 住宿位置優越讓旅客前往市區內的熱門景點變得方便快捷。');
 			$('input[name = "checkin"]').val('5:00 PM');
 			$('input[name = "checkout"]').val('9:00 AM');
-			$(':input[name = "guestPolicies"]').val('不可攜帶寵物入內');
-			$(':input[name = "cancelPolicies"]').val('不可以取消');
-			$('input[name = "roomWifi"]').prop('checked');
+			$(':input[name = "guestPolicies"]').val('禁止攜帶寵物入住，導盲犬除外。'+
+					'孩童收費標準＆加床規定:'+
+					'0至6歲(含)兒童在不加床之情況下可免費與大人同住。');
+			$(':input[name = "cancelPolicies"]').val('1.如欲取消或延期，將依照提前取消天數酌收取部分訂金，若以匯款退款者，需扣除銀行現金匯款匯費100元後，餘額訂金歸還。'+
+					'2.如因颱風或地震等天然災害或不可抗力之因素時，若發布警報，訂金可全額退還或延期三個月。'+ 
+					'3.取消訂房：請通知華安大飯店訂房組，由承辦之訂房人員取消訂房，以確定完成訂房取消作業。');
+			$('input[name = "roomWifi"]').prop('checked', "true");
+			$('input[name = "hallWifi"]').prop('checked', "true");
 		});
 		$('#but').click(function(){
 			console.log($('#photo'));

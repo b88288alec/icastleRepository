@@ -67,8 +67,8 @@ public class FakeDatas extends HttpServlet {
 			for(int j = 1; j <= 4; j++){
 				
 //				一年12個月，照淡旺季準備輸入訂單
-				for(int i = 0; i < 12; i++){
-					java.sql.Date start = new java.sql.Date(new GregorianCalendar(2016, i, 1).getTimeInMillis());
+				for(int i = 0; i < 7; i++){
+					java.sql.Date start = new java.sql.Date(new GregorianCalendar(2017, i, 1).getTimeInMillis());
 					java.sql.Date end = null;
 					
 //					計算大小月日期
@@ -77,13 +77,13 @@ public class FakeDatas extends HttpServlet {
 						case 5:
 						case 8:
 						case 10:
-							end = new java.sql.Date(new GregorianCalendar(2016, i, 30).getTimeInMillis());
+							end = new java.sql.Date(new GregorianCalendar(2017, i, 30).getTimeInMillis());
 							break;
 						case 1:
-							end = new java.sql.Date(new GregorianCalendar(2016, i, 29).getTimeInMillis());
+							end = new java.sql.Date(new GregorianCalendar(2017, i, 29).getTimeInMillis());
 							break;
 						default:
-							end = new java.sql.Date(new GregorianCalendar(2016, i, 31).getTimeInMillis());
+							end = new java.sql.Date(new GregorianCalendar(2017, i, 31).getTimeInMillis());
 							break;
 					}
 					
@@ -152,7 +152,11 @@ public class FakeDatas extends HttpServlet {
 						
 //						取得入住退房日
 						java.sql.Date checkin = room.getRoomDate();
-						java.sql.Timestamp ordered = new java.sql.Timestamp(checkin.getTime() - (long)(Math.random()*31536000000.0));
+						long timemin = 0;
+						do{
+							timemin = (long)(Math.random()*31536000000.0);
+						}while(timemin >= new GregorianCalendar(2017,5,26).getTimeInMillis());
+						java.sql.Timestamp ordered = new java.sql.Timestamp(checkin.getTime() - timemin);
 						
 //						取消訂單
 						StringBuffer endsb = new StringBuffer();
@@ -167,83 +171,83 @@ public class FakeDatas extends HttpServlet {
 //						endsb.append("'" +  + "'" + ",");
 						
 //						2016連假機率增加
-						double lv = 1.0;
-						switch(String.valueOf(checkin)){
-							case "2016-01-01":
-							case "2016-01-02":
-							case "2016-01-03":
-							case "2016-02-06":
-							case "2016-02-07":
-							case "2016-02-08":
-							case "2016-02-09":
-							case "2016-02-10":
-							case "2016-02-11":
-							case "2016-02-27":
-							case "2016-02-28":
-							case "2016-02-29":
-							case "2016-04-02":
-							case "2016-04-03":
-							case "2016-04-04":
-							case "2016-04-05":
-							case "2016-06-09":
-							case "2016-06-10":
-							case "2016-06-11":
-							case "2016-06-12":
-							case "2016-09-15":
-							case "2016-09-16":
-							case "2016-09-17":
-							case "2016-09-18":
-							case "2016-10-08":
-							case "2016-10-09":
-							case "2016-10-10":
-							case "2016-12-31":
-								lv = 6.0;
-								break;
-							case "2016-09-10":
-								lv = 0.25;
-								break;
-						}
-						
-//						2017連假機率增加
 //						double lv = 1.0;
 //						switch(String.valueOf(checkin)){
+//							case "2016-01-01":
+//							case "2016-01-02":
+//							case "2016-01-03":
+//							case "2016-02-06":
+//							case "2016-02-07":
+//							case "2016-02-08":
+//							case "2016-02-09":
+//							case "2016-02-10":
+//							case "2016-02-11":
+//							case "2016-02-27":
+//							case "2016-02-28":
+//							case "2016-02-29":
+//							case "2016-04-02":
+//							case "2016-04-03":
+//							case "2016-04-04":
+//							case "2016-04-05":
+//							case "2016-06-09":
+//							case "2016-06-10":
+//							case "2016-06-11":
+//							case "2016-06-12":
+//							case "2016-09-15":
+//							case "2016-09-16":
+//							case "2016-09-17":
+//							case "2016-09-18":
+//							case "2016-10-08":
+//							case "2016-10-09":
+//							case "2016-10-10":
 //							case "2016-12-31":
-//							case "2017-01-01":
-//							case "2017-01-02":
-//							case "2017-01-27":
-//							case "2017-01-28":
-//							case "2017-01-29":
-//							case "2017-01-30":
-//							case "2017-01-31":
-//							case "2017-02-01":
-//							case "2017-02-25":
-//							case "2017-02-26":
-//							case "2017-02-27":
-//							case "2017-02-28":
-//							case "2017-04-01":
-//							case "2017-04-02":
-//							case "2017-04-03":
-//							case "2017-04-04":
-//							case "2017-04-29":
-//							case "2017-04-30":
-//							case "2017-05-01":
-//							case "2017-05-27":
-//							case "2017-05-28":
-//							case "2017-05-29":
-//							case "2017-05-30":
-//							case "2017-10-04":
-//							case "2017-10-07":
-//							case "2017-10-08":
-//							case "2017-10-09":
-//							case "2017-10-10":
 //								lv = 6.0;
 //								break;
-//							case "2017-02-18":
-//							case "2017-06-03":
-//							case "2017-06-30":
+//							case "2016-09-10":
 //								lv = 0.25;
 //								break;
 //						}
+						
+//						2017連假機率增加
+						double lv = 1.0;
+						switch(String.valueOf(checkin)){
+							case "2016-12-31":
+							case "2017-01-01":
+							case "2017-01-02":
+							case "2017-01-27":
+							case "2017-01-28":
+							case "2017-01-29":
+							case "2017-01-30":
+							case "2017-01-31":
+							case "2017-02-01":
+							case "2017-02-25":
+							case "2017-02-26":
+							case "2017-02-27":
+							case "2017-02-28":
+							case "2017-04-01":
+							case "2017-04-02":
+							case "2017-04-03":
+							case "2017-04-04":
+							case "2017-04-29":
+							case "2017-04-30":
+							case "2017-05-01":
+							case "2017-05-27":
+							case "2017-05-28":
+							case "2017-05-29":
+							case "2017-05-30":
+							case "2017-10-04":
+							case "2017-10-07":
+							case "2017-10-08":
+							case "2017-10-09":
+							case "2017-10-10":
+								lv = 6.0;
+								break;
+							case "2017-02-18":
+							case "2017-06-03":
+							case "2017-06-30":
+								lv = 0.25;
+								break;
+						}
 
 //						週末機率增加
 						double week = 0.5;
