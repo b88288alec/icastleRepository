@@ -18,7 +18,7 @@
     <link href="${pageContext.servletContext.contextPath}/css/manager_template.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/checkbox.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/fullcalendar.css" rel="stylesheet" />
-    <!--<link href="${pageContext.servletContext.contextPath}/css/_materialFullCalendar.css" rel="stylesheet" />-->
+    <link href="${pageContext.servletContext.contextPath}/css/_materialFullCalendar.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
     <title></title>
     <style>
