@@ -153,11 +153,12 @@
 		$('#idSelectOrderState').on("change", orders);
 		$('#idSelectMonth').on("change", orders);
 		$('#idSelectDate').on("change", orders);
-		$('#idtbody').on("click","button[name='updatechange']", updatememo);
+		$('body').on("click","button[name='updatechange']", updatememo);
 		
 // 		觸發的方法
 
 		function updatememo(){
+	
 			var orderid = $(this).attr('id');
 			var tdid = ('#td' + orderid);
 			var myMemoId = ('#w' + orderid);
@@ -232,6 +233,8 @@
 						r.append([d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13]);
 						tb.append([r,d0]);
 					})
+//				 		修正modal的bug
+						$('.modal').appendTo("body");
 				}
 			})
 			}else if($('#idButton').val() == '1'){
