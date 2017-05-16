@@ -23,7 +23,12 @@
 <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
 <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
 <!--以下請加入各自頁面的css-->
-
+<style>
+	h1,h3{
+		margin:0 auto;
+		text-align:center;
+	}
+</style>
 <title>愛客宿-iCastle</title>
 </head>
 <body>

@@ -35,15 +35,19 @@
 <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 400px;
-        width: 700px;
-      }
-      /* Optional: Makes the sample page fill the window. */
+	#map {
+        height: 600px;
+        width: 850px;  
+	}
+	#smallImg{
+        -webkit-filter: brightness(70%); /* Safari 6.0 - 9.0 */
+		filter: brightness(70%);
+	}
+
 </style>
 </head>
 <body>
-	<!--開始導覽列-->
+	<!--開始導覽列--> 
 	<jsp:include page="../fragment/nav.jsp" />
 	<!--結束導覽列-->
 
@@ -197,7 +201,7 @@
 							</div>
 						</c:if>
 
-					</c:forEach>
+					</c:forEach> 
 
 
 					<div style="clear: both"></div>
@@ -205,7 +209,32 @@
 			</div>
 			<!--結束飯店圖片-->
 			
-			<div id="map"></div>
+			<!-- 地圖預覽 -->
+			<div id="smallImgDiv">
+				<img id="smallImg" src="../img/staticmap.png">
+			</div>
+			
+			<!-- 開始google地圖的Modal -->
+			<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+			  <div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">地圖</h4>
+			      </div>
+			      <div class="modal-body">
+			        
+			        <div id="map"></div>
+			        
+			      </div>
+<!-- 			      <div class="modal-footer"> -->
+<!-- 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+<!-- 			        <button type="button" class="btn btn-primary">Save changes</button> -->
+<!-- 			      </div> -->
+			    </div>
+			  </div>
+			</div>
+			<!-- 結束google地圖的Modal -->
 			
 			<!--聯絡與設施-->
 			<div class="col-md-12 connect-checkin">
@@ -491,7 +520,7 @@
 					<h4>交通方式</h4>
 				</div>
 				<div class="col-md-10">
-					${hotelInfo.transport}
+					<pre>${hotelInfo.transport}</pre>
 				</div>
 			</div>
 			
@@ -596,35 +625,7 @@
   type="text/javascript"></script>
 
 	<script>
-		$(document)
-				.ready(
-						function() {
-							$('.popup-gallery')
-									.magnificPopup(
-											{
-												delegate : 'a',
-												type : 'image',
-												tLoading : 'Loading image #%curr%...',
-												mainClass : 'mfp-img-mobile',
-												gallery : {
-													enabled : true,
-													navigateByImgClick : true,
-													preload : [ 0, 1 ]
-												// Will preload 0 - before current, and 1 after the current image
-												},
-												image : {
-													tError : '<a href="%url%">The image #%curr%</a> could not be loaded.',
-													titleSrc : function(item) {
-														return item.el
-																.attr('title')
-																+ '<small>by Marsel Van Oosten</small>';
-													}
-												}
-											});
-							lightbox.option({
-								'wrapAround' : true
-							})
-						});
+		
 	//取得地址陣列
 	var address = [
 	<c:forEach var="addr" items="${address}" varStatus="loop">
@@ -642,8 +643,12 @@
 	</c:forEach>
 	
 	//初始化地圖
+	
+	var map = null;
+	var currentCenter = null;
+	
 	function initMap(){
-		var map = new google.maps.Map(document.getElementById("map"), {
+		map = new google.maps.Map(document.getElementById("map"), {
 			center: {
 	                   "lat" : 25.042787,
 	                   "lng" : 121.509309
@@ -662,7 +667,8 @@
 			if (status == google.maps.GeocoderStatus.OK) {
 				console.log("成功轉換" + results[0].geometry.location);
 				//設定新的center
-				map.setCenter(results[0].geometry.location);
+				currentCenter = results[0].geometry.location; 
+				map.setCenter(currentCenter);
 			} else 
 				console.log("無法轉換..."+ status);
 		})
@@ -685,6 +691,46 @@
 			})
 		}
 	}
+	
+	$(document)
+	.ready(
+			function() {
+				$('.popup-gallery')
+						.magnificPopup(
+								{
+									delegate : 'a',
+									type : 'image',
+									tLoading : 'Loading image #%curr%...',
+									mainClass : 'mfp-img-mobile',
+									gallery : {
+										enabled : true,
+										navigateByImgClick : true,
+										preload : [ 0, 1 ]
+									// Will preload 0 - before current, and 1 after the current image
+									},
+									image : {
+										tError : '<a href="%url%">The image #%curr%</a> could not be loaded.',
+										titleSrc : function(item) {
+											return item.el
+													.attr('title')
+													+ '<small>by Marsel Van Oosten</small>';
+										}
+									}
+								});
+				lightbox.option({
+					'wrapAround' : true
+				})
+				
+				$('#smallImg').click(function(){
+					$('#myModal').modal('show');
+					
+				})
+				
+				$("#myModal").on("shown.bs.modal", function () {
+				    google.maps.event.trigger(map, "resize");
+					map.setCenter(currentCenter);
+				});
+			});
 	</script>
 </body>
 </html>

@@ -96,13 +96,15 @@
 		
 			<c:forEach var="hotel" items="${hotels}" varStatus="loop">
 				<c:if test="${loop.index%3==0}">
-					<div class="row">			
+					<div class="row arowHotel">			
 				</c:if>
 			
 				<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;">
-					<div class="card" style="width: 300px;">
-						<img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${hotel.hotelId}&type=hotelid"
-							style="width: 100%;" />
+					<div class="card" style="width:300px; heigth:225px">
+						<div class="crop">					
+							<img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${hotel.hotelId}&type=hotelid"
+							style="width: 100%; max-height: 100%" />
+						</div>
 						<div class="cardContext">
 							<h4>${hotel.hotelName}</h4>
 							<p>${hotel.zone}</p>
@@ -114,6 +116,7 @@
 					</div>			
 				</c:if>
 			</c:forEach>
+	</div>
 	</div>
 <!-- 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;"> -->
 <!-- 				<div class="card" style="width: 300px;"> -->
