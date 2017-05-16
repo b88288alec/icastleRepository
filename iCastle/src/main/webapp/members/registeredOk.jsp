@@ -5,7 +5,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <meta http-equiv=refresh content="5;url=../../index.jsp">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
@@ -21,69 +20,79 @@
 </head>
 <body>
     <!--開始導覽列-->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" height:55px;">
-        <div class="container-fluid">
-            <!--logo-->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/index.jsp">
-                    <img alt="Brand" height="30" src="${pageContext.servletContext.contextPath}/img/logo.png" />
-                </a>
-            </div>
-            <!--結束logo-->
-            <div class="collapse navbar-collapse" id="navbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="${pageContext.servletContext.contextPath}/index.jsp">首頁</a></li>
-                    <li><a href="#">活動</a></li>
-                    <li><a href="#">討論區</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-cog"></span>會員中心</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> 登入</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登出</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!--結束導覽列-->
-    <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
+		<jsp:include page="../fragment/nav.jsp"/>
+ 	<!--結束導覽列-->
+ 	<div class="row col-md-offset-3" style="margin-top: 100px">
+		<div class="col-md-8" >
+			<div class="page-header">
 
-<div class="member" style="margin-top:56px">
-<h1>恭喜您註冊成功</h1>
-<table>
-<tr><td><span>帳號:${membersVO.email}</span></td><td><br></td></tr>
-<tr><td><span>密碼:${membersVO.pw}</span></td><td><br></td></tr>
-<tr><td><span>性名:${membersVO.name}</span></td><td><br></td></tr>
-<tr><td><span>性別:${membersVO.gender}</span></td><td><br></td></tr>
-<tr><td><span>生日:${membersVO.bdate}</span></td><td><br></td></tr>
-<tr><td><span>地址:${membersVO.addr}</span></td><td><br></td></tr>
-<tr><td><span>電話:${membersVO.tel}</span></td><td><br></td></tr>
-<tr><td><span>身分證字號:${membersVO.personId}</span></td><td><br></td></tr>
-<tr><td><span>國家:${membersVO.country}</span></td><td><br></td></tr>
-<tr><td><span>護照:${membersVO.passport}</span></td><td><br></td></tr>
 
-</table>
-<input type="button" value="回首頁" onclick="location.href='${pageContext.servletContext.contextPath}/index.jsp'">
+    <!--開始本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
+
+<h1 style="font-weight:bold">恭喜您註冊成功</h1>
+
+<div class="card " style="padding: 0px 50px 50px 50px">
+<div class="member" style="margin-top:30px">
+<div class="row modal-body">
+<div class="container-fluid" style="font-weight:bold ; font-size: 20px ">
+<div class="row">
+  <div class="col-md-2">帳號:</div>
+  <div class="col-md-1">${membersVO.email}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">密碼:</div>
+  <div class="col-md-1">${membersVO.pw}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">姓名:</div>
+  <div class="col-md-2">${membersVO.name}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">性別:</div>
+  <div class="col-md-1">${membersVO.gender}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">生日:</div>
+  <div class="col-md-3">${membersVO.bdate}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">地址:</div>
+  <div class="col-md-5">${membersVO.addr}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">電話:</div>
+  <div class="col-md-1">${membersVO.tel}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">身分證字號:</div>
+  <div class="col-md-1">${membersVO.personId}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">國家:</div>
+  <div class="col-md-2">${membersVO.country}</div>
+</div>
+<div class="row">
+  <div class="col-md-2">護照:</div>
+  <div class="col-md-1">${membersVO.passport}</div>
 </div>
 
-    
-    
-    
-    
-    
-    
-    <!--footer-->
-    <div class="footer">
-        <img src="${pageContext.servletContext.contextPath}/img/logo.png" width="100" />
-        <h6>版權所有©2005 – 2017, iCastle Company Pte. Ltd.保留所有權利</h6>
-        <h6>iCastle.com隸屬於Priceline集團—線上旅遊業及相關服務的全球領導品牌。</h6>
-    </div>
-    <!--結束footer-->
+</div>
+
+</div>
+</div>
+</div>
+
+
+<button class="btn btn-success"  onclick="location.href='${pageContext.servletContext.contextPath}/index.jsp'">回首頁</button>
+<%-- <input type="button" value="回首頁" onclick="location.href='${pageContext.servletContext.contextPath}/index.jsp'"> --%>
+
+</div>
+</div>
+</div>
+ <!--結束本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
+    <!--開始footer-->
+		<jsp:include page="../fragment/footer.jsp"/>
+	<!--結束footer-->
 </body>
 <script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
