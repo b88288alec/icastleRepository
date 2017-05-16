@@ -88,14 +88,14 @@
 					<c:choose>
 						<c:when test="${servletPath == '/hotelcenter/setRoomType.jsp'}">
 							<li class="active"><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/setRoomType.jsp">
+								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowRoomType.do">
 									<i class="material-icons">add_circle_outline</i>
 									<p>編輯飯店房型</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/setRoomType.jsp">
+								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowRoomType.do">
 									<i class="material-icons">add_circle_outline</i>
 									<p>編輯飯店房型</p>
 							</a></li>

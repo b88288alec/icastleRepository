@@ -27,6 +27,8 @@
 <link
 	href="${pageContext.servletContext.contextPath}/css/manager_template.css"
 	rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/checkbox.css" rel="stylesheet" />
 <title>iCastle飯店管理中心</title>
 <style>
         table label {
@@ -84,7 +86,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:150px;">
-                                                                    <input class="mdl-textfield__input" type="text" id="roomTypeName${status.count}" name="roomTypeName" value="${roomTypeVO.roomTypeName }">
+                                                                    <input class="mdl-textfield__input" type="text" id="roomTypeName${status.count}" name="roomTypeName" value="${roomTypeVO.roomTypeName }" disabled>
                                                                     <label class="mdl-textfield__label" for="roomTypeName${status.count}">請輸入房型名稱</label>
                                                                 </div>
                                                             </div>
@@ -94,15 +96,17 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="select">
-                                                                    <select name="peopleNum">
-                                                                        <option value="1">1</option>
-                                                                        <option value="2">2</option>
-                                                                        <option value="3">3</option>
-                                                                        <option value="4">4</option>
-                                                                        <option value="5">5</option>
-                                                                        <option value="6">6</option>
-                                                                        <option value="7">7</option>
-                                                                        <option value="8">8</option>
+                                                                    <select name="peopleNum" disabled>
+                                                                    	<c:forEach begin="1" end="8" varStatus="innerStatus">
+                                                                    		<c:choose>
+                                                                    		<c:when test="${roomTypeVO.peopleNum == innerStatus.count }">
+                                                                    		<option value="${innerStatus.count }" selected>${innerStatus.count }</option>
+                                                                    		</c:when>
+                                                                    		<c:otherwise>
+                                                                    		<option value="${innerStatus.count }">${innerStatus.count }</option>
+                                                                    		</c:otherwise>
+                                                                    		</c:choose>
+                                                                    	</c:forEach>
                                                                     </select>
                                                                     <div class="select__arrow"></div>
                                                                 </div>
@@ -116,7 +120,7 @@
                                                                     <td><p style="font-size: 16px;padding-top:10px;">平日價</p></td>
                                                                     <td>
                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100px;margin-left:15px;">
-                                                                            <input class="mdl-textfield__input" type="text" id="weekdaysPrice${status.count}" name="weekdaysPrice" pattern="-?[0-9]*(\.[0-9]+)?">
+                                                                            <input class="mdl-textfield__input" type="text" id="weekdaysPrice${status.count}" name="weekdaysPrice" pattern="-?[0-9]*(\.[0-9]+)?" value="${roomTypeVO.weekdaysPrice }" disabled>
                                                                             <label class="mdl-textfield__label" for="weekdaysPrice${status.count}">請輸入房型價格</label>
                                                                         </div>
                                                                     </td>
@@ -127,7 +131,7 @@
                                                                     </td>
                                                                     <td>
                                                                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100px;margin-left:15px;">
-                                                                                <input class="mdl-textfield__input" type="text" id="holidayPrice${status.count}" name="holidayPrice">
+                                                                                <input class="mdl-textfield__input" type="text" id="holidayPrice${status.count}" name="holidayPrice" value="${roomTypeVO.holidayPrice }" disabled>
                                                                                 <label class="mdl-textfield__label" for="holidayPrice${status.count}">請輸入房型價格</label>
                                                                             </div>
                                                                     </td>
@@ -138,7 +142,7 @@
                                                                     </td>
                                                                     <td>
                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100px;margin-left:15px;">
-                                                                            <input class="mdl-textfield__input" type="text" id="seasonPrice${status.count}" name="seasonPrice">
+                                                                            <input class="mdl-textfield__input" type="text" id="seasonPrice${status.count}" name="seasonPrice" value="${roomTypeVO.seasonPrice }" disabled>
                                                                             <label class="mdl-textfield__label" for="seasonPrice${status.count}">請輸入房型價格</label>
                                                                         </div>
                                                                     </td>
@@ -146,13 +150,13 @@
                                                                 <tr>
                                                                     <td>
                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80px;">
-                                                                            <input class="mdl-textfield__input" type="text" id="customizedName${status.count}" name="customizedName">
+                                                                            <input class="mdl-textfield__input" type="text" id="customizedName${status.count}" name="customizedName" value="${roomTypeVO.customizedName }" disabled>
                                                                             <label class="mdl-textfield__label" for="customizedName${status.count}">自訂價格</label>
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100px;margin-left:15px;">
-                                                                            <input class="mdl-textfield__input" type="text" id="customizedPrice${status.count}" name="customizedPrice">
+                                                                            <input class="mdl-textfield__input" type="text" id="customizedPrice${status.count}" name="customizedPrice" value="${roomTypeVO.customizedPrice}" disabled>
                                                                             <label class="mdl-textfield__label" for="customizedPrice${status.count}">請輸入房型價格</label>
                                                                         </div>
                                                                     </td>
@@ -166,7 +170,14 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox" for="meals0${status.count}">
-                                                                            <input type="checkbox" id="meals0${status.count}" class="mdl-checkbox__input" name="meals0">
+                                                                        <c:choose>
+                                                                        <c:when test="${roomTypeVO.breakfast }">
+                                                                        <input type="checkbox" id="meals0${status.count}" class="mdl-checkbox__input" name="meals0" value="0" checked disabled>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                        <input type="checkbox" id="meals0${status.count}" class="mdl-checkbox__input" name="meals0" value="0" disabled>
+                                                                        </c:otherwise>
+                                                                        </c:choose>
                                                                             <span class="mdl-checkbox__label">早餐</span>
                                                                         </label>
                                                                     </div>
@@ -174,7 +185,14 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox" for="meals1${status.count}">
-                                                                            <input type="checkbox" id="meals1${status.count}" class="mdl-checkbox__input" name="meals1">
+                                                                        <c:choose>
+                                                                        <c:when test="${roomTypeVO.afternoonTea }">
+                                                                        <input type="checkbox" id="meals1${status.count}" class="mdl-checkbox__input" name="meals${status.count - 1}" value="1" checked disabled>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                        <input type="checkbox" id="meals1${status.count}" class="mdl-checkbox__input" name="meals${status.count - 1}" value="1" disabled>
+                                                                        </c:otherwise>
+                                                                        </c:choose>    
                                                                             <span class="mdl-checkbox__label">下午茶</span>
                                                                         </label>
                                                                     </div>
@@ -182,7 +200,14 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox" for="meals2${status.count}">
-                                                                            <input type="checkbox" id="meals2${status.count}" class="mdl-checkbox__input" name="meals2">
+                                                                        <c:choose>
+                                                                        <c:when test="${roomTypeVO.dinner }">
+                                                                        <input type="checkbox" id="meals2${status.count}" class="mdl-checkbox__input" name="meals${status.count - 1}" value="2" checked disabled>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                        <input type="checkbox" id="meals2${status.count}" class="mdl-checkbox__input" name="meals${status.count - 1}" value="2" disabled>
+                                                                        </c:otherwise>
+                                                                        </c:choose>
                                                                             <span class="mdl-checkbox__label">晚餐</span>
                                                                         </label>
                                                                     </div>
@@ -193,11 +218,26 @@
                                                     <td>
                                                         <div class="col-md-12">
                                                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect myradio" for="bedAddable0_yes${status.count}">
-                                                                <input type="radio" id="bedAddable0_yes${status.count}" class="mdl-radio__button" name="bedAddable0" value="true">
+                                                            <c:choose>
+                                                            <c:when test="${roomTypeVO.bedAddable }">
+                                                            <input type="radio" id="bedAddable0_yes${status.count}" class="mdl-radio__button" name="bedAddable${status.count - 1}" value="true" checked disabled>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <input type="radio" id="bedAddable0_yes${status.count}" class="mdl-radio__button" name="bedAddable${status.count - 1}" value="true" disabled>
+                                                            </c:otherwise>
+                                                            </c:choose>
                                                                 <span class="mdl-radio__label">可加床</span>
                                                             </label>
                                                             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect myradio" for="bedAddable0_no${status.count}">
-                                                                <input type="radio" id="bedAddable0_no${status.count}" class="mdl-radio__button" name="bedAddable0" value="false">
+                                                            <c:choose>
+                                                            <c:when test="${roomTypeVO.bedAddable }">
+                                                            <input type="radio" id="bedAddable0_no${status.count}" class="mdl-radio__button" name="bedAddable${status.count - 1}" value="false" disabled>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <input type="radio" id="bedAddable0_no${status.count}" class="mdl-radio__button" name="bedAddable${status.count - 1}" value="false" checked disabled>
+                                                            </c:otherwise>
+                                                            </c:choose>
+                                                                
                                                                 <span class="mdl-radio__label">不可加床</span>
                                                             </label>
                                                         </div>
@@ -206,7 +246,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80px;">
-                                                                    <input class="mdl-textfield__input" type="text" id="pricePerPerson${status.count}" name="pricePerPerson">
+                                                                    <input class="mdl-textfield__input" type="text" id="pricePerPerson${status.count}" name="pricePerPerson" value="${roomTypeVO.pricePerPerson }" disabled>
                                                                     <label class="mdl-textfield__label" for="pricePerPerson${status.count}">請輸入費用</label>
                                                                 </div>
                                                             </div>
@@ -217,7 +257,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mdl-textfield mdl-js-textfield" style="width:150px;">
-                                                                    <textarea class="mdl-textfield__input" type="text" rows="6" id="remark${status.count}" name="remark"></textarea>
+                                                                    <textarea class="mdl-textfield__input" type="text" rows="6" id="remark${status.count}" name="remark" disabled>${roomTypeVO.remark }</textarea>
                                                                     <label class="mdl-textfield__label" for="remark${status.count}">請輸入備註</label>
                                                                 </div>
                                                             </div>
@@ -228,23 +268,28 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80px;">
-                                                                    <input class="mdl-textfield__input" type="text" id="roomNumber${status.count}" name="roomNumber">
+                                                                    <input class="mdl-textfield__input" type="text" id="roomNumber${status.count}" name="roomNumber" value="${roomTypeVO.roomNumber }" disabled>
                                                                     <label class="mdl-textfield__label" for="roomNumber${status.count}">請輸入房間數量</label>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <c:if test="${status.last }">
+                                                <c:set var="times" value="${status.count }" scope="page"></c:set>
+                                                </c:if>
                                                 </c:forEach>
                                             </tbody>
                                         </table>
+                                        <input type="hidden" name="count"/>
                                         <input type="hidden" name="times"/>
-                                        <input type="submit" class="btn btn-primary" value="登入"
+                                        
+                                        <input type="submit" class="btn btn-info" value="確定送出" class="pull-right"
                                                style="float: right">
                                     </form>
-                                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" id="add">
-                                        <i class="material-icons">add</i>
-                                    </button>
+                                    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="add">
+  										<i class="material-icons">add</i>
+									</button>
                                 </div>
                             </div>
                         </div>
@@ -278,9 +323,34 @@
 	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
 
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/sweetalert2.min.js"></script>
 <script>
     $(function () {
-        var count = 1;
+        
+    	<c:if test="${not empty error}">
+    	swal({
+    		title: '${error.none}',
+			type: 'error'
+			});
+    	</c:if>
+    	<c:if test="${RegisterPath == '/hotelcenter/roomtype/RegisterRoomType.do' and updatecount != 0}">
+    	swal({
+    		title: '成功新增${updatecount}筆房型',
+			type: 'success'
+			});
+    	</c:if>
+    	
+    	
+    	<c:choose>
+    	<c:when test="${times > 0}">
+    	var count = ${times};
+    	</c:when>
+    	<c:otherwise>
+    	var count = 0;
+    	</c:otherwise>
+    	</c:choose>
+    	
+        var times = 0;
 
         $('#add').click(function () {
             var tbody = $('#room');
@@ -382,7 +452,7 @@
             var breakfast_row = $('<div></div>').addClass("row");
             var breakfast_col = $('<div></div>').addClass('col-md-12');
             var breakfast_label = $('<label></label>').addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox").attr("for", "meals0" + "_" + count);
-            var breakfast_input = $('<input/>').addClass("mdl-checkbox__input").attr({ type: "checkbox", id: "meals0" + "_" + count, name: "meals0" });
+            var breakfast_input = $('<input/>').addClass("mdl-checkbox__input").attr({ type: "checkbox", id: "meals0" + "_" + count, name: "meals" + count, value: "0" });
             var breakfast_span = $('<span></span>').addClass("mdl-checkbox__label").text("早餐");
             breakfast_label.append([breakfast_input, breakfast_span]);
             breakfast_col.append(breakfast_label);
@@ -391,7 +461,7 @@
             var afternoontea_row = $('<div></div>').addClass("row");
             var afternoontea_col = $('<div></div>').addClass('col-md-12');
             var afternoontea_label = $('<label></label>').addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox").attr("for", "meals1" + "_" + count);
-            var afternoontea_input = $('<input/>').addClass("mdl-checkbox__input").attr({ type: "checkbox", id: "meals1" + "_" + count, name: "meals1" });
+            var afternoontea_input = $('<input/>').addClass("mdl-checkbox__input").attr({ type: "checkbox", id: "meals1" + "_" + count, name: "meals" + count, value: "1" });
             var afternoontea_span = $('<span></span>').addClass("mdl-checkbox__label").text("下午茶");
             afternoontea_label.append([afternoontea_input, afternoontea_span]);
             afternoontea_col.append(afternoontea_label);
@@ -400,7 +470,7 @@
             var dinner_row = $('<div></div>').addClass("row");
             var dinner_col = $('<div></div>').addClass('col-md-12');
             var dinner_label = $('<label></label>').addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox").attr("for", "meals2" + "_" + count);
-            var dinner_input = $('<input/>').addClass("mdl-checkbox__input").attr({ type: "checkbox", id: "meals2" + "_" + count, name: "meals2" });
+            var dinner_input = $('<input/>').addClass("mdl-checkbox__input").attr({ type: "checkbox", id: "meals2" + "_" + count, name: "meals" + count, value: "2" });
             var dinner_span = $('<span></span>').addClass("mdl-checkbox__label").text("晚餐");
             dinner_label.append([dinner_input, dinner_span]);
             dinner_col.append(dinner_label);
@@ -463,8 +533,10 @@
             tbody.append(tr);
             componentHandler.upgradeDom();
 
+            times++
             count++;
-            $('input[name="times"]').val(count);
+            $('input[name="times"]').val(times);
+            $('input[name="count"]').val(count);
         })
     })
 </script>
