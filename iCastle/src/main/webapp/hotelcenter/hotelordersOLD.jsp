@@ -1,30 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
-	name='viewport' />
-<meta name="viewport" content="width=device-width" />
-<link
-	href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css"
-	rel="stylesheet" />
-<link
-	href="${pageContext.servletContext.contextPath}/css/material-dashboard.css"
-	rel="stylesheet" />
-<!--     Fonts and icons     -->
-<link
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
-	rel="stylesheet">
-<link
-	href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons'
-	rel='stylesheet' type='text/css'>
-<link
-	href="${pageContext.servletContext.contextPath}/css/manager_template.css"
-	rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="${pageContext.servletContext.contextPath}/css/material-kit.css" rel="stylesheet" />
+<!-- <link -->
+<%-- 	href="${pageContext.servletContext.contextPath}/css/paper-dashboard.css" --%>
+<!-- 	rel="stylesheet" /> -->
+    <link href="${pageContext.servletContext.contextPath}/css/template.css" rel="stylesheet" />
 <!--     圖表用CSS -->
     <link href="${pageContext.servletContext.contextPath}/css/chartist.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
@@ -40,9 +33,9 @@
     	text.ct-label{
     		font-size:32px;
     	}
-/*     	.mastype{ */
+    	.mastype{
 /*     		text-align:center; */
-/*     	} */
+    	}
     	.gradeRound1{
     		border:3px solid #75c2df;
     		background-color:#75c2df;
@@ -59,19 +52,16 @@
     	}
     </style>
 
-<title>iCastle飯店管理中心</title>
+    <title>愛客宿-iCastle</title>
 </head>
 <body>
-	<!--開始左側及上方導覽列-->
-	<jsp:include page="../fragment/hotelManagement.jsp" />
-	<!--開始左側及上方導覽列-->
-
-	<!--內容區塊-->
-	<div class="content">
-		<div class="container-fluid">
-			<div class="row">
-			
-	<table class="table">
+    <!--開始導覽列-->
+		<jsp:include page="../fragment/nav.jsp"/>
+	<!--結束導覽列-->
+	
+    <div class="container" style="margin-top:56px">
+<%--     <form action="${pageContext.servletContext.contextPath}/hotelcenter/OrdersListServlet" method="post"> --%>
+    <table class="table">
     	<tr>
     		<td><span>房型名稱:</span>
     			<select id='idSelectRoomTypeName' name="RTN">
@@ -109,40 +99,26 @@
     		</tbody>
     	</table>
     </div>
+<!--     </form> -->
+    </div>
     
-			</div>
-		</div>
-	</div>
-	<!--內容區塊-->
-
-	<!--開始footer-->
-	<jsp:include page="../fragment/hotelManagementFooter.jsp" />
+    <!--開始footer-->
+		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->
 </body>
+<script src="${pageContext.servletContext.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
 
-<script
-	src="${pageContext.servletContext.contextPath}/js/jquery-3.2.1.min.js"></script>
-<script
-	src="${pageContext.servletContext.contextPath}/js/bootstrap.min.js"></script>
-<script
-	src="${pageContext.servletContext.contextPath}/js/material.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/nouislider.min.js"></script>
 
-<script
-	src="${pageContext.servletContext.contextPath}/js/chartist.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/bootstrap-datepicker.js"></script>
 
-<script
-	src="${pageContext.servletContext.contextPath}/js/bootstrap-notify.js"></script>
-
-<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js"></script>
-
-<script
-	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
-
+<script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 
 <script src="${pageContext.servletContext.contextPath}/js/calendar.js"></script>
 <!-- 圖表用JS -->
-<%-- <script src="${pageContext.servletContext.contextPath}/js/chartist.min.js"></script> --%>
+<script src="${pageContext.servletContext.contextPath}/js/chartist.min.js"></script>
 
 <script>
 	$(function(){
@@ -219,13 +195,7 @@
 						
 // 						綁定跳出彈跳頁面
 						var oId = ('#' + did);
-						var btn = $('<button></button>').attr('data-toggle', 'modal').attr('data-target', oId).text(value.orderState);
-						
-						if(value.orderState == '已取消'){
-							btn.attr('class', 'btn btn-primary btn-danger');
-						}else{
-							btn.attr('class', 'btn btn-primary btn-success');
-						}
+						var btn = $('<button></button>').attr('class', 'btn btn-primary').attr('data-toggle', 'modal').attr('data-target', oId).text(value.orderState);
 						
 						d13.append(btn);
 						d0.append(content);
@@ -299,7 +269,7 @@
 						state : $('#idSelectOrderState').val()
 					},
 					success : function(datas){
-						$('#showdatapic').remove();
+						$('div.row').remove();
 						var chart = new Chartist.Line('.ct-chart', datas, {fullWidth:true, chartPadding:{right: 40}, lineSmooth: Chartist.Interpolation.simple({divisor: 99}),showArea: true});
 					
 						// Let's put a sequence number aside so we can use it in the event callbacks
@@ -411,7 +381,7 @@
 						var dataname2 = datas.series[1].name + "年";
 						var datapic2 = $('<div></div>').addClass('col-md-1 gradeRound2');
 						var datashowname2 = $('<div></div>').addClass('col-md-1').append($('<p></p>').text(dataname2));
-						var dataground = $('<div></div>').addClass('row').attr('id','showdatapic').append([datapic1,datashowname1,datapic2,datashowname2]);
+						var dataground = $('<div></div>').addClass('row').append([datapic1,datashowname1,datapic2,datashowname2]);
 						$('#showData').after(dataground);
 						
 					}
@@ -462,5 +432,4 @@
 		
 	});
 </script>
-
 </html>

@@ -10,13 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.icastle.Comments.model.CommentService;
 
 /**
  * Servlet implementation class Response
  */
-@WebServlet("/comment/Response")
+@WebServlet("/hotelcenter/Response")
 public class Response extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,12 +44,17 @@ public class Response extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
 		int commentId = Integer.parseInt(request.getParameter("hiddeninput"));
+		System.out.println("response的: "+commentId);
 		String hostResponse = request.getParameter("textareavalue");
+
+		int page = Integer.parseInt(request.getParameter("formInput"));
 		
-//		System.out.println(commentId);
-//		System.out.println(hostResponse);
+		String servletPath = request.getServletPath();
+//		System.out.println(servletPath);
 		
+			
 	    Map<String,String> ErrorMessage = new HashMap<String,String>();
 		
 		if(hostResponse.isEmpty()!=true ){
@@ -62,6 +68,10 @@ public class Response extends HttpServlet {
 		comtService.response(commentId,d,hostResponse);
 		
 		request.setAttribute("error",ErrorMessage);
+		request.setAttribute("page", page);
+		request.setAttribute("servletPath",servletPath);
+//		request.setAttribute("page",page);
+				
         RequestDispatcher rd = request.getRequestDispatcher("HostComment");
         rd.forward(request, response);
 		

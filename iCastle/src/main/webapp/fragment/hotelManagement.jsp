@@ -24,35 +24,52 @@
 						<c:when test="${servletPath  == '/hotelcenter/hotelcenter.jsp'}">
 							<li class="active"><a href="${pageContext.servletContext.contextPath}/hotelcenter/hotelcenter.jsp"> <i
 									class="material-icons">dashboard</i>
-									<p>總攬</p>
+									<p>總覽</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="${pageContext.servletContext.contextPath}/hotelcenter/hotelcenter.jsp"> <i class="material-icons">dashboard</i>
-									<p>總攬</p>
+									<p>總覽</p>
 							</a></li>
 						</c:otherwise>
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/ShowHotelInfo.do'}">
+						<c:when test="${servletPath == '/hotelcenter/updateHotelInfo.jsp'}">
 							<li class="active"><a
 								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelInfo.do">
 									<i class="material-icons">location_city</i>
-									<p>飯店資料</p>
+									<p>修改飯店資料</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
 								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelInfo.do">
 									<i class="material-icons">location_city</i>
-									<p>飯店資料</p>
+									<p>修改飯店資料</p>
 							</a></li>
 						</c:otherwise>
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/ShowHotelPhoto.do'}">
+						<c:when test="${servletPath == '/hotelcenter/updateHotelPw.jsp'}">
+							<li class="active"><a
+								href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelPw.jsp">
+									<i class="material-icons">location_city</i>
+									<p>修改密碼</p>
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a
+								href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelPw.jsp">
+									<i class="material-icons">location_city</i>
+									<p>修改密碼</p>
+							</a></li>
+						</c:otherwise>
+					</c:choose>
+
+					<c:choose>
+						<c:when test="${servletPath == '/hotelcenter/hotelphoto.jsp'}">
 							<li class="active"><a
 								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelPhoto.do">
 									<i class="material-icons">picture_in_picture_alt</i>
@@ -128,7 +145,7 @@
 							</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="#"> <i class="material-icons">comment</i>
+							<li><a href="${pageContext.servletContext.contextPath}/hotelcenter/HostComment?page=1"> <i class="material-icons">comment</i>
 									<p>查詢評論</p>
 							</a></li>
 						</c:otherwise>

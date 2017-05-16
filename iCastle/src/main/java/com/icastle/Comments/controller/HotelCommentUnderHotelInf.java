@@ -58,7 +58,6 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 			NET = new NameEmailTime();
 			
 			membersVO = memberService.findByPrimaryKey(comt.getEmail());
-			System.out.println(membersVO.getName());
 			NET.setName(membersVO.getName());
 			NET.setEmail(comt.getEmail());
 			NET.setAvgScore(comt.getAvgScore());
@@ -71,17 +70,11 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 			NET.setResponse(comt.getResponse());
 			NET.setResponseTime(comt.getResponseTime());
 			ids = comtPhotoService.findByIds(comt.getCommentId());
-//            for(Integer i :ids){
-//            	comtPhotoService.findById(i);
-//            	
-//            }
 			NET.setIds(ids);
 			NETList.add(NET);
 			
 		}
-		
-		System.out.println(NETList.size());
-		
+			
 		request.setAttribute("NETList",NETList);
 		RequestDispatcher rd = request.getRequestDispatcher("../hotel/hotel.jsp");
 		rd.forward(request, response);

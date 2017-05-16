@@ -38,59 +38,59 @@
 		<jsp:include page="../fragment/nav.jsp"/>
 	<!--結束導覽列-->
 	   <div style="margin-top:60px">
-    <table class="table">
-    <thead>
-        <tr>
-            <th class="text-center">編號</th>
-            <th>會員姓名</th>
-            <th>會員信箱</th>
-            <th>會員評論時間</th>
-            <th class="text-right">查看評論</th>
-            <th class="text-right">回覆評論</th>
-        </tr>
-    </thead>
-    <tbody>
+       		<table class="table">
+    		<thead>
+        		<tr>
+            		<th class="text-center">編號</th>
+            		<th>會員姓名</th>
+            		<th>會員信箱</th>
+            		<th>會員評論時間</th>
+            		<th class="text-right">查看評論</th>
+            		<th class="text-right">回覆評論</th>
+        		</tr>
+    		</thead>
+    		<tbody>
  
-         <c:forEach var="comment" items="${commentData}">
-         <c:if test="${comment.response == null }">
-         <tr>       
-            <td name="firstId" class="text-center">
-            ${comment.id}
-            </td>
+         		<c:forEach var="comment" items="${commentData}">
+         			<c:if test="${comment.response == null }">
+         				<tr>       
+            			<td name="firstId" class="text-center">
+            			${comment.id}
+            			</td>
                      
-            <td  id="memberName${comment.commentId}">
-            ${comment.name}
-            </td>
+            			<td  id="memberName${comment.commentId}">
+            			${comment.name}
+            			</td>
    
-            <td>
-            ${comment.email}
-            </td>
+            			<td>
+            			${comment.email}
+            			</td>
             
-            <td>
-            ${comment.commentTime}
-            </td>
+            			<td>
+            			${comment.commentTime}
+            			</td>
             
-            <td class="td-actions text-right">
+            			<td class="td-actions text-right">
                        	
-            	<button type="button"  class="btn btn-info btn-simple btn-xs" id="${comment.commentId}" value="${comment.commentId}" name="ButtonCheck">
-                	<i class="fa fa-user"></i>
-                </button>
+            			<button type="button"  class="btn btn-info btn-simple btn-xs" id="${comment.commentId}" value="${comment.commentId}" name="ButtonCheck">
+                			<i class="fa fa-user"></i>
+                		</button>
                              
-            </td>
-            <td class="td-actions text-right">
+            			</td>
+            			<td class="td-actions text-right">
             
-            	<button type="button"  class="btn btn-info btn-simple btn-xs" name="ButtonResponse" value="${comment.commentId}">
-                    <i class="fa fa-user"></i>
-                </button>	
+            			<button type="button"  class="btn btn-info btn-simple btn-xs" name="ButtonResponse" value="${comment.commentId}">
+                    		<i class="fa fa-user"></i>
+               			</button>	
             
             
-            </td>
-            </tr>
-            </c:if>
-            </c:forEach> 
-    </tbody>
-</table>
-</div>
+           				 </td>
+           				 </tr>
+            		</c:if>
+            	</c:forEach> 
+    		</tbody>
+			</table>
+		</div>
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
     <!-- Modal Core -->
