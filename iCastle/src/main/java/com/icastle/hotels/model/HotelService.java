@@ -32,12 +32,32 @@ public class HotelService {
 	//忘記密碼時系統會產生隨機數作為新的密碼
 	public String createPw(Integer hotelId){
 		HotelVO hotelvo = dao.findByPrimaryKey(hotelId);
-		Random ran = new Random();
-		int range = 999999;
-		String newpw = String.valueOf(ran.nextInt(range));
+
+		String newpw = randomNum();
+		
 		hotelvo.setPw(newpw);
 		dao.update(hotelvo);
 		return newpw;
+	}
+	
+	public static String randomNum(){
+		Random ran = new Random();
+		int range = 62;
+		int num = 0;
+		
+		StringBuilder randomnum = new StringBuilder();
+
+		//隨機產生10個0~35的數字
+		for (int i=0 ; i<10 ; i++){
+			num = ran.nextInt(range);
+			if (num < 10)
+				randomnum.append(num);//0~9
+			else if (num >= 10 && num < 36)
+				randomnum.append((char)(num + 55));//10~35 to 大寫英文
+			else
+				randomnum.append((char)(num + 61));//10~35 to 小寫英文
+		}
+		return randomnum.toString() ;
 	}
 	
 	//修改飯店狀態(管理員同意上架或將飯店下架)

@@ -240,3 +240,8 @@
 .material-icons.orange500 {
     color: #FF5722;
 }
+
+pre {
+	background-color: transparent;
+	border: 0;
+}
