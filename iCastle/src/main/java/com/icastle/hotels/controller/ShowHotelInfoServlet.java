@@ -27,7 +27,7 @@ public class ShowHotelInfoServlet extends HttpServlet {
 		//查詢飯店info
 		InfoService infoServ = new InfoService();
 		InfoVO hotelInfo = infoServ.findByHotelId(hotelvo.getHotelId());
-		session.setAttribute("HotelInfo", hotelInfo); 
+		session.setAttribute("HotelInfo", hotelInfo);  
 		
 		//轉交到view
 		RequestDispatcher rd = request.getRequestDispatcher("updateHotelInfo.jsp");

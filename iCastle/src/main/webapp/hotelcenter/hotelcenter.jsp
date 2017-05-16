@@ -35,7 +35,12 @@
 	<!--內容區塊-->
 	<div class="content">
 		<div class="container-fluid">
-			<div class="row"></div>
+			<div class="row">
+				<c:if test="${HotelLoginOK.hotelState == 0}">
+					<p>您的帳號尚未通過審核，請耐心等候審核</p>
+					<p>您的帳號在通過審核前無法使用任何功能</p>
+				</c:if>
+			</div>
 		</div>
 	</div>
 	<!--內容區塊-->
