@@ -117,6 +117,7 @@
 				</c:if>
 			</c:forEach>
 	</div>
+	</div>
 <!-- 			<div class="col-md-3 col-xs-12 col-sm-4" style="margin-right: 60px;"> -->
 <!-- 				<div class="card" style="width: 300px;"> -->
 <%-- 					<img src="${pageContext.servletContext.contextPath}/img/3843_15070211000031541467.jpg" --%>

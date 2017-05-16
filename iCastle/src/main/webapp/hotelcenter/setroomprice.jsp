@@ -18,7 +18,7 @@
     <link href="${pageContext.servletContext.contextPath}/css/manager_template.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/checkbox.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/fullcalendar.css" rel="stylesheet" />
-    <!--<link href="${pageContext.servletContext.contextPath}/css/_materialFullCalendar.css" rel="stylesheet" />-->
+    <link href="${pageContext.servletContext.contextPath}/css/_materialFullCalendar.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
     <title></title>
     <style>
@@ -220,9 +220,9 @@
                         checkbox_div.append([label_weekdaysPrice, label_holidayPrice, label_seasonPrice, label_customizedPrice]);
                     })
                 })
-                   componentHandler.upgradeElements($(selector + ' label.mdl-radio').get());
-                console.log($(selector + ' label.mdl-radio').get());
-                   componentHandler.upgradeElements($('input[type=radio]').get());
+//                    componentHandler.upgradeElements($(selector + ' label.mdl-radio').get());
+//                 console.log($(selector + ' label.mdl-radio').get());
+//                    componentHandler.upgradeElements($('input[type=radio]').get());
 //                 componentHandler.upgradeDom();
         }
 
