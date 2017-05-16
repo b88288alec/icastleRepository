@@ -127,7 +127,7 @@
 							<div class="form-group">
 								<label for="email" class="control-label col-md-2" style="font-size: 16px;">密碼:</label>
 								<div class="col-md-8">
-									<input class="form-control" placeholder="輸入密碼" name="pw" value="${MemberLoginOK.pw}" />
+									<input type="password" class="form-control" placeholder="輸入密碼" name="pw" value="${MemberLoginOK.pw}" />
 								</div>
 							</div>
 						</div>
