@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,11 +21,12 @@ import org.json.simple.JSONObject;
 import com.icastle.Comments.model.CommentService;
 import com.icastle.Comments.model.CommentVO;
 import com.icastle.commentphotos.model.CommentPhotosService;
+import com.icastle.hotels.model.HotelVO;
 
 /**
  * Servlet implementation class CommentCheck
  */
-@WebServlet("/comment/CommentCheck")
+@WebServlet("/hotelcenter/CommentCheck")
 public class CommentCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,6 +44,7 @@ public class CommentCheck extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int value = Integer.parseInt(request.getParameter("ButtonCheck"));
+
 		
 		CommentVO comtVO = new CommentVO();
 		CommentService comtService = new CommentService();
@@ -69,6 +72,7 @@ public class CommentCheck extends HttpServlet {
 		JSONArray jsonArray = new JSONArray();
 		jsonArray.add(ObjectToJSON);
 		
+		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		out.println(jsonArray);

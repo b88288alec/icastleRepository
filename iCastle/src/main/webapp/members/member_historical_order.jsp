@@ -47,7 +47,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-      <form action="../comment/CommentServlet" method="post" enctype="multipart/form-data">
+      <form action="CommentServlet" method="post" enctype="multipart/form-data">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <input type="hidden" name="hotelId">
         <input type="hidden" name="orderId">

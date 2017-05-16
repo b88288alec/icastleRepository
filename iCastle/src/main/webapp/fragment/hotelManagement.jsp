@@ -52,10 +52,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="${pageContext.servletContext.contextPath}/hotelcenter/HostComment?page=1">
                             <i class="material-icons">comment</i>
                             <p>查詢評論</p>
-                        </a>
+                        </a>    
+                        
                     </li>
                 </ul>
             </div>

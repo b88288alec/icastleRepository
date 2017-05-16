@@ -66,7 +66,7 @@ public class MemberInformationCentre extends HttpServlet {
 //		}
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("../comment/CommentServlet");//!!!!
+		RequestDispatcher rd = request.getRequestDispatcher("CommentServlet");//!!!!
 		rd.forward(request, response);
 		
 	}

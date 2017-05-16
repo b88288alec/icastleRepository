@@ -31,9 +31,9 @@
 	<!--開始左側及上方導覽列-->
 	<jsp:include page="../fragment/hotelManagement.jsp" />
 	<!--開始左側及上方導覽列-->
-
-	<!--內容區塊-->
-	<div class="content">
+	
+		<!--內容區塊-->
+    <div class="content">
 		<div class="container-fluid">
 			<div class="row"></div>
 		</div>
