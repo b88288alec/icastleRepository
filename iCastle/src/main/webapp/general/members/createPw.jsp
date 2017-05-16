@@ -42,14 +42,6 @@
 .button--ujarak::before {
 	background: #a0a4a7;
 }
-/* .button--ujarak:hover { */
-/* 	color: rgb(255, 255, 255); */
-/* 	border-color: #ffaf25; */
-/* } */
-/* .bg-1 .button { */
-/* 	color: #787878; */
-/* 	border-color: #787878; */
-/* } */
 </style>
 </head>
 <body>
