@@ -548,17 +548,55 @@
 	</div>
 
 	<!-- 開始飯店評論 -->
-	<div>
-	   <c:forEach var="comment" items="${NETList}">
-    <h5>${comment.name}</h5>
-    <h5>${comment.email}</h5>
-    <h5>${comment.comment}</h5>
-    	<c:forEach var="photo" items="${comment.ids}">
-    	<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}">
-    	</c:forEach>
+	<!-- ================原本code============================== -->
+<!-- 	<div> -->
+<%-- 	   <c:forEach var="comment" items="${NETList}"> --%>
+<%--     <h5>${comment.name}</h5> --%>
+<%--     <h5>${comment.email}</h5> --%>
+<%--     <h5>${comment.comment}</h5> --%>
+<%--     	<c:forEach var="photo" items="${comment.ids}"> --%>
+<%--     	<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}"> --%>
+<%--     	</c:forEach> --%>
+<%--     </c:forEach> --%>
+<!-- 	</div> -->
+	<!-- ===================================================== -->
+	<div class="container" >		
+		<div class="row">
+			
+			<div class="col-md-12" style="border-bottom: 1px solid #ECEFF1; padding-bottom: 20px;">
+				<div class="page-header">
+					<h3>評論</h3>
+				</div>			
+				<c:forEach var="comment" items="${NETList}">
+				<div class="col-md-2">
+					<h5>${comment.name}</h5>
+					<h5>${comment.email}</h5>
+					<h5>${comment.comment}</h5>
+				</div>								
+				<c:forEach var="photo" items="${comment.ids}">
+				<div class="col-md-10">
+					<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}" class="img-rounded" width="304" height="236">
+				</div>
+				</c:forEach>
+				</c:forEach>
+			</div>
+		</div>
+</div>				
+<!-- 	<div class="row col-md-offset-3" style="margin-top:100px"> -->
+<!-- 		<div class="col-md-8" > -->
+<!-- 		  	<div class="card " style="padding:0px 50px 50px 50px"> -->
+<%--   				<c:forEach var="comment" items="${NETList}"> --%>
+<%--   	 				 <h5>${comment.name}</h5> --%>
+<%-- 					 <h5>${comment.email}</h5> --%>
+<%--   		    		 <h5>${comment.comment}</h5> --%>
+<%--     				<c:forEach var="photo" items="${comment.ids}"> --%>
+<%--     					<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}" > --%>
+<%--     				</c:forEach> --%>
     
-    </c:forEach>
-	</div>
+<%--    				 </c:forEach> --%>
+<!-- 			</div>	 -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	<!-- 結束飯店評論 -->
 	
 	<!--開始footer-->
