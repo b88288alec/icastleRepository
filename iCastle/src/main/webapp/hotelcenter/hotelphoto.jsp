@@ -43,6 +43,8 @@
 	<div class="content">
 		<div class="container-fluid">
 			<div class="row">
+			
+				<!-- 上面的大圖 -->
 				<div class="row bigImagediv" ondragover="dragoverHandler(event)"
 					ondrop="dropHandler(event)">
 					<img class="bigImage" src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${firstPhotovo.id}" data-img=""><br>
@@ -50,25 +52,38 @@
 				</div>
 		
 				<!-- 輸入區域 -->
-				<div class="row inputzone">
-					說明:<input type="text" id="description" maxlength="20" value="${firstPhotovo.pohtoDescription}"/>
-					對應房型:
-		<!-- 			<input type="text" id="roomTypeId" maxlength="20"/> -->
-					<select id="roomTypeId">
-						<option value="無">無</option>
-						<c:forEach var="roomType" items="${roomTypeVOs}">
-							<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
-						</c:forEach>
-					</select>
+				<div class="inputzone">
+					<table id="table">
+						<tr>
+							<td id="td1">
+								<span>說明</span>
+							</td>
+							<td id="td2">
+								<div class="form-group">
+							    	<input type="text" id="description" value="${firstPhotovo.pohtoDescription}" placeholder="輸入說明文字" class="form-control" />
+								</div>
+							</td>
+							<td id="td3">
+								<span>對應房型</span>
+							</td>
+							<td>
+								<select id="roomTypeId" class="form-control">
+								<option value="無">無</option>
+								<c:forEach var="roomType" items="${roomTypeVOs}">
+									<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
+								</c:forEach>
+								</select>
+								
+								
+							</td>
+						<tr>
+					</table>
 				</div>
 		
 				<!-- 下面一排 -->
 				<div class="row">
 					<form method="post" action="UploadPhoto.do"
 						enctype="multipart/form-data">
-						<div class="col-md-2">
-							<button type="button" id="left">左</button>
-						</div>
 		
 						<div class="col-md-8">
 							<div id="abgneBlock">
@@ -95,10 +110,9 @@
 						</div>
 		
 						<div class="col-md-2">
-							<button type="button" id="right">右</button>
-							<button type="button" id="delete">刪除</button>
-							<input type="file" id="file" name="image" multiple /> <input
-								type="submit" value="上傳" />
+							<input type="file" id="file" name="image" multiple /> 
+							<button type="button" id="delete" class="btn btn-danger">刪除</button>
+							<input type="submit" class="btn btn-success" value="修改" />
 						</div>
 					</form>
 				</div>

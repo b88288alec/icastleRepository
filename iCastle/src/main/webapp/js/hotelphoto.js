@@ -6,7 +6,10 @@ $(function() {
 	
 	index = parseInt($('#index').val(), 10);
 	page = index-1;
-	console.log('page= '+page);
+	console.log('page1= '+page);
+	
+	$("#list").css("width", page*100+"px");
+	
 	// 按下向左按鈕
 	$('#left').click(function() {
 		var lef = parseInt($('#list').css("left"));
@@ -38,6 +41,8 @@ $(function() {
 		if ( parseInt($('#list').css("left")) > 0 ){
 			$('#list').css("left", "0px");
 		}
+		
+		$("#list").css("width", page*100+"px");
 	})
 	
 	//初始化roomTypeId
@@ -148,6 +153,7 @@ fileObj.onchange = function (){
                  //將li放到list內
                  document.getElementById("list").appendChild(liObj);
                  page++;
+                 $("#list").css("width", page*100+"px");
                  console.log('page= '+page);
             };
         })(theFiles[i]);   
