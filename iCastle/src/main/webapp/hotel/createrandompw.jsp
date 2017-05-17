@@ -41,10 +41,14 @@
 		<h1 style="font-size:30pt">是否忘記密碼?</h1>
 		<form action="${pageContext.servletContext.contextPath}/hotel/CreateRandomPw.do" method="post">
 			<div class="col-sm-6">
-				<div class="form-group label-floating">
-					<label class="control-label">請輸入您的Email</label> 
-					<input type="text" name="email" class="form-control" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2}
+				<div class="form-group">
+			    	<input type="text" name="email" value="${param.email}" placeholder="請輸入您的Email" class="form-control" />
+			    	${errMap.emailErr}${errMap.emailErr2}
 				</div>
+<!-- 				<div class="form-group label-floating"> -->
+<!-- 					<label class="control-label">請輸入您的Email</label>  -->
+<%-- 					<input type="text" name="email" class="form-control" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2} --%>
+<!-- 				</div> -->
 				<section class="content">
 					<div class="box bg-1">
 						<button type="submit" id="onekey" class="button button--ujarak button--border-thin button--text-thick">一鍵輸入</button>
@@ -54,6 +58,8 @@
 			</div>
 			</form>
 		</div>
+		<p style="margin-left:450px">${success}</p>
+		
 <!-- ==============原始code============================= -->		
 <!--     <div class="container"> -->
 <!--     	<h1>是否忘記密碼?</h1> -->
