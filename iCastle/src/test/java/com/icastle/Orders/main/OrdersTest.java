@@ -355,10 +355,15 @@ public class OrdersTest {
 //		System.out.println(new java.sql.Date(commentTime));
 		
 //		測試linechart
-		OrdersService os = new OrdersService();
-		List<OrdersChartVO> test = os.search_Line_Chart(1, 2016, null, 1, null);
+//		OrdersService os = new OrdersService();
+//		List<OrdersChartVO> test = os.search_Line_Chart(1, 2016, null, 1, null);
+//		
+//		System.out.println(test.size());
 		
-		System.out.println(test.size());
+		String test = "joi@jfidoas";
+//		System.out.println(test.indexOf("1"));
+		
+		System.out.println(test.substring(2));
 		
 	}
 

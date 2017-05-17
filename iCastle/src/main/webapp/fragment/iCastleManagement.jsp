@@ -21,135 +21,88 @@
 			<div class="sidebar-wrapper">
 				<ul class="nav">
 					<c:choose>
-						<c:when test="${servletPath  == '/hotelcenter/hotelcenter.jsp'}">
-							<li class="active"><a href="${pageContext.servletContext.contextPath}/hotelcenter/hotelcenter.jsp"> <i
+						<c:when test="${servletPath  == '/manager/managercenter.jsp'}">
+							<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/managercenter.jsp"> <i
 									class="material-icons">dashboard</i>
-									<p>總覽</p>
+									<p>總攬</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="${pageContext.servletContext.contextPath}/hotelcenter/hotelcenter.jsp"> <i class="material-icons">dashboard</i>
-									<p>總覽</p>
+							<li><a href="${pageContext.servletContext.contextPath}/manager/managercenter.jsp"> <i class="material-icons">dashboard</i>
+									<p>總攬</p>
 							</a></li>
 						</c:otherwise>
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/updateHotelInfo.jsp'}">
+						<c:when test="${servletPath == '/manager/checkhotels.jsp'}">
 							<li class="active"><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelInfo.do">
+								href="${pageContext.servletContext.contextPath}/manager/GetAllhotel.do">
 									<i class="material-icons">location_city</i>
-									<p>修改飯店資料</p>
-							</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelInfo.do">
-									<i class="material-icons">location_city</i>
-									<p>修改飯店資料</p>
-							</a></li>
-						</c:otherwise>
-					</c:choose>
-
-					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/updateHotelPw.jsp'}">
-							<li class="active"><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelPw.jsp">
-									<i class="material-icons">location_city</i>
-									<p>修改密碼</p>
+									<p>管理飯店資料</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/updateHotelPw.jsp">
+								href="${pageContext.servletContext.contextPath}/manager/GetAllhotel.do">
 									<i class="material-icons">location_city</i>
-									<p>修改密碼</p>
+									<p>管理飯店資料</p>
 							</a></li>
 						</c:otherwise>
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/hotelphoto.jsp'}">
+						<c:when test="${servletPath == '/manager/membersInfo.jsp'}">
 							<li class="active"><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelPhoto.do">
+								href="${pageContext.servletContext.contextPath}/manager/membersInfo.jsp">
 									<i class="material-icons">picture_in_picture_alt</i>
-									<p>編輯飯店圖片</p>
+									<p>管理會員資料</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelPhoto.do">
+								href="${pageContext.servletContext.contextPath}/manager/membersInfo.jsp">
 									<i class="material-icons">picture_in_picture_alt</i>
-									<p>編輯飯店圖片</p>
+									<p>管理會員資料</p>
 							</a></li>
 						</c:otherwise>
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/setRoomType.jsp'}">
+						<c:when test="${servletPath == '/manager/new_manager.jsp'}">
 							<li class="active"><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowRoomType.do">
+								href="${pageContext.servletContext.contextPath}/manager/ManagerPageServlet">
 									<i class="material-icons">add_circle_outline</i>
-									<p>編輯飯店房型</p>
+									<p>管理員權限</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowRoomType.do">
+								href="${pageContext.servletContext.contextPath}/manager/ManagerPageServlet">
 									<i class="material-icons">add_circle_outline</i>
-									<p>編輯飯店房型</p>
+									<p>管理員權限</p>
 							</a></li>
 						</c:otherwise>
 					</c:choose>
 
 					<c:choose>
 						<c:when
-							test="${servletPath == '/hotelcenter/setroomprice.jsp'}">
+							test="${servletPath == '/manager/QA.jsp'}">
 							<li class="active"><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do">
+								href="${pageContext.servletContext.contextPath}/manager/SearchQAServlet">
 									<i class="material-icons">attach_money</i>
-									<p>設定每日房型價錢</p>
+									<p>Q&A設定</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do">
+								href="${pageContext.servletContext.contextPath}/manager/SearchQAServlet">
 									<i class="material-icons">attach_money</i>
-									<p>設定每日房型價錢</p>
+									<p>Q&A設定</p>
 							</a></li>
 						</c:otherwise>
 					</c:choose>
 
-					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/ToHotelOrders'}">
-							<li class="active"><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/ToHotelOrders">
-									<i class="material-icons">bookmark_border</i>
-									<p>查詢訂單紀錄</p>
-							</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a
-								href="${pageContext.servletContext.contextPath}/hotelcenter/ToHotelOrders">
-									<i class="material-icons">bookmark_border</i>
-									<p>查詢訂單紀錄</p>
-							</a></li>
-						</c:otherwise>
-					</c:choose>
-
-					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/HotelCommentManager.jsp'}">
-							<li class="active"><a href="#"> <i
-									class="material-icons">comment</i>
-									<p>查詢評論</p>
-							</a></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="${pageContext.servletContext.contextPath}/hotelcenter/HostComment?page=1"> <i class="material-icons">comment</i>
-									<p>查詢評論</p>
-							</a></li>
-						</c:otherwise>
-					</c:choose>
 				</ul>
 			</div>
 		</div>
@@ -166,7 +119,7 @@
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#">飯店管理中心</a>
+						<a class="navbar-brand" href="#">管理者中心</a>
 					</div>
 					<div class="collapse navbar-collapse">
 						<ul class="nav navbar-nav navbar-right">
