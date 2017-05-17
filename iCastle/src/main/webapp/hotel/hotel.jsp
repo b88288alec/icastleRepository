@@ -626,7 +626,6 @@
 	var address = [
 	<c:forEach var="addr" items="${address}" varStatus="loop">
 		'${addr}'
-		
 		<c:choose>
 			<c:when test="${loop.last}">
 				];
@@ -642,6 +641,7 @@
 	
 	var map = null;
 	var currentCenter = null;
+	var geocoder = null;
 	
 	function initMap(){
 		map = new google.maps.Map(document.getElementById("map"), {
@@ -651,7 +651,7 @@
 	                },
 			zoom:14
 		});
-		var geocoder  = new google.maps.Geocoder();
+		geocoder  = new google.maps.Geocoder();
 		geocodeAddress(geocoder, map);
 	} 
 	
@@ -661,7 +661,6 @@
 		//設定center
 		geocoder.geocode( {"address" : address[0]}, function(results, status){
 			if (status == google.maps.GeocoderStatus.OK) {
-				console.log("成功轉換" + results[0].geometry.location);
 				//設定新的center
 				currentCenter = results[0].geometry.location; 
 				map.setCenter(currentCenter);
@@ -670,22 +669,35 @@
 		})
 
 		//設定marker
-		for (var i=0 ; i<address.length ; i++){
-			geocoder.geocode( {"address" : address[i]}, function(results, status){
-				if (status == google.maps.GeocoderStatus.OK) {
-					console.log("成功轉換" + results[0].geometry.location);
-					//設定新的center
-					if (i==0)
-						map.setCenter(results[0].geometry.location);
-					//設定marker
-					var marker = new google.maps.Marker({
-						map : map,
-						position : results[0].geometry.location
-					});
-				} else 
-					console.log("無法轉換..."+ status);
-			})
-		}
+// 		for (var i=0 ; i<address.length ; i++){
+			
+// 			setTimeout( function (){setMarker(geocoder, map)} , 200*i );
+				
+// 		}
+	}
+	
+	var j=0;
+	
+	setTimeout(setMarker, 1000);
+	
+	//取得地址並設定marker唷
+	function setMarker(){
+		geocoder.geocode( {"address" : address[j]}, function(results, status){
+			if (status == google.maps.GeocoderStatus.OK) {
+				console.log("成功轉換...地址:" + address[j] + results[0].geometry.location);
+				//設定marker
+				var marker = new google.maps.Marker({
+					map : map,
+					position : results[0].geometry.location
+				});
+				j++;
+				if (j<address.length)
+					setMarker();
+			} else {
+				console.log("無法轉換...地址:" + address[j] + status);
+				setTimeout(setMarker, 200);
+			}
+		})	
 	}
 	
 	$(document)
