@@ -324,6 +324,8 @@
                                     json.push({
                                         date: moment(date).format('YYYY-MM-DD'),
                                         price: $('input[name=price]:checked').val(),
+                                        //應急用
+                                        title: $('input[name=price]:checked').val(),
                                     });
                                     //如果該日期是已有存在的價錢，則更新原有價錢
                                 } else if (date.getDay() == weekdaycheck[i]) {
@@ -334,6 +336,8 @@
                                         roomId: eventoObj.roomId,
                                         date: moment(date).format('YYYY-MM-DD'),
                                         price: $('input[name=price]:checked').val(),
+                                      //應急用
+                                        title: $('input[name=price]:checked').val(),
                                     });
                                 }
                             }
@@ -364,6 +368,8 @@
                     roomId: eventoObj.roomId,
                     date: date,
                     price: price,
+                  //應急用
+                    title: price,
                 });
             } else {
                 $("#calendar").fullCalendar('addEventSource',
@@ -380,6 +386,8 @@
                         json.push({
                             date: moment(date).format('YYYY-MM-DD'),
                             price: price,
+                          //應急用
+                            title: price,
                         });
                         $('#myModal').modal('hide');
                         callback(events);
@@ -404,7 +412,7 @@
                     })
                 }
             })
-            json.length = 0;
+//             json.length = 0;
             var events = {
                 url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
                 data: {
@@ -415,8 +423,10 @@
 
             //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
             $('#calendar').fullCalendar('removeEventSources');
-            $('#calendar').fullCalendar('addEventSource', events);
+            $('#calendar').fullCalendar('addEventSource', json);
             $('#calendar').fullCalendar('refetchEvents');
+            
+            json.length = 0;
         })
 
     });
