@@ -406,7 +406,7 @@
             })
             json.length = 0;
             var events = {
-                url: '${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do',
+                url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
                 data: {
                     hotelId: '${HotelLoginOK.hotelId}',
                     roomTypeId: $('select').val(),

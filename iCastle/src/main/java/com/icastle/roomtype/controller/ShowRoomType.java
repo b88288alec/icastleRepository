@@ -15,7 +15,7 @@ import com.icastle.hotels.model.HotelVO;
 import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
-@WebServlet("/hotelcenter/ShowRoomType")
+@WebServlet("/hotelcenter/ShowRoomType.do")
 public class ShowRoomType extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
