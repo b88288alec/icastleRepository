@@ -59,6 +59,11 @@ public class CreateRandomPwServlet extends HttpServlet {
 		GlobalService gs = new GlobalService();
 		gs.SendGmail(email, "忘記密碼", "您的新密碼為"+newPw);
 		
+		//成功寄信,跳轉化面
+		request.setAttribute("success", "已寄送新密碼到您的信箱");
+		RequestDispatcher rd = request.getRequestDispatcher("createrandompw.jsp");
+		rd.forward(request, response);
+		return;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

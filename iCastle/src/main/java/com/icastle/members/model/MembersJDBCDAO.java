@@ -513,6 +513,34 @@ public MembersVO lineLogin(String name, String pw) {
 			}
 		}
 		return membersVO;
+	}
+
+
+	@Override
+	public List<MembersVO> search_by_name(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	@Override
+	public void suspension(Integer memberId, Boolean suspension) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void setManager(Integer memberId, Boolean manager) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public List<MembersVO> search_manager() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 
 

@@ -29,6 +29,17 @@
 <!-- 		<property name="hibernate.c3p0.max_size">20</property> -->
 <!-- 		<property name="hibernate.c3p0.timeout">1800</property> -->
 <!-- 		<property name="hibernate.c3p0.max_statements">50</property> -->
+		
+		<!--Azure高級版-->
+<!-- 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:sqlserver://icastle.database.windows.net:1433;database=iCastle</property> -->
+<!-- 		<property name="hibernate.connection.username">icastlemanager@icastle</property> -->
+<!-- 		<property name="hibernate.connection.password">Taiwanno1</property>        -->
+<!-- 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> -->
+<!-- 		<property name="hibernate.c3p0.min_size">5</property> -->
+<!-- 		<property name="hibernate.c3p0.max_size">20</property> -->
+<!-- 		<property name="hibernate.c3p0.timeout">1800</property> -->
+<!-- 		<property name="hibernate.c3p0.max_statements">50</property> -->
         
 		<!--SQL方言,以下使用SQLServer -->
 		<property name="hibernate.dialect">hibernate.util.SQLServer2012DialectWithNvarchar</property>

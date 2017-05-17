@@ -25,76 +25,17 @@
 <link
 	href="${pageContext.servletContext.contextPath}/css/manager_template.css"
 	rel="stylesheet" />
-<style>
-.submit {
-	margin-right: 15px; 
-}
-#oldpw {
-	width:100px;
-}
-</style>
-<title>iCastle飯店管理中心</title>
+<title>iCastle管理者中心</title>
 </head>
 <body>
 	<!--開始左側及上方導覽列-->
-	<jsp:include page="../fragment/hotelManagement.jsp" />
+	<jsp:include page="../fragment/iCastleManagement.jsp" />
 	<!--開始左側及上方導覽列-->
 
 	<!--內容區塊-->
 	<div class="content">
 		<div class="container-fluid">
-			<div class="row">
-				
-				<form method="post" action="../hotelcenter/UpdateHotelPw.do">
-					<table>
-					<tbody>
-						<tr>
-							<td id="oldpw">舊密碼:</td>
-							<td>
-								<div class="form-group label-floating">
-									<label class="control-label">請輸入舊密碼</label>
-									<input type="text" class="form-control" name="oldpw">
-								
-								</div>
-							</td>
-							<td>
-								<font color="red">${errMap.oldpwErr}${errMap.oldpwnotcorrect}</font>
-							</td>
-						</tr>
-						
-						<tr>
-							<td>新密碼:</td>
-							<td>
-								<div class="form-group label-floating">
-									<label class="control-label">請輸入新密碼</label>
-									<input type="text" class="form-control" name="newpw">
-								</div>
-							</td>
-							<td>
-								<font color="red">${errMap.newpwErr}</font>
-							</td>
-						</tr>
-						
-						<tr>
-							<td>確認新密碼:</td>
-							<td>
-								<div class="form-group label-floating">
-									<label class="control-label">請輸入確認新密碼</label>
-									<input type="text" class="form-control" name="checkNewpw">
-								</div>
-							</td>
-							<td>
-								<font color="red">${errMap.chechNewpwErr}${errMap.pwcheckErr}</font>
-							</td>
-						</tr>
-					</tbody>
-					</table>
-					<input class="submit btn btn-success" type="submit" value="送出" />
-					<input class="btn  btn-danger" type="reset" value="清除" />
-					<p>${success}</p>
-				</form>		
-			
-			</div>
+			<div class="row"></div>
 		</div>
 	</div>
 	<!--內容區塊-->

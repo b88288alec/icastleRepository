@@ -44,6 +44,19 @@ textarea {
 	color: rgba(0, 0, 0, 0.54);
 }
 
+.pagediv{
+	text-align: center;
+}
+
+.CommentContent{
+	font-size:20px;
+}
+
+.myH{
+    color:"#8B4513";
+
+}
+
 </style>
 </head>
 <body>
@@ -58,23 +71,15 @@ textarea {
 				<!-- ------------------------------------------------------ -->
 				<div class="card">
 					<div class="card-header" data-background-color="green">
-						<h4 class="title">Table Title</h4>
-						<p class="category">Here is a subtitle for this table</p>
+						<h4 class="title">飯店評論</h4>
+						<p class="category"></p>
 					</div>
 					<div class="card-content table-responsive table-full-width" id="divStyle">
-						<input type="text" value="${page}" name="myInput">
-<%-- 					<c:choose> --%>
-<%-- 						<c:when test="${servletPath == '/hotelcenter/HostComment' }"> --%>
-<%-- 						<input type="text" value="${param.page}" name="myInput"> --%>
-<%-- 						</c:when> --%>
-						
-<%-- <%-- 						<c:when> --%> 
-<%-- <%-- 						<input type="text" value="${param.page}" name="myInput"> --%> 
-<%-- <%-- 						</c:when> --%> 
-<%-- 					</c:choose> --%>
+						<input type="hidden" value="${page}" name="myInput">
+						<input type="hidden" value="${pageContext.servletContext.contextPath}" id="Path">
+
 						<table class="table">
 							<thead class="text-danger">
-
 
 				                 
 								<th class="text-center">會員姓名</th>
@@ -89,8 +94,8 @@ textarea {
 								<!-- 																forEach開始 -->
 								<c:forEach var="comment" items="${commentData}">
 
-										<tr>
-							
+										<tr name="mytr">
+							      
 											<td id="memberName${comment.commentId}" class="text-center">${comment.name}</td>
 											<td class="text-center">${comment.email}</td>
 											<td class="text-primary text-center" >${comment.commentTime}</td>
@@ -123,27 +128,19 @@ textarea {
 					</div>
 				</div>
 <!-- 	上一頁、下一頁 -->
-                
+                <div class="pagediv">
 				<ul class="pagination pagination-primary text-center" name="myul">
                 <c:forEach begin="1" end="${DataNumbers/5+1}" varStatus="number">
                 
-                <li><a href="http://localhost:8081/iCastle/hotelcenter/HostComment?page=${number.count}">${number.count}</a></li>
+                <li><a href="${pageContext.servletContext.contextPath}/hotelcenter/HostComment?page=${number.count}">${number.count}</a></li>
                 
                
                 
                 </c:forEach>
 				
-				
-					
-<!-- 					<li><a href="#"><</a></li> -->
-<!-- 					<li class="active"><a href="http://localhost:8081/iCastle/hotelcenter/HostComment?page=1">1</a></li> -->
-<!-- 					<li><a href="http://localhost:8081/iCastle/hotelcenter/HostComment?page=2">2</a></li> -->
-<!-- 					<li><a href="http://localhost:8081/iCastle/hotelcenter/HostComment?page=3">3</a></li> -->
-<!-- 					<li><a href="#">4</a></li> -->
-<!-- 					<li><a href="#">5</a></li> -->
-<!-- 					<li><a href="#">></a></li> -->
                 	
 				</ul>
+				</div>
 
 				<!-- 	上一頁、下一頁 -->
 
@@ -157,7 +154,7 @@ textarea {
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="myModalLabel"></h4>
+								<h3 class="modal-title" id="myModalLabel"></h3>
 							</div>
 							<div class="modal-body" id="myDiv"></div>
 							<div class="modal-footer">
@@ -176,12 +173,12 @@ textarea {
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="myModalLabel2"></h4>
+								<h3 class="modal-title" id="myModalLabel2"></h3>
 							</div>
 							<form id="myform" action="Response" method="post">
 								<div class="modal-body" id="myDiv2">
 									<input type="hidden" name="hiddeninput">
-									<input type="text" name="formInput">
+									<input type="hidden" name="formInput">
 									<textarea name="textareavalue">
       	
       	
@@ -192,8 +189,8 @@ textarea {
 								<div class="modal-footer">
 									<input type="submit" class="btn btn-info btn-simple" value="回覆"
 										id="mysubmit">
-									<button type="button" class="btn btn-default btn-simple"
-										data-dismiss="modal">Close</button>
+<!-- 									<button type="button" class="btn btn-default btn-simple" -->
+<!-- 										data-dismiss="modal">Close</button> -->
 								</div>
 							</form>
 						</div>
@@ -235,6 +232,7 @@ textarea {
 <script>
 	$(document).ready(
 			function() {
+				var path =$("#Path").val();
 				//修正跳出視窗bug
 				$('.modal').appendTo("body");
 				$('button[name="ButtonCheck"]').click(
@@ -269,13 +267,14 @@ textarea {
 									div.append($("<h5>風景評分</h5>"));
 									genimg(data[i].sceneScore);
 									div.append($("<h5>評論內容</h5>"));
-									div.append($("<p></p>").text(
+									div.append($("<p></p>").addClass("CommentContent").text(
 											data[i].comment));
 									for (var j = 0; j < len; j++) {
-										div.append($("<img>").attr(
+										var myimg = ($("<img>").attr(
 												"src",
-												"http://localhost:8081/iCastle/comment/CommentPhotosServlet?id="
-														+ data[i].ids[j]));
+												path + "/comment/CommentPhotosServlet?id="
+														+ data[i].ids[j])).attr("width","300").attr("height","200");
+										div.append(myimg);
 
 									}
 
@@ -293,23 +292,23 @@ textarea {
 
 					var img1 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "5%"
+						width : "8%"
 					});
 					var img2 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "5%"
+						width : "8%"
 					});
 					var img3 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "5%"
+						width : "8%"
 					});
 					var img4 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "5%"
+						width : "8%"
 					});
 					var img5 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "5%"
+						width : "8%"
 					});
 					var div = $("#myDiv");
 
@@ -317,115 +316,115 @@ textarea {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 
 					} else if (score == 2) {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 
 					} else if (score == 3) {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 
 					} else if (score == 4) {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "5%"
+							width : "8%"
 						});
 
 					} else {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "5%"
+							width : "8%"
 						});
 
 					}
@@ -435,9 +434,7 @@ textarea {
 				}
 
 				$('button[name="ButtonResponse"]').click(function() {
-					// 				 $("#myDiv").empty();
-					// 				 $("#myModalLabel").empty();	
-					// 				 $("#myModalLabel2").empty();
+		
 					//清掉
 					$("textarea[name='textareavalue']").val(null);
 					$("#myModal2").modal('show');
@@ -469,6 +466,30 @@ textarea {
 					
 					
 				});
+				
+				$("tr[name='mytr']").hover(mousein,mouseout);
+				
+				function mousein(){
+					
+					$(this).css("background-color","#9ACD32");
+					
+				}
+				
+                function mouseout(){
+					
+					$(this).css("background-color","white");
+					
+				}
+                
+                
+                $("li").click(function(){
+                	
+                	$(this).addClass("active");
+                
+                });
+                
+                
+                
 
 			});
 </script>

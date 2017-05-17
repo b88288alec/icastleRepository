@@ -40,8 +40,14 @@
         width: 850px;  
 	}
 	#smallImg{
-        -webkit-filter: brightness(70%); /* Safari 6.0 - 9.0 */
-		filter: brightness(70%);
+		width:300px;
+/*         -webkit-filter: brightness(70%); /* Safari 6.0 - 9.0 */ */
+/* 		filter: brightness(70%); */
+	}
+	#smallImg:hover{
+		width:300px;
+         -webkit-filter: brightness(80%); /* Safari 6.0 - 9.0 */ 
+ 		filter: brightness(80%); 
 	}
 
 </style>
@@ -211,7 +217,7 @@
 			
 			<!-- 地圖預覽 -->
 			<div id="smallImgDiv">
-				<img id="smallImg" src="../img/staticmap.png">
+				<img id="smallImg" src="../img/map.jpg">
 			</div>
 			
 			<!-- 開始google地圖的Modal -->

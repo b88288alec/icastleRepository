@@ -11,11 +11,11 @@ public class MembersTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		新增
-		MembersJDBCDAO mjo = new MembersJDBCDAO();
-	MembersVO mvo = new MembersVO();
+//		MembersJDBCDAO mjo = new MembersJDBCDAO();
+//	MembersVO mvo = new MembersVO();
 //		mvo.setEmail("qwe@yahoo.com.tw");
-		mvo.setPw("456");
-		mvo.setName("TAKA");
+//		mvo.setPw("456");
+//		mvo.setName("TAKA");
 //		mvo.setGender("女");
 //		mvo.setBdate(java.sql.Date.valueOf("2017-04-15"));
 //		mvo.setAddr("台北市");
@@ -24,9 +24,9 @@ public class MembersTest {
 //		mvo.setCountry("台灣");
 //		mvo.setPassport("789632145");
 //
-		mjo.insert(mvo);
-		
-		System.out.println("新增成功");
+//		mjo.insert(mvo);
+//		
+//		System.out.println("新增成功");
 		
 		
 //		修改
@@ -120,6 +120,9 @@ public class MembersTest {
 //		System.out.println("新增成功");
 //		
 //		
+		
+		
+		
 	}
 
 }
