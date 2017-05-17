@@ -2,23 +2,19 @@ package com.icastle.qa.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.icastle.qa.model.QaService;
-import com.icastle.qa.model.QaVO;
 
-@WebServlet("/manager/DeleteQAServlet")
-public class DeleteQAServlet extends HttpServlet {
+@WebServlet("/manager/UpdateQAServlet")
+public class UpdateQAServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
@@ -28,20 +24,18 @@ public class DeleteQAServlet extends HttpServlet {
 		PrintWriter out = res.getWriter();
 		
 		try{
-
-			JSONArray ja = new JSONArray();
+			
+			Integer id = new Integer(req.getParameter("id"));
+			String question = req.getParameter("question");
+			String answer = req.getParameter("answer");
 			
 			QaService qs = new QaService();
+			qs.update(question, answer, id);
 			
-			String del[] = req.getParameterValues("id");
-			for(String id : del){
-				qs.delete(new Integer(id));
-				JSONObject jo = new JSONObject();
-				jo.put("id", id);
-				ja.add(jo);
-			}
+			JSONObject jo = new JSONObject();
+			jo.put("success", "success");
 			
-			out.println(ja);
+			out.println(jo);
 			
 		}catch(Exception e){
 			e.printStackTrace();
