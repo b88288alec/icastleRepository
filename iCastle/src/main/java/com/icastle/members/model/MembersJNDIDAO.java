@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.naming.Context;
@@ -31,7 +32,7 @@ public class MembersJNDIDAO implements MembersDAO_interface {
 	private static final String GET_ALL_STMT =
 			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport,manager,suspension FROM Members order by email";
 	private static final String GET_ONE_STMT =
-			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport FROM Members where email = ?";
+			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport,manager,suspension FROM Members where email = ?";
 //	private static final String DELETE =
 //			"DELETE FROM Members where email = ?";
 	private static final String UPDATE =
@@ -42,6 +43,15 @@ public class MembersJNDIDAO implements MembersDAO_interface {
 			"SELECT * FROM Members WHERE name = ? AND pw = ?";
 	private static final String FINDBYEMAIL = 
 			"SELECT email FROM Members where email = ?";
+	
+	private static final String SEARCHBYNAME = 
+			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport,manager,suspension FROM Members where name like ?";
+	private static final String SUSPENSION = 
+			"update Members set suspension = ? where memberid = ?";
+	private static final String SETMANAGER = 
+			"update Members set manager = ? where memberid = ?";
+	private static final String SEARCHMANAGER = 
+			"SELECT memberId,email,pw,name,gender,bdate,addr,tel,personId,country,passport,manager,suspension FROM Members where manager=1";
 	
 	@Override
 	public void insert(MembersVO membersVO) {
@@ -218,6 +228,8 @@ public MembersVO findByPrimaryKey(String email) {
 			membersVO.setPersonId(rs.getString("personId"));
 			membersVO.setCountry(rs.getString("country"));
 			membersVO.setPassport(rs.getString("passport"));
+			membersVO.setManager(rs.getBoolean("manager"));
+			membersVO.setSuspension(rs.getBoolean("suspension"));
 	
 		}
 
@@ -498,6 +510,214 @@ public MembersVO findByEmail(String email) {
 		}
 	}
 	return membersVO;
+}
+
+
+
+@Override
+public List<MembersVO> search_by_name(String name) {
+
+	List<MembersVO> result = new LinkedList<MembersVO>();
+	Connection conn = null;
+	PreparedStatement pstat = null;
+	ResultSet rs = null;
+	
+	try{
+		conn = ds.getConnection();
+		pstat = conn.prepareStatement(SEARCHBYNAME);
+		pstat.setString(1, name);
+		
+		rs = pstat.executeQuery();
+		while(rs.next()){
+			MembersVO membersVO = new MembersVO();
+			membersVO.setMemberId(rs.getInt("memberId"));
+			membersVO.setEmail(rs.getString("email"));
+			membersVO.setPw(rs.getString("pw"));
+			membersVO.setName(rs.getString("name"));
+			membersVO.setGender(rs.getString("gender"));
+			membersVO.setBdate(rs.getDate("bdate"));
+			membersVO.setAddr(rs.getString("addr"));
+			membersVO.setTel(rs.getString("tel"));
+			membersVO.setPersonId(rs.getString("personId"));
+			membersVO.setCountry(rs.getString("country"));
+			membersVO.setPassport(rs.getString("passport"));
+			membersVO.setManager(rs.getBoolean("manager"));
+			membersVO.setSuspension(rs.getBoolean("suspension"));
+			
+			result.add(membersVO);
+		}
+		
+	}catch(SQLException e){
+		throw new RuntimeException("A database error occured. "
+				+ e.getMessage());
+		// Clean up JDBC resources
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstat != null) {
+			try {
+				pstat.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	
+	return result;
+}
+
+
+
+@Override
+public void suspension(Integer memberId, Boolean suspension) {
+	
+	Connection conn = null;
+	PreparedStatement pstat = null;
+	
+	try{
+		conn = ds.getConnection();
+		pstat = conn.prepareStatement(SUSPENSION);
+		pstat.setBoolean(1, suspension);
+		pstat.setInt(2, memberId);
+
+		pstat.executeUpdate();
+		
+	}catch(SQLException e){
+		throw new RuntimeException("A database error occured. "
+				+ e.getMessage());
+		// Clean up JDBC resources
+	} finally {
+		if (pstat != null) {
+			try {
+				pstat.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	
+}
+
+
+
+@Override
+public void setManager(Integer memberId, Boolean manager) {
+
+	Connection conn = null;
+	PreparedStatement pstat = null;
+	
+	try{
+		conn = ds.getConnection();
+		pstat = conn.prepareStatement(SETMANAGER);
+		pstat.setBoolean(1, manager);
+		pstat.setInt(2, memberId);
+
+		pstat.executeUpdate();
+		
+	}catch(SQLException e){
+		throw new RuntimeException("A database error occured. "
+				+ e.getMessage());
+		// Clean up JDBC resources
+	} finally {
+		if (pstat != null) {
+			try {
+				pstat.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	
+}
+
+
+
+@Override
+public List<MembersVO> search_manager() {
+	List<MembersVO> result = new LinkedList<MembersVO>();
+	Connection conn = null;
+	PreparedStatement pstat = null;
+	ResultSet rs = null;
+	
+	try{
+		conn = ds.getConnection();
+		pstat = conn.prepareStatement(SEARCHMANAGER);
+		
+		rs = pstat.executeQuery();
+		while(rs.next()){
+			MembersVO membersVO = new MembersVO();
+			membersVO.setMemberId(rs.getInt("memberId"));
+			membersVO.setEmail(rs.getString("email"));
+			membersVO.setPw(rs.getString("pw"));
+			membersVO.setName(rs.getString("name"));
+			membersVO.setGender(rs.getString("gender"));
+			membersVO.setBdate(rs.getDate("bdate"));
+			membersVO.setAddr(rs.getString("addr"));
+			membersVO.setTel(rs.getString("tel"));
+			membersVO.setPersonId(rs.getString("personId"));
+			membersVO.setCountry(rs.getString("country"));
+			membersVO.setPassport(rs.getString("passport"));
+			membersVO.setManager(rs.getBoolean("manager"));
+			membersVO.setSuspension(rs.getBoolean("suspension"));
+			
+			result.add(membersVO);
+		}
+		
+	}catch(SQLException e){
+		throw new RuntimeException("A database error occured. "
+				+ e.getMessage());
+		// Clean up JDBC resources
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstat != null) {
+			try {
+				pstat.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	
+	return result;
 }
 	
 

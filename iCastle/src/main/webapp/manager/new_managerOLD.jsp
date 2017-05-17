@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
-<%@ page import="java.util.*"%>
-<%@ page import="com.icastle.qa.model.*"%>
-    
-<%
-    QaDAO_interface dao = new QaJNDIDAO();
-    List<QaVO> list = dao.getAll();
-    pageContext.setAttribute("list",list);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,49 +21,12 @@
 <body>
     <!--開始導覽列-->
 		<jsp:include page="../fragment/nav.jsp"/>
- 	<!--結束導覽列--
- 	
-    <!--開始本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
-    
-   
- 
-    <br>
-    <br>
-    <h1>飯店Q&A</h1>
-    <table border='2' bordercolor='#CCCCFF' width='900' height='800'>
-	<tr>
-	<td>問題</td>
-	<td>答案</td>
-		
-	</tr>
+	<!--結束導覽列-->
 	
-	<c:forEach var="QaVO" items="${list}">
-		<tr align='center' valign='middle'}>
-			<td>${QaVO.question}</td>
-			<td>${QaVO.answer}</td>
-			
-		</tr>
-	</c:forEach>
-</table>
-
+    <div class="container" style="margin-top:56px">
     
+    </div>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <!--結束本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>
 	<!--結束footer-->

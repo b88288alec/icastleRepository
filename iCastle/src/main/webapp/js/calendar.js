@@ -23,7 +23,7 @@ $(function(){
 			monthchange();
 		}else{
 			$('#idSelectMonth').empty().append("<option value='null'>--</option>");
-			if($('#idButton').val() == '2'){
+			if($('#idButton').val() == '3'){
 				if($('#idSelectYear').val() != 'null'){
 					for(i = 1; i <= 12; i++){
 						$('#idSelectMonth').append("<option value='" + i + "'>" + i +"</option>");

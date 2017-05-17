@@ -12,5 +12,10 @@ public interface MembersDAO_interface {
       public MembersVO findByEmail(String email); //查詢email是否已經註冊過
       public MembersVO lineLogin(String name,String pw);  // 檢查line登入
       
+//    管理者用
+      public List<MembersVO> search_by_name(String name);	//用姓名搜尋
+      public List<MembersVO> search_manager();	//搜尋管理員
+      public void suspension(Integer memberId, Boolean suspension);	//停權功能
+      public void setManager(Integer memberId, Boolean manager);	//升格管理員
       
 }

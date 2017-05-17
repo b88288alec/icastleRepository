@@ -20,7 +20,7 @@
     <style>
 .container {
 	width: 1300px;
-	margin-top: 150px;
+/* 	margin-top: 150px; */
 }
 
 /* Rules for sizing the icon. */
@@ -52,8 +52,8 @@
 	<!--結束導覽列-->
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container">
-		<div class="row col-md-offset-2">
+    <div class="container page-wrap">
+		<div class="row col-md-offset-2" style="margin-top: 25%;">
 			<div class="col-md-6">
 				<!--按钮触发模态框  data-toggle="modal" data-target="#myModal"-->
 				<a href="${pageContext.servletContext.contextPath}/hotel/registerhotel.jsp">
@@ -72,16 +72,6 @@
 		</div>
 	</div>
 	
-	
-						<!-- 	原本code 尚未美化     -->
-<!--     <div class="row"> -->
-<!--     	<div class="col-md-6"> -->
-<%-- 		    <a href="${pageContext.servletContext.contextPath}/hotel/registerhotel.jsp">業者註冊</a> --%>
-<!-- 		</div>    -->
-<!-- 		<div class="col-md-6"> -->
-<%-- 		    <a href="${pageContext.servletContext.contextPath}/members/registered.jsp">會員註冊</a> --%>
-<!-- 		</div>    -->
-<!-- 	</div> -->
     </div>
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>

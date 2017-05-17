@@ -89,7 +89,7 @@
 	</div>
 	<!--結束搜尋列表-->
 	<!--精選飯店-->
-	<div class="container">
+	<div class="container page-wrap">
 		<div class="page-header">
 			<h1>精選飯店</h1>
 		</div>
