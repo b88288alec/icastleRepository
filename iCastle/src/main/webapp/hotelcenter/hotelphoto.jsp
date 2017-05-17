@@ -33,6 +33,11 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <title>iCastle飯店管理中心</title>
+<style>
+.leftzone {
+	margin-left:100px;
+}
+</style>
 </head>
 <body>
 	<!--開始左側及上方導覽列-->
@@ -50,70 +55,86 @@
 					<img class="bigImage" src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${firstPhotovo.id}" data-img=""><br>
 					<input type="hidden" id="index" value="${originpage+1}"/>
 				</div>
-		
-				<!-- 輸入區域 -->
-				<div class="inputzone">
-					<table id="table">
-						<tr>
-							<td id="td1">
-								<span>說明</span>
-							</td>
-							<td id="td2">
-								<div class="form-group">
-							    	<input type="text" id="description" value="${firstPhotovo.pohtoDescription}" placeholder="輸入說明文字" class="form-control" />
-								</div>
-							</td>
-							<td id="td3">
-								<span>對應房型</span>
-							</td>
-							<td>
-								<select id="roomTypeId" class="form-control">
-								<option value="無">無</option>
-								<c:forEach var="roomType" items="${roomTypeVOs}">
-									<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
-								</c:forEach>
-								</select>
-								
-								
-							</td>
-						<tr>
-					</table>
-				</div>
-		
-				<!-- 下面一排 -->
+				
 				<div class="row">
 					<form method="post" action="UploadPhoto.do"
-						enctype="multipart/form-data">
-		
-						<div class="col-md-8">
-							<div id="abgneBlock">
-								<ul id="list" class="list">
-									<c:forEach var="photo" items="${photovos}" varStatus="loop">
-										<li>
-											<img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" id="img${loop.index+1}" class="imgs"/>
-											<input type="hidden" name="update"/>
-											<input type="hidden" name="imgdescription${loop.index+1}" id="inpimg${loop.index+1}" value="${photo.pohtoDescription}"/>
-											<input type="hidden" name="imgroomTypeId${loop.index+1}" id="roomTypeIdimg${loop.index+1}" value="
-												<c:choose>
-													<c:when test="${empty photo.roomTypeId}">
-														無
-													</c:when>
-													<c:otherwise>
-														${photo.roomTypeId}
-													</c:otherwise> 
-												</c:choose>
-											"/>
-										</li> 
-									</c:forEach>  
-								</ul>
+							enctype="multipart/form-data">
+						<div class="col-md-8">	
+							<!-- 輸入區域 -->
+							<div class="row inputzone">
+								<table id="table">
+									<tr>
+										<td id="td1">
+											<span>說明</span>
+										</td>
+										<td id="td2">
+											<div class="form-group">
+										    	<input type="text" id="description" value="${firstPhotovo.pohtoDescription}" placeholder="輸入說明文字" class="form-control" />
+											</div>
+										</td>
+										<td id="td3">
+											<span>對應房型</span>
+										</td>
+										<td>
+											<select id="roomTypeId" class="form-control">
+											<option value="無">無</option>
+											<c:forEach var="roomType" items="${roomTypeVOs}">
+												<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
+											</c:forEach>
+											</select>
+										</td>
+									<tr>
+								</table>
+							</div>
+							<!-- 輸入區域 -->
+			
+							<!-- 下面一排圖片 -->
+							<div class="row">
+								<div id="abgneBlock">
+									<ul id="list" class="list">
+										<c:forEach var="photo" items="${photovos}" varStatus="loop">
+											<li>
+												<img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}" id="img${loop.index+1}" class="imgs"/>
+												<input type="hidden" name="update"/>
+												<input type="hidden" name="imgdescription${loop.index+1}" id="inpimg${loop.index+1}" value="${photo.pohtoDescription}"/>
+												<input type="hidden" name="imgroomTypeId${loop.index+1}" id="roomTypeIdimg${loop.index+1}" value="
+													<c:choose>
+														<c:when test="${empty photo.roomTypeId}">
+															無
+														</c:when>
+														<c:otherwise>
+															${photo.roomTypeId}
+														</c:otherwise> 
+													</c:choose>
+												"/>
+											</li> 
+										</c:forEach>  
+									</ul>
+								</div>
+							</div>
+							<!-- 下面一排圖片 -->
+						</div>
+						
+						<!-- 開始按鈕區塊 -->
+						<div class="col-md-4">
+							<div class="col-md-2">
+								<div class="form-group">
+	    							<input type="file" id="file" name="image" multiple> 
+									<div class="input-group col-md-9s"> 
+	   									<span class="input-group-btn input-group-sm"> 
+	       									<button type="button" class="btn btn-just-icon btn-warning"> 
+	           									<i class="material-icons">attach_file</i> 
+	        								</button>
+	   									</span>
+									</div>
+								</div>
+								
+								<button type="button" id="delete" class="btn btn-danger">刪除</button>
+								<input type="submit" class="btn btn-success" value="修改" />
 							</div>
 						</div>
-		
-						<div class="col-md-2">
-							<input type="file" id="file" name="image" multiple /> 
-							<button type="button" id="delete" class="btn btn-danger">刪除</button>
-							<input type="submit" class="btn btn-success" value="修改" />
-						</div>
+						<!-- 結束按鈕區塊 -->
+						
 					</form>
 				</div>
 			</div>

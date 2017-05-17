@@ -27,6 +27,7 @@ public class IndexSerlvet extends HttpServlet {
 		//查詢所有飯店
 		HotelService hotelServ = new HotelService();
 		List<HotelVO> hotels = hotelServ.getAll();
+		
 		session.setAttribute("hotels", hotels);
 		System.out.println(hotels.size());
 		
