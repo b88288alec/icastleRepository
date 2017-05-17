@@ -584,7 +584,7 @@
 						<div class="col-md-8" style="float:right;padding:20px 0px">	
 							<c:forEach var="photo" items="${comment.ids}">
 								<div class="col-md-4">
-									<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}" 
+									<img src="${pageContext.servletContext.contextPath}/comment/CommentPhotosServlet?id=${photo}" 
 									class="img-rounded" width="100%" style="padding:5px 0px" ></div>
 							</c:forEach>
 						</div>
