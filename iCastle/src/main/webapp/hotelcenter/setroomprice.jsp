@@ -390,33 +390,42 @@
 
         //將暫存於json內的資料傳送至server新增到資料庫，並重新整理頁面
         $('#submit').click(function () {
-            $.ajax({
-                type: 'POST',
-                url: '${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do',
-                data: {
-                    jsonData: JSON.stringify(json),
-                    roomTypeId: $('select').val(),
-                },
-                success: function () {
-                    swal({
-                        title: '新增成功',
-                        type: 'success',
-                    })
+        	var price = $('input[name=price]:checked').val();
+        	if(weekdaycheck.length > 0 && !(price == null)){
+        		$.ajax({
+                    type: 'POST',
+                    url: '${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do',
+                    data: {
+                        jsonData: JSON.stringify(json),
+                        roomTypeId: $('select').val(),
+                    },
+                    success: function () {
+                        swal({
+                            title: '新增成功',
+                            type: 'success',
+                        })
+                    }
+                })
+                json.length = 0;
+                var events = {
+                    url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
+                    data: {
+                        hotelId: '${HotelLoginOK.hotelId}',
+                        roomTypeId: $('select').val(),
+                    }
                 }
-            })
-            json.length = 0;
-            var events = {
-                url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
-                data: {
-                    hotelId: '${HotelLoginOK.hotelId}',
-                    roomTypeId: $('select').val(),
-                }
-            }
 
-            //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
-            $('#calendar').fullCalendar('removeEventSources');
-            $('#calendar').fullCalendar('addEventSource', events);
-            $('#calendar').fullCalendar('refetchEvents');
+                //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
+                $('#calendar').fullCalendar('removeEventSources');
+                $('#calendar').fullCalendar('addEventSource', events);
+                $('#calendar').fullCalendar('refetchEvents');
+        	}else{
+        		swal({
+                    title: '請先選擇價錢及星期',
+                    type: 'error',
+                })
+        	}
+            
         })
 
     });
