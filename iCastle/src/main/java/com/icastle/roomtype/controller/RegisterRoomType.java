@@ -2,7 +2,9 @@ package com.icastle.roomtype.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,20 +39,36 @@ public class RegisterRoomType extends HttpServlet {
 		String customizedName[] = request.getParameterValues("customizedName");
 		String pricePerPerson[] = request.getParameterValues("pricePerPerson");
 		String remark[] = request.getParameterValues("remark");
-		Integer times = Integer.parseInt((request.getParameter("times").equals(""))? "0" : request.getParameter("times"));
+		String timestr = request.getParameter("times");
+		String RegisterPath = request.getServletPath();
+		Integer times = 0;
+		
+		Map<String,String> error = new HashMap<String,String>();
+		if(timestr.equals("")){
+			error.put("none", "沒有要新增的房型");
+			request.setAttribute("error", error);
+			RequestDispatcher rd = request.getRequestDispatcher("/hotelcenter/ShowRoomType.do");
+			rd.forward(request, response);
+			return;
+		}else{
+			times = Integer.parseInt(timestr) - 1;
+		}
+		
+		Integer count = Integer.parseInt(request.getParameter("count"));
 		
 		List<String> bedAddablesList = new ArrayList<String>();
 		List<String[]> mealsList = new ArrayList<String[]>();
-		if(times == 0){
+		if(count == 0){
 			String bedAddables = request.getParameter("bedAddable0");
 			bedAddablesList.add(bedAddables);
 			String meals[] = request.getParameterValues("meals0");
 			mealsList.add(meals);
 		}else{
 			for(int i = 0; i <= times; i++){
-				String bedAddables = request.getParameter("bedAddable"+i);
+				count--;
+				String bedAddables = request.getParameter("bedAddable"+count);
 				bedAddablesList.add(bedAddables);
-				String meals[] = request.getParameterValues("meals"+i);
+				String meals[] = request.getParameterValues("meals"+count);
 				mealsList.add(meals);
 			}
 		}
@@ -108,11 +126,12 @@ public class RegisterRoomType extends HttpServlet {
 		}
 		
 		RoomTypeService rots = new RoomTypeService();
-		Integer count = rots.addOrUpdateRoomType(list);
+		Integer updatecount = rots.addOrUpdateRoomType(list);
 		
 		session.setAttribute("RoomTypeVOList", list);
-		RequestDispatcher rd = request.getRequestDispatcher("../FakeDataGen.jsp");
-//		RequestDispatcher rd = request.getRequestDispatcher("../rooms/SetRoomPrice");
+		request.setAttribute("RegisterPath", RegisterPath);
+		request.setAttribute("updatecount", updatecount);
+		RequestDispatcher rd = request.getRequestDispatcher("/hotelcenter/ShowRoomType.do");
 		rd.forward(request, response);
 	}
 

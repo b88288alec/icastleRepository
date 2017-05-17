@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -151,8 +152,13 @@ public class UploadPhotoServlet extends HttpServlet {
 //			List<HotelPhotosVO> photos = new ArrayList<HotelPhotosVO>();
 //			photos.add(photovo);
 			
+			//刪除不會再用到的session物件
 			session.removeAttribute("photovos");
 			session.removeAttribute("originpage");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("ShowHotelPhoto.do");
+			rd.forward(request, response);
+			return;
 			
 		} catch (Exception e){
 			e.printStackTrace();

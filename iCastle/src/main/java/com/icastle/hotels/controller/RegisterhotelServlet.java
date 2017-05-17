@@ -184,7 +184,7 @@ public class RegisterhotelServlet extends HttpServlet {
 							gymStr = value;
 						} else if (fldName.equals("spa")) {
 							spaStr = value;
-						} else if (fldName.equals("swimPool")) {
+						} else if (fldName.equals("swimPools")) {
 							swimPoolStr = value;
 						}  
 					} else {

@@ -78,13 +78,32 @@ public class MembersService {
    
    public String createPw(String email){
 	   MembersVO membersVO = dao.findByPrimaryKey(email);
-	   Random ran = new Random();
-		int range = 999999;
-		String newpw = String.valueOf(ran.nextInt(range));
+	   String newpw = randomNum();
 		membersVO.setPw(newpw);
 		dao.update(membersVO);
 		return newpw;
 	}
+   
+	public static String randomNum(){
+		Random ran = new Random();
+		int range = 62;
+		int num = 0;
+		
+		StringBuilder randomnum = new StringBuilder();
+
+		//隨機產生10個0~35的數字
+		for (int i=0 ; i<10 ; i++){
+			num = ran.nextInt(range);
+			if (num < 10)
+				randomnum.append(num);//0~9
+			else if (num >= 10 && num < 36)
+				randomnum.append((char)(num + 55));//10~35 to 大寫英文
+			else
+				randomnum.append((char)(num + 61));//10~35 to 小寫英文
+		}
+		return randomnum.toString() ;
+	}
+	
 //  驗證line登入
    public  MembersVO lineLogin(String name, String pw){
           return dao.lineLogin(name, pw);

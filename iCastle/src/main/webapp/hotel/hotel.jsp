@@ -548,17 +548,45 @@
 	</div>
 
 	<!-- 開始飯店評論 -->
-	<div>
-	   <c:forEach var="comment" items="${NETList}">
-    <h5>${comment.name}</h5>
-    <h5>${comment.email}</h5>
-    <h5>${comment.comment}</h5>
-    	<c:forEach var="photo" items="${comment.ids}">
-    	<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}">
-    	</c:forEach>
-    
-    </c:forEach>
-	</div>
+	<!-- ================原本code============================== -->
+<!-- 	<div> -->
+<%-- 	   <c:forEach var="comment" items="${NETList}"> --%>
+<%--     <h5>${comment.name}</h5> --%>
+<%--     <h5>${comment.email}</h5> --%>
+<%--     <h5>${comment.comment}</h5> --%>
+<%--     	<c:forEach var="photo" items="${comment.ids}"> --%>
+<%--     	<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}"> --%>
+<%--     	</c:forEach> --%>
+<%--     </c:forEach> --%>
+<!-- 	</div> -->
+	<!-- ===================================================== -->
+	<div class="container" >		
+		<div class="row">
+			<div class="col-md-12" style="padding-bottom: 20px;">
+				<div calss="col-md-2" style="border-bottom: 1px solid #ECEFF1"><h3>評論</h3></div>
+				<c:forEach var="comment" items="${NETList}">
+					<div class="row" style="border-bottom: 1px solid #ECEFF1;"> <!-- 每一個則評論都是row -->
+						<div class="col-md-4" style="float: left;padding:50px;text-align:center">
+							<h4>${comment.name}</h4>
+							<h5>${comment.email}</h5>
+							<!-- 這裡加入星星分數 -->
+							
+						</div>
+						<div class="col-md-8" style="padding:20px;float:right">	
+							<h5>${comment.comment}</h5>
+						</div>
+						<div class="col-md-8" style="float:right;padding:20px 0px">	
+							<c:forEach var="photo" items="${comment.ids}">
+								<div class="col-md-4">
+									<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}" 
+									class="img-rounded" width="100%" style="padding:5px 0px" ></div>
+							</c:forEach>
+						</div>
+					</div><!-- div class="row" -->
+				</c:forEach>
+			</div><!-- div class="col-md-12" -->
+		</div>
+</div>				
 	<!-- 結束飯店評論 -->
 	
 	<!--開始footer-->

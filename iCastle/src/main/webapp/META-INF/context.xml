@@ -25,4 +25,5 @@
 <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/iCastleDB" password="sa123456" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;DatabaseName=iCastle" username="sa"/>
 <!-- 家用 -->
 <!-- <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/iCastleDB" password="sa123456" type="javax.sql.DataSource" url="jdbc:sqlserver://192.168.100.7:1433;DatabaseName=iCastle" username="sa"/> -->
+<!-- <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/iCastleDB" password="Alec88288" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;DatabaseName=iCastle" username="sa"/> -->
 </Context>

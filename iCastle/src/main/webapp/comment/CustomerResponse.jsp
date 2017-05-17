@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="HostComment" method="get">
+<form action="../hotelcenter/HostComment" method="get">
 <input type="submit" value="顧客評論" name="hotelCommentSearch">
 </form>
 

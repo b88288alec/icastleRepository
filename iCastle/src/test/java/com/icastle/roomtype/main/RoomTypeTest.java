@@ -155,7 +155,7 @@ public class RoomTypeTest {
 	}
 	
 	public static void findRoomTypeByHotelId(){
-		List<RoomTypeVO> list = dao.findRoomTypeByHotelId(5);
+		List<RoomTypeVO> list = dao.findRoomTypeByHotelId(1);
 		
 		for(RoomTypeVO vo : list){
 			System.out.println(vo.getRoomTypeId());

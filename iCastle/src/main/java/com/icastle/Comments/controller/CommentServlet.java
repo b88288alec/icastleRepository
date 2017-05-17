@@ -35,7 +35,7 @@ import com.icastle.members.model.MembersVO;
 /**
  * Servlet implementation class CommentServlet
  */
-@WebServlet("/comment/CommentServlet")
+@WebServlet("/members/CommentServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5 * 5 * 1024 * 1024)
 public class CommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -123,27 +123,42 @@ public class CommentServlet extends HttpServlet {
 		
 		comt = comtService.findByOrderId(comt.getOrderId());
 
-		    CommentPhotosService comtPhotoService = new CommentPhotosService();
+		CommentPhotosService comtPhotoService = new CommentPhotosService();
+		
+		
 		
 			
-			for(Part part : p){
+			 for(Part part : p){
+				 System.out.println("for迴圈裡的:" + part.getName());
 
+					
+				//過濾掉非uploadphoto的part已及是uploadphoto但是長度等於0的
+					if(part.getName().equals("uploadphoto")&&part.getSize()!=0){
+						
+						System.out.println("if裡的:" + part.getName());
+						
+						
+						InputStream ips = part.getInputStream();
+						
+						long lenLong = part.getSize();
+                        
+						System.out.println("圖片長度"+part.getSize());
+						
+						
+						comtPhotoService.uploadCommentPhoto(comt.getCommentId(),ips,lenLong);
+										
+						
+					}
 				
-				if(part.getName().equals("uploadphoto")){
-					
-					
-					InputStream ips = part.getInputStream();
+			  }
+				
+			
+	
+		
 
-					long lenLong = part.getSize();
-					
-					comtPhotoService.uploadCommentPhoto(comt.getCommentId(),ips,lenLong);
-									
-					
-				}
+		 
 			
-			}
-			
-//			CommentService cs = new CommentService();
+
 			OrdersService ordersService = new OrdersService();
 			List<OrdersVO> list = ordersService.search_By_MemberId(membersvo.getMemberId());
 			
