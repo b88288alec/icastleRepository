@@ -404,7 +404,7 @@
                     })
                 }
             })
-            json.length = 0;
+//             json.length = 0;
             var events = {
                 url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
                 data: {
@@ -415,8 +415,10 @@
 
             //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
             $('#calendar').fullCalendar('removeEventSources');
-            $('#calendar').fullCalendar('addEventSource', events);
+            $('#calendar').fullCalendar('addEventSource', json);
             $('#calendar').fullCalendar('refetchEvents');
+            
+            json.length = 0;
         })
 
     });
