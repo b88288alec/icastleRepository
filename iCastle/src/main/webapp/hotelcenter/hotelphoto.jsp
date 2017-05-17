@@ -52,7 +52,7 @@
 				<!-- 上面的大圖 -->
 				<div class="row bigImagediv" ondragover="dragoverHandler(event)"
 					ondrop="dropHandler(event)">
-					<img class="bigImage" src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${firstPhotovo.id}" data-img=""><br>
+					<img class="bigImage" src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${firstPhotovo.id}" data-img="img1"><br>
 					<input type="hidden" id="index" value="${originpage+1}"/>
 				</div>
 				
