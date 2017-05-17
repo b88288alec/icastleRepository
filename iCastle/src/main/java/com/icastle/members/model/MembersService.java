@@ -113,5 +113,28 @@ public class MembersService {
    public MembersVO findByEmail(String email){
 		return dao.findByEmail(email);
 	}
+   
+//   用姓名搜尋
+   public List<MembersVO> search_by_name(String name){
+	   
+	   String finalName = "%" + name + "%";
+	   
+	   return dao.search_by_name(finalName);
+   }
+   
+//   會員停權
+   public void suspension(Integer memberId, Boolean suspension){
+	   dao.suspension(memberId, suspension);
+   }
+   
+//   升格管理員
+   public void setManager(Integer memberId, Boolean manager){
+	   dao.setManager(memberId, manager);
+   }
+   
+// 搜尋管理者
+ public List<MembersVO> search_manager(){
+	   return dao.search_manager();
+ }
 	
 }

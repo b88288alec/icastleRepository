@@ -58,11 +58,11 @@ textarea {
 				<!-- ------------------------------------------------------ -->
 				<div class="card">
 					<div class="card-header" data-background-color="green">
-						<h4 class="title">Table Title</h4>
-						<p class="category">Here is a subtitle for this table</p>
+						<h4 class="title">飯店評論</h4>
+						<p class="category"></p>
 					</div>
 					<div class="card-content table-responsive table-full-width" id="divStyle">
-						<input type="text" value="${page}" name="myInput">
+						<input type="hidden" value="${page}" name="myInput">
 <%-- 					<c:choose> --%>
 <%-- 						<c:when test="${servletPath == '/hotelcenter/HostComment' }"> --%>
 <%-- 						<input type="text" value="${param.page}" name="myInput"> --%>
@@ -89,8 +89,8 @@ textarea {
 								<!-- 																forEach開始 -->
 								<c:forEach var="comment" items="${commentData}">
 
-										<tr>
-							
+										<tr name="mytr${comment.commentId}">
+<%-- 							                <input type="hidden" value="${comment.commentId}"> --%>
 											<td id="memberName${comment.commentId}" class="text-center">${comment.name}</td>
 											<td class="text-center">${comment.email}</td>
 											<td class="text-primary text-center" >${comment.commentTime}</td>
@@ -181,7 +181,7 @@ textarea {
 							<form id="myform" action="Response" method="post">
 								<div class="modal-body" id="myDiv2">
 									<input type="hidden" name="hiddeninput">
-									<input type="text" name="formInput">
+									<input type="hidden" name="formInput">
 									<textarea name="textareavalue">
       	
       	
@@ -435,9 +435,7 @@ textarea {
 				}
 
 				$('button[name="ButtonResponse"]').click(function() {
-					// 				 $("#myDiv").empty();
-					// 				 $("#myModalLabel").empty();	
-					// 				 $("#myModalLabel2").empty();
+		
 					//清掉
 					$("textarea[name='textareavalue']").val(null);
 					$("#myModal2").modal('show');
@@ -469,6 +467,20 @@ textarea {
 					
 					
 				});
+				
+				$("tr[name='mytr']").hover(mousein,mouseout);
+				
+				function mousein(){
+					
+					$("tr[name='mytr']").css("background-color","#9ACD32");
+					
+				}
+				
+                function mouseout(){
+					
+					$("tr[name='mytr']").css("background-color","white");
+					
+				}
 
 			});
 </script>
