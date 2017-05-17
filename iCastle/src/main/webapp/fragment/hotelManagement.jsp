@@ -138,7 +138,7 @@
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/'}">
+						<c:when test="${servletPath == '/hotelcenter/HotelCommentManager.jsp'}">
 							<li class="active"><a href="#"> <i
 									class="material-icons">comment</i>
 									<p>查詢評論</p>
