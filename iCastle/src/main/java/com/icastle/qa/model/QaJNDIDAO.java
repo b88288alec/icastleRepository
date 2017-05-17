@@ -20,7 +20,7 @@ public class QaJNDIDAO implements QaDAO_interface{
 	static{
 		try{
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/TestDB");
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/iCastleDB");
 		}catch (NamingException e){
 			e.printStackTrace();
 		}
@@ -33,7 +33,7 @@ public class QaJNDIDAO implements QaDAO_interface{
 	private static final String DELETE =
 			"DELETE FROM QA where id = ?";
 	private static final String GET_ALL_STMT =
-			"SELECT question, answer FROM QA ";
+			"SELECT id, question, answer FROM QA ";
 	
 	
 	
@@ -160,6 +160,7 @@ public class QaJNDIDAO implements QaDAO_interface{
 			
 			while (rs.next()) {
 				qaVO = new QaVO();
+				qaVO.setId(rs.getInt("id"));
 				qaVO.setQuestion(rs.getString("question"));
 				qaVO.setAnswer(rs.getString("answer"));
 //				qaVO.setId(rs.getInt("id"));
