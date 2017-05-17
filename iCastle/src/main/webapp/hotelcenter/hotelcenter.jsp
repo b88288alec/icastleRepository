@@ -31,15 +31,26 @@
 	<!--開始左側及上方導覽列-->
 	<jsp:include page="../fragment/hotelManagement.jsp" />
 	<!--開始左側及上方導覽列-->
-	
-		<!--內容區塊-->
-    <div class="content">
+
+	<!--內容區塊-->
+	<div class="content">
 		<div class="container-fluid">
 			<div class="row">
 				<c:if test="${HotelLoginOK.hotelState == 0}">
-					<p>您的帳號尚未通過審核，請耐心等候審核</p>
-					<p>您的帳號在通過審核前無法使用任何功能</p>
+					<div class="alert alert-warning">
+						<div class="container-fluid">
+							<div class="alert-icon">
+								<i class="material-icons">warning</i>
+							</div>
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true"><i class="material-icons">clear</i></span>
+							</button>
+							<b>注意:</b>您的帳號尚未通過審核，請耐心等候審核，再通過審核前您無法使用任何功能
+						</div>
+					</div>
 				</c:if>
+
 			</div>
 		</div>
 	</div>

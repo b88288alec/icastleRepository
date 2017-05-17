@@ -30,7 +30,7 @@
 <style>
 .container {
 	width: 1300px;
-	margin-top: 150px;
+/* 	margin-top: 150px; */
 }
 
 /* Rules for sizing the icon. */
@@ -61,10 +61,10 @@
 	<jsp:include page="../fragment/nav.jsp" />
 	<!--結束導覽列-->
 	<!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-	<div class="container">
+	<div class="container page-wrap">
 
 
-		<div class="row col-md-offset-2">
+		<div class="row col-md-offset-2" style="margin-top: 25%;">
 			<div class="col-md-6">
 				<!--按钮触发模态框  data-toggle="modal" data-target="#myModal"-->
 				<button type="button" class="btn btn-warning"
