@@ -201,7 +201,7 @@
 							<table>
 								<tbody>
 									<tr>
-										<td>審核狀態 </td>
+										<td>審核狀態: </td>
 										<c:choose>
 											<c:when test="${hotelandInfo.hotelState == 0}">
 												<td>
