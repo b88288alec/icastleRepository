@@ -30,48 +30,47 @@
 </head>
 <body>
     <!--開始導覽列-->
-		<jsp:include page="../fragment/nav.jsp"/>
- 	<!--結束導覽列--
+	<jsp:include page="../fragment/nav.jsp"/>
+ 	<!--結束導覽列-->
+>	
+			
+ 	<div class="row col-md-offset-2" style="margin-top:100px">
+		<div class="col-md-8" >
+			<div  style="padding:0px 50px " ><h1 style="font-weight:bold">飯店Q&A</h1></div>
+			<div  style="padding:0px 50px 50px 50px">
  	
     <!--開始本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     
-   
- 
-    <br>
-    <br>
-    <h1>飯店Q&A</h1>
-    <table border='2' bordercolor='#CCCCFF' width='900' height='800'>
-	<tr>
-	<td>問題</td>
-	<td>答案</td>
-		
-	</tr>
-	
-	<c:forEach var="QaVO" items="${list}">
-		<tr align='center' valign='middle'}>
-			<td>${QaVO.question}</td>
-			<td>${QaVO.answer}</td>
-			
-		</tr>
-	</c:forEach>
-</table>
 
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <c:forEach var="QaVO" items="${list}" varStatus="qa">
+      <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#${QaVO.question}" aria-expanded="false" aria-controls="${QaVO.question}" style="font-size:20px">
+        
+          ${QaVO.question}
+          
+        </a>
+      </h4>
+    </div>
+    <div id="${QaVO.question}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+      
+      ${QaVO.answer}
+
+        </div>
+    </div>
+   </div>
+   </c:forEach>
+  </div>
+ 
+</div>
+</div>
+</div>
+  
     
     <!--結束本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     <!--開始footer-->
