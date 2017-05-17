@@ -9,6 +9,7 @@
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
 <meta name="viewport" content="width=device-width" />
+<link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
 <link
 	href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -38,6 +39,13 @@
 	.msp{
 		position:absolute;
 	}
+	.updatebutton{
+		width:50px;
+	}
+	.que{
+		font-weight:bold;
+		font-size:18px;
+	}
 </style>
 
 <title>iCastle管理者中心</title>
@@ -52,56 +60,95 @@
 		<div class="container-fluid">
 		<table class="table">
 		<c:forEach var="QA" items="${QA}">
-			<tr>
+			<tr id="del${QA.id}">
 			<div class="row">
 			
 				<td>
-				<input type="checkbox" name="del" value="${QA.id}" />
+				<div class="row">
+					<div class="col-xs-2">
+						<span>問題: </span>
+					</div>
+					<div class="col-xs-9">
+						<span class="que" id="showq${QA.id}">${QA.question}</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-2">
+						<span>回答: </span>
+					</div>
+					<div class="col-xs-9">
+						<span id="showa${QA.id}">${QA.answer}</span>
+					</div>
+				</div>
 				</td>
-			
+				
 				<td>
-				<div class=".col-xs-2">
-					<span>問題: ${QA.question}</span>
-				</div>
-				<div class=".col-xs-8">
-					<span>回答: ${QA.answer}</span>
-				</div>
+					<button class="updatebutton" data-toggle="modal" data-target="#show${QA.id}" name="update">修改</button>
 				</td>
-			
-				<div class=".col-xs-2">
+				
+				<td>
+					<button class="updatebutton" type="button" name="delete" value="${QA.id}">刪除</button>
+				</td>
 					
-					<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="${QA.id}">
+					<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="show${QA.id}">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="myModalLabel">QA</h4>
+									<h4 class="modal-title" id="myModalLabel">修改QA</h4>
 								</div>
 								<div class="modal-body myselfdiv">
 									<div class=".col-xs-3">
 										<span>問題: </span><input class="qu" type="text" name="question" id="q${QA.id}" value="${QA.question}" />
 									</div>
 									<div class=".col-xs-8 an">
-										<span class="msp">回答: </span><textarea name="question" id="a${QA.id}">${QA.answer}</textarea>
+										<span class="msp">回答: </span><textarea name="answer" id="a${QA.id}">${QA.answer}</textarea>
 									</div>
 								</div>
 								<div class="modal-footer">
+									<button type="button" id="${QA.id}" class="btn btn-info btn-simple" name="updatechange" data-dismiss="modal">修改</button>
 									<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">關閉</button>
-									<button type="button" id="send${QA.id}" class="btn btn-info btn-simple" name="updatechange" data-dismiss="modal">修改</button>
 								</div>
 							</div>
 						</div>
 					</div>
 					
-					<td>
-					<button data-toggle="modal" data-target="#${QA.id}" name="update">修改</button>
-					</td>
-					
-				</div>
 			</div>
 			</tr>
 		</c:forEach>
 		</table>
+			<div class="row">
+				
+				<div class="col-xs-5">
+					<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="newqa">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="myModalLabel">新增QA</h4>
+								</div>
+								<form action="NewQAServlet" method="post">
+								<div class="modal-body myselfdiv">
+									<div class=".col-xs-3">
+										<span>問題: </span><input class="qu" type="text" name="question" id="newq" />
+									</div>
+									<div class=".col-xs-8 an">
+										<span class="msp">回答: </span><textarea name="answer" id="newa"></textarea>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<input type="submit" id="newsend" class="btn btn-info btn-simple" name="updatechange" />
+									<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">關閉</button>
+								</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					
+					<button class="updatebutton" data-toggle="modal" data-target="#newqa" name="update">新增</button>
+
+				</div>
+			</div>
 		</div>
 	</div>
 	<!--內容區塊-->
@@ -138,8 +185,52 @@
 		})
 		
 // 		修改用
-		$('table.table').on('click','button[name="updatechange"]',function(){
+		$('button[name="updatechange"]').on('click',function(){
 			
+			var id = $(this).attr('id');
+			var qid = ('#q' + id);
+			var aid = ('#a' + id);
+			var question = $(qid).val();
+			var answer = $(aid).val();
+			
+			$.ajax({
+				type : 'POST',
+				url : '${pageContext.servletContext.contextPath}/manager/UpdateQAServlet',
+				data : {
+					id : id,
+					question : question,
+					answer : answer
+				},
+				success : function(data){
+					var showqid = ('#showq' + id);
+					var showaid = ('#showa' + id);
+					$(showqid).empty().append(question);
+					$(showaid).empty().append(answer);
+				}
+			})
+			
+		})
+		
+// 		刪除用
+		$('button[name="delete"]').on('click', function(){
+			
+			var id = $(this).val();
+			
+			console.log($('input[name="del"]:checked').val());
+			
+			$.ajax({
+				type : 'GET',
+				url : '${pageContext.servletContext.contextPath}/manager/DeleteQAServlet',
+				data : {
+					id : id
+				},
+				success : function(data){
+					$.each(data, function(key, value){
+						var delid = ('#del' + value.id);
+						$(delid).remove();
+					})
+				}
+			})
 		})
 		
 	})
