@@ -40,7 +40,9 @@
 	   <div style="margin-top:60px">
        		<table class="table">
     		<thead>
+    		<input type="hidden" value="${pageContext.servletContext.contextPath}" id="Path">
         		<tr>
+        		    
             		<th class="text-center">編號</th>
             		<th>會員姓名</th>
             		<th>會員信箱</th>
@@ -161,6 +163,10 @@
  $(document).ready(
 		 function(){
 			 
+			 var path =$("#Path").val();
+			 
+			
+			 
 			 $('button[name="ButtonCheck"]').click(function(){
 				 
 				 $("#myDiv").empty();
@@ -194,7 +200,7 @@
                          div.append($("<h5>評論內容</h5>"));
                          div.append($("<p></p>").text(data[i].comment));
                          for(var j=0; j<len; j++){
-                        	 div.append($("<img>").attr("src","http://localhost:8081/iCastle/comment/CommentPhotosServlet?id="+data[i].ids[j]));
+                        	 div.append($("<img>").attr("src",path+"/comment/CommentPhotosServlet?id="+data[i].ids[j]));
                         	 
                          }
 
