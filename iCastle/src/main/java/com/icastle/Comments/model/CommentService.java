@@ -9,8 +9,8 @@ public class CommentService {
 	
 	
 	
-	public String comtIns(CommentVO comt){
-		return comtDAO.comtIns(comt);	
+	public String comtIns(CommentVO comt,int good){
+		return comtDAO.comtIns(comt,good);	
 	}
 	
 	public List<CommentVO> hotelComtSearch(Integer hotelId){
