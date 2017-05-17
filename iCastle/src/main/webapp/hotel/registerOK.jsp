@@ -33,7 +33,7 @@
 	<!--結束導覽列-->
 	
     <!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-    <div class="container"
+    <div class="container page-wrap"
 		style="background-color: white; padding-bottom: 100px;">
 		<center>
 	    	<h1>謝謝您使用我們的平台!!</h1>

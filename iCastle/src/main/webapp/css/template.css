@@ -42,8 +42,30 @@
 body {
     background-color: #FAFAFA;
     font-family: 'Microsoft JhengHei';
+    height: 100%;
 }
 /*網頁字體及底色結束*/
+
+html{
+	height: 100%;
+}
+
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -100px; 
+}
+
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  height: 142px; 
+}
+.site-footer {
+  background: orange;
+}
 
 /*網頁footer*/
 .footer {
