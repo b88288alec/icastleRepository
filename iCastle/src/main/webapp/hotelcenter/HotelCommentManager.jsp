@@ -44,21 +44,9 @@ textarea {
 	color: rgba(0, 0, 0, 0.54);
 }
 
-.pagediv{
-	text-align: center;
-}
+/* ----------------圖片輪播css------------------- */
 
-.CommentContent{
-	font-size:20px;
-}
-
-.myH{
-    color:"#8B4513";
-
-}
-
-/* --------------圖片輪播------------- */
-   		.carousel-control.left
+		.carousel-control.left
 			{
 				background: none;
 			}
@@ -136,15 +124,15 @@ textarea {
 				<!-- ------------------------------------------------------ -->
 				<div class="card">
 					<div class="card-header" data-background-color="green">
-						<h4 class="title">飯店評論</h4>
-						<p class="category"></p>
+						<h4 class="title">顧客評論</h4>
 					</div>
 					<div class="card-content table-responsive table-full-width" id="divStyle">
 						<input type="hidden" value="${page}" name="myInput">
-						<input type="hidden" value="${pageContext.servletContext.contextPath}" id="Path">
+						<input type="hidden" value="${pageContext.servletContext.contextPath}" id="path">
 
 						<table class="table">
 							<thead class="text-danger">
+
 
 				                 
 								<th class="text-center">會員姓名</th>
@@ -152,6 +140,7 @@ textarea {
 								<th class="text-center">評論時間</th>
 								<th class="text-center">查看評論</th>
 								<th class="text-center">回覆評論</th>
+								<th class="text-center">刪除</th>
 
 
 							</thead>
@@ -159,8 +148,8 @@ textarea {
 								<!-- 																forEach開始 -->
 								<c:forEach var="comment" items="${commentData}">
 
-										<tr name="mytr">
-							      
+										<tr>
+							
 											<td id="memberName${comment.commentId}" class="text-center">${comment.name}</td>
 											<td class="text-center">${comment.email}</td>
 											<td class="text-primary text-center" >${comment.commentTime}</td>
@@ -181,6 +170,17 @@ textarea {
 
 
 											</td>
+											
+											<td class="text-center">
+												<button type="button" class="btn btn-info btn-simple btn-xs"
+													name="ButtonResponse" value="${comment.commentId}">
+													<i class="material-icons md-48 md-dark">rate_review</i>
+												</button>
+
+
+											</td>
+											
+																				
 
 										</tr>
 
@@ -193,7 +193,8 @@ textarea {
 					</div>
 				</div>
 <!-- 	上一頁、下一頁 -->
-                <div class="pagediv">
+
+                
 				<ul class="pagination pagination-primary text-center" name="myul">
                 <c:forEach begin="1" end="${DataNumbers/5+1}" varStatus="number">
                 
@@ -203,9 +204,10 @@ textarea {
                 
                 </c:forEach>
 				
+				
+					
                 	
 				</ul>
-				</div>
 
 				<!-- 	上一頁、下一頁 -->
 
@@ -219,58 +221,47 @@ textarea {
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h3 class="modal-title" id="myModalLabel"></h3>
+								<h3 class="text-center" id="myModalLabel"></h3>
 							</div>
 							<div class="modal-body" id="myDiv">
-							
-							
-							
+
+
+                                                               
+
 							</div>
-<!-- 							圖片輪播 -->
-<!--    <div class="container"> -->
-<!--     Indicators -->
-<!--     <div id="myCarousel" class="carousel slide" data-ride="carousel"> -->
-<!--         Wrapper for slides -->
-<!--         <div class="carousel-inner" role="listbox" name="outerDiv"> -->
-<!--             <div class="item active" name="onlyDiv"> -->
-<!--                 <img src="http://synicsys.com/wp-content/uploads/2014/08/seo-banner-bgd.jpg" alt="Chania"> -->
-             
-<!--             </div> -->
-<!--             <div class="item"> -->
-<!--                 <img src="http://allpoints.ph/wp-content/uploads/2013/10/banner.jpg" alt="Chania"> -->
-          
-<!--             </div> -->
-<!--             <div class="item"> -->
-<!--                 <img src="http://www.nimble-solution.com/images/slider/banner4.png" alt="Flower"> -->
-               
-<!--             </div> -->
-<!--         </div> -->
-<!--         Left and right controls -->
-<!--         <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> -->
-<!--             <span class="fa fa-angle-left" aria-hidden="true"></span> -->
-<!--             <span class="sr-only">Previous</span> -->
-<!--         </a> -->
-<!--         <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> -->
-<!--             <span class="fa fa-angle-right" aria-hidden="true"></span> -->
-<!--             <span class="sr-only">Next</span> -->
-<!--         </a> -->
-<!--         <ol class="carousel-indicators"> -->
-<!--             <li data-target="#myCarousel" data-slide-to="0" class="active"></li> -->
-<!--             <li data-target="#myCarousel" data-slide-to="1"></li> -->
-<!--             <li data-target="#myCarousel" data-slide-to="2"></li> -->
-<!--         </ol> -->
-<!--     </div> -->
-<!-- </div> -->
-							<!-- 							圖片輪播 -->
+<!-- 圖 -->
+<!-- <div class="container"> -->
+
+<!-- 		<div id="myCarousel" class="carousel slide" data-ride="carousel"> -->
+
+<!-- 			<div class="carousel-inner" role="listbox" id="outerDiv"> -->
+			
+			
+			
+<!-- 			</div> -->
+
+<!-- 			<a class="left carousel-control" href="#myCarousel" role="button" -->
+<!-- 				data-slide="prev"> <span class="fa fa-angle-left" -->
+<!-- 				aria-hidden="true"></span> <span class="sr-only">Previous</span> -->
+<!-- 			</a> <a class="right carousel-control" href="#myCarousel" role="button" -->
+<!-- 				data-slide="next"> <span class="fa fa-angle-right" -->
+<!-- 				aria-hidden="true"></span> <span class="sr-only">Next</span> -->
+<!-- 			</a> -->
+
+<!-- 		</div> -->
+<!-- 	</div> -->
+
+<!-- 圖 -->
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default btn-simple"
-									data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-info btn-simple">Save</button>
+									data-dismiss="modal">關閉</button>
 							</div>
 						</div>
 					</div>
 				</div>
 
+				
+				
 				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
@@ -278,7 +269,7 @@ textarea {
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-hidden="true">&times;</button>
-								<h3 class="modal-title" id="myModalLabel2"></h3>
+								<h4 class="modal-title" id="myModalLabel2"></h4>
 							</div>
 							<form id="myform" action="Response" method="post">
 								<div class="modal-body" id="myDiv2">
@@ -294,8 +285,8 @@ textarea {
 								<div class="modal-footer">
 									<input type="submit" class="btn btn-info btn-simple" value="回覆"
 										id="mysubmit">
-<!-- 									<button type="button" class="btn btn-default btn-simple" -->
-<!-- 										data-dismiss="modal">Close</button> -->
+									<button type="button" class="btn btn-default btn-simple"
+										data-dismiss="modal">關閉</button>									
 								</div>
 							</form>
 						</div>
@@ -337,7 +328,6 @@ textarea {
 <script>
 	$(document).ready(
 			function() {
-				var path =$("#Path").val();
 				//修正跳出視窗bug
 				$('.modal').appendTo("body");
 				$('button[name="ButtonCheck"]').click(
@@ -345,7 +335,8 @@ textarea {
 
 							$("#myDiv").empty();
 							$("#myModalLabel").empty();
-
+                            
+							var path = $("#path").val();
 							var commentId = $(this).val();
 							$.getJSON("CommentCheck", {
 								"ButtonCheck" : commentId
@@ -372,34 +363,35 @@ textarea {
 									div.append($("<h5>風景評分</h5>"));
 									genimg(data[i].sceneScore);
 									div.append($("<h5>評論內容</h5>"));
-									div.append($("<p></p>").addClass("CommentContent").text(
+									div.append($("<p></p>").text(
 											data[i].comment));
 									for (var j = 0; j < len; j++) {
-										var myimg = ($("<img>").attr(
+										div.append($("<img>").attr(
 												"src",
-												path + "/comment/CommentPhotosServlet?id="
-														+ data[i].ids[j])).attr("width","300").attr("height","200");
-										div.append(myimg);
-										
-// 										if(j=0){
-											
-// 											$("div[name='outerDiv']").append($("div[name='onlyDiv']").append(myimg));
-											
-// 										}else{
-											
-// 											$("div[name='outerDiv']").append(myimg);
-											
-// 										}
-										
-										
+												 path+"/comment/CommentPhotosServlet?id="
+														+ data[i].ids[j]).attr("width","400"));
 
+//                                         var imgRotation = $("<img>").attr("src",path+"/comment/CommentPhotosServlet?id="+ data[i].ids[j]).attr("width","400");
+                                        
+//                                         var outerDiv = $("#outerDiv");
+//                                         outerDiv.append("<h1></h1>");
+                                        
+                                        
+//                                         if(j==0){
+//                                         	outerDiv.append($("<div></div>").addClass("item active").append(imgRotation));
+
+                                        	
+                                        	
+//                                         }else{
+                                        	
+//                                         	outerDiv.append($("<div></div>").addClass("item").append(imgRotation));
+                                        	
+//                                         }
 									}
 
 									$('#myModalLabel').text(
 											$("#memberName" + commentId).text()
 													+ "的評論");
-									
-									
 
 								})
 								$("#myModal").modal('show');
@@ -411,23 +403,23 @@ textarea {
 
 					var img1 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "8%"
+						width : "5%"
 					});
 					var img2 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "8%"
+						width : "5%"
 					});
 					var img3 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "8%"
+						width : "5%"
 					});
 					var img4 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "8%"
+						width : "5%"
 					});
 					var img5 = $("<img>").attr({
 						src : "../img/unstar.png",
-						width : "8%"
+						width : "5%"
 					});
 					var div = $("#myDiv");
 
@@ -435,115 +427,115 @@ textarea {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 
 					} else if (score == 2) {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 
 					} else if (score == 3) {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 
 					} else if (score == 4) {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/unstar.png",
-							width : "8%"
+							width : "5%"
 						});
 
 					} else {
 
 						img1 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img2 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img3 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img4 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 						img5 = $("<img>").attr({
 							src : "../img/star.png",
-							width : "8%"
+							width : "5%"
 						});
 
 					}
@@ -553,7 +545,9 @@ textarea {
 				}
 
 				$('button[name="ButtonResponse"]').click(function() {
-		
+					// 				 $("#myDiv").empty();
+					// 				 $("#myModalLabel").empty();	
+					// 				 $("#myModalLabel2").empty();
 					//清掉
 					$("textarea[name='textareavalue']").val(null);
 					$("#myModal2").modal('show');
@@ -585,30 +579,6 @@ textarea {
 					
 					
 				});
-				
-				$("tr[name='mytr']").hover(mousein,mouseout);
-				
-				function mousein(){
-					
-					$(this).css("background-color","#9ACD32");
-					
-				}
-				
-                function mouseout(){
-					
-					$(this).css("background-color","white");
-					
-				}
-                
-                
-                $("li").click(function(){
-                	
-                	$(this).addClass("active");
-                
-                });
-                
-                
-                
 
 			});
 </script>

@@ -165,6 +165,7 @@
 <script src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/moment.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/fullcalendar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/locale/zh-tw.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/sweetalert2.min.js"></script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
@@ -404,7 +405,7 @@
                     })
                 }
             })
-//             json.length = 0;
+            json.length = 0;
             var events = {
                 url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
                 data: {
@@ -415,10 +416,9 @@
 
             //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
             $('#calendar').fullCalendar('removeEventSources');
-            $('#calendar').fullCalendar('addEventSource', json);
+            $('#calendar').fullCalendar('addEventSource', events);
             $('#calendar').fullCalendar('refetchEvents');
             
-            json.length = 0;
         })
 
     });

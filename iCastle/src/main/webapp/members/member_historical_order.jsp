@@ -51,7 +51,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <input type="hidden" name="hotelId">
         <input type="hidden" name="orderId">
-
+        <input type="hidden" name="good" value="1">
         <h4 class="modal-title" id="myModalLabel">
         
         
