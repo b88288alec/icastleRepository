@@ -1,0 +1,27 @@
+.basicInfo {
+	border-collapse: collapse;
+	
+}
+
+.basicInfo td {
+    border: 1px solid black;
+    padding:3px;
+}
+
+.areaInfo {
+	border-collapse: collapse;
+	
+}
+
+.areaInfo td {
+    border: 1px solid black;
+    padding:3px;
+}
+
+.button {
+	margin-top:10px;
+}
+
+.button td{
+	width: 200px;
+}

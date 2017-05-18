@@ -18,6 +18,7 @@
     <url-pattern>/hotelcenter/*</url-pattern>
     <url-pattern>/orders/*</url-pattern>
     <url-pattern>/members/*</url-pattern>
+    <url-pattern>/manager/*</url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
   </filter-mapping>

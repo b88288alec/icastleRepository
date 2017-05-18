@@ -13,7 +13,8 @@ import hibernate.util.HibernateUtil;
 
 public class OrdersHibernateDAO implements OrdersDAO_interface{
 	
-	private static final String SELECT_BY_MEMBERID = "from OrdersVO where memberId = :memberId and checkinDay < :today order by checkinDay desc";
+	private static final String SELECT_BY_MEMBERID = "from OrdersVO where memberId = :memberId and (checkinDay < :today or cancelDate is not null) order by checkinDay desc";
+	private static final String SELECT_NEW_ORDER_BY_MEMBERID = "from OrdersVO where memberId = :memberId and checkinDay >= :today and cancelDate is null order by checkinDay desc";
 	private static final String SELECT_BY_HOTELID_YEAR = "from OrdersVO where hotelId=:hotelId and (year(checkinDay)=:yearin or year(checkoutDay)=:yearout) order by checkinDay desc";
 	private static final String SELECT_BY_HOTELID_MONTH = "from OrdersVO where hotelId=:hotelId and (checkinDay between :Imonthin and :Imonthout or checkoutDay between :Omonthin and :Omonthout) order by checkinDay desc";
 	private static final String SELECT_BY_HOTELID_DAY = "from OrdersVO where hotelId=:hotelId and checkinDay<=:checkinDay and checkoutDay>:checkoutDay order by checkinDay desc";
@@ -1107,8 +1108,22 @@ public class OrdersHibernateDAO implements OrdersDAO_interface{
 
 	@Override
 	public List<OrdersVO> select_new_orders_by_memberId(Integer memberId, java.sql.Date today) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<OrdersVO> result = new LinkedList<OrdersVO>();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_NEW_ORDER_BY_MEMBERID);
+			query.setParameter("memberId", memberId);
+			query.setParameter("today", today);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			throw e;
+		}
+		
+		return result;
 	}
 
 }

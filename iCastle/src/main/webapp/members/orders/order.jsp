@@ -258,7 +258,14 @@
                                                             總房價
                                                         </td>
                                                         <td>
-                                                            ${totalPrice} 元
+                                                        	<c:choose>
+                                                        		<c:when test="${orderMap.bedAdding == true}">
+                                                        			${(totalPrice+(orderMap.pricePerPerson*stayDayNum))*orderMap.roomCount} 元
+                                                        		</c:when>
+                                                        		<c:otherwise>
+                                                        			${totalPrice*orderMap.roomCount} 元
+                                                        		</c:otherwise>
+                                                        	</c:choose>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -616,7 +623,7 @@
 //     			$('input[name = "cardnum3"]').val('9012');
 //     			$('input[name = "cardnum4"]').val('3456');
     			$('input[name = "threenum"]').val('246');
-    			$('input[name = "month"]').val('12');
+    			$('input[name = "month"]').val('12/20');
     			$('input[name = "year"]').val('20');
     			$('input[name = "name"]').val('${MemberLoginOK.name}');
     			$('input[name = "ID"]').val('${MemberLoginOK.personId}');

@@ -62,6 +62,18 @@ public class OrdersService {
 		return result;
 	}
 	
+//	客戶搜尋尚未入住的訂單
+	public List<OrdersVO> search_new_orders_by_memberId(Integer memberId){
+		
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Taipei"));
+		java.sql.Date today = new java.sql.Date(new GregorianCalendar().getTimeInMillis());
+		
+		List<OrdersVO> result = dao.select_new_orders_by_memberId(memberId, today);
+		
+		return result;
+		
+	}
+	
 //	客戶和業者搜尋單筆訂單
 	public OrdersVO search_By_OrderId(Integer orderId){
 		OrdersVO result = dao.select_by_orderId(orderId);
