@@ -1,6 +1,7 @@
 package com.icastle.hotels.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -28,9 +29,16 @@ public class IndexSerlvet extends HttpServlet {
 		
 		//查詢所有飯店
 		HotelService hotelServ = new HotelService();
-		List<HotelVO> hotels = hotelServ.getAll();
+		List<HotelVO> hotels1 = hotelServ.getAll();
 		
-		//已hot排序
+		//只取通過審核的飯店
+		List<HotelVO> hotels = new ArrayList<HotelVO>();
+		for (HotelVO hotel : hotels1){
+			if (hotel.getHotelState() == 1)
+				hotels.add(hotel);
+		}
+		
+		//以hot排序
 		if (hotels.size() > 0) {
 			Collections.sort(hotels, new Comparator<HotelVO>() {
 				@Override

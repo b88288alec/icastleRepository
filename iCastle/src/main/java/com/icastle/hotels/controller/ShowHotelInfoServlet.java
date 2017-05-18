@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.icastle.hotelInfo.modle.*;
+import com.icastle.hotelphotos.model.HotelPhotosService;
+import com.icastle.hotelphotos.model.HotelPhotosVO;
 import com.icastle.hotels.model.*;
 
 @WebServlet("/hotelcenter/ShowHotelInfo.do")
@@ -28,6 +30,11 @@ public class ShowHotelInfoServlet extends HttpServlet {
 		InfoService infoServ = new InfoService();
 		InfoVO hotelInfo = infoServ.findByHotelId(hotelvo.getHotelId());
 		session.setAttribute("HotelInfo", hotelInfo);  
+		
+		//查詢照片
+//		HotelPhotosService hotelServ = new HotelPhotosService();
+//		HotelPhotosVO photo = hotelServ.findByHotelIdTop1(hotelvo.getHotelId());
+//		request.setAttribute("photo", photo);
 		
 		//轉交到view
 		RequestDispatcher rd = request.getRequestDispatcher("updateHotelInfo.jsp");

@@ -24,12 +24,12 @@
 						<c:when test="${servletPath  == '/manager/managercenter.jsp'}">
 							<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/managercenter.jsp"> <i
 									class="material-icons">dashboard</i>
-									<p>總攬</p>
+									<p>總覽</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="${pageContext.servletContext.contextPath}/manager/managercenter.jsp"> <i class="material-icons">dashboard</i>
-									<p>總攬</p>
+									<p>總覽</p>
 							</a></li>
 						</c:otherwise>
 					</c:choose>

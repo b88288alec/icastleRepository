@@ -90,8 +90,8 @@
 						</tr>
 					</tbody>
 					</table>
-					<input class="submit btn btn-success" type="submit" value="送出" />
 					<input class="btn  btn-danger" type="reset" value="清除" />
+					<input class="submit btn btn-success" type="submit" value="送出" />
 					<p>${success}</p>
 				</form>		
 			
