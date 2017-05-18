@@ -25,8 +25,8 @@ public class CommentService {
 		return comtDAO.comUpdate(comt);	
 	}
 	
-	public CommentVO pressGood(Integer commentId,Integer good){
-		return comtDAO.pressGood(commentId,good);
+	public void pressGood(Integer commentId,Integer good){
+		 comtDAO.pressGood(commentId,good);
 		
 	}
 	
@@ -48,6 +48,11 @@ public class CommentService {
 	
 	public List<CommentVO> findByEmail(String email){
 		return comtDAO.findByEmail(email);
+	}
+	
+	public List<Integer> findByGood(int good){
+		return comtDAO.findByGood(good);
+		
 	}
 	
 	

@@ -20,7 +20,7 @@ public class CommentDAO implements CommentDAO_interface {
 //	private static final String SEL_ORDERID = "SELECT response FROM Comments WHERE orderId = ?";
 	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=? where commentId = ?";
 	private static final String GOOD_COMT = "UPDATE Comments SET good = ? WHERE commentId = ?";
-	private static final String SHOW_GOOD = "SELECT good FROM Comments WHERE commentId = ?";
+	private static final String SEL_GOOD = "SELECT orderId FROM Comments WHERE good = ?";
 	private static final String SEL_COMTID = "SELECT orderId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime FROM Comments WHERE commentId = ?";
 	private static final String SEL_EMAIL = "SELECT orderId FROM Comments WHERE email = ?";
 	Connection conn;
@@ -29,6 +29,7 @@ public class CommentDAO implements CommentDAO_interface {
 	CommentVO com;
 	CommentDAO commt;
 	List<CommentVO> comtList = new ArrayList<CommentVO>();
+	List<Integer> intList = new ArrayList<Integer>();
 	
 	
 	private static DataSource ds = null;
@@ -180,7 +181,7 @@ public class CommentDAO implements CommentDAO_interface {
 			stmt.setInt(1, commentId);
 			stmt.executeUpdate();
 			
-			stmt = conn.prepareStatement(SHOW_GOOD);
+			stmt = conn.prepareStatement(SEL_GOOD);
 			stmt.setInt(1,commentId);
 			rs = stmt.executeQuery();
 			rs.next();
@@ -275,7 +276,7 @@ public class CommentDAO implements CommentDAO_interface {
 		return com;
 	}
 	
-	public CommentVO pressGood(Integer commentId,Integer good){
+	public void pressGood(Integer commentId,Integer good){
 		
 
 		try {
@@ -283,16 +284,7 @@ public class CommentDAO implements CommentDAO_interface {
 			stmt = conn.prepareStatement(GOOD_COMT);
 			stmt.setInt(1, good);
 			stmt.setInt(2, commentId);
-			stmt.executeUpdate();
-			
-			stmt = conn.prepareStatement(SHOW_GOOD);
-			stmt.setInt(1,commentId);
-			rs = stmt.executeQuery();
-			rs.next();
-			
-			com = new CommentVO();
-			com.setGood(rs.getInt("good"));
-				
+			stmt.executeUpdate();							
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -305,7 +297,6 @@ public class CommentDAO implements CommentDAO_interface {
 				e.printStackTrace();
 			}
 		}
-		return com;
 			
 	}
 	
@@ -371,7 +362,38 @@ public class CommentDAO implements CommentDAO_interface {
 	}
 
 
-} 
+
+	public List<Integer> findByGood(int good){
+		
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SEL_GOOD);
+			stmt.setInt(1,good);
+			rs = stmt.executeQuery();			
+			while(rs.next()){
+				
+				intList.add(rs.getInt(good));
+				
+				
+			}
+			
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return intList;
+		
+    }
+	
+}
 
 
 
