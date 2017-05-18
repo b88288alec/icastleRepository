@@ -9,6 +9,7 @@
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
 <meta name="viewport" content="width=device-width" />
+<link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
 <link
 	href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -89,8 +90,8 @@
 						</tr>
 					</tbody>
 					</table>
-					<input class="submit btn btn-success" type="submit" value="送出" />
 					<input class="btn  btn-danger" type="reset" value="清除" />
+					<input class="submit btn btn-success" type="submit" value="送出" />
 					<p>${success}</p>
 				</form>		
 			

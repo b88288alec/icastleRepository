@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
-<%@ page import="java.util.*"%>
-<%@ page import="com.icastle.qa.model.*"%>
-    
-<%
-    QaDAO_interface dao = new QaJNDIDAO();
-    List<QaVO> list = dao.getAll();
-    pageContext.setAttribute("list",list);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,48 +21,23 @@
 </head>
 <body>
     <!--開始導覽列-->
-	<jsp:include page="../fragment/nav.jsp"/>
- 	<!--結束導覽列-->
->	
-			
- 	<div class="row col-md-offset-2" style="margin-top:80px">
-		<div class="col-md-8" >
-			<div  style="padding:0px 50px " ><h1 style="font-weight:bold">飯店Q&A</h1></div>
-			<div  style="padding:0px 50px 50px 50px">
+		<jsp:include page="../fragment/nav.jsp"/>
+ 	<!--結束導覽列--
  	
     <!--開始本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
-    
-
-    
-    
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    <c:forEach var="QaVO" items="${list}" varStatus="qa">
-      <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#${QaVO.question}" aria-expanded="false" aria-controls="${QaVO.question}" style="font-size:20px">
-        
-          ${QaVO.question}
-          
-        </a>
-      </h4>
+    <div class="container page-wrap">
+    	<div class="alert alert-danger" style="margin-top:40%;">
+    <div class="container-fluid">
+	  <div class="alert-icon">
+	    <i class="material-icons">error_outline</i>
+	  </div>
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true"><i class="material-icons">clear</i></span>
+	  </button>
+      	您的帳號已被停權! 無法使用下訂功能!
     </div>
-    <div id="${QaVO.question}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body">
-      
-          ${QaVO.answer}
-
-        </div>
+</div>
     </div>
-   </div>
-   </c:forEach>
-  </div>
- 
-</div>
-</div>
-</div>
-  
-    
     <!--結束本頁內容!!!!!!!!!!!!~~~~~~~~~~-->
     <!--開始footer-->
 		<jsp:include page="../fragment/footer.jsp"/>

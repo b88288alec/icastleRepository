@@ -9,6 +9,7 @@
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
 <meta name="viewport" content="width=device-width" />
+<link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
 <link
 	href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -30,6 +31,9 @@
 	
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link
+	href="${pageContext.servletContext.contextPath}/css/checkhotels.css"
+	rel="stylesheet" />
 <title>iCastle管理者中心</title>
 </head>
 <body>
@@ -60,7 +64,7 @@
 					<c:forEach var="hotelandInfo" items="${hotelandInfos}">
 						<h3>${hotelandInfo.hotelId} ${hotelandInfo.hotelName}</h3>
 						<div>
-							<table>
+							<table class="basicInfo">
 								<thead>
 								</thead>
 								<tbody>
@@ -90,7 +94,7 @@
 									</tr>
 									<tr> 
 										<td>星級</td>
-										<td>${hotelandInfo.star}</td>
+										<td colspan="3">${hotelandInfo.star}</td>
 										
 									</tr>
 									<tr>
@@ -113,7 +117,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<table>
+							<table class="areaInfo">
 								<tbody>
 									<tr>
 										<td style="width:100px">交通方式</td>
@@ -197,7 +201,7 @@
 							<table>
 								<tbody>
 									<tr>
-										<td>審核狀態 </td>
+										<td>審核狀態: </td>
 										<c:choose>
 											<c:when test="${hotelandInfo.hotelState == 0}">
 												<td>
@@ -228,7 +232,7 @@
 						<c:set var="count" value="${count = count+1}"/>
 						<h3>${hotelandInfo.hotelId} ${hotelandInfo.hotelName}</h3>
 						<div>
-							<table>
+							<table class="basicInfo">
 								<thead>
 								</thead>
 								<tbody>
@@ -258,7 +262,7 @@
 									</tr>
 									<tr> 
 										<td>星級</td>
-										<td>${hotelandInfo.star}</td>
+										<td colspan="3">${hotelandInfo.star}</td>
 										
 									</tr>
 									<tr>
@@ -281,7 +285,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<table>
+							<table class="areaInfo">
 								<tbody>
 									<tr>
 										<td style="width:100px">交通方式</td>
@@ -362,17 +366,16 @@
 									</tr>
 								</tbody>
 							</table> 
-							<table>
+							<table class="button">
 								<tbody>
 									<tr>
-										<td>審核狀態 </td>
-											<td>
-												未通過審核
-											</td>
-											<td> 
-											    <label for="pass${hotelandInfo.hotelId}">審核通過</label>
-	  											<input type="checkbox" class="checkbox" name="pass" id="pass${hotelandInfo.hotelId}" value="${hotelandInfo.hotelId}">
-											</td>
+										<td>
+											審核狀態:未通過審核
+										</td>
+										<td> 
+										    <label for="pass${hotelandInfo.hotelId}">審核通過</label>
+  											<input type="checkbox" class="checkbox" name="pass" id="pass${hotelandInfo.hotelId}" value="${hotelandInfo.hotelId}">
+										</td>
 									</tr>
 								</tbody>
 							</table> 
@@ -395,7 +398,7 @@
 						<c:set var="count" value="${count = count+1}"/>
 						<h3>${hotelandInfo.hotelId} ${hotelandInfo.hotelName}</h3>
 						<div>
-							<table>
+							<table class="basicInfo">
 								<thead>
 								</thead>
 								<tbody>
@@ -425,7 +428,7 @@
 									</tr>
 									<tr> 
 										<td>星級</td>
-										<td>${hotelandInfo.star}</td>
+										<td colspan="3">${hotelandInfo.star}</td>
 										
 									</tr>
 									<tr>
@@ -448,7 +451,7 @@
 									</tr>
 								</tbody>
 							</table>
-							<table>
+							<table class="areaInfo">
 								<tbody>
 									<tr>
 										<td style="width:100px">交通方式</td>
@@ -529,17 +532,15 @@
 									</tr>
 								</tbody>
 							</table> 
-							<table>
+							<table class="button">
 								<tbody>
 									<tr>
-										<td>審核狀態 </td>
-											<td>
-												已通過審核
-											</td>
-											<td> 
-											    <label for="suspend${hotelandInfo.hotelId}">停權</label>
-	  											<input type="checkbox" class="checkbox" name="suspend" id="suspend${hotelandInfo.hotelId}" value="${hotelandInfo.hotelId}">
-											</td>
+										<td>審核狀態:已通過審核
+										</td>
+										<td> 
+										    <label for="suspend${hotelandInfo.hotelId}">停權</label>
+  											<input type="checkbox" class="checkbox" name="suspend" id="suspend${hotelandInfo.hotelId}" value="${hotelandInfo.hotelId}">
+										</td>
 									</tr>
 								</tbody>
 							</table> 
@@ -554,7 +555,7 @@
 			</div>
 			
 		</div>
-		<button class="btn btn-default" type="submit">送出修改</button>
+		<button class="btn btn-success" type="submit">送出修改</button>
 		</form>
 		
 		

@@ -7,7 +7,8 @@
     <meta charset="utf-8" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-    <title></title>
+    <link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
+    <title>愛客宿-iCastle</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.amber-orange.min.css" />
     <link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
@@ -257,7 +258,14 @@
                                                             總房價
                                                         </td>
                                                         <td>
-                                                            ${totalPrice} 元
+                                                        	<c:choose>
+                                                        		<c:when test="${orderMap.bedAdding == true}">
+                                                        			${(totalPrice+(orderMap.pricePerPerson*stayDayNum))*orderMap.roomCount} 元
+                                                        		</c:when>
+                                                        		<c:otherwise>
+                                                        			${totalPrice*orderMap.roomCount} 元
+                                                        		</c:otherwise>
+                                                        	</c:choose>
                                                         </td>
                                                     </tr>
                                                 </tbody>

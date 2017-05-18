@@ -46,7 +46,7 @@
 					<h2>會員中心</h2>
 				</div>
 				
-					<div class="row col-md-offset-3" >
+					<div class="row col-md-offset-1" >
 						<div class="col-md-4" style="margin-top: 100px">
 							<!--如下-- 先進到member_profile.jsp頁面，當修改資料(送出表單時候)直接呼叫sevlet程式-->
 							<a href="${pageContext.servletContext.contextPath}/members/member_profile.jsp">
@@ -63,7 +63,17 @@
 								<button type="button" class="btn btn-white"
 									style="width: 250px; height: 250px">
 									<i class="material-icons md-40">filter_none</i>
-									<p style="font-size: 20px">歷史訂單查詢</p>
+									<p style="font-size: 20px">歷史記錄</p>
+								</button>
+							</a>
+						</div>
+						<div class="col-md-4" style="margin-top: 100px">
+							<!--如下--直接呼叫sevlet將資料丟到member_historical_order.jsp顯示-->
+							<a href="${pageContext.servletContext.contextPath}/members/MemberForSearchNewOrdersServlet">
+								<button type="button" class="btn btn-white"
+									style="width: 250px; height: 250px">
+									<i class="material-icons md-40">filter_none</i>
+									<p style="font-size: 20px">訂單查詢</p>
 								</button>
 							</a>
 						</div>
