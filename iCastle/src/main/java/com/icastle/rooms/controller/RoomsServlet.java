@@ -16,25 +16,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.icastle.members.model.MembersVO;
 import com.icastle.rooms.model.RoomsService;
-
-
 
 @WebServlet("/members/rooms/Rooms.do")
 public class RoomsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
-		HttpSession session = request.getSession(); 
-		
+		HttpSession session = request.getSession();
+		MembersVO member = (MembersVO) session.getAttribute("MemberLoginOK");
+
 		RequestDispatcher rd = null;
-		
-		//判斷請求
-		if(action.trim().equals("getOrder")){
-			//取得參數
+
+		if (member.isSuspension()) {
+			rd = request.getRequestDispatcher("../suspension.jsp");
+			rd.forward(request, response);
+			return;
+		}
+
+		// 判斷請求
+		if (action.trim().equals("getOrder")) {
+			// 取得參數
 			String roomId = request.getParameter("roomId");
 			String hotelId = request.getParameter("hotelId");
 			String hotelName = request.getParameter("hotelName");
@@ -53,15 +60,15 @@ public class RoomsServlet extends HttpServlet {
 			String avgPrice = request.getParameter("price");
 			String guestPolicies = request.getParameter("guestPolicies");
 			String cancelPolicies = request.getParameter("cancelPolicies");
-			
-			
+
 			RoomsService roomS = new RoomsService();
 			Integer stayDayNum = roomS.getstayDayNum(checkinDay, checkoutDay);
-			Map<String,Integer> PerPrice = roomS.getPerPriceByAuto(Integer.parseInt(roomId), Integer.parseInt(hotelId), Integer.parseInt(roomTypeId), checkinDay, checkoutDay, stayDayNum);
+			Map<String, Integer> PerPrice = roomS.getPerPriceByAuto(Integer.parseInt(roomId), Integer.parseInt(hotelId),
+					Integer.parseInt(roomTypeId), checkinDay, checkoutDay, stayDayNum);
 			int totalPrice = roomS.getTotalPrice(PerPrice);
-			
-			//包裝資料
-			Map<String,String> orderMap = new HashMap<String,String>();
+
+			// 包裝資料
+			Map<String, String> orderMap = new HashMap<String, String>();
 			orderMap.put("roomId", roomId);
 			orderMap.put("hotelId", hotelId);
 			orderMap.put("hotelName", hotelName);
@@ -80,21 +87,22 @@ public class RoomsServlet extends HttpServlet {
 			orderMap.put("avgPrice", avgPrice);
 			orderMap.put("guestPolicies", guestPolicies);
 			orderMap.put("cancelPolicies", cancelPolicies);
-			
-			//放入request
+
+			// 放入request
 			session.setAttribute("orderMap", orderMap);
 			session.setAttribute("stayDayNum", stayDayNum);
 			session.setAttribute("PerPrice", PerPrice);
 			session.setAttribute("totalPrice", totalPrice);
-			
-			//forward
+
+			// forward
 			rd = request.getRequestDispatcher("../orders/order.jsp");
 			rd.forward(request, response);
 		}
-		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
