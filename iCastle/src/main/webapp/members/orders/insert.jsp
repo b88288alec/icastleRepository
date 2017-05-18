@@ -6,6 +6,7 @@
 <head>
     <meta charset="utf-8" http-equiv="Content-Type" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
     <!--     Fonts and icons     -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
