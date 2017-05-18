@@ -21,7 +21,7 @@
     <link href="${pageContext.servletContext.contextPath}/css/fullcalendar.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/_materialFullCalendar.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
-    <title></title>
+    <title>iCastle飯店管理中心</title>
     <style>
         #calendar {
             /* 		float: right; */
@@ -399,26 +399,32 @@
                     jsonData: JSON.stringify(json),
                     roomTypeId: $('select').val(),
                 },
-                success: function () {
-                    swal({
-                        title: '新增成功',
-                        type: 'success',
-                    })
+//                 success: function () {
+//                     swal({
+//                         title: '新增成功',
+//                         type: 'success',
+//                     })
+//                 }
+            }).done(function(date){
+            	swal({
+                    title: '成功新增' + date + '筆資料',
+                    type: 'success',
+                })
+            	json.length = 0;
+                var events = {
+                    url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
+                    data: {
+                        hotelId: '${HotelLoginOK.hotelId}',
+                        roomTypeId: $('select').val(),
+                    }
                 }
-            })
-            json.length = 0;
-            var events = {
-                url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
-                data: {
-                    hotelId: '${HotelLoginOK.hotelId}',
-                    roomTypeId: $('select').val(),
-                }
-            }
 
-            //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
-            $('#calendar').fullCalendar('removeEventSources');
-            $('#calendar').fullCalendar('addEventSource', events);
-            $('#calendar').fullCalendar('refetchEvents');
+                //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
+                $('#calendar').fullCalendar('removeEventSources');
+                $('#calendar').fullCalendar('addEventSource', events);
+                $('#calendar').fullCalendar('refetchEvents');
+            })
+            
             
         })
 
