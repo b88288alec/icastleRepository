@@ -35,6 +35,9 @@
     		width:600px;
     		overflow:auto;
     	}
+tr{
+	height:80px;
+}
 </style>
 
 <title>愛客宿-iCastle</title>
@@ -122,7 +125,7 @@
 						<th>旅客備註</th>
 						<th>下單日期</th>
 						<th>訂單狀態</th>
-						<th class="text-right">留言給飯店</th>
+						<th class="text-right">評論</th>
 						<!--評論 -->
 					</tr>
 				</thead>
@@ -164,7 +167,7 @@
 							<td id="state${myData.orderId}"><c:choose>
 									<%--orderState布林值判斷改顯示字串 --%>
 									<c:when test="${myData.orderState == true}">訂單成立</c:when>
-									<c:otherwise>取消訂單</c:otherwise>
+									<c:otherwise>取消訂單<br>${myData.cancelDate}</c:otherwise>
 								</c:choose></td>
 							<!--評論 -->
 							<c:choose>
@@ -214,7 +217,7 @@
 													class="btn btn-success btn-simple btn-xs">
 													<i class="fa fa-edit"></i>
 												</button>
-								</a></td>
+								</td>
 								</c:when>
 								<c:otherwise><td></td></c:otherwise>
 								</c:choose>

@@ -35,6 +35,9 @@
     		width:600px;
     		overflow:auto;
     	}
+tr{
+	height:80px;
+}
 </style>
 
 <title>愛客宿-iCastle</title>
@@ -65,7 +68,7 @@
 						<th>取消訂單</th>
 				</thead>
 				<tbody id='idtbody'>
-				<c:forEach var="myData" items="${ordersKey}">
+				<c:forEach var="myData" items="${orders}">
 					
 					<!--取出VO裡的List 此orderKey相當於List概念-->
 					<%-- 						${myData.orderId} ${myData.orderedDate} ${myData.memberId} ${myData.roomId} ${myData.hotelId} ${myData.hotelName} --%>
@@ -106,7 +109,7 @@
 								</c:choose></td>
 								<td>
 								<c:choose>
-									<c:when test="${myData.cancelDate == null && myData.checkinDay.time > currentTime}">
+									<c:when test="${myData.cancelDate == null}">
 									<div id="td${myData.orderId}">
 										<button class="btn btn-primary" data-toggle="modal" data-target="#cancelModal" type="button" name="cancelOrder" id="" value="cancel">取消訂單</button>
 									</div>
