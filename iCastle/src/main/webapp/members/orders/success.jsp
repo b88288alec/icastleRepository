@@ -7,6 +7,7 @@
 <meta charset="utf-8" http-equiv="Content-Type" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv=refresh content="3;url=${pageContext.servletContext.contextPath}/index.jsp">
+<link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
 <!--     Fonts and icons     -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons" />

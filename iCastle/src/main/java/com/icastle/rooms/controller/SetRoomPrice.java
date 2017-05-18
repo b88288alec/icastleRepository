@@ -1,6 +1,7 @@
 package com.icastle.rooms.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -133,7 +134,11 @@ public class SetRoomPrice extends HttpServlet {
 		
 		//執行新增或修改
 		RoomsService roms = new RoomsService();
-		roms.insertRooms(roomslist);
+		Integer updateCount = roms.insertRooms(roomslist);
+		
+		response.setCharacterEncoding("UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println(updateCount);
 		
 	}
 

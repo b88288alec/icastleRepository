@@ -7,6 +7,7 @@
     <meta charset="utf-8" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
+    <link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.amber-orange.min.css" />
     <link href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css" rel="stylesheet" />
@@ -20,7 +21,7 @@
     <link href="${pageContext.servletContext.contextPath}/css/fullcalendar.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/_materialFullCalendar.css" rel="stylesheet" />
     <link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
-    <title></title>
+    <title>iCastle飯店管理中心</title>
     <style>
         #calendar {
             /* 		float: right; */
@@ -398,26 +399,32 @@
                     jsonData: JSON.stringify(json),
                     roomTypeId: $('select').val(),
                 },
-                success: function () {
-                    swal({
-                        title: '新增成功',
-                        type: 'success',
-                    })
+//                 success: function () {
+//                     swal({
+//                         title: '新增成功',
+//                         type: 'success',
+//                     })
+//                 }
+            }).done(function(date){
+            	swal({
+                    title: '成功新增' + date + '筆資料',
+                    type: 'success',
+                })
+            	json.length = 0;
+                var events = {
+                    url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
+                    data: {
+                        hotelId: '${HotelLoginOK.hotelId}',
+                        roomTypeId: $('select').val(),
+                    }
                 }
-            })
-            json.length = 0;
-            var events = {
-                url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
-                data: {
-                    hotelId: '${HotelLoginOK.hotelId}',
-                    roomTypeId: $('select').val(),
-                }
-            }
 
-            //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
-            $('#calendar').fullCalendar('removeEventSources');
-            $('#calendar').fullCalendar('addEventSource', events);
-            $('#calendar').fullCalendar('refetchEvents');
+                //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
+                $('#calendar').fullCalendar('removeEventSources');
+                $('#calendar').fullCalendar('addEventSource', events);
+                $('#calendar').fullCalendar('refetchEvents');
+            })
+            
             
         })
 
