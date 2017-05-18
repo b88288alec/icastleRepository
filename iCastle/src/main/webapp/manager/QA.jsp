@@ -38,6 +38,13 @@
 	.msp{
 		position:absolute;
 	}
+	.updatebutton{
+		width:50px;
+	}
+	.que{
+		font-weight:bold;
+		font-size:18px;
+	}
 </style>
 
 <title>iCastle管理者中心</title>
@@ -56,19 +63,31 @@
 			<div class="row">
 			
 				<td>
-					<input type="checkbox" name="del" value="${QA.id}" />
+				<div class="row">
+					<div class="col-xs-2">
+						<span>問題: </span>
+					</div>
+					<div class="col-xs-9">
+						<span class="que" id="showq${QA.id}">${QA.question}</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-2">
+						<span>回答: </span>
+					</div>
+					<div class="col-xs-9">
+						<span id="showa${QA.id}">${QA.answer}</span>
+					</div>
+				</div>
 				</td>
-			
+				
 				<td>
-				<div>
-					<span id="showq${QA.id}">問題: ${QA.question}</span>
-				</div>
-				<div>
-					<span id="showa${QA.id}">回答: ${QA.answer}</span>
-				</div>
+					<button class="updatebutton" data-toggle="modal" data-target="#show${QA.id}" name="update">修改</button>
 				</td>
-			
-				<div>
+				
+				<td>
+					<button class="updatebutton" type="button" name="delete" value="${QA.id}">刪除</button>
+				</td>
 					
 					<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="show${QA.id}">
 						<div class="modal-dialog">
@@ -86,27 +105,20 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">關閉</button>
 									<button type="button" id="${QA.id}" class="btn btn-info btn-simple" name="updatechange" data-dismiss="modal">修改</button>
+									<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">關閉</button>
 								</div>
 							</div>
 						</div>
 					</div>
 					
-					<td>
-						<button data-toggle="modal" data-target="#show${QA.id}" name="update">修改</button>
-					</td>
-					
-				</div>
 			</div>
 			</tr>
 		</c:forEach>
 		</table>
 			<div class="row">
-				<div class="col-xs-2">
-					<button type="button" id="delete">刪除</button>
-				</div>
-				<div class="col-xs-2">
+				
+				<div class="col-xs-5">
 					<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="newqa">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -114,6 +126,7 @@
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 									<h4 class="modal-title" id="myModalLabel">新增QA</h4>
 								</div>
+								<form action="NewQAServlet" method="post">
 								<div class="modal-body myselfdiv">
 									<div class=".col-xs-3">
 										<span>問題: </span><input class="qu" type="text" name="question" id="newq" />
@@ -123,14 +136,16 @@
 									</div>
 								</div>
 								<div class="modal-footer">
+									<input type="submit" id="newsend" class="btn btn-info btn-simple" name="updatechange" />
 									<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">關閉</button>
-									<button type="button" id="newsend" class="btn btn-info btn-simple" name="updatechange" data-dismiss="modal">新增</button>
 								</div>
+								</form>
 							</div>
 						</div>
 					</div>
 					
-					<button data-toggle="modal" data-target="#newqa" name="update">新增</button>
+					<button class="updatebutton" data-toggle="modal" data-target="#newqa" name="update">新增</button>
+
 				</div>
 			</div>
 		</div>
@@ -178,7 +193,7 @@
 			var answer = $(aid).val();
 			
 			$.ajax({
-				type : 'GET',
+				type : 'POST',
 				url : '${pageContext.servletContext.contextPath}/manager/UpdateQAServlet',
 				data : {
 					id : id,
@@ -196,26 +211,26 @@
 		})
 		
 // 		刪除用
-// 		$('#delete').on('click', function(){
+		$('button[name="delete"]').on('click', function(){
 			
-// 			var id[] = $('input[name="del"]').val();
+			var id = $(this).val();
 			
-// 			$.ajax({
-// 				type : 'GET',
-// 				url : '${pageContext.servletContext.contextPath}/manager/DeleteQAServlet',
-// 				data : {
-// 					id : id[]
-// 				},
-// 				success : function(data){
-// 					$.each(data, function(key, value){
-// 						var delid = ('#del' + value.id);
-						
-// 					})
-					
-// 					$('#del').empty().append(answer);
-// 				}
-// 			})
-// 		})
+			console.log($('input[name="del"]:checked').val());
+			
+			$.ajax({
+				type : 'GET',
+				url : '${pageContext.servletContext.contextPath}/manager/DeleteQAServlet',
+				data : {
+					id : id
+				},
+				success : function(data){
+					$.each(data, function(key, value){
+						var delid = ('#del' + value.id);
+						$(delid).remove();
+					})
+				}
+			})
+		})
 		
 	})
 </script>

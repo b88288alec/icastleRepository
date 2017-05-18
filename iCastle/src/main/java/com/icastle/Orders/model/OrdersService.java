@@ -51,9 +51,13 @@ public class OrdersService {
 		return sdf.format(day);
 	}
 	
-//	客戶搜尋所有訂單
-	public List<OrdersVO> search_By_MemberId(Integer memberId){
-		List<OrdersVO> result = dao.select_by_memberId(memberId);
+//	客戶搜尋歷史訂單
+	public List<OrdersVO> search_history_By_MemberId(Integer memberId){
+		
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Taipei"));
+		java.sql.Date today = new java.sql.Date(new GregorianCalendar().getTimeInMillis());
+		
+		List<OrdersVO> result = dao.select_by_memberId(memberId, today);
 
 		return result;
 	}

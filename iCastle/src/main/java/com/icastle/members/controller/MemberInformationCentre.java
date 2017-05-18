@@ -41,7 +41,7 @@ public class MemberInformationCentre extends HttpServlet {
  	
 	//----------------顯示訂單歷史資料------------------
 		OrdersService ordersService = new OrdersService();
-		List<OrdersVO> list = ordersService.search_By_MemberId(membersvo.getMemberId());
+		List<OrdersVO> list = ordersService.search_history_By_MemberId(membersvo.getMemberId());
 		request.setAttribute("ordersKey", list);
 		
 //		取得當前時間來比較日期大小

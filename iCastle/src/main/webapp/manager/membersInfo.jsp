@@ -168,7 +168,7 @@
 						}
 
 						if(value.suspension == 'true'){
-							minp.prop('checked', true);
+							sinp.prop('checked', true);
 						}
 						
 						mlab.append([minp,msp]);

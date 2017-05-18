@@ -9,7 +9,9 @@ public interface OrdersDAO_interface {
 //	修改訂單狀態，顧客或業者用同一個方法
 	public void update(OrdersVO ordersVO);
 //	顧客搜尋歷史記錄
-	public List<OrdersVO> select_by_memberId(Integer memberId);
+	public List<OrdersVO> select_by_memberId(Integer memberId, java.sql.Date today);
+//	顧客搜尋尚未入住的訂單
+	public List<OrdersVO> select_new_orders_by_memberId(Integer memberId, java.sql.Date today);
 //	顧客或業者搜尋單筆訂單
 	public OrdersVO select_by_orderId(Integer orderId);
 //	業者搜尋所有訂單

@@ -160,7 +160,7 @@ public class CommentServlet extends HttpServlet {
 			
 
 			OrdersService ordersService = new OrdersService();
-			List<OrdersVO> list = ordersService.search_By_MemberId(membersvo.getMemberId());
+			List<OrdersVO> list = ordersService.search_history_By_MemberId(membersvo.getMemberId());
 			
 			for(OrdersVO order:list){
 				order.getOrderId();
