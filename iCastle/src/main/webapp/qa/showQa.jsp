@@ -34,7 +34,7 @@
  	<!--結束導覽列-->
 >	
 			
- 	<div class="row col-md-offset-2" style="margin-top:100px">
+ 	<div class="row col-md-offset-2" style="margin-top:80px">
 		<div class="col-md-8" >
 			<div  style="padding:0px 50px " ><h1 style="font-weight:bold">飯店Q&A</h1></div>
 			<div  style="padding:0px 50px 50px 50px">
@@ -59,7 +59,7 @@
     <div id="${QaVO.question}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
       
-      ${QaVO.answer}
+          ${QaVO.answer}
 
         </div>
     </div>

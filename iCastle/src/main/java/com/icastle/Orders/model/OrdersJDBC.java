@@ -159,7 +159,7 @@ public class OrdersJDBC implements OrdersDAO_interface{
 	}
 
 	@Override
-	public List<OrdersVO> select_by_memberId(Integer memberId) {
+	public List<OrdersVO> select_by_memberId(Integer memberId, java.sql.Date today) {
 
 		Connection conn = null;
 		PreparedStatement pstat = null;
@@ -1640,6 +1640,12 @@ public class OrdersJDBC implements OrdersDAO_interface{
 	@Override
 	public List<OrdersChartVO> piechart_select_by_hotelId_year_month_orderstate(Integer hotelId, Boolean state,
 			Integer year, Integer month) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrdersVO> select_new_orders_by_memberId(Integer memberId, java.sql.Date today) {
 		// TODO Auto-generated method stub
 		return null;
 	}

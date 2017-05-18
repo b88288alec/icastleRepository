@@ -70,6 +70,7 @@ public class CommentServlet extends HttpServlet {
 		String quality = request.getParameter("quality");
 		String scene = request.getParameter("scene");
 		String comment = request.getParameter("comment");
+		String good= request.getParameter("good");
 
 		
 		Collection<Part> p=request.getParts();
@@ -78,6 +79,7 @@ public class CommentServlet extends HttpServlet {
 		int serviceInt = Integer.parseInt(service);
 		int qualityInt = Integer.parseInt(quality);
 		int sceneInt = Integer.parseInt(scene);
+		int goodInt = Integer.parseInt(good);
 	
 		Map<String,String> ErrorMessage = new HashMap<String,String>();
 		CommentVO comt;
@@ -119,7 +121,7 @@ public class CommentServlet extends HttpServlet {
 		comt.setQualityScore(qualityInt);
 		comt.setComment(comment);
 		comt.setCommentTime(d);
-		comtService.comtIns(comt);	
+		comtService.comtIns(comt,goodInt);	
 		
 		comt = comtService.findByOrderId(comt.getOrderId());
 
@@ -160,7 +162,7 @@ public class CommentServlet extends HttpServlet {
 			
 
 			OrdersService ordersService = new OrdersService();
-			List<OrdersVO> list = ordersService.search_By_MemberId(membersvo.getMemberId());
+			List<OrdersVO> list = ordersService.search_history_By_MemberId(membersvo.getMemberId());
 			
 			for(OrdersVO order:list){
 				order.getOrderId();

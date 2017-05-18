@@ -13,7 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class CommentDAO implements CommentDAO_interface {
-	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime) VALUES(?,?,?,?,?,?,?,?,?)";
+	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime,good) VALUES(?,?,?,?,?,?,?,?,?,?)";
 	private static final String SHOW_COMT = "SELECT commentId,orderId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE orderId = ?";
 	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime,response FROM Comments WHERE hotelId = ?";
 	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ?,responseTime = ? WHERE commentId = ?";
@@ -30,6 +30,7 @@ public class CommentDAO implements CommentDAO_interface {
 	CommentDAO commt;
 	List<CommentVO> comtList = new ArrayList<CommentVO>();
 	
+	
 	private static DataSource ds = null;
 	static{
 		
@@ -43,7 +44,7 @@ public class CommentDAO implements CommentDAO_interface {
 	}
 	
 	
-	public String comtIns(CommentVO comt){
+	public String comtIns(CommentVO comt,int good){
 
 		try {
 			conn = ds.getConnection();
@@ -57,6 +58,7 @@ public class CommentDAO implements CommentDAO_interface {
 			stmt.setInt(7,comt.getSceneScore());
 			stmt.setString(8,comt.getComment());
 			stmt.setDate(9,comt.getCommentTime());
+			stmt.setInt(10,good);
 			stmt.executeUpdate();
 		
 			
