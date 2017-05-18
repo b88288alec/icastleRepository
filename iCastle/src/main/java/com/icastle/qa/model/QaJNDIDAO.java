@@ -78,7 +78,7 @@ public class QaJNDIDAO implements QaDAO_interface{
 		try {
 
 			con = ds.getConnection();
-			pstmt = con.prepareStatement(DELETE);
+			pstmt = con.prepareStatement(UPDATE);
 
 			pstmt.setString(1, qaVO.getQuestion());
 			pstmt.setString(2, qaVO.getAnswer());
