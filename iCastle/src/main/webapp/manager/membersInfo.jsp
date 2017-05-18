@@ -28,6 +28,68 @@
 <link
 	href="${pageContext.servletContext.contextPath}/css/manager_template.css"
 	rel="stylesheet" />
+	
+<style>
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
+</style>
+	
 <title>iCastle管理者中心</title>
 </head>
 <body>
@@ -152,16 +214,18 @@
 						var d9 = $('<td></td>').text(value.country);
 						var d10 = $('<td></td>').text(value.passport);
 						
-						var msp = $('<span></span>').addClass('mdl-switch__label');
+// 						var msp = $('<span></span>').addClass('mdl-switch__label');
+						var mdiv = $('<div></div>').addClass('slider round');
 						var mid = ('man' + value.memberId);
-						var minp = $('<input>').attr('type','checkbox').attr('name', 'manager').attr('id', mid).addClass('mdl-switch__input');
-						var mlab = $('<label></label>').addClass('mdl-switch mdl-js-switch mdl-js-ripple-effect').attr('for', mid);
+						var minp = $('<input>').attr('type','checkbox').attr('name', 'manager').attr('id', mid);
+						var mlab = $('<label></label>').addClass('switch').attr('for', mid);
 						var d11 = $('<td></td>');
 
-						var ssp = $('<span></span>').addClass('mdl-switch__label');
+// 						var ssp = $('<span></span>').addClass('mdl-switch__label');
+						var sdiv = $('<div></div>').addClass('slider round');
 						var sid = ('sus' + value.memberId);
-						var sinp = $('<input>').attr('type','checkbox').attr('name', 'suspension').attr('id', sid).addClass('mdl-switch__input');
-						var slab = $('<label></label>').addClass('mdl-switch mdl-js-switch mdl-js-ripple-effect').attr('for', sid);
+						var sinp = $('<input>').attr('type','checkbox').attr('name', 'suspension').attr('id', sid);
+						var slab = $('<label></label>').addClass('switch').attr('for', sid);
 						var d12 = $('<td></td>');
 						
 						if(value.manager == 'true'){
@@ -172,9 +236,11 @@
 							sinp.prop('checked', true);
 						}
 						
-						mlab.append([minp,msp]);
+// 						mlab.append([minp,msp]);
+						mlab.append([minp,mdiv]);
 						d11.append(mlab);
-						slab.append([sinp,ssp]);
+// 						slab.append([sinp,ssp]);
+						slab.append([sinp,sdiv]);
 						d12.append(slab);
 						r.append([d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12]);
 						tb.append(r);

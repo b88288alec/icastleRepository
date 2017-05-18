@@ -9,6 +9,10 @@
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
 <meta name="viewport" content="width=device-width" />
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
 <link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
 <link
 	href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css"
@@ -83,11 +87,11 @@
 				</td>
 				
 				<td>
-					<button class="updatebutton" data-toggle="modal" data-target="#show${QA.id}" name="update">修改</button>
+					<button class="mdl-button mdl-js-button mdl-js-ripple-effect" data-toggle="modal" data-target="#show${QA.id}" name="update">修改</button>
 				</td>
 				
 				<td>
-					<button class="updatebutton" type="button" name="delete" value="${QA.id}">刪除</button>
+					<button class="mdl-button mdl-js-button mdl-js-ripple-effect" type="button" name="delete" value="${QA.id}">刪除</button>
 				</td>
 					
 					<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="show${QA.id}">
@@ -145,7 +149,7 @@
 						</div>
 					</div>
 					
-					<button class="updatebutton" data-toggle="modal" data-target="#newqa" name="update">新增</button>
+					<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" data-toggle="modal" data-target="#newqa" name="update"><i class="material-icons">add</i></button>
 
 				</div>
 			</div>
@@ -176,6 +180,8 @@
 
 <script
 	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
+
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 <script>
 	$(function(){

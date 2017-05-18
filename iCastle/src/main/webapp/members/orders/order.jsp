@@ -258,7 +258,14 @@
                                                             總房價
                                                         </td>
                                                         <td>
-                                                            ${totalPrice} 元
+                                                        	<c:choose>
+                                                        		<c:when test="${orderMap.bedAdding == true}">
+                                                        			${(totalPrice+(orderMap.pricePerPerson*stayDayNum))*orderMap.roomCount} 元
+                                                        		</c:when>
+                                                        		<c:otherwise>
+                                                        			${totalPrice*orderMap.roomCount} 元
+                                                        		</c:otherwise>
+                                                        	</c:choose>
                                                         </td>
                                                     </tr>
                                                 </tbody>
