@@ -27,9 +27,7 @@
 <!--以下請加入各自頁面的css-->
 
 <title>愛客宿-iCastle</title>
-</head>
-<body>
-	<title>愛客宿-iCastle</title>
+
 </head>
 <body>
     <!--開始導覽列-->

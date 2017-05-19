@@ -227,7 +227,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3" style="font-size: 18px;">取消規定:</label>
 									<div class="col-md-9">
-										<textarea name="cancelPolicies"  class="form-control" 
+										<textarea name="cancelPolicies"  class="form-control" rows="5"
 											placeholder="取消規定介紹(基本300個字)"  >${param.cancelPolicies}</textarea>${errMap.cancelPoliciesErr}
 									</div>
 								</div>
@@ -275,8 +275,8 @@
 								</div>
 							</div>
 							
-							<input type="submit" class="btn btn-danger" value="註冊" style="float:right; margin:50px 50px 0px 50px; width:280px ">
-							<input type="reset" class="btn btn-default" value="清除" style="float:left; margin:50px 50px 0px 50px; width:280px ">
+							<input type="submit" class="btn btn-danger" value="註冊" style="float:left; margin:50px 50px 0px 50px; width:280px ">
+							<input type="reset" class="btn btn-default" value="清除" style="float:right; margin:50px 50px 0px 50px; width:280px ">
 							<button type="button" id="onekey" class="btn btn-primary btn-simple" style="float: right; margin:0px 50px 0px 20px">一鍵輸入</button>
 								
 																																																																																																																								

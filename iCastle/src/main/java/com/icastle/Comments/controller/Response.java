@@ -46,7 +46,8 @@ public class Response extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		int commentId = Integer.parseInt(request.getParameter("hiddeninput"));
-		System.out.println("response的: "+commentId);
+		
+
 		String hostResponse = request.getParameter("textareavalue");
 
 		int page = Integer.parseInt(request.getParameter("formInput"));

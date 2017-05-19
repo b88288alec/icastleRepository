@@ -13,20 +13,21 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class CommentJNDIDAO implements CommentDAO_interface {
-	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime,good) VALUES(?,?,?,?,?,?,?,?,?,?)";
+	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime) VALUES(?,?,?,?,?,?,?,?,?)";
 	private static final String SHOW_COMT = "SELECT commentId,orderId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment FROM Comments WHERE orderId = ?";
 	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime,response FROM Comments WHERE hotelId = ?";
 	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ?,responseTime = ? WHERE commentId = ?";
 	private static final String SHOW_RESPONSE = "SELECT response FROM Comments WHERE commentId = ?";
 	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=? where commentId = ?";
 	private static final String GOOD_COMT = "UPDATE Comments SET good = ? WHERE commentId = ?";
-	private static final String SHOW_GOOD = "SELECT good FROM Comments WHERE commentId = ?";
+	private static final String SEL_GOOD = "SELECT orderId FROM Comments WHERE good = ?";
 	private static final String SEL_COMTID = "SELECT orderId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime FROM Comments WHERE commentId = ?";
 	Connection conn;
 	PreparedStatement stmt;
 	ResultSet rs; 
 	CommentVO com;
 	List<CommentVO> comtList = new ArrayList<CommentVO>();
+	List<Integer> intList = new ArrayList<Integer>();
 	
 	private static DataSource ds = null;
 	static{
@@ -41,7 +42,7 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 	}
 	
 	
-	public String comtIns(CommentVO comt,int good){
+	public String comtIns(CommentVO comt){
 		try {
 			conn = ds.getConnection();
 			stmt = conn.prepareStatement(INS_COMT);
@@ -54,7 +55,6 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 			stmt.setInt(7,comt.getSceneScore());
 			stmt.setString(8,comt.getComment());
 			stmt.setDate(9,comt.getCommentTime());
-			stmt.setInt(10,good);
 			stmt.executeUpdate();
 		
 			
@@ -170,7 +170,7 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 		
 	}
 	
-	public CommentVO pressGood(Integer commentId,Integer good){
+	public void pressGood(Integer commentId,Integer good){
 		
 
 		try {
@@ -179,15 +179,7 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 			stmt.setInt(1, good);
 			stmt.setInt(2, commentId);
 			stmt.executeUpdate();
-			
-			stmt = conn.prepareStatement(SHOW_GOOD);
-			stmt.setInt(1,commentId);
-			rs = stmt.executeQuery();
-			rs.next();
-			
-			com = new CommentVO();
-			com.setGood(rs.getInt("good"));
-				
+
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -200,7 +192,7 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 				e.printStackTrace();
 			}
 		}
-		return com;
+
 			
 	}
 	
@@ -280,6 +272,36 @@ public class CommentJNDIDAO implements CommentDAO_interface {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<Integer> findByGood(int good){
+		
+		try {
+			conn = ds.getConnection();
+			stmt = conn.prepareStatement(SEL_GOOD);
+			stmt.setInt(1,good);
+			rs = stmt.executeQuery();			
+			while(rs.next()){
+				
+				intList.add(rs.getInt(good));
+				
+				
+			}
+			
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return intList;
+		
+    }
 } 
 
 
