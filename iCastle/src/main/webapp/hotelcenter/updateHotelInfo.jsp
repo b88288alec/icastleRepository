@@ -86,6 +86,7 @@
                                             <div class="form-group">
                                                 <p style="font-size: 16px;">飯店介紹:</p>
                                                 <textarea class="form-control" placeholder="請輸入飯店介紹" name="hotelProfile" rows="5">${HotelInfo.hotelProfile}</textarea>
+                                            	<font color="red">${errMap.hotelProfileErr}</font> 
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -129,6 +130,7 @@
                                                 	</c:if>
                                                 	>9:00 PM</option>
                                                 </select>
+                                                <font color="red">${errMap.checkinErr}</font> 
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
