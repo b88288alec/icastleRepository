@@ -623,7 +623,7 @@
 //     			$('input[name = "cardnum3"]').val('9012');
 //     			$('input[name = "cardnum4"]').val('3456');
     			$('input[name = "threenum"]').val('246');
-    			$('input[name = "month"]').val('12');
+    			$('input[name = "month"]').val('12/20');
     			$('input[name = "year"]').val('20');
     			$('input[name = "name"]').val('${MemberLoginOK.name}');
     			$('input[name = "ID"]').val('${MemberLoginOK.personId}');

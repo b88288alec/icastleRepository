@@ -54,7 +54,7 @@ tr{
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <input type="hidden" name="hotelId">
         <input type="hidden" name="orderId">
-        <input type="hidden" name="good" value="1">
+ 
         <h4 class="modal-title" id="myModalLabel">
         
         
@@ -68,6 +68,7 @@ tr{
 <img src="../img/unstar.png" width="50" id="star4">
 <img src="../img/unstar.png" width="50" id="star5">
 <input type="hidden" id="serviceScore" value="0" name="service"><span style="color:red">${error.serviceKey}</span><br>
+
 
 
 品質評分:
@@ -172,14 +173,14 @@ tr{
 							<!--評論 -->
 							<c:choose>
 							
-							<c:when test="${myData.orderState}">
+							<c:when test="${myData.orderState}">   <%-- 訂單成立的話 --%> 
 							<c:choose>
-							<c:when test="${nocomment}">
+							<c:when test="${nocomment}">   <%-- 表示Comment table裡，這email帳號有訂單是已經下過評論的--%> 
 							
 							<c:set value="false" var="iscomment" />
 							<c:forEach var="orderId" items="${alreadycomment}" varStatus="loop">
 								
-								<c:if test="${!iscomment}">
+								<c:if test="${!iscomment}">  <%-- true --%>
 								<c:choose>
 									<c:when test="${myData.orderId == orderId.orderId}">
 										<td></td>

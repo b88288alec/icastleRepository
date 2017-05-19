@@ -6,7 +6,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
+<link href="${pageContext.servletContext.contextPath}/favicon.ico"
+	rel="icon" type="image/x-icon" />
 <!--     Fonts and icons     -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -34,27 +35,53 @@
 
 <title>愛客宿-iCastle</title>
 <style>
-      /* Always set the map height explicitly to define the size of the div
+/* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-	#map {
-        height: 600px;
-        width: 850px;  
-	}
-	#smallImg{
-		width:300px;
-/*         -webkit-filter: brightness(70%); /* Safari 6.0 - 9.0 */ */
-/* 		filter: brightness(70%); */
-	}
-	#smallImg:hover{
-		width:300px;
-         -webkit-filter: brightness(80%); /* Safari 6.0 - 9.0 */ 
- 		filter: brightness(80%); 
-	}
+#map {
+	height: 600px;
+	width: 850px;
+}
 
+#smallImg {
+	width: 300px;
+	/*         -webkit-filter: brightness(70%); /* Safari 6.0 - 9.0 */
+	*/
+	/* 		filter: brightness(70%); */
+}
+
+#smallImg:hover {
+	width: 300px;
+	-webkit-filter: brightness(80%); /* Safari 6.0 - 9.0 */
+	filter: brightness(80%);
+}
+
+.separatedDiv {
+	border-top: 1px solid #9E9E9E;
+	margin-top: 20px;
+}
+
+.card {
+	position: relative;
+	margin-top: 15px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: #E1F5FE;
+	transition: 0.3s;
+	display: inline-block;
+	margin-right: 15px;
+}
+.card2 {
+	position: relative;
+	margin-top: 15px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: white;
+	transition: 0.3s;
+	display: inline-block;
+	margin-right: 15px;
+}
 </style>
 </head>
 <body>
-	<!--開始導覽列--> 
+	<!--開始導覽列-->
 	<jsp:include page="../fragment/nav.jsp" />
 	<!--結束導覽列-->
 
@@ -210,41 +237,45 @@
 							</div>
 						</c:if>
 
-					</c:forEach> 
+					</c:forEach>
 
 
 					<div style="clear: both"></div>
 				</div>
 			</div>
 			<!--結束飯店圖片-->
-			
+
 			<!-- 地圖預覽 -->
 			<div id="smallImgDiv">
 				<img id="smallImg" src="../img/map.jpg">
 			</div>
-			
+
 			<!-- 開始google地圖的Modal -->
-			<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-			  <div class="modal-dialog modal-lg" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">地圖</h4>
-			      </div>
-			      <div class="modal-body">
-			        
-			        <div id="map"></div>
-			        
-			      </div>
-<!-- 			      <div class="modal-footer"> -->
-<!-- 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-<!-- 			        <button type="button" class="btn btn-primary">Save changes</button> -->
-<!-- 			      </div> -->
-			    </div>
-			  </div>
+			<div class="modal fade bs-example-modal-lg" id="myModal"
+				tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">地圖</h4>
+						</div>
+						<div class="modal-body">
+
+							<div id="map"></div>
+
+						</div>
+						<!-- 			      <div class="modal-footer"> -->
+						<!-- 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+						<!-- 			        <button type="button" class="btn btn-primary">Save changes</button> -->
+						<!-- 			      </div> -->
+					</div>
+				</div>
 			</div>
 			<!-- 結束google地圖的Modal -->
-			
+
 			<!--聯絡與設施-->
 			<div class="col-md-12 connect-checkin">
 				<div class="col-md-4">
@@ -276,7 +307,7 @@
 					<div class="col-md-2">
 						<i class="material-icons green200">wifi</i>
 						<p>室內wifi</p>
-					</div> 
+					</div>
 				</c:if>
 
 				<c:if test="${hotelInfo.gameRoom}">
@@ -314,8 +345,8 @@
                 </div>-->
 			</div>
 			<!--結束聯絡與設施-->
- 
-		</div> 
+
+		</div>
 
 		<div class="row" style="margin-bottom: 50px;">
 
@@ -339,7 +370,9 @@
 					<tbody>
 						<!-- 一筆又一筆的房間 -->
 						<c:forEach var="room" items="${rooms}">
-							<form action="${pageContext.servletContext.contextPath}/members/rooms/Rooms.do" name="form">
+							<form
+								action="${pageContext.servletContext.contextPath}/members/rooms/Rooms.do"
+								name="form">
 								<!-- 					<form action="Test2Servlet" name="form"> -->
 								<tr>
 									<!--房型照片-->
@@ -456,11 +489,13 @@
 										name="afternoonTea" value="${room.afternoonTea}" /> <input
 										type="hidden" name="price" value="${room.price}" /> <%--                                     <input type="hidden" name="bedAddable" value="${room.bedAddable}" /> --%>
 										<input type="hidden" name="pricePerPerson"
-										value="${room.pricePerPerson}" />
-										<input type="hidden" name="remark" value="${room.remark}" />
-										<input type="hidden" name="action" value="getOrder" /></td>
-										<input type="hidden" name="guestPolicies" value="${hotelInfo.guestPolicies}"/>
-										<input type="hidden" name="cancelPolicies" value="${hotelInfo.cancelPolicies}"/>
+										value="${room.pricePerPerson}" /> <input type="hidden"
+										name="remark" value="${room.remark}" /> <input type="hidden"
+										name="action" value="getOrder" /></td>
+									<input type="hidden" name="guestPolicies"
+										value="${hotelInfo.guestPolicies}" />
+									<input type="hidden" name="cancelPolicies"
+										value="${hotelInfo.cancelPolicies}" />
 									<!-- 結束預訂按鈕以及傳送資訊 -->
 								</tr>
 							</form>
@@ -482,7 +517,7 @@
 				<div class="page-header">
 					<h3>關於${hotel.hotelName}</h3>
 				</div>
-				<div class="col-md-2"> 
+				<div class="col-md-2">
 					<h4>簡介</h4>
 				</div>
 				<div class="col-md-10">
@@ -522,7 +557,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="col-md-12"
 				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
 				<div class="col-md-2">
@@ -532,7 +567,7 @@
 					<pre>${hotelInfo.transport}</pre>
 				</div>
 			</div>
-			
+
 			<div class="col-md-12"
 				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
 				<div class="col-md-2">
@@ -542,7 +577,7 @@
 					<pre>${hotelInfo.guestPolicies}</pre>
 				</div>
 			</div>
-			
+
 			<div class="col-md-12"
 				style="border-bottom: 1px solid #ECEFF1; padding-top: 20px; padding-bottom: 20px;">
 				<div class="col-md-2">
@@ -552,52 +587,66 @@
 					<pre>${hotelInfo.cancelPolicies}</pre>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 
-	<!-- 開始飯店評論 -->
-	<!-- ================原本code============================== -->
-<!-- 	<div> -->
-<%-- 	   <c:forEach var="comment" items="${NETList}"> --%>
-<%--     <h5>${comment.name}</h5> --%>
-<%--     <h5>${comment.email}</h5> --%>
-<%--     <h5>${comment.comment}</h5> --%>
-<%--     	<c:forEach var="photo" items="${comment.ids}"> --%>
-<%--     	<img src="http://localhost:8081/iCastle/comment/CommentPhotosServlet?id=${photo}"> --%>
-<%--     	</c:forEach> --%>
-<%--     </c:forEach> --%>
-<!-- 	</div> -->
-	<!-- ===================================================== -->
-	<div class="container" >		
-		<div class="row">
-			<div class="col-md-12" style="padding-bottom: 20px;">
-				<div calss="col-md-2" style="border-bottom: 1px solid #ECEFF1"><h3>評論</h3></div>
-				<c:forEach var="comment" items="${NETList}">
-					<div class="row" style="border-bottom: 1px solid #ECEFF1;"> <!-- 每一個則評論都是row -->
-						<div class="col-md-4" style="float: left;padding:50px;text-align:center">
-							<h4>${comment.name}</h4>
-							<h5>${comment.email}</h5>
-							<!-- 這裡加入星星分數 -->
-							
+
+<div class="container">
+
+
+         
+			<div class="row" style="border-radius: 20px;width: 80%; padding-left:20%">
+			
+			<div class="col-md-12 card2" style="padding-bottom: 20px;">
+<h2 style="text-align:center">所有評論</h2>
+</div>
+
+	<c:forEach var="comment" items="${NETList}">
+		
+				<div class="col-md-12 card" style="padding-bottom: 20px;">
+<!-- 					<div calss="col-md-2" style="border-bottom: 1px solid #ECEFF1"> -->
+<!-- 						<h3>評論</h3> -->
+<!-- 					</div> -->
+					<div class="row" style="border-bottom: 1px solid #ECEFF1;">
+						<p style="padding-left: 30px; font-size:16px; margin-top:30px">${comment.name} : ${comment.comment}</p>
+						<c:forEach var="photo" items="${comment.ids}" varStatus="frequency">
+							<c:if test="${frequency.count==1}">
+								<a
+									href="${pageContext.servletContext.contextPath}/comment/CommentPhotosServlet?id=${photo}"
+									data-lightbox="roadtrip${comment.commentId}"> <img
+									src="${pageContext.servletContext.contextPath}/comment/CommentPhotosServlet?id=${photo}"
+									width="200px">
+								</a>
+							</c:if>
+							<c:if test="${frequency.count>1}">
+								<a
+									href="${pageContext.servletContext.contextPath}/comment/CommentPhotosServlet?id=${photo}"
+									data-lightbox="roadtrip${comment.commentId}"> </a>
+							</c:if>
+						</c:forEach>
+
+
+						<div class="separatedDiv">
+							<h6 style="padding-left: 30px; font-size:16px; margin-top:30px">業者 : ${comment.response}</h6>
 						</div>
-						<div class="col-md-8" style="padding:20px;float:right">	
-							<h5>${comment.comment}</h5>
-						</div>
-						<div class="col-md-8" style="float:right;padding:20px 0px">	
-							<c:forEach var="photo" items="${comment.ids}">
-								<div class="col-md-4">
-									<img src="${pageContext.servletContext.contextPath}/comment/CommentPhotosServlet?id=${photo}" 
-									class="img-rounded" width="100%" style="padding:5px 0px" ></div>
-							</c:forEach>
-						</div>
-					</div><!-- div class="row" -->
-				</c:forEach>
-			</div><!-- div class="col-md-12" -->
-		</div>
-</div>				
-	<!-- 結束飯店評論 -->
+
+					
+					</div>
+
+				</div>
 	
+	</c:forEach>
+			</div>
+					
+		</div>
+
+
+	
+
+
+	<!-- 結束飯店評論 -->
+
 	<!--開始footer-->
 	<jsp:include page="../fragment/footer.jsp" />
 	<!--結束footer-->
@@ -620,8 +669,9 @@
 
 	<script src="../js/magnific-popup.js"></script>
 	<script src="../js/lightbox.min.js"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn7jC3DDQXAbDR9-IDsCnNL79Hsuz-55k&callback=initMap"
-  type="text/javascript"></script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn7jC3DDQXAbDR9-IDsCnNL79Hsuz-55k&callback=initMap"
+		type="text/javascript"></script>
 
 	<script>
 		
@@ -746,7 +796,12 @@
 				    google.maps.event.trigger(map, "resize");
 					map.setCenter(currentCenter);
 				});
+				
+
+			
 			});
+	
+
 	</script>
 </body>
 </html>

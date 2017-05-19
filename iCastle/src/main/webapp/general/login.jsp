@@ -145,9 +145,8 @@
 							<button type="button" id="onekey2"
 								class="btn btn-primary btn-simple">德立莊一鍵輸入</button>
 							<button type="button" class="btn btn-default "
-								data-dismiss="modal">取消</button>
-							<input type="submit" class="btn btn-primary" value="登入"
-								style="float: right">
+								data-dismiss="modal" style="float: right">取消</button>
+							<input type="submit" class="btn btn-primary" value="登入">
 						</form>
 					</div>
 				</div>
@@ -210,12 +209,12 @@
 									href="${pageContext.servletContext.contextPath}/general/members/createPw.jsp"
 									style="float: right">忘記密碼</a>
 							</div>
-							<button type="button" class="btn btn-primary btn-simple btn-sm" style="margin-left:13%;" onclick="Auth();">點選這裡連結到Line Login</button>
+<!-- 							<button type="button" class="btn btn-primary btn-simple btn-sm" style="margin-left:13%;" onclick="Auth();">點選這裡連結到Line Login</button> -->
+							<button type="button" class="btn btn-primary btn-simple btn-sm" style="margin-left:3%;" onclick="Auth();"><img src="${pageContext.servletContext.contextPath}/img/line.png" height="20%" width="20%" ></button>
 							<button type="button" id="member-onekey"
 								class="btn btn-primary btn-simple">一鍵輸入</button>
-							<button type="button" class="btn btn-default " data-dismiss="modal">取消</button>
-							<input type="submit" class="btn btn-primary" value="登入"
-								style="float: right">
+							<input type="submit" class="btn btn-primary" value="登入">
+							<button type="button" class="btn btn-default " data-dismiss="modal" style="float: right">取消</button>
 						</form>
 					</div>
 				</div>

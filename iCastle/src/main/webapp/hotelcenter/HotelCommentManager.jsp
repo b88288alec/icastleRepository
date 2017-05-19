@@ -134,15 +134,14 @@ textarea {
 						<table class="table">
 							<thead class="text-danger">
 
-
 				                 
 								<th class="text-center">會員姓名</th>
 								<th class="text-center">會員信箱</th>
 								<th class="text-center">評論時間</th>
 								<th class="text-center">查看評論</th>
 								<th class="text-center">回覆評論</th>
-								<th class="text-center">刪除</th>
-
+								
+								
 
 							</thead>
 							<tbody>
@@ -163,15 +162,6 @@ textarea {
 												</button>
 											</td>
 
-											<td class="text-center">
-												<button type="button" class="btn btn-info btn-simple btn-xs"
-													name="ButtonResponse" value="${comment.commentId}">
-													<i class="material-icons md-48 md-dark">rate_review</i>
-												</button>
-
-
-											</td>
-											
 											<td class="text-center">
 												<button type="button" class="btn btn-info btn-simple btn-xs"
 													name="ButtonResponse" value="${comment.commentId}">
@@ -230,29 +220,7 @@ textarea {
                                                                
 
 							</div>
-<!-- 圖 -->
-<!-- <div class="container"> -->
 
-<!-- 		<div id="myCarousel" class="carousel slide" data-ride="carousel"> -->
-
-<!-- 			<div class="carousel-inner" role="listbox" id="outerDiv"> -->
-			
-			
-			
-<!-- 			</div> -->
-
-<!-- 			<a class="left carousel-control" href="#myCarousel" role="button" -->
-<!-- 				data-slide="prev"> <span class="fa fa-angle-left" -->
-<!-- 				aria-hidden="true"></span> <span class="sr-only">Previous</span> -->
-<!-- 			</a> <a class="right carousel-control" href="#myCarousel" role="button" -->
-<!-- 				data-slide="next"> <span class="fa fa-angle-right" -->
-<!-- 				aria-hidden="true"></span> <span class="sr-only">Next</span> -->
-<!-- 			</a> -->
-
-<!-- 		</div> -->
-<!-- 	</div> -->
-
-<!-- 圖 -->
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default btn-simple"
 									data-dismiss="modal">關閉</button>
@@ -371,23 +339,7 @@ textarea {
 												"src",
 												 path+"/comment/CommentPhotosServlet?id="
 														+ data[i].ids[j]).attr("width","400"));
-
-//                                         var imgRotation = $("<img>").attr("src",path+"/comment/CommentPhotosServlet?id="+ data[i].ids[j]).attr("width","400");
-                                        
-//                                         var outerDiv = $("#outerDiv");
-//                                         outerDiv.append("<h1></h1>");
-                                        
-                                        
-//                                         if(j==0){
-//                                         	outerDiv.append($("<div></div>").addClass("item active").append(imgRotation));
-
-                                        	
-                                        	
-//                                         }else{
-                                        	
-//                                         	outerDiv.append($("<div></div>").addClass("item").append(imgRotation));
-                                        	
-//                                         }
+                        
 									}
 
 									$('#myModalLabel').text(
@@ -546,10 +498,7 @@ textarea {
 				}
 
 				$('button[name="ButtonResponse"]').click(function() {
-					// 				 $("#myDiv").empty();
-					// 				 $("#myModalLabel").empty();	
-					// 				 $("#myModalLabel2").empty();
-					//清掉
+                    //清掉
 					$("textarea[name='textareavalue']").val(null);
 					$("#myModal2").modal('show');
 
@@ -570,16 +519,9 @@ textarea {
 					$("#myModalLabel2").text("回應 " + z + " 的評論");
 
 				});
-
-				$('#mysubmit').click(function() {
-
-				});
 				
-				
-				$("li").click(function(){
-					
-					
-				});
+
+
 
 			});
 </script>

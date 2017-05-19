@@ -69,6 +69,7 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 			NET.setCommentTime(comt.getCommentTime());
 			NET.setResponse(comt.getResponse());
 			NET.setResponseTime(comt.getResponseTime());
+			NET.setCommentId(comt.getCommentId());
 			ids = comtPhotoService.findByIds(comt.getCommentId());
 			NET.setIds(ids);
 			NETList.add(NET);
