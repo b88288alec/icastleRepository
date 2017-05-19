@@ -2,6 +2,7 @@ package com.icastle.Comments.model;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 public class CommentService {
 	
@@ -9,8 +10,8 @@ public class CommentService {
 	
 	
 	
-	public String comtIns(CommentVO comt,int good){
-		return comtDAO.comtIns(comt,good);	
+	public String comtIns(CommentVO comt){
+		return comtDAO.comtIns(comt);	
 	}
 	
 	public List<CommentVO> hotelComtSearch(Integer hotelId){
@@ -36,6 +37,10 @@ public class CommentService {
 	}
 	
 	public java.sql.Date getCurrentDate(){
+			
+		TimeZone tz = TimeZone.getTimeZone("Asia/Taipei");
+		TimeZone.setDefault(tz);
+
 		java.sql.Date d;
 		d = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
 		return d;
