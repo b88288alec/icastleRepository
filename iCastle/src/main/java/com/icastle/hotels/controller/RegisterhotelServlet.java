@@ -188,7 +188,7 @@ public class RegisterhotelServlet extends HttpServlet {
 							swimPoolStr = value;
 						}  
 					} else {
-						//contentType==null為圖片
+						//contentType!=null為圖片
 						size = p.getSize();
 						is = p.getInputStream();
 						System.out.println("size= " + size);
