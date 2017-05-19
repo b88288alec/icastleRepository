@@ -113,7 +113,7 @@ public class HotelPhotosDAOHibernate implements HotelPhotos_Interface{
 		try {
 			session.beginTransaction();
 			Query query = session.createQuery(
-					"from HotelPhotosVO where roomTypeId=:roomTypeId");
+					"from HotelPhotosVO where roomTypeId=:roomTypeId order by photoOrder asc ");
 			query.setParameter("roomTypeId", roomTypeId);
 			
 			photos = query.list();
