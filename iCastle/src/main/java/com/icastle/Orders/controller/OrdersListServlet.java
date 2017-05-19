@@ -26,7 +26,6 @@ import com.icastle.hotels.model.HotelVO;
  */
 @WebServlet("/hotelcenter/OrdersListServlet")
 public class OrdersListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
