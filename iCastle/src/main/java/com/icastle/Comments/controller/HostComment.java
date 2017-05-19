@@ -52,7 +52,7 @@ public class HostComment extends HttpServlet {
 //		    	 System.out.println("response.java的page屬性字串");
 		    }
 		    
-		    
+		     //補
 		    HttpSession session = request.getSession();
 	        HotelVO hotelvo = (HotelVO)session.getAttribute("HotelLoginOK");
 	        

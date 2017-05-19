@@ -144,8 +144,8 @@ tr{
       												</div>
       												<div class="modal-footer">
         												<input type="hidden" name="myOrderId" value="${myData.orderId}">
-        												<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">返回</button>
         												<button type="button" class="btn btn-info btn-simple" name="cancelButton" id="confirmcancel">確認取消</button>
+        												<button type="button" class="btn btn-default btn-simple" data-dismiss="modal">返回</button>
       												</div>
     											</div>
   											</div>
