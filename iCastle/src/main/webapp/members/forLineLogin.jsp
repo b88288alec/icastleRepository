@@ -5,6 +5,7 @@
 <head>
  <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
 <title>Insert title here</title>
 
 

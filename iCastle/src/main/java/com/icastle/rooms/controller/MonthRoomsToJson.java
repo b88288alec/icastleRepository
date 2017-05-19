@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -43,14 +44,40 @@ public class MonthRoomsToJson extends HttpServlet {
 		RoomsService roms = new RoomsService();
 		List<RoomsVO> list = roms.getRoomsByMonth(hotelId, roomTypeId, new Date(startlong), new Date(endlong));
 		
+		String[] subStart = start.split("-");
+		String[] subEnd = start.split("-");
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, Integer.parseInt(subEnd[0]));
+		cal.set(Calendar.MONTH, Integer.parseInt(subEnd[1]));
+		cal.set(Calendar.DATE, cal.getMinimum(Calendar.DATE));
+		cal.set(Calendar.HOUR, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		Date starGray = new Date(cal.getTimeInMillis());
+		System.out.println(starGray.getTime());
+		
+		cal.set(Calendar.DATE, cal.getMaximum(Calendar.DATE));
+		Date endGray = new Date(cal.getTimeInMillis());
+		System.out.println(endGray);
+		
 		JSONArray jsonArray = new JSONArray();
 		for(RoomsVO vo : list){
 			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("id", vo.getRoomDate().toString());
-			jsonObj.put("roomId", vo.getRoomId().toString());
-			jsonObj.put("title", vo.getPrice().toString());
-			jsonObj.put("start", vo.getRoomDate().toString());
-			jsonObj.put("allDay", "true");
+			if(vo.getRoomDate().getTime() >= starGray.getTime() && vo.getRoomDate().getTime() <= endGray.getTime()){
+				jsonObj.put("id", vo.getRoomDate().toString());
+				jsonObj.put("roomId", vo.getRoomId().toString());
+				jsonObj.put("title", vo.getPrice().toString());
+				jsonObj.put("start", vo.getRoomDate().toString());
+				jsonObj.put("allDay", "true");
+			}else{
+				jsonObj.put("id", vo.getRoomDate().toString());
+				jsonObj.put("roomId", vo.getRoomId().toString());
+				jsonObj.put("title", vo.getPrice().toString());
+				jsonObj.put("start", vo.getRoomDate().toString());
+				jsonObj.put("allDay", "true");
+				jsonObj.put("color", "#9E9E9E");
+			}
 			
 			jsonArray.add(jsonObj);
 		}
