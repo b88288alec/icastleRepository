@@ -92,9 +92,9 @@ public class OrdersLineChartServlet extends HttpServlet {
 					}
 					
 //					兩份資料塞成物件
-					jo1.put("name", String.valueOf(year1));
+					jo1.put("name", String.valueOf(year1)+"年");
 					jo1.put("data", fullresultvalue);
-					jo2.put("name", String.valueOf(year2));
+					jo2.put("name", String.valueOf(year2)+"年");
 					jo2.put("data", resultvalue);
 					
 				}else{
@@ -146,9 +146,9 @@ public class OrdersLineChartServlet extends HttpServlet {
 						}
 						
 //						兩份資料塞成物件
-						jo1.put("name", String.valueOf(year1));
+						jo1.put("name", String.valueOf(year1)+"年");
 						jo1.put("data", fullresultvalue);
-						jo2.put("name", String.valueOf(year2));
+						jo2.put("name", String.valueOf(year2)+"年");
 						jo2.put("data", resultvalue);
 						
 					}else{
@@ -199,9 +199,9 @@ public class OrdersLineChartServlet extends HttpServlet {
 						}
 						
 //						兩份資料塞成物件
-						jo1.put("name", String.valueOf(year2));
+						jo1.put("name", String.valueOf(year2)+"年");
 						jo1.put("data", fullresultvalue);
-						jo2.put("name", String.valueOf(year1));
+						jo2.put("name", String.valueOf(year1)+"年");
 						jo2.put("data", resultvalue);
 						
 					}
@@ -214,9 +214,9 @@ public class OrdersLineChartServlet extends HttpServlet {
 				fullresultvalue.add(0);
 				
 //				兩份資料塞成物件
-				jo1.put("name", String.valueOf(year1));
+				jo1.put("name", String.valueOf(year1)+"年");
 				jo1.put("data", fullresultvalue);
-				jo2.put("name", String.valueOf(year2));
+				jo2.put("name", String.valueOf(year2)+"年");
 				jo2.put("data", resultvalue);
 				
 			}

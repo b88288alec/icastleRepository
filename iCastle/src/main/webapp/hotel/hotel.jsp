@@ -337,9 +337,6 @@
 						<p>游泳池</p>
 					</div>
 				</c:if>
-
-
-
 				<!-- 				<div class="col-md-2"> -->
 				<!-- 					<i class="material-icons green200">spa</i> -->
 				<!-- 					<p>spa</p> -->
@@ -385,9 +382,8 @@
 									<!--房型照片-->
 									<td class="text-center" style="vertical-align: middle"><strong
 										style="font-size: 18px">${room.roomTypeName}</strong>
-										<div style="margin: 20px;">
-											<img
-												src="${pageContext.servletContext.contextPath}/img/hotelphoto/106.jpg"
+										<div style="margin: 20px;"> 
+											<img src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${room.roomTypeId}&type=roomtypeid"
 												width="180" height="90" />
 										</div></td>
 									<!--結束房型照片-->

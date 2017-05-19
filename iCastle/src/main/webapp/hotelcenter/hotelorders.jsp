@@ -28,6 +28,7 @@
 	rel="stylesheet" />
 <!--     圖表用CSS -->
     <link href="${pageContext.servletContext.contextPath}/css/chartist.css" rel="stylesheet" />
+    <link href="${pageContext.servletContext.contextPath}/css/chartist-plugin-tooltip.css" rel="stylesheet" />
     <!--以下請加入各自頁面的css-->
     <style>
     	.myselfwidth{
@@ -144,6 +145,7 @@
 <script src="${pageContext.servletContext.contextPath}/js/calendar.js"></script>
 <!-- 圖表用JS -->
 <%-- <script src="${pageContext.servletContext.contextPath}/js/chartist.min.js"></script> --%>
+<script src="${pageContext.servletContext.contextPath}/js/chartist-plugin-tooltip.js"></script>
 
 <script>
 	$(function(){
@@ -199,7 +201,7 @@
 						
 // 						訂單詳細資料
 						var tdid = ('td' + value.orderId);
-						var content = ('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel">訂單明細</h4></div><div class="modal-body myselfdiv"><table class="table"><tbody><tr><td>訂單編號</td><td>'+value.orderId+'</td></tr><tr><td>下訂日期</td><td>'+value.orderedDate+'</td></tr><tr><td>房型名稱</td><td>'+value.roomTypeName+'</td></tr><tr><td>入住日期</td><td>'+value.checkinDay+'</td></tr><tr><td>退房日期</td><td>'+value.checkoutDay+'</td></tr><tr><td>訂房數量</td><td>'+value.roomCount+'</td></tr><tr><td>入住人數</td><td>'+value.peopleNum+'</td></tr><tr><td>早餐</td><td>'+value.breakfast+'</td></tr><tr><td>晚餐</td><td>'+value.dinner+'</td></tr><tr><td>下午茶</td><td>'+value.afternoonTea+'</td></tr><tr><td>入住人姓名</td><td>'+value.reservationer+'</td></tr><tr><td>生日</td><td>'+value.bdate+'</td></tr><tr><td>電話</td><td>'+value.tel+'</td></tr><tr><td>E-mail</td><td>'+value.email+'</td></tr><tr><td>地址</td><td>'+value.addr+'</td></tr><tr><td>身分證字號</td><td>'+value.personId+'</td></tr><tr><td>國籍</td><td>'+value.country+'</td></tr><tr><td>護照號碼</td><td>'+value.passport+'</td></tr><tr><td>加床</td><td>'+value.bedAdding+'</td></tr><tr><td>總金額</td><td>'+value.price+'</td></tr><tr><td>旅客備註</td><td>'+value.customerRemark+'</td></tr><tr><td>備忘錄</td><td><textarea class="myselfwidth" name="writememo" id="w'+value.orderId+'">'+value.memo+'</textarea></td></tr><tr><td>訂單狀態</td><td>'+value.orderState+'</td></tr><tr><td>取消日期</td><td>'+value.cancelDate+'</td></tr></tbody></table></div><div class="modal-footer"><button type="button" class="btn btn-default btn-simple" data-dismiss="modal">取消</button><button type="button" id="'+value.orderId+'" class="btn btn-info btn-simple" name="updatechange" data-dismiss="modal">修改</button></div></div></div>');
+						var content = ('<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel">訂單明細</h4></div><div class="modal-body myselfdiv"><table class="table"><tbody><tr><td>訂單編號</td><td>'+value.orderId+'</td></tr><tr><td>下訂日期</td><td>'+value.orderedDate+'</td></tr><tr><td>房型名稱</td><td>'+value.roomTypeName+'</td></tr><tr><td>入住日期</td><td>'+value.checkinDay+'</td></tr><tr><td>退房日期</td><td>'+value.checkoutDay+'</td></tr><tr><td>訂房數量</td><td>'+value.roomCount+'</td></tr><tr><td>入住人數</td><td>'+value.peopleNum+'</td></tr><tr><td>早餐</td><td>'+value.breakfast+'</td></tr><tr><td>晚餐</td><td>'+value.dinner+'</td></tr><tr><td>下午茶</td><td>'+value.afternoonTea+'</td></tr><tr><td>入住人姓名</td><td>'+value.reservationer+'</td></tr><tr><td>生日</td><td>'+value.bdate+'</td></tr><tr><td>電話</td><td>'+value.tel+'</td></tr><tr><td>E-mail</td><td>'+value.email+'</td></tr><tr><td>地址</td><td>'+value.addr+'</td></tr><tr><td>身分證字號</td><td>'+value.personId+'</td></tr><tr><td>國籍</td><td>'+value.country+'</td></tr><tr><td>護照號碼</td><td>'+value.passport+'</td></tr><tr><td>加床</td><td>'+value.bedAdding+'</td></tr><tr><td>總金額</td><td>'+value.price+'</td></tr><tr><td>旅客備註</td><td>'+value.customerRemark+'</td></tr><tr><td>備忘錄</td><td><textarea class="myselfwidth" name="writememo" id="w'+value.orderId+'">'+value.memo+'</textarea></td></tr><tr><td>訂單狀態</td><td>'+value.orderState+'</td></tr><tr><td>取消日期</td><td>'+value.cancelDate+'</td></tr></tbody></table></div><div class="modal-footer"><button type="button" id="'+value.orderId+'" class="btn btn-info btn-simple" name="updatechange" data-dismiss="modal">修改</button><button type="button" class="btn btn-default btn-simple" data-dismiss="modal">取消</button></div></div></div>');
 						var did = ('d' + value.orderId);
 						var d0 = $('<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>').attr('id', did);
 						
@@ -234,8 +236,8 @@
 						r.append([d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13]);
 						tb.append([r,d0]);
 					})
-//				 		修正modal的bug
-						$('.modal').appendTo("body");
+//				 	修正modal的bug
+					$('.modal').appendTo("body");
 				}
 			})
 			}else if($('#idButton').val() == '1'){
@@ -250,7 +252,7 @@
 						state : $('#idSelectOrderState').val()
 					},
 					success : function(data){
-						var chart = new Chartist.Bar('.ct-chart', data ,{distributeSeries: true});
+						var chart = new Chartist.Bar('.ct-chart', data ,{distributeSeries: true, plugins: [Chartist.plugins.tooltip()]});
 						// Let's put a sequence number aside so we can use it in the event callbacks
 						var seq = 0,
 						  delays = 10,
@@ -304,7 +306,7 @@
 					},
 					success : function(datas){
 						$('#showdatapic').remove();
-						var chart = new Chartist.Line('.ct-chart', datas, {fullWidth:true, chartPadding:{right: 40}, lineSmooth: Chartist.Interpolation.simple({divisor: 99}),showArea: true});
+						var chart = new Chartist.Line('.ct-chart', datas, {fullWidth:true, chartPadding:{right: 40}, lineSmooth: Chartist.Interpolation.simple({divisor: 99}),showArea: true, plugins: [Chartist.plugins.tooltip()]});
 					
 						// Let's put a sequence number aside so we can use it in the event callbacks
 						var seq = 0,
@@ -409,10 +411,10 @@
 						  window.__exampleAnimateTimeout = setTimeout(chart.update.bind(chart), 600000);
 						});
 						
-						var dataname1 = datas.series[0].name + "年";
+						var dataname1 = datas.series[0].name;
 						var datapic1 = $('<div></div>').addClass('col-md-1 gradeRound1');
 						var datashowname1 = $('<div></div>').addClass('col-md-1').append($('<p></p>').text(dataname1));
-						var dataname2 = datas.series[1].name + "年";
+						var dataname2 = datas.series[1].name;
 						var datapic2 = $('<div></div>').addClass('col-md-1 gradeRound2');
 						var datashowname2 = $('<div></div>').addClass('col-md-1').append($('<p></p>').text(dataname2));
 						var dataground = $('<div></div>').addClass('row').attr('id','showdatapic').append([datapic1,datashowname1,datapic2,datashowname2]);
@@ -466,5 +468,4 @@
 		
 	});
 </script>
-
 </html>
