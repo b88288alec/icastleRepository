@@ -201,7 +201,6 @@ tr{
 <!-- 												</button> -->
 <!-- 										</a></td> -->
 									</c:when>
-									<c:otherwise><td></td></c:otherwise>
 								</c:choose>
 								</c:if>
 								
