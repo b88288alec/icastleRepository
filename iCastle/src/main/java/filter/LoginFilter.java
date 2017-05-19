@@ -42,7 +42,7 @@ public class LoginFilter implements Filter {
 			session.setAttribute("requestURI", requestURI);
 			session.setAttribute("queryString", queryString);
 			return;
-		} else if ((sub[2].equals("orders") || sub[2].equals("members")) && member == null) {
+		} else if (sub[2].equals("members") && member == null) {
 			response.sendRedirect(request.getContextPath() + "/general/login.jsp");
 			System.out.println(requestURI);
 			session.setAttribute("requestURI", requestURI);
@@ -51,6 +51,11 @@ public class LoginFilter implements Filter {
 		} else if (sub[2].equals("hotelcenter") && !sub[3].equals("hotelcenter.jsp") 
 				&& hotel != null && hotel.getHotelState() == 0){
 			response.sendRedirect(request.getContextPath() + "/hotelcenter/hotelcenter.jsp");
+			return;
+		} else if(sub[2].equals("manager") && manager == null) {
+			response.sendRedirect(request.getContextPath() + "/general/login.jsp");
+			session.setAttribute("requestURI", requestURI);
+			session.setAttribute("queryString", queryString);
 			return;
 		}
 			

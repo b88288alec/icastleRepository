@@ -32,9 +32,20 @@
 							<li class="active"><a href="${pageContext.servletContext.contextPath}/index.jsp">首頁</a></li>	
 						</c:when>
 						<c:otherwise>
-							<li><a href="${pageContext.servletContext.contextPath}/index.jsp">首頁</a></li>	
+							<li><a href="${pageContext.servletContext.contextPath}/index.jsp">首頁</a></li>							
 						</c:otherwise>
-    				</c:choose>   
+				    </c:choose>
+    				
+    				
+    				<c:choose>
+						<c:when test="${servletPath  == '/qa/showQa.jsp'}">
+							<li class="active"><a href="${pageContext.servletContext.contextPath}/qa/showQa.jsp">Q&A</a></li>	
+						</c:when>
+						<c:otherwise>
+							<li><a href="${pageContext.servletContext.contextPath}/qa/showQa.jsp">Q&A</a></li>						
+						</c:otherwise>
+				    </c:choose>
+    				   
     				<c:choose>
     					<c:when test="${not empty MemberLoginOK}">
 							<!--會員標頭使用區塊 -->
@@ -54,8 +65,7 @@
     						</c:choose>
     					</c:when>
     					<c:otherwise>
-    						<li><a href="#">活動</a></li>
-                   			<li><a href="#">討論區 </a></li>
+    					  
     					</c:otherwise>
     				</c:choose>
                     

@@ -89,7 +89,7 @@
 	<div class="container-fluid search-row">
 		<div class="row" style="background-color: #607D8B; width: 100%">
 			<div class="col-md-10 col-md-offset-1">
-				<form action="#" method="get">
+				<form action="ShowHotel.do" method="get">
 					<div class="col-md-2 col-xs-12 col-sm-4" style="margin: 15px;">
 						<input type="text" class="form-control" placeholder="輸入區域或飯店名稱"
 							name="type" value="${param.type}" />
@@ -114,7 +114,9 @@
 						<input type="submit" class="btn btn-success"
 							style="width: 80%; margin-bottom: 0px; margin-top: 20px"
 							value="搜尋" />
+						<input type="hidden" name="hotelId" value="${hotelId}">
 					</div>
+					
 				</form>
 			</div>
 		</div>
@@ -715,19 +717,19 @@
 				//設定新的center
 				currentCenter = results[0].geometry.location; 
 				map.setCenter(currentCenter);
+				
+				//設定做為center的marker
+				var marker = new google.maps.Marker({
+					map : map,
+					position : results[0].geometry.location
+				});
+				
 			} else 
 				console.log("無法轉換..."+ status);
 		})
-
-		//設定marker
-// 		for (var i=0 ; i<address.length ; i++){
-			
-// 			setTimeout( function (){setMarker(geocoder, map)} , 200*i );
-				
-// 		}
 	}
 	
-	var j=0;
+	var j=1;
 	
 	setTimeout(setMarker, 1000);
 	
@@ -737,9 +739,14 @@
 			if (status == google.maps.GeocoderStatus.OK) {
 				console.log("成功轉換...地址:" + address[j] + results[0].geometry.location);
 				//設定marker
+				var pinColor = "66B3FF";
+				var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+			        new google.maps.Size(21, 34),
+			        new google.maps.Point(0,0));
 				var marker = new google.maps.Marker({
 					map : map,
-					position : results[0].geometry.location
+					position : results[0].geometry.location,
+					icon : pinImage
 				});
 				j++;
 				if (j<address.length)
