@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -125,6 +126,7 @@ public class CommentServlet extends HttpServlet {
 		
 		//取得當下時間，做為評論時間
 		java.sql.Date d = comtService.getCurrentDate();
+		
 		
 		//將上面從前端送來的資料封裝成名為comt的CommentVO物件
 		CommentVO comt;		

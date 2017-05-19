@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 public class CommentDAO implements CommentDAO_interface {
 	private static final String INS_COMT = "INSERT INTO Comments(orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,comment,commentTime) VALUES(?,?,?,?,?,?,?,?,?)";
 	private static final String SHOW_COMT = "SELECT commentId,orderId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime FROM Comments WHERE orderId = ?";
-	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime,response FROM Comments WHERE hotelId = ?";
+	private static final String SEL_HOTELID = "SELECT commentId,orderId,hotelId,email,avgScore,serviceScore,qualityScore,sceneScore,good,comment,commentTime,response FROM Comments WHERE hotelId = ? order by commentTime DESC";
 	private static final String HOST_RESPONSE = "UPDATE Comments SET response = ?,responseTime = ? WHERE commentId = ?";
 //	private static final String SEL_ORDERID = "SELECT response FROM Comments WHERE orderId = ?";
 	private static final String UPD_COMT = "UPDATE Comments SET avgScore = ?,serviceScore = ?,qualityScore = ?,sceneScore =?,comment=? where commentId = ?";

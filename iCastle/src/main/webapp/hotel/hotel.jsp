@@ -78,6 +78,13 @@
 	display: inline-block;
 	margin-right: 15px;
 }
+
+#pictureDiv{
+	border:solid 2px black;
+/* 	display:inline;  */
+
+
+}
 </style>
 </head>
 <body>
@@ -605,16 +612,21 @@
 	<c:forEach var="comment" items="${NETList}">
 		
 				<div class="col-md-12 card" style="padding-bottom: 20px;">
-<!-- 					<div calss="col-md-2" style="border-bottom: 1px solid #ECEFF1"> -->
-<!-- 						<h3>評論</h3> -->
-<!-- 					</div> -->
+
 					<div class="row" style="border-bottom: 1px solid #ECEFF1;">
-						<p style="padding-left: 30px; font-size:16px; margin-top:30px">${comment.name} : ${comment.comment}</p>
+					
+                       <div card="cardContext" style="left:80%">
+                           <h3 style="padding-left: 30px; margin-top:30px;margin-right:30px;color:purple">${comment.name} :</h3>
+                           <p style="padding-left: 30px;margin-right:30px;margin-top:5px;font-size:18px">${comment.comment}</p>
+                       </div>
+                       
+                       <div card="cardContext" style="left:80%">   
+						<div id="pictureDiv" style="float: right;margin-right:30px;margin-top:30px;">
 						<c:forEach var="photo" items="${comment.ids}" varStatus="frequency">
 							<c:if test="${frequency.count==1}">
 								<a
 									href="${pageContext.servletContext.contextPath}/comment/CommentPhotosServlet?id=${photo}"
-									data-lightbox="roadtrip${comment.commentId}"> <img
+									data-lightbox="roadtrip${comment.commentId}"> <img 
 									src="${pageContext.servletContext.contextPath}/comment/CommentPhotosServlet?id=${photo}"
 									width="200px">
 								</a>
@@ -625,17 +637,20 @@
 									data-lightbox="roadtrip${comment.commentId}"> </a>
 							</c:if>
 						</c:forEach>
-
-
-						<div class="separatedDiv">
-							<h6 style="padding-left: 30px; font-size:16px; margin-top:30px">業者 : ${comment.response}</h6>
 						</div>
+						</div>
+                        
+                        <c:if test="${comment.response!=null}">
+						 <h3 style="padding-left: 30px; margin-top:30px;margin-right:30px;color:darkslateblue">回覆 : </h3>
+							<p style="padding-left: 30px;margin-right:30px;margin-top:5px;font-size:18px">${comment.response}</p>
+						
+						</c:if>
 
 					
 					</div>
 
 				</div>
-	
+		
 	</c:forEach>
 			</div>
 					
