@@ -77,16 +77,17 @@
                                                     <th class="text-center col-md-1">加床費用/人</th>
                                                     <th class="text-center col-md-1">備註</th>
                                                     <th class="text-center col-md-1">房間數量</th>
-<!--                                                     <th class="text-center col-md-1">解除鎖定</th> -->
+                                                    <th class="text-center col-md-1">解除鎖定</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="room">
                                             	<c:forEach var="roomTypeVO" items="${roomTypeList}" varStatus="status">
                                             	
-                                                <tr>
+                                                <tr id="tr${status.count }">
                                                     <td style="vertical-align:middle">
                                                         <div class="row">
                                                             <div class="col-md-12">
+                                                            	<input type="hidden" name="roomTypeId" value="${roomTypeVO.roomTypeId }" id="roomTypeId${status.count }" disabled>
                                                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:150px;" id="roomTypeName_div${status.count}">
                                                                     <input class="mdl-textfield__input" type="text" id="roomTypeName${status.count}" name="roomTypeName" value="${roomTypeVO.roomTypeName }" disabled>
                                                                     <label class="mdl-textfield__label" for="roomTypeName${status.count}">請輸入房型名稱</label>
@@ -102,10 +103,10 @@
                                                                     	<c:forEach begin="1" end="8" varStatus="innerStatus">
                                                                     		<c:choose>
                                                                     		<c:when test="${roomTypeVO.peopleNum == innerStatus.count }">
-                                                                    		<option value="${innerStatus.count }" selected>${innerStatus.count }</option>
+                                                                    		<option value="${innerStatus.count }" selected>${innerStatus.count }人</option>
                                                                     		</c:when>
                                                                     		<c:otherwise>
-                                                                    		<option value="${innerStatus.count }">${innerStatus.count }</option>
+                                                                    		<option value="${innerStatus.count }">${innerStatus.count }人</option>
                                                                     		</c:otherwise>
                                                                     		</c:choose>
                                                                     	</c:forEach>
@@ -219,7 +220,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="col-md-12">
-                                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect myradio" for="bedAddable0_yes${status.count}">
+                                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect myradio" for="bedAddable0_yes${status.count}" id="bedAddable0_yes_label${status.count}">
                                                             <c:choose>
                                                             <c:when test="${roomTypeVO.bedAddable }">
                                                             <input type="radio" id="bedAddable0_yes${status.count}" class="mdl-radio__button" name="bedAddable${status.count - 1}" value="true" checked disabled>
@@ -230,7 +231,7 @@
                                                             </c:choose>
                                                                 <span class="mdl-radio__label">可加床</span>
                                                             </label>
-                                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect myradio" for="bedAddable0_no${status.count}">
+                                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect myradio" for="bedAddable0_no${status.count}" id="bedAddable0_no_label${status.count}">
                                                             <c:choose>
                                                             <c:when test="${roomTypeVO.bedAddable }">
                                                             <input type="radio" id="bedAddable0_no${status.count}" class="mdl-radio__button" name="bedAddable${status.count - 1}" value="false" disabled>
@@ -247,7 +248,7 @@
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80px;">
+                                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80px;" id="pricePerPerson_div${status.count}">
                                                                     <input class="mdl-textfield__input" type="text" id="pricePerPerson${status.count}" name="pricePerPerson" value="${roomTypeVO.pricePerPerson }" disabled>
                                                                     <label class="mdl-textfield__label" for="pricePerPerson${status.count}">請輸入費用</label>
                                                                 </div>
@@ -258,7 +259,7 @@
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div class="mdl-textfield mdl-js-textfield" style="width:150px;">
+                                                                <div class="mdl-textfield mdl-js-textfield" style="width:150px;" id="remark_div${status.count}">
                                                                     <textarea class="mdl-textfield__input" type="text" rows="6" id="remark${status.count}" name="remark" disabled>${roomTypeVO.remark }</textarea>
                                                                     <label class="mdl-textfield__label" for="remark${status.count}">請輸入備註</label>
                                                                 </div>
@@ -269,20 +270,21 @@
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80px;">
+                                                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:80px;" id="roomNumber_div${status.count}">
                                                                     <input class="mdl-textfield__input" type="text" id="roomNumber${status.count}" name="roomNumber" value="${roomTypeVO.roomNumber }" disabled>
                                                                     <label class="mdl-textfield__label" for="roomNumber${status.count}">請輸入房間數量</label>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </td>
-<!--                                                     <td> -->
-<!--                                                     	<div class="row"> -->
-<!--                                                     		<div class="col-md-12"> -->
-<%--                                                     			<button type="button" class="btn btn-warning" id="${status.count }" name="active">解除鎖定</button> --%>
-<!--                                                     		</div> -->
-<!--                                                     	</div> -->
-<!--                                                     </td> -->
+                                                    <td>
+                                                    	<input type="hidden" name="countId" value="${status.count - 1 }" id="countId${status.count }" disabled>
+                                                    	<div class="row">
+                                                    		<div class="col-md-12">
+                                                    			<button type="button" class="btn btn-warning" id="${status.count }" name="active">解除鎖定</button>
+                                                    		</div>
+                                                    	</div>
+                                                    </td>
                                                 </tr>
                                                 <c:if test="${status.last }">
                                                 <c:set var="times" value="${status.count }" scope="page"></c:set>
@@ -290,11 +292,7 @@
                                                 </c:forEach>
                                             </tbody>
                                         </table>
-                                        <input type="hidden" name="count"/>
-                                        <input type="hidden" name="times"/>
-                                        
-                                        <input type="submit" class="btn btn-info" value="確定送出" class="pull-right"
-                                               style="float: right">
+                                        <input type="submit" class="btn btn-info" value="確定送出" class="pull-right" style="float: right">
                                     </form>
                                     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="add">
   										<i class="material-icons">add</i>
@@ -345,6 +343,7 @@
     	<c:if test="${RegisterPath == '/hotelcenter/roomtype/RegisterRoomType.do' and updatecount != 0}">
     	swal({
     		title: '成功新增${updatecount}筆房型',
+    		text: '並連同更新${updatecountRooms}筆房間資料',
 			type: 'success'
 			});
     	</c:if>
@@ -359,12 +358,11 @@
     	</c:otherwise>
     	</c:choose>
     	
-        var times = 0;
 
         $('#add').click(function () {
             var tbody = $('#room');
             
-            var tr = $('<tr></tr>');
+            var tr = $('<tr></tr>').attr("id","tr" + (count+1));
 
             var roomTypeName_td = $('<td></td>').css("vertical-align", "middle");
             var roomTypeName_row = $('<div></div>').addClass("row");
@@ -372,8 +370,9 @@
             var roomTypeName_inputdiv = $('<div></div>').addClass("mdl-textfield mdl-js-textfield mdl-textfield--floating-label").css("width","150px");
             var roomTypeName_input = $('<input/>').addClass("mdl-textfield__input").attr({ type: "text", id: "roomTypeName" + count, name: "roomTypeName" });
             var roomTypeName_label = $('<label></label>').addClass("mdl-textfield__label").attr("id", "roomTypeName" + count).text("請輸入房型名稱");
+            var roomTypeId = $('<input/>').attr({type: "hidden", value: "", name: "roomTypeId"});
             roomTypeName_inputdiv.append([roomTypeName_input, roomTypeName_label]);
-            roomTypeName_col.append(roomTypeName_inputdiv);
+            roomTypeName_col.append([roomTypeId,roomTypeName_inputdiv]);
             roomTypeName_row.append(roomTypeName_col);
             roomTypeName_td.append(roomTypeName_row);
 
@@ -382,14 +381,14 @@
             var peopleNum_col = $('<div></div>').addClass('col-md-12');
             var peopleNum_selectdiv = $('<div></div>').addClass("select");
             var peopleNum_select = $('<select></select>').attr("name", "peopleNum");
-            var peopleNum_option1 = $('<option></option>').text("1").attr("value","1");
-            var peopleNum_option2 = $('<option></option>').text("2").attr("value", "2");
-            var peopleNum_option3 = $('<option></option>').text("3").attr("value", "3");
-            var peopleNum_option4 = $('<option></option>').text("4").attr("value", "4");
-            var peopleNum_option5 = $('<option></option>').text("5").attr("value", "5");
-            var peopleNum_option6 = $('<option></option>').text("6").attr("value", "6");
-            var peopleNum_option7 = $('<option></option>').text("7").attr("value", "7");
-            var peopleNum_option8 = $('<option></option>').text("8").attr("value", "8");
+            var peopleNum_option1 = $('<option></option>').text("1人").attr("value","1");
+            var peopleNum_option2 = $('<option></option>').text("2人").attr("value", "2");
+            var peopleNum_option3 = $('<option></option>').text("3人").attr("value", "3");
+            var peopleNum_option4 = $('<option></option>').text("4人").attr("value", "4");
+            var peopleNum_option5 = $('<option></option>').text("5人").attr("value", "5");
+            var peopleNum_option6 = $('<option></option>').text("6人").attr("value", "6");
+            var peopleNum_option7 = $('<option></option>').text("7人").attr("value", "7");
+            var peopleNum_option8 = $('<option></option>').text("8人").attr("value", "8");
             var peopleNum_arrow = $('<div></div>').addClass("select__arrow");
             peopleNum_select.append([peopleNum_option1, peopleNum_option2, peopleNum_option3, peopleNum_option4, peopleNum_option5, peopleNum_option6, peopleNum_option7, peopleNum_option8]);
             peopleNum_selectdiv.append([peopleNum_select, peopleNum_arrow]);
@@ -536,20 +535,56 @@
             roomNumber_col.append(roomNumber_inputdiv);
             roomNumber_row.append(roomNumber_col);
             roomNumber_td.append(roomNumber_row);
+            
+            var delete_td = $('<td></td>').css("vertical-align", "middle");
+            var countId = $('<input/>').attr({type: "hidden", name: "countId", value: count});
+            var delete_row = $('<div></div>').addClass("row");
+            var delete_col = $('<div></div>').addClass('col-md-12');
+            var delete_button = $('<button></button>').attr({type: "button", id: count+1, name: "detele"}).addClass("btn btn-danger").text("移除");
+            delete_col.append(delete_button);
+            delete_row.append(delete_col);
+            delete_td.append([countId, delete_row]);
 
 
-            tr.append([roomTypeName_td, peopleNum_td, price_td, meals_td, bedAddable_td, pricePerPerson_td, remark_td, roomNumber_td]);
+            tr.append([roomTypeName_td, peopleNum_td, price_td, meals_td, bedAddable_td, pricePerPerson_td, remark_td, roomNumber_td, delete_td]);
             tbody.append(tr);
             componentHandler.upgradeDom();
 
-            times++
             count++;
-            $('input[name="times"]').val(times);
-            $('input[name="count"]').val(count);
+        });
+        
+        $('tbody').on("click",'button[name="detele"]',function(){
+        	var trId = $(this).attr("id");
+        	$('#tr'+trId).remove();
         })
         
+        
+        var isFirstActived = true;
         $('button[name="active"]').click(function(){
-        	var id = $(this).attr("id");
+        	if(isFirstActived){
+        		var id = $(this).attr("id");
+        		swal({
+            		title: '注意!!您試圖解除修改鎖定',
+            		text: '提醒您此項操作將連同修改房間資料(不包括價錢)，並且已售出的訂單將不會被修改',
+        			type: 'warning',
+        			showCancelButton: true,
+        			confirmButtonText: '確定',
+        			cancelButtonText: '取消',
+        			}).then(function () {
+        				active(id);
+        				isFirstActived = false;
+        			});
+        	}else if(!isFirstActived){
+        		var id = $(this).attr("id");
+				active(id);
+        	}
+        	
+        	
+        	
+        });
+        
+        function active(id){
+        	$('#roomTypeId'+id).removeAttr("disabled");
         	$("#roomTypeName_div"+id).removeClass().addClass("mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty");
         	$("#roomTypeName"+id).removeAttr("disabled");
         	$('#peopleNum'+id).removeAttr("disabled");
@@ -580,9 +615,28 @@
         	}else{
         		$("#meals2_label"+id).removeClass().addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox mdl-js-ripple-effect--ignore-events is-upgraded");
         	}
-        	$("#meals1"+id).removeAttr("disabled");
+        	$("#meals2"+id).removeAttr("disabled");
+        	if($("#bedAddable0_yes"+id).prop("checked")){
+        		$('#bedAddable0_yes_label'+id).removeClass().addClass("mdl-radio mdl-js-radio mdl-js-ripple-effect myradio mdl-js-ripple-effect--ignore-events is-upgraded is-checked");
+        	}else{
+        		$('#bedAddable0_yes_label'+id).removeClass().addClass("mdl-radio mdl-js-radio mdl-js-ripple-effect myradio mdl-js-ripple-effect--ignore-events is-upgraded");
+        	}
+        	$("#bedAddable0_yes"+id).removeAttr("disabled");
+        	if($("#bedAddable0_no"+id).prop("checked")){
+        		$('#bedAddable0_no_label'+id).removeClass().addClass("mdl-radio mdl-js-radio mdl-js-ripple-effect myradio mdl-js-ripple-effect--ignore-events is-upgraded is-checked");
+        	}else{
+        		$('#bedAddable0_no_label'+id).removeClass().addClass("mdl-radio mdl-js-radio mdl-js-ripple-effect myradio mdl-js-ripple-effect--ignore-events is-upgraded");
+        	}
+        	$("#bedAddable0_no"+id).removeAttr("disabled");
+        	$("#pricePerPerson_div"+id).removeClass().addClass("mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty");
+        	$("#pricePerPerson"+id).removeAttr("disabled");
+        	$("#remark_div"+id).removeClass().addClass("mdl-textfield mdl-js-textfield is-dirty is-upgraded");
+        	$("#remark"+id).removeAttr("disabled");
+        	$("#roomNumber_div"+id).removeClass().addClass("mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty");
+        	$("#roomNumber"+id).removeAttr("disabled");
+        	$("#countId"+id).removeAttr("disabled");
         	componentHandler.upgradeDom();
-        })
+        }
     })
 </script>
 </html>

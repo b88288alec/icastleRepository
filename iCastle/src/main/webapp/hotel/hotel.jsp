@@ -43,14 +43,14 @@
 }
 
 #smallImg {
-	width: 300px;
+	width: 268px;
 	/*         -webkit-filter: brightness(70%); /* Safari 6.0 - 9.0 */
 	*/
 	/* 		filter: brightness(70%); */
 }
 
 #smallImg:hover {
-	width: 300px;
+	width: 268px;
 	-webkit-filter: brightness(80%); /* Safari 6.0 - 9.0 */
 	filter: brightness(80%);
 }
@@ -219,21 +219,14 @@
 
 						<c:if test="${loop.index == 3}">
 							<div class="fourth-img">
-								<img
-									src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
-									width="268" height="189" /> <a
-									href="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${photo.id}"
-									data-lightbox="hotel-imgs"
-									data-title="${photo.pohtoDescription}">
-									<div class="overlay">
-										<h3
-											style="color: white; position: absolute; bottom: 10px; left: 10px;">${photo.pohtoDescription}</h3>
-									</div>
-								</a>
+								<!-- 地圖預覽 -->
+			<div id="smallImgDiv">
+				<img id="smallImg" src="../img/map.jpg" width="268" height="189">
+			</div>
 							</div>
 						</c:if>
 
-						<c:if test="${loop.index > 3}">
+						<c:if test="${loop.index > 2}">
 							<!-- 第5張以後的圖片 -->
 							<div style="display: none">
 								<a
@@ -252,10 +245,7 @@
 			</div>
 			<!--結束飯店圖片-->
 
-			<!-- 地圖預覽 -->
-			<div id="smallImgDiv">
-				<img id="smallImg" src="../img/map.jpg">
-			</div>
+			
 
 			<!-- 開始google地圖的Modal -->
 			<div class="modal fade bs-example-modal-lg" id="myModal"

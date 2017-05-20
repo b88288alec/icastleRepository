@@ -1,6 +1,8 @@
 package com.icastle.rooms.model;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +38,12 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 	public Integer updateDetail(List<RoomsVO> roomList) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Integer updateCount = 0;
+		java.util.Date now = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String nowstr = sdf.format(now);
 		try{
 			session.beginTransaction();
-			Query query = session.createQuery("update RoomsVO set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomId = ?");
+			Query query = session.createQuery("update RoomsVO set RoomTypeName = ?, roomNumber = ?, breakfast = ?, dinner = ?, afternoonTea = ?, bedAddable = ?, pricePerPerson = ?, remark = ? where roomTypeId = ? and roomDate > ?");
 			for(RoomsVO vo : roomList){
 				query.setParameter(0, vo.getRoomTypeName());
 				query.setParameter(1, vo.getRoomNumber());
@@ -48,7 +53,8 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 				query.setParameter(5, vo.isBedAddable());
 				query.setParameter(6, vo.getPricePerPerson());
 				query.setParameter(7, vo.getRemark());
-				query.setParameter(8, vo.getRoomId());
+				query.setParameter(8, vo.getRoomTypeId());
+				query.setParameter(9, new Date(sdf.parse(nowstr).getTime()));
 				Integer count = query.executeUpdate();
 				updateCount += count;
 			}
@@ -56,6 +62,8 @@ public class RoomsHibernateDAO implements RoomsDAO_interface {
 		}catch(RuntimeException e){
 			session.getTransaction().rollback();
 			throw e;
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 		return updateCount;
 	}

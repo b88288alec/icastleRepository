@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.icastle.hotels.model.HotelVO;
+import com.icastle.rooms.model.RoomsService;
+import com.icastle.rooms.model.RoomsVO;
 import com.icastle.roomtype.model.RoomTypeService;
 import com.icastle.roomtype.model.RoomTypeVO;
 
@@ -29,6 +31,7 @@ public class RegisterRoomType extends HttpServlet {
 		
 		HotelVO hotelvo = (HotelVO)session.getAttribute("HotelLoginOK");
 		Integer hotelId = hotelvo.getHotelId();
+		String roomTypeId[] = request.getParameterValues("roomTypeId");
 		String roomTypeName[] = request.getParameterValues("roomTypeName");
 		String peopleNum[] = request.getParameterValues("peopleNum");
 		String roomNumber[] = request.getParameterValues("roomNumber");
@@ -39,45 +42,40 @@ public class RegisterRoomType extends HttpServlet {
 		String customizedName[] = request.getParameterValues("customizedName");
 		String pricePerPerson[] = request.getParameterValues("pricePerPerson");
 		String remark[] = request.getParameterValues("remark");
-		String timestr = request.getParameter("times");
+		String countId[] = request.getParameterValues("countId");
 		String RegisterPath = request.getServletPath();
-		Integer times = 0;
 		
 		Map<String,String> error = new HashMap<String,String>();
-		if(timestr.equals("")){
+		if(roomTypeId == null){
 			error.put("none", "沒有要新增的房型");
 			request.setAttribute("error", error);
 			RequestDispatcher rd = request.getRequestDispatcher("/hotelcenter/ShowRoomType.do");
 			rd.forward(request, response);
 			return;
-		}else{
-			times = Integer.parseInt(timestr) - 1;
 		}
 		
-		Integer count = Integer.parseInt(request.getParameter("count"));
 		
 		List<String> bedAddablesList = new ArrayList<String>();
 		List<String[]> mealsList = new ArrayList<String[]>();
-		if(count == 0){
-			String bedAddables = request.getParameter("bedAddable0");
+		for(int i = 0; i < countId.length; i++){
+			String bedAddables = request.getParameter("bedAddable"+Integer.parseInt(countId[i]));
 			bedAddablesList.add(bedAddables);
-			String meals[] = request.getParameterValues("meals0");
+			String meals[] = request.getParameterValues("meals"+Integer.parseInt(countId[i]));
 			mealsList.add(meals);
-		}else{
-			for(int i = 0; i <= times; i++){
-				count--;
-				String bedAddables = request.getParameter("bedAddable"+count);
-				bedAddablesList.add(bedAddables);
-				String meals[] = request.getParameterValues("meals"+count);
-				mealsList.add(meals);
-			}
 		}
 		
 		
 		List<RoomTypeVO> list = new ArrayList<RoomTypeVO>();
+		List<RoomsVO> updateRoomsList = new ArrayList<RoomsVO>();
 		
-		for(int i = 0; i <= times; i++){
+		for(int i = 0; i < roomTypeId.length; i++){
+			System.out.println(roomTypeId.length);
 			RoomTypeVO vo = new RoomTypeVO();
+			Boolean updateRooms = false;
+			if(!roomTypeId[i].equals("")){
+				vo.setRoomTypeId(Integer.parseInt(roomTypeId[i]));
+				updateRooms = true;
+			}
 			vo.setHotelId(hotelId);
 			vo.setRoomTypeName(roomTypeName[i]);
 			vo.setPeopleNum(Integer.parseInt(peopleNum[i]));
@@ -123,14 +121,46 @@ public class RegisterRoomType extends HttpServlet {
 			vo.setPricePerPerson(Integer.parseInt((pricePerPerson[i].equals(""))? "0" : pricePerPerson[i]));
 			vo.setRemark(remark[i]);
 			list.add(vo);
+			
+			if(updateRooms){
+				RoomsVO roomvo = new RoomsVO();
+				roomvo.setRoomTypeId(Integer.parseInt(roomTypeId[i]));
+				roomvo.setRoomTypeName(roomTypeName[i]);
+				roomvo.setRoomNumber(Integer.parseInt(roomNumber[i]));
+				if(isbreakfast==true)
+					roomvo.setBreakfast(true);
+				else
+					roomvo.setBreakfast(false);
+				
+				if(isafternoontea==true)
+					roomvo.setAfternoonTea(true);
+				else
+					roomvo.setAfternoonTea(false);
+				
+				if(isdinner==true)
+					roomvo.setDinner(true);
+				else
+					roomvo.setDinner(false);
+				roomvo.setBedAddable(Boolean.valueOf(bedAddablesList.get(i)));
+				roomvo.setPricePerPerson(Integer.parseInt((pricePerPerson[i].equals(""))? "0" : pricePerPerson[i]));
+				roomvo.setRemark(remark[i]);
+				updateRoomsList.add(roomvo);
+				updateRooms = false;
+			}
 		}
 		
 		RoomTypeService rots = new RoomTypeService();
 		Integer updatecount = rots.addOrUpdateRoomType(list);
+		Integer updatecountRooms = 0;
+		if(updateRoomsList.size() != 0){
+			RoomsService roms = new RoomsService();
+			updatecountRooms = roms.updateDetail(updateRoomsList);
+		}
 		
 		session.setAttribute("RoomTypeVOList", list);
 		request.setAttribute("RegisterPath", RegisterPath);
 		request.setAttribute("updatecount", updatecount);
+		request.setAttribute("updatecountRooms", updatecountRooms);
 		RequestDispatcher rd = request.getRequestDispatcher("/hotelcenter/ShowRoomType.do");
 		rd.forward(request, response);
 	}
