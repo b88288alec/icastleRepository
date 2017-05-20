@@ -54,6 +54,16 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 		NameEmailTime NET;
 		List<NameEmailTime> NETList = new  ArrayList<NameEmailTime>();
 		
+		//測試list順序
+//		for(CommentVO c : comtList){
+//			
+//			System.out.println(c.getCommentId());
+//			System.out.println(c.getComment());
+//			System.out.println(c.getResponse());
+//			System.out.println(c.getCommentTime());
+//			
+//		}
+		
 		for(CommentVO comt:comtList){
 			NET = new NameEmailTime();
 			
@@ -75,10 +85,24 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 			NETList.add(NET);
 			
 		}
+		
+		//NETList排序測試
+		
+//		for(NameEmailTime n : NETList){
+//			
+//			System.out.println(n.getCommentId());
+//			System.out.println(n.getComment());
+//			System.out.println(n.getResponse());
+//			System.out.println(n.getCommentTime());
+//			
+//		}
 			
+		
 		request.setAttribute("NETList",NETList);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("../hotel/hotel.jsp");
 		rd.forward(request, response);
+		
 		
 		
 		

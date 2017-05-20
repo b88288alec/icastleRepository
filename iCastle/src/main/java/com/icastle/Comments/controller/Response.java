@@ -44,7 +44,7 @@ public class Response extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		request.setCharacterEncoding("UTF-8");
 		int commentId = Integer.parseInt(request.getParameter("hiddeninput"));
 		
 
