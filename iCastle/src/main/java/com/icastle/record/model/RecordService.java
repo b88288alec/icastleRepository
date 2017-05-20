@@ -44,8 +44,8 @@ public class RecordService {
 	}
 	
 //	使用ID查詢管理員歷史紀錄
-	public List<RecordVO> search_manager_records_by_id(Integer hotelId){
-		String id = "m" + hotelId;
+	public List<RecordVO> search_manager_records_by_id(String managerId){
+		String id = "m" + managerId;
 		
 		return dao.select_by_id(id);
 	}

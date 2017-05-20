@@ -151,6 +151,8 @@ input:checked + .slider:before {
 			
 			var memberId = $(this).attr('id');
 			var manager = $(this).prop('checked');
+			var nameid = ('#name' + memberId);
+			var membername = $(nameid).text();
 			
 			$.ajax({
 				type : 'GET',
@@ -158,6 +160,7 @@ input:checked + .slider:before {
 				data : {
 					memberId : memberId,
 					manager : manager,
+					membername : membername,
 					action : 'forMemberPage'
 				},
 				success : function(data){
@@ -170,13 +173,16 @@ input:checked + .slider:before {
 			
 			var memberId = $(this).attr('id');
 			var suspension = $(this).prop('checked');
+			var nameid = ('#name' + memberId);
+			var membername = $(nameid).text();
 			
 			$.ajax({
 				type : 'GET',
 				url : '${pageContext.servletContext.contextPath}/manager/SuspensionServlet',
 				data : {
 					memberId : memberId,
-					suspension : suspension
+					suspension : suspension,
+					membername : membername
 				},
 				success : function(data){
 				}
@@ -205,7 +211,8 @@ input:checked + .slider:before {
 						var r = $('<tr></tr>');
 						var d1 = $('<td></td>').text(value.memberId);
 						var d2 = $('<td></td>').text(value.email);
-						var d3 = $('<td></td>').text(value.name);
+						var nameid = ('name' + value.memberId);
+						var d3 = $('<td></td>').text(value.name).attr('id', nameid);
 						var d4 = $('<td></td>').text(value.gender);
 						var d5 = $('<td></td>').text(value.bdate);
 						var d6 = $('<td></td>').text(value.addr);

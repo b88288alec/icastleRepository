@@ -374,7 +374,7 @@
 										</td>
 										<td> 
 										    <label for="pass${hotelandInfo.hotelId}">審核通過</label>
-  											<input type="checkbox" class="checkbox" name="pass" id="pass${hotelandInfo.hotelId}" value="${hotelandInfo.hotelId}">
+  											<input type="checkbox" class="checkbox" name="pass" id="pass${hotelandInfo.hotelId}" value="${hotelandInfo.hotelId}@${hotelandInfo.hotelName}">
 										</td>
 									</tr>
 								</tbody>
@@ -539,7 +539,7 @@
 										</td>
 										<td> 
 										    <label for="suspend${hotelandInfo.hotelId}">停權</label>
-  											<input type="checkbox" class="checkbox" name="suspend" id="suspend${hotelandInfo.hotelId}" value="${hotelandInfo.hotelId}">
+  											<input type="checkbox" class="checkbox" name="suspend" id="suspend${hotelandInfo.hotelId}" value="${hotelandInfo.hotelId}@${hotelandInfo.hotelName}">
 										</td>
 									</tr>
 								</tbody>
