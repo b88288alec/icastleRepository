@@ -174,10 +174,10 @@
                                                                         <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox" for="meals0${status.count}" id="meals0_label${status.count}">
                                                                         <c:choose>
                                                                         <c:when test="${roomTypeVO.breakfast }">
-                                                                        <input type="checkbox" id="meals0${status.count}" class="mdl-checkbox__input" name="meals0" value="0" checked disabled>
+                                                                        <input type="checkbox" id="meals0${status.count}" class="mdl-checkbox__input" name="meals${status.count - 1}" value="0" checked disabled>
                                                                         </c:when>
                                                                         <c:otherwise>
-                                                                        <input type="checkbox" id="meals0${status.count}" class="mdl-checkbox__input" name="meals0" value="0" disabled>
+                                                                        <input type="checkbox" id="meals0${status.count}" class="mdl-checkbox__input" name="meals${status.count - 1}" value="0" disabled>
                                                                         </c:otherwise>
                                                                         </c:choose>
                                                                             <span class="mdl-checkbox__label">早餐</span>
@@ -186,7 +186,7 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-12">
-                                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox" for="meals1${status.count}">
+                                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox" for="meals1${status.count}" id="meals1_label${status.count}">
                                                                         <c:choose>
                                                                         <c:when test="${roomTypeVO.afternoonTea }">
                                                                         <input type="checkbox" id="meals1${status.count}" class="mdl-checkbox__input" name="meals${status.count - 1}" value="1" checked disabled>
@@ -201,7 +201,7 @@
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-12">
-                                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox" for="meals2${status.count}">
+                                                                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox" for="meals2${status.count}" id="meals2_label${status.count}">
                                                                         <c:choose>
                                                                         <c:when test="${roomTypeVO.dinner }">
                                                                         <input type="checkbox" id="meals2${status.count}" class="mdl-checkbox__input" name="meals${status.count - 1}" value="2" checked disabled>
@@ -569,6 +569,18 @@
         		$("#meals0_label"+id).removeClass().addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox mdl-js-ripple-effect--ignore-events is-upgraded");
         	}
         	$("#meals0"+id).removeAttr("disabled");
+        	if($("#meals1"+id).prop("checked")){
+        		$("#meals1_label"+id).removeClass().addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox mdl-js-ripple-effect--ignore-events is-upgraded is-checked");
+        	}else{
+        		$("#meals1_label"+id).removeClass().addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox mdl-js-ripple-effect--ignore-events is-upgraded");
+        	}
+        	$("#meals1"+id).removeAttr("disabled");
+        	if($("#meals2"+id).prop("checked")){
+        		$("#meals2_label"+id).removeClass().addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox mdl-js-ripple-effect--ignore-events is-upgraded is-checked");
+        	}else{
+        		$("#meals2_label"+id).removeClass().addClass("mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mycheckbox mdl-js-ripple-effect--ignore-events is-upgraded");
+        	}
+        	$("#meals1"+id).removeAttr("disabled");
         	componentHandler.upgradeDom();
         })
     })
