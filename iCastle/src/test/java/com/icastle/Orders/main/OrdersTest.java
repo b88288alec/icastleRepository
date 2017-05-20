@@ -361,9 +361,11 @@ public class OrdersTest {
 //		System.out.println(test.size());
 		
 		String test = "joi@jfidoas";
-//		System.out.println(test.indexOf("1"));
+		System.out.println(test.indexOf("@"));
+		System.out.println(test.substring(0, test.indexOf("@")));
+		System.out.println(test.substring((test.indexOf("@"))+1));
 		
-		System.out.println(test.substring(2));
+//		System.out.println(test.substring(2));
 		
 	}
 
