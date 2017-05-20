@@ -77,7 +77,7 @@
                                                     <th class="text-center col-md-1">加床費用/人</th>
                                                     <th class="text-center col-md-1">備註</th>
                                                     <th class="text-center col-md-1">房間數量</th>
-                                                    <th class="text-center col-md-1">解除鎖定</th>
+<!--                                                     <th class="text-center col-md-1">解除鎖定</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody id="room">
@@ -276,13 +276,13 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                    	<div class="row">
-                                                    		<div class="col-md-12">
-                                                    			<button type="button" class="btn btn-warning" id="${status.count }" name="active">解除鎖定</button>
-                                                    		</div>
-                                                    	</div>
-                                                    </td>
+<!--                                                     <td> -->
+<!--                                                     	<div class="row"> -->
+<!--                                                     		<div class="col-md-12"> -->
+<%--                                                     			<button type="button" class="btn btn-warning" id="${status.count }" name="active">解除鎖定</button> --%>
+<!--                                                     		</div> -->
+<!--                                                     	</div> -->
+<!--                                                     </td> -->
                                                 </tr>
                                                 <c:if test="${status.last }">
                                                 <c:set var="times" value="${status.count }" scope="page"></c:set>

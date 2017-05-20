@@ -138,8 +138,8 @@
                                 <div id="price-select"></div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">取消</button>
                                 <button type="button" class="btn btn-info btn-simple" id="submit-single">修改</button>
+                                <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">取消</button>
                             </div>
                         </div>
                     </div>
@@ -300,13 +300,15 @@
                     var events = [];
                     var startd = new Date(start);
                     var endd = new Date(end);
-                    var end = endd.getTime();
+                    var currentDate = new Date(endd.getFullYear(), (endd.getMonth()) - 1);
+                    var end = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+                    console.log(end);
                     var price = $('input[name=price]:checked').val();
 
                     //判斷是否有勾選星期及價錢
                     if (weekdaycheck.length > 0 && !(price == null)) {
                         //根據目前月分跑每日迴圈
-                        for (var loop = startd.getTime(); loop <= end; loop += (24 * 60 * 60 * 1000)) {
+                        for (var loop = currentDate.getTime(); loop <= end; loop += (24 * 60 * 60 * 1000)) {
                             var date = new Date(loop);
                             var eventoObj = $("#calendar").fullCalendar('clientEvents', moment(date).format('YYYY-MM-DD'))[0];
                             //抓取weekdaycheck陣列的值
@@ -392,38 +394,46 @@
 
         //將暫存於json內的資料傳送至server新增到資料庫，並重新整理頁面
         $('#submit').click(function () {
-            $.ajax({
-                type: 'POST',
-                url: '${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do',
-                data: {
-                    jsonData: JSON.stringify(json),
-                    roomTypeId: $('select').val(),
-                },
-//                 success: function () {
-//                     swal({
-//                         title: '新增成功',
-//                         type: 'success',
-//                     })
-//                 }
-            }).done(function(date){
-            	swal({
-                    title: '成功新增' + date + '筆資料',
-                    type: 'success',
-                })
-            	json.length = 0;
-                var events = {
-                    url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
+        	if(json.length != 0){
+        		$.ajax({
+                    type: 'POST',
+                    url: '${pageContext.servletContext.contextPath}/hotelcenter/rooms/SetRoomPrice.do',
                     data: {
-                        hotelId: '${HotelLoginOK.hotelId}',
+                        jsonData: JSON.stringify(json),
                         roomTypeId: $('select').val(),
+                    },
+//                     success: function () {
+//                         swal({
+//                             title: '新增成功',
+//                             type: 'success',
+//                         })
+//                     }
+                }).done(function(date){
+                	swal({
+                        title: '成功新增' + date + '筆資料',
+                        type: 'success',
+                    })
+                	json.length = 0;
+                    var events = {
+                        url: '${pageContext.servletContext.contextPath}/json/rooms/MonthRoomsToJson',
+                        data: {
+                            hotelId: '${HotelLoginOK.hotelId}',
+                            roomTypeId: $('select').val(),
+                        }
                     }
-                }
 
-                //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
-                $('#calendar').fullCalendar('removeEventSources');
-                $('#calendar').fullCalendar('addEventSource', events);
-                $('#calendar').fullCalendar('refetchEvents');
-            })
+                    //	 			$('#calendar').fullCalendar( 'removeEventSource', events);
+                    $('#calendar').fullCalendar('removeEventSources');
+                    $('#calendar').fullCalendar('addEventSource', events);
+                    $('#calendar').fullCalendar('refetchEvents');
+                })
+        	}else{
+        		swal({
+                    title: '沒有要新增的價錢',
+                    type: 'error',
+                })
+        	}
+            
             
             
         })
