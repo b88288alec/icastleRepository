@@ -10,12 +10,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.icastle.members.model.MembersVO;
 import com.icastle.qa.model.QaService;
 import com.icastle.qa.model.QaVO;
+import com.icastle.record.model.RecordService;
+import com.icastle.record.model.RecordVO;
 
 @WebServlet("/manager/DeleteQAServlet")
 public class DeleteQAServlet extends HttpServlet {
@@ -26,6 +30,8 @@ public class DeleteQAServlet extends HttpServlet {
 		res.setCharacterEncoding("utf-8");
 		res.setHeader("content-type", "application/json;charset=UTF-8");
 		PrintWriter out = res.getWriter();
+		HttpSession session = req.getSession();
+    	MembersVO manager = (MembersVO)session.getAttribute("ManagerLoginOK");
 		
 		try{
 
@@ -40,6 +46,15 @@ public class DeleteQAServlet extends HttpServlet {
 				jo.put("id", id);
 				ja.add(jo);
 			}
+			
+			String content = manager.getName() + " 刪除了一則QA";
+			RecordVO record = new RecordVO();
+	    	record.setId(("m" + manager.getMemberId()));
+	    	record.setName(manager.getName());
+	    	record.setManagerRecord(content);
+	    	
+	    	RecordService rs = new RecordService();
+	    	rs.managerRecord(record);
 			
 			out.println(ja);
 			

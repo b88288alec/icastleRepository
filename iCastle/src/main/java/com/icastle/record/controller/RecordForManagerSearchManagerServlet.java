@@ -34,7 +34,7 @@ public class RecordForManagerSearchManagerServlet extends HttpServlet {
 			List<RecordVO> result = null;
 			
 			RecordService rs = new RecordService();
-			if(name.matches(regex)){
+			if(name.matches(regex) && name != ""){
 				result = rs.search_manager_records_by_id(name);
 			}else{
 				result = rs.search_records_by_name(name);

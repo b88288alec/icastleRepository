@@ -9,6 +9,8 @@
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
 <meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <link href="${pageContext.servletContext.contextPath}/favicon.ico" rel="icon" type="image/x-icon" />
 <link
 	href="${pageContext.servletContext.contextPath}/css/bootstrap.min.css"
@@ -52,7 +54,6 @@
 						</tr>
 					</thead>
 					<tbody id="tb">
-						
 					</tbody>
 				</table>
 			</div>
@@ -84,6 +85,8 @@
 <script
 	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
 
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
 <script>
 	$(function(){
 		
@@ -94,7 +97,7 @@
 			
 			$.ajax({
 				type : 'GET',
-				url : '${pageContext.servletContext.contextPath}/manager/MembersForManagerServlet',
+				url : '${pageContext.servletContext.contextPath}/manager/RecordForManagerSearchManagerServlet',
 				data : {
 					email : email
 				},

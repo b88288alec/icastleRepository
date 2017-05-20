@@ -102,6 +102,42 @@
 							</a></li>
 						</c:otherwise>
 					</c:choose>
+					
+					<c:choose>
+						<c:when
+							test="${servletPath == '/manager/managerrecord.jsp'}">
+							<li class="active"><a
+								href="${pageContext.servletContext.contextPath}/manager/managerrecord.jsp">
+									<i class="material-icons">attach_money</i>
+									<p>管理員異動記錄</p>
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a
+								href="${pageContext.servletContext.contextPath}/manager/managerrecord.jsp">
+									<i class="material-icons">attach_money</i>
+									<p>管理員異動記錄</p>
+							</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when
+							test="${servletPath == '/manager/hotelrecord.jsp'}">
+							<li class="active"><a
+								href="${pageContext.servletContext.contextPath}/manager/hotelrecord.jsp">
+									<i class="material-icons">attach_money</i>
+									<p>業者異動記錄</p>
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a
+								href="${pageContext.servletContext.contextPath}/manager/hotelrecord.jsp">
+									<i class="material-icons">attach_money</i>
+									<p>業者異動記錄</p>
+							</a></li>
+						</c:otherwise>
+					</c:choose>
 
 				</ul>
 			</div>

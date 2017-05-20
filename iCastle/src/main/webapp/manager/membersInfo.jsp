@@ -151,7 +151,7 @@ input:checked + .slider:before {
 			
 			var memberId = $(this).attr('id');
 			var manager = $(this).prop('checked');
-			var nameid = ('#name' + memberId);
+			var nameid = ('#name' + memberId.substring(3));
 			var membername = $(nameid).text();
 			
 			$.ajax({
@@ -173,7 +173,7 @@ input:checked + .slider:before {
 			
 			var memberId = $(this).attr('id');
 			var suspension = $(this).prop('checked');
-			var nameid = ('#name' + memberId);
+			var nameid = ('#name' + memberId.substring(3));
 			var membername = $(nameid).text();
 			
 			$.ajax({
