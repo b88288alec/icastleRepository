@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.icastle.record.model.RecordVO" table="Record" >
+        
+        <id name="recordId" column="recordId">
+            <generator class="identity"/>
+        </id>
+        
+        <property name="recordTime" column="recordTime" />
+        <property name="id" column="id" />
+        <property name="name" column="name" />
+        <property name="roomTypeName" column="roomTypeName" />
+        <property name="peopleNum" column="peopleNum" />
+        <property name="roomNumber" column="roomNumber" />
+        <property name="weekdaysPrice" column="weekdaysPrice" />
+        <property name="holidayPrice" column="holidayPrice" />
+        <property name="seasonPrice" column="seasonPrice" />
+        <property name="customizedPrice" column="customizedPrice" />
+        <property name="customizedName" column="customizedName" />
+        <property name="breakfast" column="breakfast" />
+        <property name="afternoonTea" column="afternoonTea" />
+        <property name="dinner" column="dinner" />
+        <property name="bedAddable" column="bedAddable" />
+        <property name="pricePerPerson" column="pricePerPerson" />
+        <property name="remark" column="remark" />
+        <property name="managerRecord" column="managerRecord" />
+        
+    </class>
+</hibernate-mapping>
+
