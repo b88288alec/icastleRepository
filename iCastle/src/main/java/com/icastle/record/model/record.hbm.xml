@@ -27,6 +27,7 @@
         <property name="pricePerPerson" column="pricePerPerson" />
         <property name="remark" column="remark" />
         <property name="managerRecord" column="managerRecord" />
+        <property name="classification" column="classification" />
         
     </class>
 </hibernate-mapping>

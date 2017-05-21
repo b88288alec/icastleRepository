@@ -181,6 +181,10 @@ tr{
 
 <script
 	src="${pageContext.servletContext.contextPath}/js/material-kit.js"></script>
+	
+<!-- loading用 -->
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay_progress.min.js"></script>
 
 <script>
 //讀取button的value值
@@ -203,6 +207,12 @@ $(function(){
 				data : {
 					orderId : orderid
 				},
+				beforeSend:function(){
+					$.LoadingOverlay("show");
+                },
+                complete:function(){
+                	$.LoadingOverlay("hide", true);
+                },
 				success : function(data){
 					$(tdid).empty().append(data.cancelTime);
 					$(commenttdid).empty();

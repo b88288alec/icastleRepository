@@ -45,6 +45,7 @@ public class SuspensionServlet extends HttpServlet {
 		    	record.setId(("m" + manager.getMemberId()));
 		    	record.setName(manager.getName());
 		    	record.setManagerRecord(content);
+		    	record.setClassification("會員相關");
 		    	
 		    	RecordService rs = new RecordService();
 		    	rs.managerRecord(record);
@@ -54,6 +55,7 @@ public class SuspensionServlet extends HttpServlet {
 		    	record.setId(("m" + manager.getMemberId()));
 		    	record.setName(manager.getName());
 		    	record.setManagerRecord(content);
+		    	record.setClassification("會員相關");
 		    	
 		    	RecordService rs = new RecordService();
 		    	rs.managerRecord(record);

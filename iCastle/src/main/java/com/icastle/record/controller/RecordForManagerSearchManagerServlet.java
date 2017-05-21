@@ -30,14 +30,15 @@ public class RecordForManagerSearchManagerServlet extends HttpServlet {
 		
 		try{
 			String name = req.getParameter("email");
+			String classification = req.getParameter("classification");
 			String regex = "^[0-9]*$";
 			List<RecordVO> result = null;
 			
 			RecordService rs = new RecordService();
 			if(name.matches(regex) && name != ""){
-				result = rs.search_manager_records_by_id(name);
+				result = rs.search_manager_records_by_id(name, classification);
 			}else{
-				result = rs.search_records_by_name(name);
+				result = rs.search_records_by_name(name, classification);
 			}
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
@@ -45,6 +46,7 @@ public class RecordForManagerSearchManagerServlet extends HttpServlet {
 			JSONArray ja = new JSONArray();
 			for(RecordVO record : result){
 				JSONObject jo = new JSONObject();
+				jo.put("classification", record.getClassification());
 				jo.put("id", record.getId());
 				jo.put("name", record.getName());
 				String time = sdf.format(record.getRecordTime());

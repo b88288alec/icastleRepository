@@ -47,6 +47,7 @@ public class NewManagerServlet extends HttpServlet {
 		    	record.setId(("m" + managerData.getMemberId()));
 		    	record.setName(managerData.getName());
 		    	record.setManagerRecord(content);
+		    	record.setClassification("會員相關");
 		    	
 		    	RecordService rs = new RecordService();
 		    	rs.managerRecord(record);
@@ -56,6 +57,7 @@ public class NewManagerServlet extends HttpServlet {
 		    	record.setId(("m" + managerData.getMemberId()));
 		    	record.setName(managerData.getName());
 		    	record.setManagerRecord(content);
+		    	record.setClassification("會員相關");
 		    	
 		    	RecordService rs = new RecordService();
 		    	rs.managerRecord(record);

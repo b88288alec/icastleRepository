@@ -49,6 +49,7 @@ public class CheckHotelServlet extends HttpServlet {
 		    	record.setId(("m" + manager.getMemberId()));
 		    	record.setName(manager.getName());
 		    	record.setManagerRecord(content);
+		    	record.setClassification("飯店相關");
 		    	
 		    	RecordService rs = new RecordService();
 		    	rs.managerRecord(record);
@@ -70,6 +71,7 @@ public class CheckHotelServlet extends HttpServlet {
 		    	record.setId(("m" + manager.getMemberId()));
 		    	record.setName(manager.getName());
 		    	record.setManagerRecord(content);
+		    	record.setClassification("飯店相關");
 		    	
 		    	RecordService rs = new RecordService();
 		    	rs.managerRecord(record);

@@ -44,16 +44,24 @@ public class RecordService {
 	}
 	
 //	使用ID查詢管理員歷史紀錄
-	public List<RecordVO> search_manager_records_by_id(String managerId){
+	public List<RecordVO> search_manager_records_by_id(String managerId, String classification){
 		String id = "m" + managerId;
 		
-		return dao.select_by_id(id);
+		if("0".equals(classification)){
+			return dao.select_by_id(id);
+		}else{
+			return dao.select_by_class_id(id, classification);
+		}
 	}
 	
 //	使用名稱查詢歷史紀錄
-	public List<RecordVO> search_records_by_name(String name){
+	public List<RecordVO> search_records_by_name(String name, String classification){
 		String search_name = "%" + name + "%";
 		
-		return dao.select_by_name(search_name);
+		if("0".equals(classification)){
+			return dao.select_by_name(search_name);
+		}else{
+			return dao.select_by_class_name(search_name, classification);
+		}
 	}
 }

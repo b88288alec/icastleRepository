@@ -121,7 +121,7 @@
 					</c:choose>
 
 					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/ToHotelOrders'}">
+						<c:when test="${servletPath == '/hotelcenter/hotelorders.jsp'}">
 							<li class="active"><a
 								href="${pageContext.servletContext.contextPath}/hotelcenter/ToHotelOrders">
 									<i class="material-icons">bookmark_border</i>

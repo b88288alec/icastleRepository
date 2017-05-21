@@ -52,6 +52,7 @@ public class DeleteQAServlet extends HttpServlet {
 	    	record.setId(("m" + manager.getMemberId()));
 	    	record.setName(manager.getName());
 	    	record.setManagerRecord(content);
+	    	record.setClassification("QA");
 	    	
 	    	RecordService rs = new RecordService();
 	    	rs.managerRecord(record);

@@ -28,7 +28,7 @@
 <link href="${pageContext.servletContext.contextPath}/css/template.css"
 	rel="stylesheet" />
 	
-<link href="css/QueryPage.css" rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/QueryPage.css" rel="stylesheet" />
 <!--以下請加入各自頁面的css-->
 <style>
 .container {

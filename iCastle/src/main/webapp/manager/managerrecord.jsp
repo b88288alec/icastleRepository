@@ -40,13 +40,21 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class=".col-xs-12">
-					<span>管理員編號或姓名:</span><input type="text" name="email"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="button" name="send" id="buttonsend">搜尋</button>
+					<span>分類:</span>
+						<select id="classification" name="classification">
+							<option value="0">--</option>
+							<option value="飯店相關">飯店相關</option>
+							<option value="會員相關">會員相關</option>
+							<option value="QA">QA</option>
+						</select>
+					<span> 管理員編號或姓名:</span><input type="text" name="email"><button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="button" name="send" id="buttonsend">搜尋</button>
 				</div>
 			</div>
 			<div class="row" name="content" id="content">
 				<table class="table">
 					<thead>
 						<tr>
+							<th>分類</th>
 							<th>管理員編號</th>
 							<th>姓名</th>
 							<th>修改時間</th>
@@ -87,6 +95,10 @@
 
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
+<!-- loading用 -->
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay_progress.min.js"></script>
+
 <script>
 	$(function(){
 		
@@ -94,13 +106,21 @@
 			
 			var tb = $('#tb');
 			var email = $('input[name="email"]').val();
+			var classification = $('#classification').val();
 			
 			$.ajax({
 				type : 'GET',
 				url : '${pageContext.servletContext.contextPath}/manager/RecordForManagerSearchManagerServlet',
 				data : {
-					email : email
+					email : email,
+					classification : classification
 				},
+				beforeSend:function(){
+					$.LoadingOverlay("show");
+                },
+                complete:function(){
+                	$.LoadingOverlay("hide", true);
+                },
 				success : function(data){
 					
 // 					componentHandler.upgradeDom();
@@ -109,12 +129,13 @@
 					$.each(data, function(key, value){
 						
 						var r = $('<tr></tr>');
+						var d0 = $('<td></td>').text(value.classification);
 						var d1 = $('<td></td>').text(value.id);
 						var d2 = $('<td></td>').text(value.name);
 						var d3 = $('<td></td>').text(value.recordTime);
 						var d4 = $('<td></td>').text(value.managerRecord);
 						
-						r.append([d1,d2,d3,d4]);
+						r.append([d0,d1,d2,d3,d4]);
 						tb.append(r);
 					})
 				}
