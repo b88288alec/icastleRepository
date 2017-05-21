@@ -12,8 +12,13 @@ public interface RecordDAO_interface {
 	public void managerRecord(RecordVO record);
 //	用ID搜尋
 	public List<RecordVO> select_by_id(String id);
+
+//	用roomTypeId搜尋
+	public List<RecordVO> select_by_roomTypeId(Integer roomTypeId);
+
 //	用分類、ID搜尋
 	public List<RecordVO> select_by_class_id(String id, String classification);
+
 //	用名稱搜尋
 	public List<RecordVO> select_by_name(String name);
 //	用分類、名稱搜尋
