@@ -151,6 +151,8 @@ input:checked + .slider:before {
 <script>
 	$(function(){
 		
+		var managerId = ${ManagerLoginOK.memberId};
+		
 		$('#tb').on('click', 'input[name="manager"]', function(){
 			
 			var memberId = $(this).attr('id');
@@ -251,6 +253,11 @@ input:checked + .slider:before {
 
 						if(value.suspension == 'true'){
 							sinp.prop('checked', true);
+						}
+						
+						if(managerId == value.memberId){
+							minp.prop('disabled', true);
+							sinp.prop('disabled', true);
 						}
 						
 // 						mlab.append([minp,msp]);
