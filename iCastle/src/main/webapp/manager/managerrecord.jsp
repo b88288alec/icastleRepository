@@ -107,13 +107,15 @@
 			var tb = $('#tb');
 			var email = $('input[name="email"]').val();
 			var classification = $('#classification').val();
+			var action = 'formanager';
 			
 			$.ajax({
 				type : 'GET',
 				url : '${pageContext.servletContext.contextPath}/manager/RecordForManagerSearchManagerServlet',
 				data : {
 					email : email,
-					classification : classification
+					classification : classification,
+					action : action
 				},
 				beforeSend:function(){
 					$.LoadingOverlay("show");

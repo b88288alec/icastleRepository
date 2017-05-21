@@ -60,13 +60,13 @@ public class RecordService {
 	}
 	
 //	使用名稱查詢歷史紀錄
-	public List<RecordVO> search_records_by_name(String name, String classification){
+	public List<RecordVO> search_records_by_name(String name, String classification, String id){
 		String search_name = "%" + name + "%";
 		
 		if("0".equals(classification)){
-			return dao.select_by_name(search_name);
+			return dao.select_by_name(search_name, id);
 		}else{
-			return dao.select_by_class_name(search_name, classification);
+			return dao.select_by_class_name(search_name, classification, id);
 		}
 	}
 }

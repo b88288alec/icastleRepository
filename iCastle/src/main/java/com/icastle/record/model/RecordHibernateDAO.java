@@ -13,8 +13,8 @@ public class RecordHibernateDAO implements RecordDAO_interface {
 
 	private static final String SELECT_BY_CLASS_ID = "from RecordVO where classification = :classification and id = :id order by recordTime desc";
 	private static final String SELECT_BY_ID = "from RecordVO where id = :id order by recordTime desc";
-	private static final String SELECT_BY_CLASS_NAME = "from RecordVO where classification = :classification and name like :name order by recordTime desc";
-	private static final String SELECT_BY_NAME = "from RecordVO where name like :name order by recordTime desc";
+	private static final String SELECT_BY_CLASS_NAME = "from RecordVO where classification = :classification and name like :name and id like :id order by recordTime desc";
+	private static final String SELECT_BY_NAME = "from RecordVO where name like :name and id like :id order by recordTime desc";
 	private static final String SELECT_BY_ROOMTYPEID = "from RecordVO where roomTypeId = :id order by recordTime desc";
 	
 	@Override
@@ -52,7 +52,7 @@ public class RecordHibernateDAO implements RecordDAO_interface {
 	}
 
 	@Override
-	public List<RecordVO> select_by_name(String name) {
+	public List<RecordVO> select_by_name(String name, String id) {
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		List<RecordVO> result = null;
@@ -60,6 +60,7 @@ public class RecordHibernateDAO implements RecordDAO_interface {
 			session.beginTransaction();
 			Query query = session.createQuery(SELECT_BY_NAME);
 			query.setParameter("name", name);
+			query.setParameter("id", id);
 			result = query.list();
 			session.getTransaction().commit();
 		}catch(RuntimeException e){
@@ -123,7 +124,7 @@ public class RecordHibernateDAO implements RecordDAO_interface {
 	}
 
 	@Override
-	public List<RecordVO> select_by_class_name(String name, String classification) {
+	public List<RecordVO> select_by_class_name(String name, String classification, String id) {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		List<RecordVO> result = null;
@@ -131,6 +132,7 @@ public class RecordHibernateDAO implements RecordDAO_interface {
 			session.beginTransaction();
 			Query query = session.createQuery(SELECT_BY_CLASS_NAME);
 			query.setParameter("name", name);
+			query.setParameter("id", id);
 			query.setParameter("classification", classification);
 			result = query.list();
 			session.getTransaction().commit();

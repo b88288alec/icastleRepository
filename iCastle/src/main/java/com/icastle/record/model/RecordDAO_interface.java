@@ -20,8 +20,8 @@ public interface RecordDAO_interface {
 	public List<RecordVO> select_by_class_id(String id, String classification);
 
 //	用名稱搜尋
-	public List<RecordVO> select_by_name(String name);
+	public List<RecordVO> select_by_name(String name, String id);
 //	用分類、名稱搜尋
-	public List<RecordVO> select_by_class_name(String name, String classification);
+	public List<RecordVO> select_by_class_name(String name, String classification, String id);
 	
 }

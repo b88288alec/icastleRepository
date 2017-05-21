@@ -31,32 +31,59 @@ public class RecordForManagerSearchManagerServlet extends HttpServlet {
 		try{
 			String name = req.getParameter("email");
 			String classification = req.getParameter("classification");
+			String action = req.getParameter("action");
 			String regex = "^[0-9]*$";
 			List<RecordVO> result = null;
 			
-			RecordService rs = new RecordService();
-			if(name.matches(regex) && name != ""){
-				result = rs.search_manager_records_by_id(name, classification);
-			}else{
-				result = rs.search_records_by_name(name, classification);
-			}
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
-			
-			JSONArray ja = new JSONArray();
-			for(RecordVO record : result){
-				JSONObject jo = new JSONObject();
-				jo.put("classification", record.getClassification());
-				jo.put("id", record.getId());
-				jo.put("name", record.getName());
-				String time = sdf.format(record.getRecordTime());
-				jo.put("recordTime", time);
-				jo.put("managerRecord", record.getManagerRecord());
+			if(!"formanager".equals(action)){
+				RecordService rs = new RecordService();
+				if(name.matches(regex) && name != ""){
+					result = rs.search_manager_records_by_id(name, classification);
+				}else{
+					result = rs.search_records_by_name(name, classification, "h%");
+				}
 				
-				ja.add(jo);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+				
+				JSONArray ja = new JSONArray();
+				for(RecordVO record : result){
+					JSONObject jo = new JSONObject();
+					jo.put("classification", record.getClassification());
+					jo.put("id", record.getId());
+					jo.put("name", record.getName());
+					String time = sdf.format(record.getRecordTime());
+					jo.put("recordTime", time);
+					jo.put("managerRecord", record.getManagerRecord());
+					
+					ja.add(jo);
+				}
+				
+				out.println(ja);
+			}else{
+				RecordService rs = new RecordService();
+				if(name.matches(regex) && name != ""){
+					result = rs.search_manager_records_by_id(name, classification);
+				}else{
+					result = rs.search_records_by_name(name, classification, "m%");
+				}
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+				
+				JSONArray ja = new JSONArray();
+				for(RecordVO record : result){
+					JSONObject jo = new JSONObject();
+					jo.put("classification", record.getClassification());
+					jo.put("id", record.getId());
+					jo.put("name", record.getName());
+					String time = sdf.format(record.getRecordTime());
+					jo.put("recordTime", time);
+					jo.put("managerRecord", record.getManagerRecord());
+					
+					ja.add(jo);
+				}
+				
+				out.println(ja);
 			}
-			
-			out.println(ja);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

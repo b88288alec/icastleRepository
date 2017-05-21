@@ -18,7 +18,7 @@ import com.icastle.hotels.model.HotelVO;
 import com.icastle.record.model.RecordService;
 import com.icastle.record.model.RecordVO;
 
-@WebServlet("/hotelcenter/RoomTypeRecordToJosn")
+@WebServlet("/json/RoomTypeRecordToJosn")
 public class RoomTypeRecordToJosn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,12 @@ public class RoomTypeRecordToJosn extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		HotelVO hotelvo = (HotelVO)session.getAttribute("HotelLoginOK");
-		Integer hotelId = hotelvo.getHotelId();
+		Integer hotelId = null;
+		if(hotelvo != null){
+			hotelId = hotelvo.getHotelId();
+		}else{
+			hotelId = new Integer(request.getParameter("hiddenid"));
+		}
 		Integer roomTypeId = Integer.parseInt(request.getParameter("roomTypeId"));
 		
 		RecordService res = new RecordService();

@@ -149,7 +149,7 @@ $(function(){
 				})
 			})
 		}else{
-			$.getJSON("${pageContext.servletContext.contextPath}/hotelcenter/RoomTypeRecordToJosn",{"roomTypeId":id},
+			$.getJSON("${pageContext.servletContext.contextPath}/json/RoomTypeRecordToJosn",{"roomTypeId":id},
 					function(data){
 					var tbody = $('#room');
 					tbody.empty();
