@@ -146,6 +146,9 @@
 <!-- 圖表用JS -->
 <%-- <script src="${pageContext.servletContext.contextPath}/js/chartist.min.js"></script> --%>
 <script src="${pageContext.servletContext.contextPath}/js/chartist-plugin-tooltip.js"></script>
+<!-- loading用 -->
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay_progress.min.js"></script>
 
 <script>
 	$(function(){
@@ -174,6 +177,12 @@
 					orderId : orderid,
 					memo : myMemo
 				},
+				beforeSend:function(){
+                    $.LoadingOverlay("show");
+                },
+                complete:function(){
+                	$.LoadingOverlay("hide", true);
+                },
 				success : function(data){
 					$(tdid).empty().append(myMemo);
 				}
@@ -193,6 +202,12 @@
 					day : $('#idSelectDate').val(),
 					state : $('#idSelectOrderState').val()
 				},
+				beforeSend:function(){
+                    $.LoadingOverlay("show");
+                },
+                complete:function(){
+                	$.LoadingOverlay("hide", true);
+                },
 				success : function(data){
 					var tb = $('#idtbody');
 					
@@ -251,6 +266,12 @@
 						month : $('#idSelectMonth').val(),
 						state : $('#idSelectOrderState').val()
 					},
+					beforeSend:function(){
+	                    $.LoadingOverlay("show");
+	                },
+	                complete:function(){
+	                	$.LoadingOverlay("hide", true);
+	                },
 					success : function(data){
 						var chart = new Chartist.Bar('.ct-chart', data ,{distributeSeries: true, plugins: [Chartist.plugins.tooltip()]});
 						// Let's put a sequence number aside so we can use it in the event callbacks
@@ -304,6 +325,12 @@
 						month : $('#idSelectMonth').val(),
 						state : $('#idSelectOrderState').val()
 					},
+					beforeSend:function(){
+	                    $.LoadingOverlay("show");
+	                },
+	                complete:function(){
+	                	$.LoadingOverlay("hide", true);
+	                },
 					success : function(datas){
 						$('#showdatapic').remove();
 						var chart = new Chartist.Line('.ct-chart', datas, {fullWidth:true, chartPadding:{right: 40}, lineSmooth: Chartist.Interpolation.simple({divisor: 99}),showArea: true, plugins: [Chartist.plugins.tooltip()]});

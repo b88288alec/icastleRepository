@@ -21,6 +21,7 @@ public class RecordVO implements java.io.Serializable{
 	private Integer pricePerPerson;
 	private String remark;
 	private String managerRecord;
+	private String classification;
 	public Integer getRecordId() {
 		return recordId;
 	}
@@ -135,11 +136,19 @@ public class RecordVO implements java.io.Serializable{
 	public void setManagerRecord(String managerRecord) {
 		this.managerRecord = managerRecord;
 	}
+
 	public Integer getRoomTypeId() {
 		return roomTypeId;
 	}
 	public void setRoomTypeId(Integer roomTypeId) {
 		this.roomTypeId = roomTypeId;
+	}
+
+	public String getClassification() {
+		return classification;
+	}
+	public void setClassification(String classification) {
+		this.classification = classification;
 	}
 
 }

@@ -42,20 +42,22 @@ public class NewManagerServlet extends HttpServlet {
 			
 //			存入歷史紀錄
 			if(manager){
-				String content = managerData.getName() + " 把 " + membername + " 升格為管理員";
+				String content = managerData.getName() + " 把會員 " + membername + " 升格為管理員";
 				RecordVO record = new RecordVO();
 		    	record.setId(("m" + managerData.getMemberId()));
 		    	record.setName(managerData.getName());
 		    	record.setManagerRecord(content);
+		    	record.setClassification("會員相關");
 		    	
 		    	RecordService rs = new RecordService();
 		    	rs.managerRecord(record);
 			}else{
-				String content = managerData.getName() + " 把 " + membername + " 取消管理員權限";
+				String content = managerData.getName() + " 把管理員 " + membername + " 取消管理員權限";
 				RecordVO record = new RecordVO();
 		    	record.setId(("m" + managerData.getMemberId()));
 		    	record.setName(managerData.getName());
 		    	record.setManagerRecord(content);
+		    	record.setClassification("會員相關");
 		    	
 		    	RecordService rs = new RecordService();
 		    	rs.managerRecord(record);

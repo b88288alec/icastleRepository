@@ -8,10 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
+import com.icastle.members.model.MembersVO;
 import com.icastle.qa.model.QaService;
+import com.icastle.record.model.RecordService;
+import com.icastle.record.model.RecordVO;
 
 @WebServlet("/manager/UpdateQAServlet")
 public class UpdateQAServlet extends HttpServlet {
@@ -26,6 +30,8 @@ public class UpdateQAServlet extends HttpServlet {
 		res.setCharacterEncoding("utf-8");
 		res.setHeader("content-type", "application/json;charset=UTF-8");
 		PrintWriter out = res.getWriter();
+		HttpSession session = req.getSession();
+    	MembersVO manager = (MembersVO)session.getAttribute("ManagerLoginOK");
 		
 		try{
 			
@@ -35,6 +41,16 @@ public class UpdateQAServlet extends HttpServlet {
 			
 			QaService qs = new QaService();
 			qs.update(question, answer, id);
+			
+			String content = manager.getName() + " 修改了一則QA";
+			RecordVO record = new RecordVO();
+	    	record.setId(("m" + manager.getMemberId()));
+	    	record.setName(manager.getName());
+	    	record.setManagerRecord(content);
+	    	record.setClassification("QA");
+	    	
+	    	RecordService rs = new RecordService();
+	    	rs.managerRecord(record);
 			
 			JSONObject jo = new JSONObject();
 			jo.put("success", "success");

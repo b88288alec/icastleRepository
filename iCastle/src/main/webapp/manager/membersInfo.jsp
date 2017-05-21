@@ -143,6 +143,10 @@ input:checked + .slider:before {
 	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
 	
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+<!-- loading用 -->
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay_progress.min.js"></script>
 	
 <script>
 	$(function(){
@@ -151,7 +155,7 @@ input:checked + .slider:before {
 			
 			var memberId = $(this).attr('id');
 			var manager = $(this).prop('checked');
-			var nameid = ('#name' + memberId);
+			var nameid = ('#name' + memberId.substring(3));
 			var membername = $(nameid).text();
 			
 			$.ajax({
@@ -173,7 +177,7 @@ input:checked + .slider:before {
 			
 			var memberId = $(this).attr('id');
 			var suspension = $(this).prop('checked');
-			var nameid = ('#name' + memberId);
+			var nameid = ('#name' + memberId.substring(3));
 			var membername = $(nameid).text();
 			
 			$.ajax({
@@ -201,6 +205,12 @@ input:checked + .slider:before {
 				data : {
 					email : email
 				},
+				beforeSend:function(){
+					$.LoadingOverlay("show");
+                },
+                complete:function(){
+                	$.LoadingOverlay("hide", true);
+                },
 				success : function(data){
 					
 					componentHandler.upgradeDom();

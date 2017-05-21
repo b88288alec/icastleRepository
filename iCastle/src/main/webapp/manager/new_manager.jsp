@@ -109,7 +109,7 @@ input:checked + .slider:before {
 						<c:forEach var="member" items="${members}">
 							<tr>
 								<td>${member.memberId}</td>
-								<td>${member.name}</td>
+								<td id="name${member.memberId}">${member.name}</td>
 								<td>${member.bdate}</td>
 								<td>${member.email}</td>
 								<td>${member.tel}</td>
@@ -167,7 +167,6 @@ input:checked + .slider:before {
 <script>
 	$(function(){
 		
-		console.log(${ManagerLoginOK.memberId});
 		var loginmember = man${ManagerLoginOK.memberId};
 		
 		$('#tb').on('click', 'input[name="manager"]', function(){
@@ -175,6 +174,8 @@ input:checked + .slider:before {
 			var memberId = $(this).attr('id');
 			var manager = $(this).prop('checked');
 			var tb = $('#tb');
+			var nameid = ('#name' + memberId.substring(3));
+			var membername = $(nameid).text();
 			
 			$.ajax({
 				type : 'GET',
@@ -182,6 +183,7 @@ input:checked + .slider:before {
 				data : {
 					memberId : memberId,
 					manager : manager,
+					membername : membername,
 					action : 'forManagerPage'
 				},
 				success : function(data){
