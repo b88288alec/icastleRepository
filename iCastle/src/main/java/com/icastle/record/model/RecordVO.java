@@ -5,6 +5,7 @@ public class RecordVO implements java.io.Serializable{
 	private java.sql.Timestamp recordTime;
 	private String id;
 	private String name;
+	private Integer roomTypeId;
 	private String roomTypeName;
 	private Integer peopleNum;
 	private Integer roomNumber;
@@ -135,6 +136,14 @@ public class RecordVO implements java.io.Serializable{
 	public void setManagerRecord(String managerRecord) {
 		this.managerRecord = managerRecord;
 	}
+
+	public Integer getRoomTypeId() {
+		return roomTypeId;
+	}
+	public void setRoomTypeId(Integer roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+
 	public String getClassification() {
 		return classification;
 	}

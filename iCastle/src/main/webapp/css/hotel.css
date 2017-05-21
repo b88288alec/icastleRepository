@@ -1,4 +1,4 @@
-﻿.form-group {
+.form-group {
     padding-bottom: 7px;
     margin: 5px 0 0 0;
 }
@@ -19,7 +19,7 @@
 
 .search-row {
     position: fixed;
-    top: 53px;
+    top: 50px;
     width: 110%;
     z-index: 3;
 }

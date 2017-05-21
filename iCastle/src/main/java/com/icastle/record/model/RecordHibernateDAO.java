@@ -15,6 +15,7 @@ public class RecordHibernateDAO implements RecordDAO_interface {
 	private static final String SELECT_BY_ID = "from RecordVO where id = :id order by recordTime desc";
 	private static final String SELECT_BY_CLASS_NAME = "from RecordVO where classification = :classification and name like :name order by recordTime desc";
 	private static final String SELECT_BY_NAME = "from RecordVO where name like :name order by recordTime desc";
+	private static final String SELECT_BY_ROOMTYPEID = "from RecordVO where roomTypeId = :id order by recordTime desc";
 	
 	@Override
 	public void managerRecord(RecordVO record) {
@@ -85,6 +86,23 @@ public class RecordHibernateDAO implements RecordDAO_interface {
 	}
 
 	@Override
+	public List<RecordVO> select_by_roomTypeId(Integer roomTypeId) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		List<RecordVO> result = null;
+		try{
+			session.beginTransaction();
+			Query query = session.createQuery(SELECT_BY_ROOMTYPEID);
+			query.setParameter("id", roomTypeId);
+			result = query.list();
+			session.getTransaction().commit();
+		}catch(RuntimeException e){
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+			
 	public List<RecordVO> select_by_class_id(String id, String classification) {
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
