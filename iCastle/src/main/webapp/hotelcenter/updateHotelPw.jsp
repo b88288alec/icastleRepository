@@ -26,6 +26,7 @@
 <link
 	href="${pageContext.servletContext.contextPath}/css/manager_template.css"
 	rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
 <style>
 .submit {
 	margin-right: 15px; 
@@ -54,7 +55,7 @@
 							<td>
 								<div class="form-group label-floating">
 									<label class="control-label">請輸入舊密碼</label>
-									<input type="text" class="form-control" name="oldpw">
+									<input type="password" class="form-control" name="oldpw">
 								
 								</div>
 							</td>
@@ -68,7 +69,7 @@
 							<td>
 								<div class="form-group label-floating">
 									<label class="control-label">請輸入新密碼</label>
-									<input type="text" class="form-control" name="newpw">
+									<input type="password" class="form-control" name="newpw">
 								</div>
 							</td>
 							<td>
@@ -81,7 +82,7 @@
 							<td>
 								<div class="form-group label-floating">
 									<label class="control-label">請輸入確認新密碼</label>
-									<input type="text" class="form-control" name="checkNewpw">
+									<input type="password" class="form-control" name="checkNewpw">
 								</div>
 							</td>
 							<td>
@@ -90,9 +91,8 @@
 						</tr>
 					</tbody>
 					</table>
-					<input class="btn  btn-danger" type="reset" value="清除" />
 					<input class="submit btn btn-success" type="submit" value="送出" />
-					<p>${success}</p>
+					<input class="btn  btn-danger" type="reset" value="重設" />
 				</form>		
 			
 			</div>
@@ -123,5 +123,13 @@
 
 <script
 	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
-
+<script src="${pageContext.servletContext.contextPath}/js/sweetalert2.min.js"></script>
+<script>
+	<c:if test="${not empty success}">
+		swal({
+    		title: '成功修改密碼',
+			type: 'success'
+		});	
+ 	</c:if>
+</script>
 </html>
