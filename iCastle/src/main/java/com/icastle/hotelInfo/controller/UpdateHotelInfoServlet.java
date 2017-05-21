@@ -80,8 +80,7 @@ public class UpdateHotelInfoServlet extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		}
-		System.out.println("roomWifiStr="+roomWifiStr);
-		System.out.println("hallWifiStr="+hallWifiStr);
+
 		//取得設施
 		Boolean roomWifi = (roomWifiStr=="" || roomWifiStr==null) ? false : true;
 		Boolean hallWifi = (hallWifiStr=="" || hallWifiStr==null) ? false : true;
@@ -125,7 +124,7 @@ public class UpdateHotelInfoServlet extends HttpServlet {
 		
 		//轉交畫面
 		request.setAttribute("OK", "修改成功");
-		RequestDispatcher rd = request.getRequestDispatcher("updateOK.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("ShowHotelInfo.do");
 		rd.forward(request, response);
 		return;
 		

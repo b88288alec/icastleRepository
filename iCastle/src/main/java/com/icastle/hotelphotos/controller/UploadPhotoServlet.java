@@ -156,6 +156,7 @@ public class UploadPhotoServlet extends HttpServlet {
 			session.removeAttribute("photovos");
 			session.removeAttribute("originpage");
 			
+			request.setAttribute("success", "success");
 			RequestDispatcher rd = request.getRequestDispatcher("ShowHotelPhoto.do");
 			rd.forward(request, response);
 			return;

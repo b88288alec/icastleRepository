@@ -90,14 +90,14 @@
 							test="${servletPath == '/manager/QA.jsp'}">
 							<li class="active"><a
 								href="${pageContext.servletContext.contextPath}/manager/SearchQAServlet">
-									<i class="material-icons">attach_money</i>
+									<i class="material-icons">help outline</i>
 									<p>Q&A設定</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
 								href="${pageContext.servletContext.contextPath}/manager/SearchQAServlet">
-									<i class="material-icons">attach_money</i>
+									<i class="material-icons">help outline</i>
 									<p>Q&A設定</p>
 							</a></li>
 						</c:otherwise>
@@ -108,14 +108,14 @@
 							test="${servletPath == '/manager/managerrecord.jsp'}">
 							<li class="active"><a
 								href="${pageContext.servletContext.contextPath}/manager/managerrecord.jsp">
-									<i class="material-icons">attach_money</i>
+									<i class="material-icons">comment</i>
 									<p>管理員異動記錄</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
 								href="${pageContext.servletContext.contextPath}/manager/managerrecord.jsp">
-									<i class="material-icons">attach_money</i>
+									<i class="material-icons">comment</i>
 									<p>管理員異動記錄</p>
 							</a></li>
 						</c:otherwise>
@@ -126,14 +126,14 @@
 							test="${servletPath == '/manager/hotelrecord.jsp'}">
 							<li class="active"><a
 								href="${pageContext.servletContext.contextPath}/manager/hotelrecord.jsp">
-									<i class="material-icons">attach_money</i>
+									<i class="material-icons">receipt</i>
 									<p>業者異動記錄</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
 								href="${pageContext.servletContext.contextPath}/manager/hotelrecord.jsp">
-									<i class="material-icons">attach_money</i>
+									<i class="material-icons">receipt</i>
 									<p>業者異動記錄</p>
 							</a></li>
 						</c:otherwise>

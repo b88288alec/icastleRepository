@@ -3,7 +3,7 @@ var index = 0;
 var page = 0;
 
 $(function() {
-	
+
 	index = parseInt($('#index').val(), 10);
 	page = index-1;
 	console.log('page1= '+page);

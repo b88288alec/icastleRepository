@@ -26,7 +26,7 @@
 <link
 	href="${pageContext.servletContext.contextPath}/css/manager_template.css"
 	rel="stylesheet" />
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
 <title>iCastle飯店管理中心</title>
 <style> 
 	.container {
@@ -174,12 +174,14 @@
                                             <div class="form-group">
                                                 <p style="font-size: 16px;">入住須知:</p>
                                                 <textarea class="form-control" placeholder="請輸入入住須知" rows="5" name="guestPolicies">${HotelInfo.guestPolicies}</textarea>
+                                                <font color="red">${errMap.guestPoliciesErr}</font> 
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <p style="font-size: 16px;">取消規定:</p>
                                                 <textarea class="form-control" placeholder="請輸入取消規定" name="cancelPolicies" rows="5">${HotelInfo.cancelPolicies}</textarea>
+                                                <font color="red">${errMap.cancelPoliciesErr}</font> 
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -300,8 +302,8 @@
                                             </div>
                                         </div>
                                         
+                                        <button type="reset" class="btn btn-danger pull-right">重設</button>
                                         <button type="submit" class="btn btn-success pull-right">送出修改</button>
-                                        <button type="reset" class="btn btn-default pull-right">重設</button>
                                         <button class="btn btn-default pull-right" id="onekey">一鍵輸入</button>
                                     </form>
                                     
@@ -372,32 +374,19 @@
 <script
 	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/sweetalert2.min.js"></script>
 <script>
 	$(function() {
-		$('.timepicker1').timepicker({
-		    timeFormat: 'h:mm p',
-		    interval: 60,
-		    minTime: '1:00pm',
-		    maxTime: '11:00pm',
-		    defaultTime: '${HotelInfo.checkin}',
-		    startTime: '0:00',
-		    dynamic: false,
-		    dropdown: true,
-		    scrollbar: true
-		});
 		
-		$('.timepicker2').timepicker({
-		    timeFormat: 'h:mm p',
-		    interval: 60,
-		    minTime: '6',
-		    maxTime: '12',
-		    defaultTime: '${HotelInfo.checkout}',
-		    startTime: '0:00',
-		    dynamic: false,
-		    dropdown: true,
-		    scrollbar: true
-		});
+		//修改成功提示
+ 		<c:if test="${not empty OK}">
+			swal({
+	    		title: '成功修改飯店資料',
+				type: 'success'
+			});	
+     	</c:if>
+		
+	
 		$('#onekey').click(function() {
 			event.preventDefault();
 			$('input[name = "hotelName"]').val('涵碧樓酒店');
@@ -419,6 +408,8 @@
 			$(':input[name = "cancelPolicies"]').val('不可以取消');
 			$('input[name = "roomWifi"]').prop('checked');
 		});
+		
+
 	});
 </script>	
 </html>
