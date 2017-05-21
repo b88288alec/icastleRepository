@@ -12,6 +12,7 @@
         <property name="recordTime" column="recordTime" />
         <property name="id" column="id" />
         <property name="name" column="name" />
+        <property name="roomTypeId" column="roomTypeId" />
         <property name="roomTypeName" column="roomTypeName" />
         <property name="peopleNum" column="peopleNum" />
         <property name="roomNumber" column="roomNumber" />

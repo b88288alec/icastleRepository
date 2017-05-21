@@ -119,9 +119,27 @@
 							</a></li>
 						</c:otherwise>
 					</c:choose>
+					
+					<c:choose>
+						<c:when
+							test="${servletPath == '/hotelcenter/record.jsp'}">
+							<li class="active"><a
+								href="${pageContext.servletContext.contextPath}/hotelcenter/HotelUpdateRecord">
+									<i class="material-icons">receipt</i>
+									<p>查詢修改紀錄</p>
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a
+								href="${pageContext.servletContext.contextPath}/hotelcenter/HotelUpdateRecord">
+									<i class="material-icons">receipt</i>
+									<p>查詢修改紀錄</p>
+							</a></li>
+						</c:otherwise>
+					</c:choose>
 
 					<c:choose>
-						<c:when test="${servletPath == '/hotelcenter/ToHotelOrders'}">
+						<c:when test="${servletPath == '/hotelcenter/hotelorders.jsp'}">
 							<li class="active"><a
 								href="${pageContext.servletContext.contextPath}/hotelcenter/ToHotelOrders">
 									<i class="material-icons">bookmark_border</i>

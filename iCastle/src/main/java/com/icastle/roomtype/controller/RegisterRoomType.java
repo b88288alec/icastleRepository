@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.icastle.hotels.model.HotelVO;
+import com.icastle.record.model.RecordService;
+import com.icastle.record.model.RecordVO;
 import com.icastle.rooms.model.RoomsService;
 import com.icastle.rooms.model.RoomsVO;
 import com.icastle.roomtype.model.RoomTypeService;
@@ -45,6 +47,7 @@ public class RegisterRoomType extends HttpServlet {
 		String countId[] = request.getParameterValues("countId");
 		String RegisterPath = request.getServletPath();
 		
+		//判斷是否有更改資料
 		Map<String,String> error = new HashMap<String,String>();
 		if(roomTypeId == null){
 			error.put("none", "沒有要新增的房型");
@@ -54,7 +57,7 @@ public class RegisterRoomType extends HttpServlet {
 			return;
 		}
 		
-		
+		//動態取得供餐及可否加床的資料
 		List<String> bedAddablesList = new ArrayList<String>();
 		List<String[]> mealsList = new ArrayList<String[]>();
 		for(int i = 0; i < countId.length; i++){
@@ -67,7 +70,9 @@ public class RegisterRoomType extends HttpServlet {
 		
 		List<RoomTypeVO> list = new ArrayList<RoomTypeVO>();
 		List<RoomsVO> updateRoomsList = new ArrayList<RoomsVO>();
+		List<RecordVO> recordList = new ArrayList<RecordVO>();
 		
+		//將收到的資料包裝為vo放入list準備寫入資料庫
 		for(int i = 0; i < roomTypeId.length; i++){
 			System.out.println(roomTypeId.length);
 			RoomTypeVO vo = new RoomTypeVO();
@@ -122,6 +127,7 @@ public class RegisterRoomType extends HttpServlet {
 			vo.setRemark(remark[i]);
 			list.add(vo);
 			
+			//如果更新現有房型資料，連動更新今日之後的rooms資料
 			if(updateRooms){
 				RoomsVO roomvo = new RoomsVO();
 				roomvo.setRoomTypeId(Integer.parseInt(roomTypeId[i]));
@@ -149,8 +155,42 @@ public class RegisterRoomType extends HttpServlet {
 			}
 		}
 		
+		
+		
 		RoomTypeService rots = new RoomTypeService();
+		List<RoomTypeVO> histroy = rots.findRoomTypeByHotelId(hotelId);
+		
+		//將修改前的房型資料，存入record
+		for(RoomTypeVO roomTypeVO : histroy){
+			for(int i = 0; i < roomTypeId.length; i++){
+				if(Integer.parseInt((roomTypeId[i].equals(""))? "0" : roomTypeId[i]) == roomTypeVO.getRoomTypeId()){
+					RecordVO recordvo = new RecordVO();
+					recordvo.setId("H" + hotelId);
+					recordvo.setName(hotelvo.getHotelName());
+					recordvo.setRoomTypeId(roomTypeVO.getRoomTypeId());
+					recordvo.setRoomTypeName(roomTypeVO.getRoomTypeName());
+					recordvo.setPeopleNum(roomTypeVO.getPeopleNum());
+					recordvo.setRoomNumber(roomTypeVO.getRoomNumber());
+					recordvo.setWeekdaysPrice(roomTypeVO.getWeekdaysPrice());
+					recordvo.setHolidayPrice(roomTypeVO.getHolidayPrice());
+					recordvo.setSeasonPrice(roomTypeVO.getSeasonPrice());
+					recordvo.setCustomizedPrice(roomTypeVO.getCustomizedPrice());
+					recordvo.setCustomizedName(roomTypeVO.getCustomizedName());
+					recordvo.setBreakfast(roomTypeVO.getBreakfast());
+					recordvo.setAfternoonTea(roomTypeVO.getAfternoonTea());
+					recordvo.setDinner(roomTypeVO.getDinner());
+					recordvo.setBedAddable(roomTypeVO.getBedAddable());
+					recordvo.setPricePerPerson(roomTypeVO.getPricePerPerson());
+					recordvo.setRemark(roomTypeVO.getRemark());
+					recordvo.setManagerRecord(null);
+					recordList.add(recordvo);
+				}
+			}
+		}
+		
 		Integer updatecount = rots.addOrUpdateRoomType(list);
+		RecordService recs = new RecordService();
+		recs.hotelRecord(recordList);
 		Integer updatecountRooms = 0;
 		if(updateRoomsList.size() != 0){
 			RoomsService roms = new RoomsService();

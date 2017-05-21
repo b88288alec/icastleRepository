@@ -43,6 +43,11 @@ public class RecordService {
 		return dao.select_by_id(id);
 	}
 	
+//	使用ID查詢飯店歷史紀錄
+	public List<RecordVO> search_hotel_records_by_roomTypeId(Integer roomTypeId){
+		return dao.select_by_roomTypeId(roomTypeId);
+	}
+	
 //	使用ID查詢管理員歷史紀錄
 	public List<RecordVO> search_manager_records_by_id(String managerId){
 		String id = "m" + managerId;
