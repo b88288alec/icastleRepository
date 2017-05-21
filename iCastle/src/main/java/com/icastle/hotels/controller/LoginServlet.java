@@ -41,9 +41,9 @@ public class LoginServlet extends HttpServlet {
 		if (pw==null || pw=="")
 			errMap.put("pwErr", "請輸入密碼");
 		
-//		if( !request.getParameter("value").equals(session.getAttribute("imageMask")) ){
-//	    	errMap.put("cdErr","驗證碼錯誤");
-//	    }
+		if( !request.getParameter("value").equals(session.getAttribute("imageMask")) ){
+	    	errMap.put("cdErr","驗證碼錯誤");
+	    }
 		
 		//如果有任何欄位沒有輸入
 		if (!errMap.isEmpty()){

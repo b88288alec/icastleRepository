@@ -33,12 +33,10 @@
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
+
 <title>iCastle飯店管理中心</title>
-<style>
-.leftzone {
-	margin-left:100px;
-}
-</style>
+
 </head>
 <body>
 	<!--開始左側及上方導覽列-->
@@ -51,18 +49,21 @@
 			<div class="row">
 			
 				<!-- 上面的大圖 -->
-				<div class="row bigImagediv" ondragover="dragoverHandler(event)"
-					ondrop="dropHandler(event)">
-					<img class="bigImage" src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${firstPhotovo.id}" data-img="img1"><br>
-					<input type="hidden" id="index" value="${originpage+1}"/>
+				<div class="row">
+					<div class="col-md-12 bigImagediv" ondragover="dragoverHandler(event)"
+						ondrop="dropHandler(event)">
+						<img class="bigImage" src="${pageContext.servletContext.contextPath}/ShowPhoto.do?id=${firstPhotovo.id}" data-img="img1"><br>
+						<input type="hidden" id="index" value="${originpage+1}"/>
+					</div>
 				</div>
 				
 				<div class="row">
 					<form method="post" action="UploadPhoto.do"
 							enctype="multipart/form-data">
-						<div class="col-md-8">	
+						<div class="leftbottom col-md-5">	
 							<!-- 輸入區域 -->
 							<div class="row inputzone">
+								<div class="col-md-12">
 								<table id="table">
 									<tr>
 										<td id="td1">
@@ -86,11 +87,13 @@
 										</td>
 									<tr>
 								</table>
+								</div>
 							</div>
 							<!-- 輸入區域 -->
 			
 							<!-- 下面一排圖片 -->
 							<div class="row">
+								<div class="col-md-12">
 								<div id="abgneBlock">
 									<ul id="list" class="list">
 										<c:forEach var="photo" items="${photovos}" varStatus="loop">
@@ -112,12 +115,13 @@
 										</c:forEach>  
 									</ul>
 								</div>
+								</div>
 							</div>
 							<!-- 下面一排圖片 -->
 						</div>
 						
 						<!-- 開始按鈕區塊 -->
-						<div class="col-md-4">
+						<div class="row col-md-4">
 							<div class="col-md-2">
 								<div class="form-group">
 	    							<input type="file" id="file" name="image" multiple> 
@@ -169,5 +173,15 @@
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+<script src="${pageContext.servletContext.contextPath}/js/sweetalert2.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/hotelphoto.js"></script>
+<script>
+//success sweet alert
+	<c:if test="${not empty success}">
+		swal({
+			title: '成功修改飯店照片',
+			type: 'success'
+		});	
+	</c:if>
+</script>
 </html>
