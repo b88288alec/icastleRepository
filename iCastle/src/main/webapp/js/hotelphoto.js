@@ -57,6 +57,8 @@ $(function() {
 	
 	//點擊圖片
 	$("#list").on('click', '.imgs', function (){
+		//更改description
+		$('#inp' + $('.bigImage').attr('data-img')).val( $("#description").val() );
 		//秀出大圖
 		$('.bigImage').css('display', 'initial');
 		$('.bigImage').attr('src', $(this).attr('src'));
