@@ -112,7 +112,7 @@ tr{
 </div>
 
 	<!--content here!!!!!!!!!!!!~~~~~~~~~~-->
-	<div class="container" style="margin-top: 100px;">
+	<div class="container page-wrap" style="margin-top: 100px;">
 		<!-- 歷史訂單 -->
 			<table class="table" align="center">
 				<!--標題列 -->

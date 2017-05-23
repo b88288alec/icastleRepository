@@ -292,7 +292,8 @@
                                                 </c:forEach>
                                             </tbody>
                                         </table>
-                                        <input type="submit" class="btn btn-info" value="確定送出" class="pull-right" style="float: right">
+                                        <input type="submit" class="btn btn-info pull-right" value="確定送出">
+                                        <button type="button" class="btn btn-default pull-right" id="onekey">一鍵輸入</button>
                                     </form>
                                     <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="add">
   										<i class="material-icons">add</i>
@@ -637,6 +638,40 @@
         	$("#countId"+id).removeAttr("disabled");
         	componentHandler.upgradeDom();
         }
+        
+        $('#onekey').click(function(){
+        	event.preventDefault();
+        	$('#tr5 input[name=roomTypeName]').val("學生專享房");
+        	$('#tr5 option[value=2]').prop("selected","true");
+        	$('#tr5 input[name=weekdaysPrice]').val("2100");
+        	$('#tr5 input[name=holidayPrice]').val("4300");
+        	$('#tr5 input[name=seasonPrice]').val("4500");
+        	$('#meals0_4').prop("checked","true");
+        	$('label[for=meals0_4]').addClass("is-checked");
+        	$('#bedAddable4_no').prop("checked","true");
+        	$('label[for=bedAddable4_no]').addClass("is-checked");
+        	$('#tr5 input[name=pricePerPerson]').val("0");
+        	$('#tr5 textarea[name=remark]').val("入住前會查驗學生身份，請務必攜帶學生證");
+        	$('#tr5 input[name=roomNumber]').val("10");
+        	
+        	$('#tr6 input[name=roomTypeName]').val("三人房");
+        	$('#tr6 option[value=3]').prop("selected","true");
+        	$('#tr6 input[name=weekdaysPrice]').val("3000");
+        	$('#tr6 input[name=holidayPrice]').val("4500");
+        	$('#tr6 input[name=seasonPrice]').val("4800");
+        	$('#tr6 input[name=customizedName]').val("好友共享價");
+        	$('#tr6 input[name=customizedPrice]').val("2500");
+        	$('#meals0_5').prop("checked","true");
+        	$('label[for=meals0_5]').addClass("is-checked");
+        	$('#meals1_5').prop("checked","true");
+        	$('label[for=meals1_5]').addClass("is-checked");
+        	$('#bedAddable5_no').prop("checked","true");
+        	$('label[for=bedAddable5_no]').addClass("is-checked");
+        	$('#bedAddable6_yes').prop("checked","true");
+        	$('label[for=bedAddable6_yes]').addClass("is-checked");
+        	$('#tr6 input[name=pricePerPerson]').val("500");
+        	$('#tr6 input[name=roomNumber]').val("5");
+        })
     })
 </script>
 </html>
