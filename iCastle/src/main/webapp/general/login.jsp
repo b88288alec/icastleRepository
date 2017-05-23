@@ -260,8 +260,8 @@
 		});
 		$('#member-onekey').click(function() {
 			event.preventDefault();
-			$('input[name = "email"]').val("sally@gmail.com");
-			$('input[name = "pw"]').val("sally123");
+			$('input[name = "email"]').val("eeit93no1@gmail.com");
+			$('input[name = "pw"]').val("123456");
 		
 		});
 		

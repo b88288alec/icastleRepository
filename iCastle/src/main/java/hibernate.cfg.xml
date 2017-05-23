@@ -69,7 +69,8 @@
 		<mapping resource="com/icastle/roomtype/model/roomtype.hbm.xml" />
 		<mapping resource="com/icastle/record/model/record.hbm.xml" />
 		<mapping resource="com/icastle/qa/model/qa.hbm.xml" />
-
+<!--         <mapping resource="com/icastle/members/model/members.hbm.xml" /> -->
+        
 	</session-factory>
 	
 </hibernate-configuration>
