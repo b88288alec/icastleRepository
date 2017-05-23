@@ -186,7 +186,7 @@ textarea {
 <!-- 	上一頁、下一頁 -->
 
                 
-				<ul class="pagination pagination-primary text-center" name="myul">
+				<ul class="pagination pagination-primary text-center pull-right" name="myul">
                 <c:forEach begin="1" end="${DataNumbers/5+1}" varStatus="number">
                 
                 <li><a href="${pageContext.servletContext.contextPath}/hotelcenter/HostComment?page=${number.count}">${number.count}</a></li>

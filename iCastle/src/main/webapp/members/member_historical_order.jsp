@@ -102,8 +102,9 @@ tr{
       
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button>
-        <button type="sumit" class="btn btn-info btn-simple">Save</button>
+      	<button type="sumit" class="btn btn-info btn-simple">評論</button>
+        <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">關閉</button>
+
        </form>
       </div>
     </div>
