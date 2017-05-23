@@ -2,7 +2,7 @@
 <Context displayName="iCastleRESTful" docBase="iCastleRESTful" path="/iCastleRESTful" reloadable="true">
 
   <!--                  Azure_SQLServer最終版本!!!                      -->
-  <Resource name="jdbc/MemberDB" type="javax.sql.DataSource"
+  <Resource name="jdbc/iCastleDB" type="javax.sql.DataSource"
       username="icastlemanager@icastledb" password="Taiwanno1"
       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
       url="jdbc:sqlserver://icastledb.database.windows.net:1433;database=icastle"    
