@@ -78,8 +78,8 @@ public class RoomTypeHibernateDAO implements RoomTypeDAO_interface{
 				price.put("weekdaysPrice", ((Integer)obj[0]).toString());
 				price.put("holidayPrice", ((Integer)obj[1]).toString());
 				price.put("seasonPrice", ((Integer)obj[2]).toString());
-				price.put("customizedPrice", ((Integer)obj[3]).toString());
-				price.put("customizedName", (String)obj[4]);
+				price.put("customizedPrice", (String.valueOf((Integer)obj[3])));
+				price.put("customizedName", String.valueOf((String)obj[4]));
 			}
 			session.getTransaction().commit();
 		}catch(RuntimeException e){

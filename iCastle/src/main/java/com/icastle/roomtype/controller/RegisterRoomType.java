@@ -88,8 +88,8 @@ public class RegisterRoomType extends HttpServlet {
 			vo.setWeekdaysPrice(Integer.parseInt(weekdaysPrice[i]));
 			vo.setHolidayPrice(Integer.parseInt(holidayPrice[i]));
 			vo.setSeasonPrice(Integer.parseInt(seasonPrice[i]));
-			vo.setCustomizedPrice(Integer.parseInt(customizedPrice[i]));
-			vo.setCustomizedName(customizedName[i]);
+			vo.setCustomizedPrice((customizedPrice[i].equals(""))?null:Integer.parseInt(customizedPrice[i]));
+			vo.setCustomizedName((customizedName[i].equals(""))?null:customizedName[i]);
 			
 			Boolean isbreakfast = false;
 			Boolean isdinner = false;
@@ -124,7 +124,7 @@ public class RegisterRoomType extends HttpServlet {
 			
 			vo.setBedAddable(Boolean.valueOf(bedAddablesList.get(i)));
 			vo.setPricePerPerson(Integer.parseInt((pricePerPerson[i].equals(""))? "0" : pricePerPerson[i]));
-			vo.setRemark(remark[i]);
+			vo.setRemark((remark[i].equals(""))?null:remark[i]);
 			list.add(vo);
 			
 			//如果更新現有房型資料，連動更新今日之後的rooms資料
@@ -149,7 +149,7 @@ public class RegisterRoomType extends HttpServlet {
 					roomvo.setDinner(false);
 				roomvo.setBedAddable(Boolean.valueOf(bedAddablesList.get(i)));
 				roomvo.setPricePerPerson(Integer.parseInt((pricePerPerson[i].equals(""))? "0" : pricePerPerson[i]));
-				roomvo.setRemark(remark[i]);
+				roomvo.setRemark((remark[i].equals(""))?null:remark[i]);
 				updateRoomsList.add(roomvo);
 				updateRooms = false;
 			}
