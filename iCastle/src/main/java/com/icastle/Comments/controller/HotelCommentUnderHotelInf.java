@@ -82,6 +82,7 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 			NET.setCommentId(comt.getCommentId());
 			ids = comtPhotoService.findByIds(comt.getCommentId());
 			NET.setIds(ids);
+			System.out.println("測試: "+NET.getIds());
 			NETList.add(NET);
 			
 		}
@@ -94,6 +95,8 @@ public class HotelCommentUnderHotelInf extends HttpServlet {
 //			System.out.println(n.getComment());
 //			System.out.println(n.getResponse());
 //			System.out.println(n.getCommentTime());
+		
+		
 //			
 //		}
 			
