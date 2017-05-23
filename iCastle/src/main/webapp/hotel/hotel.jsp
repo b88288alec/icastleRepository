@@ -79,12 +79,6 @@
 	margin-right: 15px;
 }
 
-#pictureDiv{
-	border:solid 2px black;
-/* 	display:inline;  */
-
-
-}
 </style>
 </head>
 <body>
@@ -600,14 +594,54 @@
 				<div class="col-md-12 card" style="padding-bottom: 20px;">
 
 					<div class="row" style="border-bottom: 1px solid #ECEFF1;">
-					
+                       				   
+					   <div style="margin-top:10px;text-align:center">
+					   <h3>飯店平均分數</h3>
+					   <c:if test="${comment.avgScore==1}">				   	
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   </c:if>
+					   <c:if test="${comment.avgScore==2}">
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   </c:if>	
+					   <c:if test="${comment.avgScore==3}">
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   </c:if>	
+					   <c:if test="${comment.avgScore==4}">
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/unstar.png" width=5%>
+					   </c:if>	
+					   <c:if test="${comment.avgScore==5}">
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   <img src="../img/star.png" width=5%>
+					   </c:if>				
+					   </div>
                        <div card="cardContext" style="left:80%">
+                      
                            <h3 style="padding-left: 30px; margin-top:30px;margin-right:30px;color:purple">${comment.name} :</h3>
                            <p style="padding-left: 30px;margin-right:30px;margin-top:5px;font-size:18px">${comment.comment}</p>
                        </div>
                        
                        <div card="cardContext" style="left:80%">   
-						<div id="pictureDiv" style="float: right;margin-right:30px;margin-top:30px;">
+						<div style="float: right;margin-right:30px;margin-top:30px;">
+						
 						<c:forEach var="photo" items="${comment.ids}" varStatus="frequency">
 							<c:if test="${frequency.count==1}">
 								<a
@@ -797,6 +831,7 @@
 				    google.maps.event.trigger(map, "resize");
 					map.setCenter(currentCenter);
 				});
+
 				
 
 			
