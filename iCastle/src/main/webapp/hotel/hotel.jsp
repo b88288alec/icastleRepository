@@ -597,41 +597,77 @@
                        				   
 					   <div style="margin-top:10px;text-align:center">
 					   <h3>飯店平均分數</h3>
-					   <c:if test="${comment.avgScore==1}">				   	
+					   <c:if test="${0<=comment.avgScore && comment.avgScore<1.5}">				   	
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   </c:if>
-					   <c:if test="${comment.avgScore==2}">
+					   <c:if test="${1.5<=comment.avgScore && comment.avgScore<2.5}">
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   </c:if>	
-					   <c:if test="${comment.avgScore==3}">
+					   <c:if test="${2.5<=comment.avgScore && comment.avgScore<3.5}">
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   </c:if>	
-					   <c:if test="${comment.avgScore==4}">
+					   <c:if test="${3.5<=comment.avgScore && comment.avgScore<4.5}">
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/unstar.png" width=5%>
 					   </c:if>	
-					   <c:if test="${comment.avgScore==5}">
+					   <c:if test="${4.5<=comment.avgScore && comment.avgScore<=5}">
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
 					   <img src="../img/star.png" width=5%>
-					   </c:if>				
+					   </c:if>	
+					   
+<%-- 					    <c:if test="${comment.avgScore==1}">				   	 --%>
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<%-- 					   </c:if> --%>
+<%-- 					   <c:if test="${1.5<=comment.avgScore<2.5}"> --%>
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<%-- 					   </c:if>	 --%>
+<%-- 					   <c:if test="${2.5<=comment.avgScore<3.5}"> --%>
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<%-- 					   </c:if>	 --%>
+<%-- 					   <c:if test="${3.5<=comment.avgScore<4.5}"> --%>
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/unstar.png" width=5%> -->
+<%-- 					   </c:if>	 --%>
+<%-- 					   <c:if test="${4.5<=comment.avgScore<=5}"> --%>
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<!-- 					   <img src="../img/star.png" width=5%> -->
+<%-- 					   </c:if>						 --%>
 					   </div>
                        <div card="cardContext" style="left:80%">
                       
