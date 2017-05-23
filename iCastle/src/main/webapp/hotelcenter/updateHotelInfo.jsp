@@ -399,13 +399,13 @@
 			$('input[name = "tel"]').val('0225694586');
 			$('input[name = "addr"]').val('南投縣魚池鄉中興路142號');
 			$('input[name = "zone"]').val('南投縣魚池鄉');
-			$(':input[name = "transport"]').text('搭乘火車到南投火車站接著轉6路公車');
+			$(':input[name = "transport"]').text('搭乘火車到台北火車站接著轉6路公車');
 			$('input[name = "website"]').val('http://www.bilo.com');
-			$(':input[name = "hotelProfile"]').val('位於日月潭湖畔');
+			$(':input[name = "hotelProfile"]').val('位於台北市陽光運動公園、豬肚山古遺址生態區旁的德立莊酒店，毗鄰千坪河濱綠地，坐擁便利購物商圈。簡約大方的現代元素，由榮獲2010台灣室內設計金獎、2011中國上海金外灘獎的大間設計公司，負責整體規劃設計，為大台北地區最具代表性的高性價比的國際旅遊型酒店。');
 			$('input[name = "checkin"]').val('5:00 PM');
 			$('input[name = "checkout"]').val('9:00 AM');
 			$(':input[name = "guestPolicies"]').val('不可攜帶寵物入內');
-			$(':input[name = "cancelPolicies"]').val('不可以取消');
+			$(':input[name = "cancelPolicies"]').val('請於入住日前的3天提出取消申請');
 			$('input[name = "roomWifi"]').prop('checked');
 		});
 		

@@ -73,7 +73,7 @@
 							<li class="active"><a
 								href="${pageContext.servletContext.contextPath}/hotelcenter/ShowHotelPhoto.do">
 									<i class="material-icons">picture_in_picture_alt</i>
-									<p>編輯飯店圖片</p>
+									<p>編輯飯店照片</p>
 							</a></li>
 						</c:when>
 						<c:otherwise>
