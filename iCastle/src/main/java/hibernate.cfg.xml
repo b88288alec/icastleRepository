@@ -5,19 +5,30 @@
 <hibernate-configuration>
 
 	<session-factory>
-
-		<!-- 連線池c3p0設定-->
+	
+<!-- 	最終燒錢版 -->
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=iCastle</property>
-<!-- 		<property name="hibernate.connection.url">jdbc:sqlserver://192.168.100.5:1433;DatabaseName=iCastle</property> -->
-		<property name="hibernate.connection.username">sa</property>
-		<property name="hibernate.connection.password">sa123456</property>     
-<!-- 		<property name="hibernate.connection.password">Alec88288</property>        -->
+		<property name="hibernate.connection.url">jdbc:sqlserver://icastledb.database.windows.net:1433;database=icastle</property>
+		<property name="hibernate.connection.username">icastlemanager@icastledb</property>
+		<property name="hibernate.connection.password">Taiwanno1</property>       
 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
 		<property name="hibernate.c3p0.min_size">5</property>
 		<property name="hibernate.c3p0.max_size">20</property>
 		<property name="hibernate.c3p0.timeout">1800</property>
 		<property name="hibernate.c3p0.max_statements">50</property>
+
+		<!-- 連線池c3p0設定-->
+<!-- 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;DatabaseName=iCastle</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:sqlserver://192.168.100.5:1433;DatabaseName=iCastle</property> -->
+<!-- 		<property name="hibernate.connection.username">sa</property> -->
+<!-- 		<property name="hibernate.connection.password">sa123456</property>      -->
+<!-- 		<property name="hibernate.connection.password">Alec88288</property>        -->
+<!-- 		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property> -->
+<!-- 		<property name="hibernate.c3p0.min_size">5</property> -->
+<!-- 		<property name="hibernate.c3p0.max_size">20</property> -->
+<!-- 		<property name="hibernate.c3p0.timeout">1800</property> -->
+<!-- 		<property name="hibernate.c3p0.max_statements">50</property> -->
 		
 		<!--Azure-->
 <!-- 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property> -->
