@@ -6,8 +6,11 @@ public class QaService {
 
 	QaDAO_interface dao = null;
 	
+//	public QaService(){
+//		dao = new QaJNDIDAO();
+//	}
 	public QaService(){
-		dao = new QaJNDIDAO();
+		dao = new QaHibernateDAO();
 	}
 
 // 新增QA

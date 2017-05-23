@@ -16,6 +16,10 @@ public class MembersService {
 		dao = new MembersJNDIDAO();
 	}
 	
+//	public MembersService (){
+//		dao = new MembersHibernateDAO();
+//	}
+	
 //  新增會員	
 	public void insert(String email, String pw, String name, String gender, Date bDate, String addr, String tel, String personId, String country, String passport){
 		MembersVO membersVO = new MembersVO();

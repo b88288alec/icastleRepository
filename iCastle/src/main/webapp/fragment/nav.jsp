@@ -57,10 +57,10 @@
     						<!--管理員標頭使用區塊 -->
     						<c:choose>
 	    						<c:when test="${servletPath  == '/manager/manager_index.jsp'}">
-    								<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/managercenter.jsp">管理員首頁</a></li>
+    								<li class="active"><a href="${pageContext.servletContext.contextPath}/manager/GetAllhotel.do">管理員首頁</a></li>
 	    						</c:when>
 	    						<c:otherwise>
-	    							<li><a href="${pageContext.servletContext.contextPath}/manager/managercenter.jsp">管理員首頁</a></li>
+	    							<li><a href="${pageContext.servletContext.contextPath}/manager/GetAllhotel.do">管理員首頁</a></li>
 	    						</c:otherwise>
     						</c:choose>
     					</c:when>
