@@ -39,7 +39,7 @@
 		
 		<div class="hero-unit row col-md-offset-4" style="padding:50px 0px 0px 0px">
 
-		<h1 style="font-size:30pt">是否忘記密碼?</h1>
+		<h1 style="font-size:30pt">查詢密碼</h1>
 		<form action="${pageContext.servletContext.contextPath}/hotel/CreateRandomPw.do" method="post">
 			<div class="col-sm-6">
 				<div class="form-group">
