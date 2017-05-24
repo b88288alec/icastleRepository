@@ -33,14 +33,14 @@ public class ToPDF extends HttpServlet {
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream(context.getRealPath("/recordPDF") + "\\test.pdf"));
 			document.open();
-			Table table = new Table(3);
+			Table table = new Table(5);
 			table.setBorderWidth(1);
 			table.setBorderColor(new Color(0, 0, 255));
 //			table.setPadding(5);
 //			table.setSpacing(5);
 			Cell cell = new Cell("header");
 			cell.setHeader(true);
-			cell.setColspan(3);
+			cell.setColspan(5);
 			table.addCell(cell);
 			table.endHeaders();
 			cell = new Cell("example cell with colspan 1 and rowspan 2");
