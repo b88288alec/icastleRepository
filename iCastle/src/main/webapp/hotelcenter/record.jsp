@@ -33,6 +33,7 @@
 	rel="stylesheet" />
 <link href="${pageContext.servletContext.contextPath}/css/checkbox.css"
 	rel="stylesheet" />
+<link href="${pageContext.servletContext.contextPath}/css/sweetalert2.css" rel="stylesheet" />
 <title>iCastle飯店管理中心</title>
 <style>
 table label {
@@ -68,7 +69,8 @@ table label {
 								<h5>選擇房型</h5>
 								<div class="select">
 									<select style="margin-top: 15px;" id="roomTypeId">
-										<option value="all" selected>全部</option>
+										<option selected>請選擇房型</option>
+										<option value="all">全部</option>
 										<c:forEach var="roomType" items="${roomTypeList}">
 											<option value="${roomType.roomTypeId}">${roomType.roomTypeName}</option>
 										</c:forEach>
@@ -132,9 +134,14 @@ table label {
 <script
 	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="${pageContext.servletContext.contextPath}/js/sweetalert2.min.js"></script>
 
 <script>
 $(function(){
+	swal({
+        title: '請先選擇房型',
+        type: 'info',
+    });
 	$('#roomTypeId').change(function(){
 		var id = $(this).val();
 		

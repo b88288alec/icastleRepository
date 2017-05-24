@@ -46,7 +46,7 @@ public class RoomTypeRecordToJosn extends HttpServlet {
 		for(RecordVO recVO : recordList){
 			JSONArray injsonArray = new JSONArray();
 			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("recordTime", String.valueOf(recVO.getRecordTime()));
+			jsonObj.put("recordTime", String.valueOf(recVO.getRecordTime()).substring(0, 16));
 			jsonObj.put("roomTypeName", recVO.getRoomTypeName());
 			jsonObj.put("peopleNum", String.valueOf(recVO.getPeopleNum()));
 			jsonObj.put("roomNumber", String.valueOf(recVO.getRoomNumber()));

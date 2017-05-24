@@ -214,12 +214,17 @@
                         var input_seasonPrice = $('<input/>').attr({ type: "radio", value: price.seasonPrice, name: inputName, id: "seasonPrice" + selector });
                         var span_seasonPrice = $('<span></span>').addClass("mdl-radio__label").text("旺季價");
                         label_seasonPrice.append([input_seasonPrice, span_seasonPrice]);
+                        
+                        if(price.customizedName != 'null'){
+                        	 var label_customizedPrice = $('<label></label').addClass("mdl-radio mdl-js-radio mdl-js-ripple-effect").attr("for", price.customizedName + selector);
+                             var input_customizedPrice = $('<input/>').attr({ type: "radio", value: price.customizedPrice, name: inputName, id: price.customizedName + selector });
+                             var span_customizedPrice = $('<span></span>').addClass("mdl-radio__label").text(price.customizedName);
+                             label_customizedPrice.append([input_customizedPrice,span_customizedPrice]);
+                             checkbox_div.append([label_weekdaysPrice, label_holidayPrice, label_seasonPrice, label_customizedPrice]);
+                        }else{
+                            checkbox_div.append([label_weekdaysPrice, label_holidayPrice, label_seasonPrice]);
+                        }
 
-                        var label_customizedPrice = $('<label></label').addClass("mdl-radio mdl-js-radio mdl-js-ripple-effect").attr("for", price.customizedName + selector);
-                        var input_customizedPrice = $('<input/>').attr({ type: "radio", value: price.customizedPrice, name: inputName, id: price.customizedName + selector });
-                        var span_customizedPrice = $('<span></span>').addClass("mdl-radio__label").text(price.customizedName);
-                        label_customizedPrice.append([input_customizedPrice,span_customizedPrice]);
-                        checkbox_div.append([label_weekdaysPrice, label_holidayPrice, label_seasonPrice, label_customizedPrice]);
                     })
                 })
 //                    componentHandler.upgradeElements($(selector + ' label.mdl-radio').get());
