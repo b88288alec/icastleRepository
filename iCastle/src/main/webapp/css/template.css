@@ -40,7 +40,8 @@
 
 /*網頁字體及底色*/
 body {
-    background-color: #FAFAFA;
+/*     background-color: #FAFAFA; */
+    background-color: #E0E0E0;
     font-family: 'Microsoft JhengHei';
     height: 100%;
 }
