@@ -2,15 +2,15 @@
 <Context displayName="iCastleRESTful" docBase="iCastleRESTful" path="/iCastleRESTful" reloadable="true">
 
   <!--                  Azure_SQLServer最終版本!!!                      -->
-  <Resource name="jdbc/iCastleDB" type="javax.sql.DataSource"
-      username="icastlemanager@icastledb" password="Taiwanno1"
-      driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-      url="jdbc:sqlserver://icastledb.database.windows.net:1433;database=icastle"    
-      maxActive="8"
-      maxIdle="4"
-      maxWait="5000"
-  />  
-
+<!--   <Resource name="jdbc/iCastleDB" type="javax.sql.DataSource" -->
+<!--       username="icastlemanager@icastledb" password="Taiwanno1" -->
+<!--       driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
+<!--       url="jdbc:sqlserver://icastledb.database.windows.net:1433;database=icastle"     -->
+<!--       maxActive="8" -->
+<!--       maxIdle="4" -->
+<!--       maxWait="5000" -->
+<!--   />   -->
+  
   <!--                  Azure_SQLServer                      -->
 <!--   <Resource name="jdbc/iCastleDB" type="javax.sql.DataSource" -->
 <!--       username="starbooksuser@starbooksdb12" password="Bb0192837465" -->
@@ -32,7 +32,7 @@
 <!--   />    -->
 
 <!-- SQLServer -->
-<!-- <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/iCastleDB" password="sa123456" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;DatabaseName=iCastle" username="sa"/> -->
+<Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/iCastleDB" password="sa123456" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;DatabaseName=iCastle" username="sa"/>
 <!-- 家用 -->
 <!-- <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/iCastleDB" password="sa123456" type="javax.sql.DataSource" url="jdbc:sqlserver://192.168.100.5:1433;DatabaseName=iCastle" username="sa"/> -->
 <!-- <Resource auth="Container" driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/iCastleDB" password="Alec88288" type="javax.sql.DataSource" url="jdbc:sqlserver://localhost:1433;DatabaseName=iCastle" username="sa"/> -->

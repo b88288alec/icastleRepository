@@ -86,7 +86,7 @@
     			<select id='idSelectOrderState' name="OS">
     				<option value="null">--</option>
     				<option value="true">成立訂單</option>
-    				<option value="false">取消訂單</option>
+    				<option value="false">已取消</option>
     			</select></td>
     		<td><select id='idSelectYear' name="year"></select><span>年</span></td>
     		<td><select id='idSelectMonth' name="month"></select><span>月</span></td>
@@ -97,10 +97,11 @@
     			<option value="2">折線圖</option>
     			<option value="3">圓餅圖</option>
     		</select></td>
+    		<td><button id="createexcel" class="btn btn-info">匯出成Excel</button></td>
     	</tr>
     </table>
     <div id="showData" class="ct-chart ct-golden-section">
-	    <table class="table">
+	    <table id="exceldata" class="table">
     		<thead>
     			<tr>
     				<th>訂單編號</th><th>下訂日期</th><th>房型名稱</th><th>入住日期</th><th>退房日期</th><th>訂房數量</th><th>入住人數</th><th>入住人姓名</th><th>加床</th><th>總金額</th><th>旅客備註</th><th>備忘錄</th><th>訂單狀態</th>
@@ -146,6 +147,8 @@
 <!-- 圖表用JS -->
 <%-- <script src="${pageContext.servletContext.contextPath}/js/chartist.min.js"></script> --%>
 <script src="${pageContext.servletContext.contextPath}/js/chartist-plugin-tooltip.js"></script>
+<!-- Excel -->
+<script src="${pageContext.servletContext.contextPath}/js/jquery.table2excel.js"></script>
 <!-- loading用 -->
 <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay_progress.min.js"></script>
@@ -160,6 +163,13 @@
 		$('#idSelectMonth').on("change", orders);
 		$('#idSelectDate').on("change", orders);
 		$('body').on("click","button[name='updatechange']", updatememo);
+		$("#createexcel").click(function(){
+			$("#exceldata").table2excel({
+				// exclude CSS class
+				name: "Worksheet Name",
+				filename: "Orders" //do not include extension
+			});
+		});
 		
 // 		觸發的方法
 

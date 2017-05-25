@@ -93,7 +93,7 @@ $(function(){
 			}
 			
 //			把長條圖模式換成表格
-			$('#showData').empty().append('<table class="table"><thead><tr><th>訂單編號</th><th>下訂日期</th><th>房型名稱</th><th>入住日期</th><th>退房日期</th><th>訂房數量</th><th>入住人數</th><th>入住人姓名</th><th>加床</th><th>總金額</th><th>旅客備註</th><th>備忘錄</th><th>訂單狀態</th></tr></thead><tbody id="idtbody"></tbody></table>');
+			$('#showData').empty().append('<table id="createexcel" class="table"><thead><tr><th>訂單編號</th><th>下訂日期</th><th>房型名稱</th><th>入住日期</th><th>退房日期</th><th>訂房數量</th><th>入住人數</th><th>入住人姓名</th><th>加床</th><th>總金額</th><th>旅客備註</th><th>備忘錄</th><th>訂單狀態</th></tr></thead><tbody id="idtbody"></tbody></table>');
 		}
 	}
 	
