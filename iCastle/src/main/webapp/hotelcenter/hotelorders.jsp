@@ -100,7 +100,7 @@
     		<td><button id="createexcel" class="btn btn-info">匯出成Excel</button></td>
     	</tr>
     </table>
-    <div id="showData" class="ct-chart ct-golden-section">
+    <div id="showData" class="ct-chart ct-golden-section card">
 	    <table id="exceldata" class="table">
     		<thead>
     			<tr>

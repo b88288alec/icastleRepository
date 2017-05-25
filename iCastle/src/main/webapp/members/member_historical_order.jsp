@@ -113,7 +113,8 @@ tr{
 
 	<!--content here!!!!!!!!!!!!~~~~~~~~~~-->
 	<div class="container page-wrap" style="margin-top: 100px;">
-		<!-- 歷史訂單 -->
+	<div class="card">
+	<!-- 歷史訂單 -->
 			<table class="table" align="center">
 				<!--標題列 -->
 				<thead>
@@ -238,6 +239,8 @@ tr{
 				</c:forEach>
 					</tbody>
 			</table>
+	</div>
+		
 	</div>
 
 	<!--開始footer-->

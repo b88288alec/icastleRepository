@@ -41,7 +41,7 @@
 	<!--開始導覽列-->
 	<jsp:include page="../fragment/nav.jsp" />
 	<!--結束導覽列-->
-	<div class="container page-wrap" style="background-color: white; padding-bottom: 100px; margin-top:10%;">
+	<div class="container page-wrap" style="padding-bottom: 100px; margin-top:10%;">
 			<div class="col-md-12">
 				<div class="row col-md-offset-5 " style="padding: 0px 50px">
 					<h2>會員中心</h2>
