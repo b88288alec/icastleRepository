@@ -58,9 +58,9 @@
 		<h1 style="font-size:30pt">查詢密碼</h1>
 		<form action="${pageContext.servletContext.contextPath}/general/members/CreatePw.do" method="post">
 			<div class="col-sm-6">
-				<div class="form-group label-floating">
-					<label class="control-label">請輸入您的Email</label> 
-					<input type="text" name="email" class="form-control" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2}
+				<div class="form-group">
+<!-- 					<label class="control-label">請輸入您的Email</label>  -->
+					<input type="text" name="email" class="form-control" placeholder="請輸入您的Email" value="${param.email}"/>${errMap.emailErr}${errMap.emailErr2}
 				</div>
 				<section class="content">
 					<div class="box bg-1">
