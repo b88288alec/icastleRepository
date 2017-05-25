@@ -86,7 +86,7 @@
     			<select id='idSelectOrderState' name="OS">
     				<option value="null">--</option>
     				<option value="true">成立訂單</option>
-    				<option value="false">取消訂單</option>
+    				<option value="false">已取消</option>
     			</select></td>
     		<td><select id='idSelectYear' name="year"></select><span>年</span></td>
     		<td><select id='idSelectMonth' name="month"></select><span>月</span></td>
