@@ -111,7 +111,7 @@
                                         <div class="col-md-3">
                                             <button class="btn btn-info" id="plus">+</button>
                                             <button class="btn btn-info" id="submit">確認送出</button>
-                                            <button class="btn btn-info" id="showJson">showJson</button>
+<!--                                             <button class="btn btn-info" id="showJson">showJson</button> -->
                                         </div>
                                     </div>
                                 </div>
@@ -292,9 +292,9 @@
             weekdaycheck.push(parseInt(weekdayNum));
         });
 
-        $('#showJson').click(function () {
-            alert(JSON.stringify(json))
-        })
+//         $('#showJson').click(function () {
+//             alert(JSON.stringify(json))
+//         })
 
         //新增日期事件
         function add() {
