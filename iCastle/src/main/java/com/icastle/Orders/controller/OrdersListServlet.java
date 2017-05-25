@@ -71,7 +71,7 @@ public class OrdersListServlet extends HttpServlet {
 			for(OrdersVO order: result){
 				
 				bedAdd = (order.getBedAdding())?"加一床":"X";
-				orderedState = (order.getOrderState())?"訂單完成":"已取消";
+				orderedState = (order.getOrderState())?"訂單成立":"已取消";
 				customer = (order.getCustomerRemark() == null)?"":order.getCustomerRemark();
 				mymemo = (order.getMemo() == null)?"":order.getMemo();
 				breakfast = (order.getBreakfast())?"●":"○";
