@@ -7,9 +7,16 @@
 }
 /*網頁字體及底色*/
 body {
-    background-color: #FAFAFA;
+/*     background-color: #FAFAFA; */
     font-family: 'Microsoft JhengHei';
 }
 /*網頁字體及底色結束*/
 
+.checkbox label{
+	color:black;
+}
+
+label {
+	color:black;
+}
 

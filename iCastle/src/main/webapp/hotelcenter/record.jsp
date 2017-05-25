@@ -66,7 +66,6 @@ table label {
 					<div class="card-content">
 						<div class="row">
 							<div class="col-md-2">
-								<h5>選擇房型</h5>
 								<div class="select">
 									<select style="margin-top: 15px;" id="roomTypeId">
 										<option selected>請選擇房型</option>
@@ -78,6 +77,9 @@ table label {
 									<div class="select__arrow" style="margin-top: 15px;"></div>
 								</div>
 							</div>
+							<div class="col-md-2">
+								<button id="createexcel" class="btn btn-info">匯出成Excel</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -85,7 +87,7 @@ table label {
 					<div class="card-content">
 						<div class="row">
 							<div class="col-md-12 table-full-width">
-								<table class="table table-bordered">
+								<table class="table table-bordered" id="exceldata">
 									<thead class="text-warning">
 										<tr>
 											<th class="text-center col-md-1">房型名稱</th>
@@ -135,6 +137,8 @@ table label {
 	src="${pageContext.servletContext.contextPath}/js/material-dashboard.js"></script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script src="${pageContext.servletContext.contextPath}/js/sweetalert2.min.js"></script>
+<!-- Excel -->
+<script src="${pageContext.servletContext.contextPath}/js/jquery.table2excel.js"></script>
 
 <script>
 $(function(){
@@ -326,6 +330,14 @@ $(function(){
         tbody.append([tr_time, tr]);
 		componentHandler.upgradeDom();
 	}
+	
+	$("#createexcel").click(function(){
+		$("#exceldata").table2excel({
+			// exclude CSS class
+			name: "Worksheet Name",
+			filename: "record" //do not include extension
+		});
+	});
 })
 </script>
 </html>
